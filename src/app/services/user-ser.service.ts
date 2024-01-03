@@ -26,7 +26,7 @@ export class UserSerService {
   }
   UserLoginservice(data: Login) {
     this.htttp.get(`https://b9ad-103-250-162-221.ngrok-free.app/users/${data.email}/${data.password}`,
-      { observe: 'response' }).subscribe((result: any) => {
+      { headers: this.headers, observe: 'response' }).subscribe((result: any) => {
         console.log(result);
         if (result && result.body && result.body.length) {
           localStorage.setItem('user', JSON.stringify(result.body));
