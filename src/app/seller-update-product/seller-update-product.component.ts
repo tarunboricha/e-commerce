@@ -26,16 +26,12 @@ export class SellerUpdateProductComponent implements OnInit {
       data.id = this.productData.id;
     }
     this.product.updateProductservice(data).subscribe((result) => {
-      // console.log("result");
-      // if (result) {
-      //   this.UpdateproductMessage = 'Product is Successfully Updated!';
-      // }
-      // setTimeout(() => this.UpdateproductMessage = undefined, 2000);
-      // setTimeout(() => this.route.navigate(['/seller-homepage']), 2000);
+      console.log("result");
+      if (result) {
+        this.UpdateproductMessage = 'Product is Successfully Updated!';
+      }
+      setTimeout(() => this.UpdateproductMessage = undefined, 2000);
+      setTimeout(() => this.route.navigate(['/seller-homepage']), 2000);
     });
-    this.UpdateproductMessage = 'Product is Successfully Updated!';
-    setTimeout(() => this.UpdateproductMessage = undefined, 2000);
-    setTimeout(() => this.route.navigate(['/seller-homepage']), 2000);
-    setTimeout(() => location.reload(), 2001);
   }
 }
