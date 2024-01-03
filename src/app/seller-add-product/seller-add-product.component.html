@@ -1,0 +1,39 @@
+<div class="seller-auth">
+    <div class="center">
+        <h1>Add new Product</h1>
+        <form #addproduct = "ngForm" (ngSubmit)="addProduct(addproduct.value); addproduct.reset();">
+            <div class="inputbox">
+                <input type="text" ngModel name="productName" required="required">
+                <span>Product Name</span>
+            </div>
+            <div class="inputbox">
+                <input type="text" ngModel name="productPrice" required="required">
+                <span>Product Price</span>
+            </div>
+            <div class="inputbox">
+                <select (click)="fun()" id="category" ngModel name="productType">
+                    <option value="Shirt">Shirt</option>
+                    <option value="T-Shirt">T-Shirt</option>
+                    <option value="Jeans">Jeans</option>
+                </select>
+                <span>{{data}}</span>
+            </div>
+            <div class="inputbox">
+                <input type="text" ngModel name="productColor" required="required">
+                <span>Product Color</span>
+            </div>
+            <div class="inputbox">
+                <input type="text" ngModel name="productDisc" required="required">
+                <span>Product Discription</span>
+            </div>
+            <div class="inputbox" style="margin-bottom: 20px;">
+                <input type="text" ngModel name="productURL" required="required">
+                <span>Product Image URL</span>
+            </div>
+            <div class="inputbox">
+                <button class="inputbox" ngModule>Add-Product</button>
+            </div>
+        </form>
+        <p style="color: rgb(25, 209, 99);">{{ AddproductMessage }}</p>
+    </div>
+</div>

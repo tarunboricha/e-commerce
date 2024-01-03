@@ -1,0 +1,38 @@
+<div class="seller-auth">
+    <div class="center">
+        <h1>Update Product</h1>
+        <form #updateproduct = "ngForm" (ngSubmit)="updateProduct(updateproduct.value); updateproduct.reset();">
+            <div class="inputbox">
+                <input type="text" ngModel="{{productData?.productName}}" name="productName" required="required">
+                <span>Product Name</span>
+            </div>
+            <div class="inputbox">
+                <input type="text" ngModel="{{productData?.productPrice}}" name="productPrice" required="required">
+                <span>Product Price</span>
+            </div>
+            <div class="inputbox">
+                <select id="category" ngModel="{{productData?.productType}}" name="productType">
+                    <option value="Shirt">Shirt</option>
+                    <option value="T-Shirt">T-Shirt</option>
+                    <option value="Jeans">Jeans</option>
+                  </select>
+            </div>
+            <div class="inputbox">
+                <input type="text" ngModel="{{productData?.productColor}}" name="productColor" required="required">
+                <span>Product Color</span>
+            </div>
+            <div class="inputbox">
+                <input type="text" ngModel="{{productData?.productDisc}}" name="productDisc" required="required">
+                <span>Product Discription</span>
+            </div>
+            <div class="inputbox" style="margin-bottom: 20px;">
+                <input type="text" ngModel="{{productData?.productURL}}" name="productURL" required="required">
+                <span>Product Image URL</span>
+            </div>
+            <div class="inputbox">
+                <button class="inputbox" ngModule>Update-Product</button>
+            </div>
+        </form>
+        <p style="color: rgb(25, 209, 99);">{{ UpdateproductMessage }}</p>
+    </div>
+</div>

@@ -1,0 +1,155 @@
+.nav {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.nav .barIcon{
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.Category{
+    position: absolute;
+    display: list-item !important;
+    z-index: 10;
+    background-color: #fff;
+    width: 18%;
+    height: 90.5%;
+    top: 9.31%;
+    left: 0px;
+    border: 1px solid #ddd;
+}
+
+.Category h6{
+    position: relative;
+    color: rgb(225, 110, 110);
+    top: 15px;
+    padding: 10px;
+    padding-left: 15px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.Category p{
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    left: 20px;
+    font-size: 1rem;
+}
+
+.nav h1 {
+    color: rgb(225, 110, 110);
+    margin: 0;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.nav ul {
+    display: inline-flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav li{
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.nav li a{
+    text-decoration: none;
+    color: rgb(225, 110, 110);
+    cursor: pointer;
+    font-size: 1rem;
+}
+.nav .nav-search{
+    margin: 0;
+    margin-top: 8px;
+    flex: 1;
+    padding: auto;
+    display: flex;
+    margin-left: 15px;
+}
+
+.nav .nav-search input{
+    flex: 1;
+    color: rgb(225, 110, 110);
+    border: 2px solid rgb(225, 110, 110);
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    outline: none;
+    padding-left: 10px;
+    border-bottom-right-radius: 0;
+    height: 38px;
+    border-right: 0;
+}
+
+
+.nav .nav-search button{
+    color: rgb(225, 110, 110);
+    border: 2px solid rgb(225, 110, 110);
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 38px;
+    border-left: 0;
+    cursor: pointer;
+}
+
+.search-suggestion-result{
+    position: absolute;
+    display: list-item !important;
+    z-index: 10;
+    background-color: #fff;
+    width: 300px;
+    top: 53px;
+    border: 1px solid #ddd;
+}
+
+.search-suggestion-result li{
+    border: 1px solid #fff;
+    padding: 5px;
+}
+
+.search-suggestion-result li a{
+    cursor: pointer;
+    color: rgb(225, 110, 110);
+}
+
+.nav .nav-itemss li{
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+@media only screen and (max-width: 851px){
+    h1{
+        padding-left: 3.8rem;
+    }
+    .Category{
+        width: 50vw;
+        height: 70vh;
+    }
+    .Category h6{
+        position: relative;
+        color: rgb(225, 110, 110);
+        top: 0.5rem;
+        margin-bottom: 10px;
+        font-size: 1rem;
+    }
+
+    .Category p{
+        text-align: center;
+        position: absolute;
+        bottom: 0px;
+        left: 1rem;
+        font-size: 1rem;
+    }
+    .nav-itemss{
+        padding-left: 1rem;
+    }
+}

@@ -1,0 +1,52 @@
+<div class="seller-auth">
+    <div *ngIf="showSignUp" class="form">
+        <h1>User Sign-Up</h1>
+        <form #userSignUp = "ngForm" (ngSubmit) = "signUp(userSignUp.value)">
+            <div class="inputbox">
+                <input type="text" ngModel name = "name" required="required">
+                <span>Name</span>
+            </div>
+            <div class="inputbox">
+                <input type="text" ngModel name = "email" required="required">
+                <span>Email</span>
+            </div>
+            <div class="inputbox" style="margin-bottom: 5px;">
+                <input type="password" ngModel name = "password" required="required">
+                <span>Password</span>
+            </div>
+            <div class="form-p">
+                <p>Already have an Account? <a (click)="flipPage()">Click to Login</a></p>
+            </div>
+            <div class="inputbox">
+                <button class="inputbox" ngModule>SignUp</button>
+            </div>
+        </form>
+    </div>
+
+
+    <!--------- Login --------->
+
+
+    <div *ngIf="!showSignUp" class="form">
+        <h1>User Login</h1>
+        <form  #userLogin = "ngForm" (ngSubmit) = "Login(userLogin.value)">
+            <div class="inputbox">
+                <input type="text" ngModel name = "email" required="required">
+                <span>Email</span>
+            </div>
+            <div class="inputbox" style="margin-bottom: 5px;">
+                <input type="password" ngModel name = "password" required="required">
+                <span>Password</span>
+            </div>
+            <div class="form-p">
+                <p>Don't have an Account? <a (click)="flipPage()">Click to Sign-Up</a></p>
+            </div>
+            <div class="inputbox">
+                <button class="inputbox" ngModule>Login</button>
+            </div>
+        </form>
+        <div style="color: red;">
+            <p>{{LoginFailedmessage}}</p>
+        </div>
+    </div>
+</div>

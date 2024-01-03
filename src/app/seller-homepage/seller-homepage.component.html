@@ -1,0 +1,45 @@
+<div class="product-list container-fluid">
+    <div class="filter">
+        <h1 *ngIf="!flipHeading">All Products</h1>
+        <h1 *ngIf="flipHeading">Filter Products</h1>
+        <div class="dropdown">
+            <button class="dropbtn">Filter</button>
+            <div class="dropdown-content">
+                <a (click)="Filterproduct('All'); flipHeading = false;">All</a>
+                <a (click)="Filterproduct('Shirt'); flipHeading = true;">Shirt</a>
+                <a (click)="Filterproduct('T-Shirt'); flipHeading = true;">T-Shirt</a>
+                <a (click)="Filterproduct('Jeans'); flipHeading = true;">Jeans</a>
+            </div>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr style="color: rgb(225, 110, 110);">
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Color</th>
+                <th>Discription</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of productList">
+                <td><img routerLink="/product/{{item.id}}" src="{{item.productURL}}" alt=""></td>
+                <td>{{item.productName}}</td>
+                <td>{{item.productPrice}}</td>
+                <td>{{item.productType}}</td>
+                <td>{{item.productColor}}</td>
+                <td style="text-align: left;">{{item.productDisc}}</td>
+                <td>
+                    <div>
+                        <fa-icon style="margin-right: 10px;" (click)="deleteProduct(item.id)"
+                            [icon]="deleteIcon"></fa-icon>
+                        <fa-icon routerLink="/seller-update-product/{{item.id}}" [icon]="updateIcon"></fa-icon>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

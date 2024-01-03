@@ -1,0 +1,71 @@
+/* You can add global styles to this file, and also import other style files */
+.form .inputbox {
+    position: relative;
+    width: 300px;
+    height: 50px;
+    margin-bottom: 25px;
+}
+
+.form .inputbox input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 2px solid rgb(225, 110, 110);
+    outline: none;
+    background: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.2em;
+}
+
+.form .inputbox:last-child {
+    margin-bottom: 0;
+}
+
+.form .inputbox span {
+    position: absolute;
+    top: 14px;
+    left: 20px;
+    font-size: 1em;
+    transition: 0.6s;
+    font-family: sans-serif;
+}
+
+.form .inputbox input:focus~span,
+.form .inputbox input:valid~span {
+    transform: translateX(-13px) translateY(-35px);
+    font-size: 1em;
+}
+
+.form a{
+    color: rgb(225, 110, 110);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form .inputbox-btn button {
+    background: rgb(225, 110, 110);
+    width: 50%;
+    color: #fff;
+    border: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.form .inputbox:hover button {
+    background: linear-gradient(45deg, rgb(225, 110, 110), rgb(231, 96, 81));
+}
+
+.form .inputbox-btn{
+    padding-left: 95px;
+}
+
+.carousel-caption{
+    background-color: #00000082;
+    border-radius: 5px;
+}
+.carousel-control-next-icon, .carousel-control-prev-icon{
+    background-color: black;
+    border: 5px;
+}

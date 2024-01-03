@@ -1,0 +1,40 @@
+<div class="row productDetails" *ngIf="detailsOfproduct">
+    <div class="col-sm-6">
+        <img class="product-image" src="{{detailsOfproduct.productURL}}" alt="">
+    </div>
+    <div class="col-sm-6">
+        <div class="details">
+            <h1>{{detailsOfproduct.productName}}</h1>
+            <h3>Price: {{detailsOfproduct.productPrice}}</h3>
+            <div class="temp">
+                <h5>Category: {{detailsOfproduct.productType}}</h5>
+                <h5>Color: {{detailsOfproduct.productColor}}</h5>
+            </div>
+            <div class="col" style="margin-bottom: 10px;">
+                <div ngbDropdown class="d-inline-block">
+                    <button [disabled]="removeCard" style="color:rgb(225, 110, 110); border-color: rgb(225, 110, 110);" type="button" class="btn" id="dropdownBasic1" ngbDropdownToggle>
+                        {{Selectsize}}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button (click)="size(8)" ngbDropdownItem>8</button>
+                        <button (click)="size(9)" ngbDropdownItem>9</button>
+                        <button (click)="size(10)" ngbDropdownItem>10</button>
+                        <button (click)="size(11)" ngbDropdownItem>11</button>
+                        <button (click)="size(12)" ngbDropdownItem>12</button>
+                    </div>
+                </div>
+            </div>
+            <h6>Discription: {{detailsOfproduct.productDisc}}</h6>
+            <button [disabled] = "Selectsize=='Select Size'" class="button-details" style="width: 121.2px;" (click)="AddtoCartProduct()" *ngIf="!removeCard">Add
+                to Cart</button>
+            <button class="button-details" (click)="RemovetoCartProduct(detailsOfproduct.id)" *ngIf="removeCard">Remove
+                to Cart</button>
+            <button class="button-details">Buy Now</button>
+            <div class="quantity-group">
+                <button [disabled]="removeCard" (click)="handleQuantity('min')">-</button>
+                <button style="cursor: default; width: 50px;">{{productQuantity}}</button>
+                <button [disabled]="removeCard" (click)="handleQuantity('plus')">+</button>
+            </div>
+        </div>
+    </div>
+</div>
