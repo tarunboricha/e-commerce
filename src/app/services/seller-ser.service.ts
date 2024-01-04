@@ -25,7 +25,7 @@ export class SellerSerService {
     }
   }
   sellerLoginservice(data: Login) {
-    this.htttp.get(`https://b9ad-103-250-162-221.ngrok-free.app/seller/${data.email}/${data.password}`,
+    this.htttp.get(`https://e09a-103-250-162-221.ngrok-free.app/seller/${data.email}/${data.password}`,
       { headers: this.headers, observe: 'response' }).subscribe((result: any) => {
         if (result && result.body && result.body.length) {
           this.checkSellerlogin.next(true);
