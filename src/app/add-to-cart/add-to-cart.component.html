@@ -5,21 +5,25 @@
     <div class="row">
         <div class="col-sm-8 details">
             <ul *ngFor="let item of CartDetails">
-                <li>
-                    <img routerLink="/product/{{item.productID}}" src="{{item.productURL}}" alt="">
-                </li>
-                <li style="margin-top: 14px;">
-                    <span>{{item.productName}}</span>
-                </li>
-                <li style="margin-top: 14px;">
-                    <span> Price : {{item.productPrice}}</span>
-                </li>
-                <li style="margin-top: 14px;">
-                    <span> Quantity : {{item.productQuantity}}</span>
-                </li>
-                <li>
-                    <button (click)="RemovetoCart(item.id)" class="form-button">Remove To Cart</button>
-                </li>
+                <div class="img-mobile">
+                    <li>
+                        <img routerLink="/product/{{item.productID}}" src="{{item.productURL}}" alt="">
+                    </li>
+                </div>
+                <div class="item-list">
+                    <li style="margin-top: 14px;">
+                        <span>{{item.productName}}</span>
+                    </li>
+                    <li style="margin-top: 14px;">
+                        <span> Price : {{item.productPrice}}</span>
+                    </li>
+                    <li style="margin-top: 14px;">
+                        <span> Quantity : {{item.productQuantity}}</span>
+                    </li>
+                    <li>
+                        <button (click)="RemovetoCart(item.id)" class="form-button">Remove To Cart</button>
+                    </li>
+                </div>
             </ul>
         </div>
         <div class="col-sm-4 summary">

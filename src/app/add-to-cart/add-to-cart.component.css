@@ -1,12 +1,17 @@
-.cart-page{
+.cart-page {
     margin-top: 40px;
     margin-bottom: 70px;
 }
-.cart-page h1{
+
+.img-mobile{
+    width: 20%;
+}
+
+.cart-page h1 {
     text-align: center;
 }
 
-.details button,.summary button {
+.details button, .summary button {
     height: 50px;
     background: rgb(225, 110, 110);
     color: #fff;
@@ -15,29 +20,39 @@
     cursor: pointer;
 }
 
-.summary button{
+.summary button {
     width: 100px;
 }
-.summary button:disabled{
+
+.summary button:disabled {
     cursor: default;
 }
 
-.details img{
-    height: 100px;
+.item-list{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.details img {
+    height: auto;
+    width: 50%;
     cursor: pointer;
 }
 
-.details ul{
+.details ul {
     padding: 0;
     margin: 0;
     list-style-type: none;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     border: 1px solid #ddd;
     padding: 15px;
     margin-bottom: 15px;
 }
-.summary h3{
+
+.summary h3 {
     text-align: center;
 }
 
@@ -46,7 +61,31 @@
     list-style-type: none;
     padding: 15px;
 }
-.summary ul li{
+
+.summary ul li {
     display: flex;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 767px) {
+
+    .img-mobile{
+        width: 50%;
+    }
+
+    .details img {
+        height: auto;
+        max-width: 100%;
+    }
+
+    .summary {
+        margin-top: 20px;
+    }
+
+    .summary button {
+        width: 100%;
+    }
+    button.form-button{
+        margin-top: 15%;
+    }
 }

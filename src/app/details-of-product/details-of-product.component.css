@@ -3,7 +3,6 @@
     width: 100%;
     height: 400px;
     object-fit: contain;
-
 }
 
 .productDetails{
@@ -53,4 +52,14 @@ h5,h3,h6{
 
 .button-details:disabled{
     cursor: default;
+}
+
+@media screen and (max-width: 767px) {
+    .details{
+        margin-bottom: 50px;
+    }
+
+    .product-image{
+        margin-bottom: 20px;
+    }    
 }
