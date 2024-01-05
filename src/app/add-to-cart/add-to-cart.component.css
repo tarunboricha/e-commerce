@@ -73,9 +73,17 @@
         width: 50%;
     }
 
+    .item-list{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: initial;
+    }
+
     .details img {
         height: auto;
-        max-width: 100%;
+        width: 100%;
     }
 
     .summary {
