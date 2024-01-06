@@ -1,8 +1,9 @@
 <div class="spinning-loader" *ngIf="isLoader">
-	<div class="spinner-border" role="status">
+	<div *ngIf="!serverError" class="spinner-border" role="status">
 		<span class="sr-only">Loading...</span>
 	</div>
-	<h1 style="margin-left: 20px;"> Home page is loading...</h1>
+	<h1 *ngIf="!serverError" style="margin-left: 20px;"> Home page is loading...</h1>
+	<h1 *ngIf="serverError" style="margin-left: 20px; color: red;"> Server is down please contact Tarun</h1>
 </div>
 <div *ngIf="!isLoader">
 	<ngb-carousel class="home-cont" *ngIf="popularProducts">

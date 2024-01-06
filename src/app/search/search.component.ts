@@ -11,6 +11,7 @@ import { query } from '@angular/animations';
 })
 export class SearchComponent implements OnInit {
 
+  serverError: boolean = false;
   isLoader: boolean = false;
   isDetailsLoad: boolean = false;
   searchProductData: undefined | product[];
@@ -18,29 +19,51 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.loadDetails();
   }
-  loadDetails() {
+
+  loadDetails(): void {
     if (!this.isDetailsLoad) {
       this.isLoader = true;
-      let Query = this.router.snapshot.paramMap.get('query');
-      if (Query) {
-        console.log("HELOOOOOO");
-        
-        Query && this.product.searchProductService(Query).subscribe((result) => {
-          this.searchProductData = result;
-          this.isLoader = false;
-        });
-        this.isDetailsLoad = true;
+
+      const query = this.router.snapshot.paramMap.get('query');
+      const category = this.router.snapshot.paramMap.get('cat');
+
+      if (query) {
+        this.searchProduct(query);
+      } else if (category) {
+        this.filterProduct(category);
       }
-      else {
-        let Category = this.router.snapshot.paramMap.get('cat');
-        Category && this.product.FilterProductService(Category).subscribe((result) => {
-          if (result) {
-            this.isLoader = false;
-            this.searchProductData = result;
-          }
-        });
-        this.isDetailsLoad = true;
-      }
+
+      this.isDetailsLoad = true;
     }
+  }
+
+  searchProduct(query: string): void {
+    this.product.searchProductService(query).subscribe(
+      (result) => {
+        this.searchProductData = result;
+        this.isLoader = false;
+      },
+      (error) => {
+        console.error('Error fetching search product data:', error);
+        this.serverError = true;
+        // Handle error as needed
+      }
+    );
+  }
+
+  filterProduct(category: string): void {
+    this.product.FilterProductService(category).subscribe(
+      (result) => {
+        if (result) {
+          this.isLoader = false;
+          this.searchProductData = result;
+        }
+      },
+      (error) => {
+        console.error('Error fetching filtered product data:', error);
+        this.serverError = true;
+        // Handle error as needed
+      }
+    );
   }
 }
