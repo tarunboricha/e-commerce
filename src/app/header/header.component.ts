@@ -112,7 +112,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['']);
   }
   UserLogoutfun() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('4uUser');
     this.product.cartData.emit([]);
     this.router.navigate(['']);
   }
