@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class AddToCartComponent implements OnInit {
   isLoader1: boolean = false;
   isLoader: boolean = false;
-  CartDetails: undefined | product[];
+  CartDetails: undefined | any;
   userID: number | undefined;
   priceSummary: priceSummary = {
     price: 0,
@@ -29,10 +29,11 @@ export class AddToCartComponent implements OnInit {
           this.CartDetails = result;
           let price = 0;
           if (this.CartDetails.length) {
-            this.CartDetails.forEach((item) => {
+            this.CartDetails.forEach((item:any) => {
               if (item.productQuantity) {
                 price = price + (+item.productPrice * +item.productQuantity)
               }
+              item.isloader = false;
             })
             this.priceSummary.price = price;
             this.priceSummary.discount = price / 10;
@@ -61,8 +62,8 @@ export class AddToCartComponent implements OnInit {
   ngOnInit(): void {
     this.tempFun();
   }
-  RemovetoCart(data: number) {
-    this.isLoader = true;
+  RemovetoCart(data: number, index:number) {
+    this.CartDetails[index].isloader = true;
     let user = localStorage.getItem('user');
     let userID = user && JSON.parse(user)[0].userID;
     this.product.userremoveTocart(data, userID).subscribe((result) => {
