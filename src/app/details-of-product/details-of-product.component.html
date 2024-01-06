@@ -5,7 +5,7 @@
     <div class="col-sm-6">
         <div class="details">
             <h1>{{detailsOfproduct.productName}}</h1>
-            <h3>Price: {{detailsOfproduct.productPrice}}</h3>
+            <h3>Price: {{detailsOfproduct.productPrice | currency: 'INR'}}</h3>
             <div class="temp">
                 <h5>Category: {{detailsOfproduct.productType}}</h5>
                 <h5>Color: {{detailsOfproduct.productColor}}</h5>

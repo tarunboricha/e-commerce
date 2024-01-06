@@ -4,7 +4,7 @@
     </div>
     <div class="col-sm-8 details-product">
         <h6 routerLink="/product/{{item.id}}">{{item.productName}}</h6>
-        <p class="product-price">Price: {{item.productPrice}}</p>
+        <p class="product-price">Price: {{item.productPrice | currency: 'INR'}}</p>
         <p class="product-price">Type: {{item.productType}}</p>
         <p>{{item.productDisc}}</p>
     </div>
