@@ -40,4 +40,8 @@
     .spinning-loader {
         height: 60vh;
     }
+
+    .last{
+        margin-bottom: 60px;
+    }
 }

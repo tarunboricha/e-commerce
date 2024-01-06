@@ -20,3 +20,9 @@ ul{
     color: rgb(225, 110, 110);
     text-decoration: none;
 }
+
+@media screen and (max-width: 767px) {
+    .hide{
+        display: none;
+    }
+}

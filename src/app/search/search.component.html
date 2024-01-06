@@ -5,7 +5,7 @@
 	<h1 style="margin-left: 20px;"> loading...</h1>
 </div>
 <div *ngIf="!isLoader">
-    <div class="row item-search" *ngFor="let item of searchProductData">
+    <div class="row item-search" *ngFor="let item of searchProductData;  let last = last" [ngClass]="{ 'last' : last }">
         <div class="col-sm-3">
             <img routerLink="/product/{{item.id}}" src="{{item.productURL}}" alt="">
         </div>
