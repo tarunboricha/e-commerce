@@ -1,7 +1,7 @@
 .nav {
     margin-top: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-bottom: 5px;
 }
 
@@ -121,18 +121,23 @@
     color: rgb(225, 110, 110);
 }
 
-.nav .nav-itemss li{
-    padding-top: 15px;
-    padding-left: 15px;
+.nav-itemss{
+    display: inline-flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
+/* .nav .nav-itemss li{
+    padding-top: 15px;
+    padding-left: 15px;
+} */
+
 @media only screen and (max-width: 851px){
-    h1{
-        padding-left: 3.8rem;
-    }
     .Category{
         width: 50vw;
         height: 70vh;
+        top: 5.2%;
     }
     .Category h6{
         position: relative;
@@ -142,14 +147,15 @@
         font-size: 1rem;
     }
 
+    .nav .nav-search{
+        margin: 0;
+    }
+
     .Category p{
         text-align: center;
         position: absolute;
         bottom: 0px;
         left: 1rem;
         font-size: 1rem;
-    }
-    .nav-itemss{
-        padding-left: 1rem;
     }
 }

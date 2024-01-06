@@ -29,7 +29,7 @@
                 to Cart</button>
             <button class="button-details" (click)="RemovetoCartProduct(detailsOfproduct.id)" *ngIf="removeCard">Remove
                 to Cart</button>
-            <button class="button-details">Buy Now</button>
+            <button class="button-details" id="buynow">Buy Now</button>
             <div class="quantity-group">
                 <button [disabled]="removeCard" (click)="handleQuantity('min')">-</button>
                 <button style="cursor: default; width: 50px;">{{productQuantity}}</button>

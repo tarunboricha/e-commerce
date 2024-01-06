@@ -1,7 +1,7 @@
 
 .product-image{
     width: 100%;
-    height: 400px;
+    height: 70vh;
     object-fit: contain;
 }
 
@@ -52,6 +52,11 @@ h5,h3,h6{
 
 .button-details:disabled{
     cursor: default;
+}
+
+#buynow{
+    padding: 10px;
+    cursor: initial;
 }
 
 @media screen and (max-width: 767px) {

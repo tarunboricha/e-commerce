@@ -83,3 +83,9 @@ p{
   
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {background-color: rgb(224, 93, 93);}
+
+  @media screen and (max-width: 767px) {
+    .product, .filter{
+        display: none;
+    }
+  }

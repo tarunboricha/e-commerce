@@ -21,6 +21,8 @@ export class SearchComponent implements OnInit {
     if (!this.isDetailsLoad) {
       let Query = this.router.snapshot.paramMap.get('query');
       if (Query) {
+        console.log("HELOOOOOO");
+        
         Query && this.product.searchProductService(Query).subscribe((result) => {
           this.searchProductData = result;
         });

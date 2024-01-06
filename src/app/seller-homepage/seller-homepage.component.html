@@ -17,10 +17,10 @@
             <tr style="color: rgb(225, 110, 110);">
                 <th>Image</th>
                 <th>Name</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Color</th>
-                <th>Discription</th>
+                <th class="product">Price</th>
+                <th class="product">Category</th>
+                <th class="product">Color</th>
+                <th class="product">Discription</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -28,10 +28,10 @@
             <tr *ngFor="let item of productList">
                 <td><img routerLink="/product/{{item.id}}" src="{{item.productURL}}" alt=""></td>
                 <td>{{item.productName}}</td>
-                <td>{{item.productPrice}}</td>
-                <td>{{item.productType}}</td>
-                <td>{{item.productColor}}</td>
-                <td style="text-align: left;">{{item.productDisc}}</td>
+                <td class="product">{{item.productPrice}}</td>
+                <td class="product">{{item.productType}}</td>
+                <td class="product">{{item.productColor}}</td>
+                <td class="product" style="text-align: left;">{{item.productDisc}}</td>
                 <td>
                     <div>
                         <fa-icon style="margin-right: 10px;" (click)="deleteProduct(item.id)"

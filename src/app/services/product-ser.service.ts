@@ -46,7 +46,7 @@ export class ProductSerService {
   }
 
   searchProductService(data: string) {
-    return this.http.get<product[]>(`https://1763-103-250-162-221.ngrok-free.app/products?q=${data}`, {headers: this.headers});
+    return this.http.get<product[]>(`https://1763-103-250-162-221.ngrok-free.app/products/productType/${data}`, {headers: this.headers});
   }
 
   FilterProductService(data: string) {

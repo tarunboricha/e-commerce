@@ -1,22 +1,24 @@
 <nav class="nav">
-    <fa-icon (click)="flipSidebar(); $event.stopPropagation();" (blur)="showSidebar = false;" class="fa-2xl barIcon" [icon]="barIcon" *ngIf="switchCaseCondition != 'seller'"></fa-icon>
-    <ul class="Category" (click)="$event.stopPropagation();" *ngIf="showSidebar">
-        <h6>Shop by Category</h6>
-        <p>4u Men's Wear</p>
-        <li><a (click)="showSidebar = false; CategoryProducts('Shirt');">Shirt</a></li>
-        <li><a (click)="showSidebar = false; CategoryProducts('T-Shirt');">T-Shirt</a></li>
-        <li><a (click)="showSidebar = false; CategoryProducts('Jeans');">Jeans</a></li>
-    </ul>
-    <h1 routerLink="/">4u Men's Wear</h1>
+    <div class="heading">
+        <fa-icon (click)="flipSidebar(); $event.stopPropagation();" (blur)="showSidebar = false;" class="fa-2xl barIcon"
+            [icon]="barIcon" *ngIf="switchCaseCondition != 'seller'"></fa-icon>
+        <ul class="Category" (click)="$event.stopPropagation();" *ngIf="showSidebar">
+            <h6>Shop by Category</h6>
+            <p>4u Men's Wear</p>
+            <li><a (click)="showSidebar = false; CategoryProducts('Shirt');">Shirt</a></li>
+            <li><a (click)="showSidebar = false; CategoryProducts('T-Shirt');">T-Shirt</a></li>
+            <li><a (click)="showSidebar = false; CategoryProducts('Jeans');">Jeans</a></li>
+        </ul>
+        <h1 routerLink="/">4u Men's Wear</h1>
+    </div>
     <div *ngIf="switchCaseCondition != 'seller'" class="nav-search">
-        <input #SearchProduct type="text" (keyup.enter)="searchProducts(SearchProduct.value); HideSuggestion(true);" (keyup)="SearchSuggetionfun($event);" (blur)="HideSuggestion(false)"
-            placeholder="Search for Products" />
+        <input #SearchProduct type="text" placeholder="Search for Products" />
         <button (click)="searchProducts(SearchProduct.value)">Search</button>
-        <ul class="search-suggestion-result" *ngIf="searchSuggestion">
+        <!-- <ul class="search-suggestion-result" *ngIf="searchSuggestion">
             <li *ngFor="let item of searchSuggestion">
                 <a (mousedown)="redirectPage(item.id)">{{item.productName}}</a>
             </li>
-        </ul>
+        </ul> -->
     </div>
     <div class="nav-itemss" [ngSwitch]="switchCaseCondition">
         <ul *ngSwitchCase="'default'">
@@ -34,7 +36,7 @@
         <ul *ngSwitchCase="'user'">
             <li><a routerLink="seller">Seller</a></li>
             <li><a routerLink="/">{{Username | titlecase}}</a></li>
-            <li><a routerLink="my-orders" >My Orders</a></li>
+            <li><a routerLink="my-orders">My Orders</a></li>
             <li><a (click)="UserLogoutfun()">Logout</a></li>
             <li><a routerLink="/addToCart">Cart({{CartItem}})</a></li>
         </ul>
