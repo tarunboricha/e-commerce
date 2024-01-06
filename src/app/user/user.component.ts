@@ -14,7 +14,7 @@ export class UserComponent implements OnInit {
   LoginFailedmessage: undefined | string;
   constructor(private user: UserSerService, private router: Router, private product: ProductSerService) { }
   ngOnInit(): void {
-    if (localStorage.getItem('user')) {
+    if (localStorage.getItem('4uUser')) {
       this.router.navigate(['']);
     }
   }
@@ -27,7 +27,7 @@ export class UserComponent implements OnInit {
     this.user.UserLoginservice(data).subscribe((result: any) => {
       console.log(result);
       if (result && result.body && result.body.length) {
-        localStorage.setItem('user', JSON.stringify(result.body));
+        localStorage.setItem('4uUser', JSON.stringify(result.body));
         this.router.navigate(['']);
         this.localCarttoUserCart();
       }
@@ -42,7 +42,7 @@ export class UserComponent implements OnInit {
     let Data = localStorage.getItem('LocaladdToCart');
     localStorage.removeItem('LocaladdToCart');
     let CartData: product[] = Data && JSON.parse(Data);
-    let userData = localStorage.getItem('user');
+    let userData = localStorage.getItem('4uUser');
     let uID = userData && JSON.parse(userData)[0].userID;
     if (CartData.length && uID) {
       let data: addToCart[] = [];

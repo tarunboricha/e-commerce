@@ -33,12 +33,12 @@ export class HeaderComponent implements OnInit {
           let sellerData = sellerTemp && JSON.parse(sellerTemp)[0];
           this.SellerName = sellerData.name;
         }
-        else if (!localStorage.getItem('user')) {
+        else if (!localStorage.getItem('4uUser')) {
           this.switchCaseCondition = 'default';
         }
         else {
           this.switchCaseCondition = 'user';
-          let UserTemp = localStorage.getItem('user');
+          let UserTemp = localStorage.getItem('4uUser');
           let UserData = UserTemp && JSON.parse(UserTemp)[0];
           this.Username = UserData.name;
           if (!this.cartListRequestInProgress) {

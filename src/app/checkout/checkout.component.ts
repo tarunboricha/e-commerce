@@ -13,7 +13,7 @@ export class CheckoutComponent implements OnInit {
   orderMsg: string | undefined;
   constructor(private product: ProductSerService, private router: Router) { }
   ngOnInit(): void {
-    if (localStorage.getItem('user')) {
+    if (localStorage.getItem('4uUser')) {
       this.product.cartData.subscribe((result) => {
         if (result.length) {
           let price = 0;
@@ -35,7 +35,7 @@ export class CheckoutComponent implements OnInit {
 
   orderNow(data: { email: string, address: string, contact: string }) {
     if (!(data.email == '' && data.address == '' && data.contact.length!=10)) {
-      let user = localStorage.getItem('user');
+      let user = localStorage.getItem('4uUser');
       let userId = user && JSON.parse(user).id;
       if (this.totalPrice) {
         let orderData: order = {

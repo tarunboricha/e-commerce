@@ -22,7 +22,7 @@ export class AddToCartComponent implements OnInit {
   }
   constructor(protected product: ProductSerService, private router: Router) { }
   tempFun() {
-    if (localStorage.getItem('user')) {
+    if (localStorage.getItem('4uUser')) {
       this.product.cartData.subscribe((result) => {
         if (result.length) {
           this.isLoader1 = true;
@@ -64,7 +64,7 @@ export class AddToCartComponent implements OnInit {
   }
   RemovetoCart(data: number, index:number) {
     this.CartDetails[index].isloader = true;
-    let user = localStorage.getItem('user');
+    let user = localStorage.getItem('4uUser');
     let userID = user && JSON.parse(user)[0].userID;
     this.product.userremoveTocart(data, userID).subscribe((result) => {
       if (result) {

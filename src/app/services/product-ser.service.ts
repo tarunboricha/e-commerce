@@ -120,7 +120,7 @@ export class ProductSerService {
     })
   }
   orderList() {
-    let userStore = localStorage.getItem('user');
+    let userStore = localStorage.getItem('4uUser');
     let userData = userStore && JSON.parse(userStore);
     return this.http.get<order[]>('http://localhost:3000/orders?userId=' + userData.id);
   }

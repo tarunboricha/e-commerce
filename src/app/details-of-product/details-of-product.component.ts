@@ -27,7 +27,7 @@ export class DetailsOfProductComponent implements OnInit {
       console.log('PRODUCT DETAILS: ' + result);
       this.detailsOfproduct = result[0];
     });
-    if (localStorage.getItem('user')) {
+    if (localStorage.getItem('4uUser')) {
       this.product.cartData.subscribe((result) => {
         if (result) {
           result = result.filter((item: product) => id == item.productID?.toString());
@@ -68,7 +68,7 @@ export class DetailsOfProductComponent implements OnInit {
       return;
     }
     if (this.detailsOfproduct) {
-      let userData = localStorage.getItem('user');
+      let userData = localStorage.getItem('4uUser');
       if (userData) {
         this.isLoader = true;
         let userID = JSON.parse(userData)[0].userID;
@@ -96,7 +96,7 @@ export class DetailsOfProductComponent implements OnInit {
     }
   }
   RemovetoCartProduct(data: number) {
-    if (!localStorage.getItem('user')) {
+    if (!localStorage.getItem('4uUser')) {
       this.product.localremoveTocart(data);
       this.removeCard = false;
       this.productQuantity = 1;
@@ -104,7 +104,7 @@ export class DetailsOfProductComponent implements OnInit {
     }
     else {
       this.isLoader = true;
-      let user = localStorage.getItem('user');
+      let user = localStorage.getItem('4uUser');
       let userID = user && JSON.parse(user)[0].userID;
       this.cartDetails && this.product.userremoveTocart(this.cartDetails.id, userID).subscribe((result) => {
         if (result) {
