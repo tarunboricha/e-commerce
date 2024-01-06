@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SellerSerService } from '../services/seller-ser.service';
-import { signUp, Login } from '../data-type';
+import { Login } from '../data-type';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-seller',
@@ -9,8 +10,9 @@ import { signUp, Login } from '../data-type';
 })
 export class SellerComponent implements OnInit {
 
+  isLoader: boolean = false;
   SellerLoginfailed:undefined|string;
-  constructor(private sellsign: SellerSerService) { }
+  constructor(private sellsign: SellerSerService, private router: Router) { }
   ngOnInit(): void {
     this.sellsign.sellerReloadpage();
   }
@@ -21,13 +23,19 @@ export class SellerComponent implements OnInit {
       setTimeout(()=>this.SellerLoginfailed = undefined, 2000);
     }
     else {
-      this.sellsign.sellerLoginservice(data);
-      this.sellsign.SellerLoginFailed.subscribe((check)=>{
-        if(check){
+      this.isLoader = true;
+      this.sellsign.sellerLoginservice(data).subscribe((result: any) => {
+        if (result && result.body && result.body.length) {
+          this.isLoader = false;
+          localStorage.setItem('seller', JSON.stringify(result.body));
+          this.router.navigate(['seller-homepage']);
+        }
+        else {
+          this.isLoader = false;
           this.SellerLoginfailed = "Email or Passwrod is not correct";
           setTimeout(()=>this.SellerLoginfailed = undefined, 2000);
         }
-      })
+      });
     }
   }
 }

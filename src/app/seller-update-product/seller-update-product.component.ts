@@ -33,6 +33,7 @@ export class SellerUpdateProductComponent implements OnInit {
     this.product.updateProductservice(data).subscribe((result) => {
       console.log("result");
       if (result) {
+        document.querySelectorAll('form')[0].reset(); 
         this.isLoader = false;
         this.UpdateproductMessage = 'Product is Successfully Updated!';
         setTimeout(() => this.UpdateproductMessage = undefined, 1000);

@@ -23,6 +23,7 @@ export class SellerAddProductComponent {
     console.log(data);
     this.product.AddProductservice(data).subscribe((result)=>{
       if(result){
+        document.querySelectorAll('form')[0].reset();
         this.isLoader = false;
         this.AddproductMessage = "Product is Successfully Added!";
         setTimeout(()=>this.AddproductMessage = undefined, 1000);

@@ -10,6 +10,8 @@ import { ProductSerService } from '../services/product-ser.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+
+  isLoader: boolean = false;
   productid: number[] | undefined;
   LoginFailedmessage: undefined | string;
   constructor(private user: UserSerService, private router: Router, private product: ProductSerService) { }
@@ -24,15 +26,18 @@ export class UserComponent implements OnInit {
   }
 
   Login(data: Login) {
+    this.isLoader = true;
     this.user.UserLoginservice(data).subscribe((result: any) => {
       console.log(result);
       if (result && result.body && result.body.length) {
         localStorage.setItem('4uUser', JSON.stringify(result.body));
         this.router.navigate(['']);
         this.localCarttoUserCart();
+        this.isLoader = false;
       }
       else {
         this.LoginFailedmessage = "Email or Password is not Correct";
+        this.isLoader = false;
         setTimeout(() => this.LoginFailedmessage = undefined, 2000);
       }
     });

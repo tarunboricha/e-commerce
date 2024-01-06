@@ -7,7 +7,7 @@
 <div class="seller-auth" *ngIf="!isLoader1">
     <div class="center">
         <h1>Update Product</h1>
-        <form #updateproduct = "ngForm" (ngSubmit)="updateProduct(updateproduct.value); updateproduct.reset();">
+        <form #updateproduct = "ngForm" (ngSubmit)="updateProduct(updateproduct.value)">
             <div class="inputbox">
                 <input type="text" ngModel="{{productData?.productName}}" name="productName" required="required">
                 <span>Product Name</span>

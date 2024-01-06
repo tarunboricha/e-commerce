@@ -1,7 +1,7 @@
 <div class="seller-auth">
     <div class="center">
         <h1>Add new Product</h1>
-        <form #addproduct = "ngForm" (ngSubmit)="addProduct(addproduct.value); addproduct.reset();">
+        <form #addproduct = "ngForm" (ngSubmit)="addProduct(addproduct.value)">
             <div class="inputbox">
                 <input type="text" ngModel name="productName" required="required">
                 <span>Product Name</span>
