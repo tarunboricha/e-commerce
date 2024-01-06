@@ -11,6 +11,7 @@ export class ProductSerService {
     'ngrok-skip-browser-warning': 'your-custom-value'
   });
   
+  isLoader: boolean = false;
   cartData = new EventEmitter<product[] | []>();
   addProductMessage: string = '';
   constructor(private http: HttpClient) { }
@@ -73,6 +74,10 @@ export class ProductSerService {
     return this.http.post('https://1763-103-250-162-221.ngrok-free.app/Cart', data, { headers: this.headers });
   }
 
+  UseraddTocarts(data: addToCart[]) {
+    return this.http.post('https://1763-103-250-162-221.ngrok-free.app/Carts', data, { headers: this.headers });
+  }
+
   userremoveTocart(data: number, userID: number) {
     return this.http.delete('https://1763-103-250-162-221.ngrok-free.app/Cart/' + data + '/' + userID, { headers: this.headers });
   }
@@ -94,9 +99,10 @@ export class ProductSerService {
   }
 
   getCartlist(data: number) {
-    console.log("Tarun" + data);
+    this.isLoader = true;
     return this.http.get<product[]>(`https://1763-103-250-162-221.ngrok-free.app/Cart/${data}`,
       { headers: this.headers, observe: 'response' }).subscribe((result) => {
+        this.isLoader = false;
         if (result && result.body) {
           this.cartData.emit(result.body);
         }

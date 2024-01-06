@@ -29,15 +29,13 @@ export class UserComponent implements OnInit {
       if (result && result.body && result.body.length) {
         localStorage.setItem('user', JSON.stringify(result.body));
         this.router.navigate(['']);
+        this.localCarttoUserCart();
       }
-      else{
+      else {
         this.LoginFailedmessage = "Email or Password is not Correct";
         setTimeout(() => this.LoginFailedmessage = undefined, 2000);
       }
     });
-    setTimeout(() => {
-      this.localCarttoUserCart();
-    }, 300);
   }
 
   localCarttoUserCart() {
@@ -45,26 +43,23 @@ export class UserComponent implements OnInit {
     localStorage.removeItem('LocaladdToCart');
     let CartData: product[] = Data && JSON.parse(Data);
     let userData = localStorage.getItem('user');
-    let userID = userData && JSON.parse(userData)[0].userID;
-    if (CartData.length) {
-      this.product.getCartlist(userID);
-      this.product.cartData.subscribe((result) => {
-        const alreadyAdded = new Set(result.map(e => e.productID));
-        CartData = CartData.filter((item: product) => !alreadyAdded.has(item.id));
-        CartData.forEach((product: product, index) => {
-          let Cart: addToCart = {
-            ...product,
-            productID: product.id,
-            userID,
-            productSize:product.productSize
-          };
-          this.product.UseraddTocart(Cart).subscribe((result) => { });
-        });
+    let uID = userData && JSON.parse(userData)[0].userID;
+    if (CartData.length && uID) {
+      let data: addToCart[] = [];
+      CartData.forEach((product: product, index) => {
+        let temp: addToCart = {
+          productID: product.id,
+          productQuantity: product.productQuantity,
+          productSize: product.productSize,
+          userID: uID
+        };
+        console.log(uID);
+        data.push(temp);
+      });
+      this.product.UseraddTocarts(data).subscribe((result) => {
+        this.product.getCartlist(uID);
       });
     }
-    setTimeout(() => {
-      this.product.getCartlist(userID);
-    }, 1000);
   }
 
   flipPage() {

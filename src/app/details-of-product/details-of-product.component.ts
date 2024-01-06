@@ -98,6 +98,9 @@ export class DetailsOfProductComponent implements OnInit {
   RemovetoCartProduct(data: number) {
     if (!localStorage.getItem('user')) {
       this.product.localremoveTocart(data);
+      this.removeCard = false;
+      this.productQuantity = 1;
+      this.Selectsize = 'Select Size';
     }
     else {
       this.isLoader = true;

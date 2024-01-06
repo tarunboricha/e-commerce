@@ -20,7 +20,7 @@ export class AddToCartComponent implements OnInit {
     delivery: 0,
     total: 0
   }
-  constructor(private product: ProductSerService, private router: Router) { }
+  constructor(protected product: ProductSerService, private router: Router) { }
   tempFun() {
     if (localStorage.getItem('user')) {
       this.product.cartData.subscribe((result) => {
