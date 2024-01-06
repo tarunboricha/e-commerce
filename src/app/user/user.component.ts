@@ -24,9 +24,13 @@ export class UserComponent implements OnInit {
   }
 
   Login(data: Login) {
-    this.user.UserLoginservice(data);
-    this.user.UserLoginFailed.subscribe((result) => {
-      if (result) {
+    this.user.UserLoginservice(data).subscribe((result: any) => {
+      console.log(result);
+      if (result && result.body && result.body.length) {
+        localStorage.setItem('user', JSON.stringify(result.body));
+        this.router.navigate(['']);
+      }
+      else{
         this.LoginFailedmessage = "Email or Password is not Correct";
         setTimeout(() => this.LoginFailedmessage = undefined, 2000);
       }

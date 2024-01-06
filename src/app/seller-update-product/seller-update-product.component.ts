@@ -10,17 +10,22 @@ import { product } from '../data-type';
 })
 export class SellerUpdateProductComponent implements OnInit {
 
+  isLoader1: boolean = false;
+  isLoader: boolean = false;
   productData: undefined | product;
   constructor(private router: ActivatedRoute, private product: ProductSerService, private route: Router) { }
   ngOnInit(): void {
+    this.isLoader1 = true;
     let productId = this.router.snapshot.paramMap.get('id');
     productId && this.product.getProductservice(productId).subscribe((result) => {
+      this.isLoader1 = false;
       this.productData = result[0];
     });
   }
   UpdateproductMessage: string | undefined;
 
   updateProduct(data: product) {
+    this.isLoader = true;
     console.log(data);
     if (this.productData) {
       data.id = this.productData.id;
@@ -28,10 +33,11 @@ export class SellerUpdateProductComponent implements OnInit {
     this.product.updateProductservice(data).subscribe((result) => {
       console.log("result");
       if (result) {
+        this.isLoader = false;
         this.UpdateproductMessage = 'Product is Successfully Updated!';
+        setTimeout(() => this.UpdateproductMessage = undefined, 1000);
+        setTimeout(() => this.route.navigate(['/seller-homepage']), 1000);
       }
-      setTimeout(() => this.UpdateproductMessage = undefined, 2000);
-      setTimeout(() => this.route.navigate(['/seller-homepage']), 2000);
     });
   }
 }

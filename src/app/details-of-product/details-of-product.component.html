@@ -1,4 +1,10 @@
-<div class="row productDetails" *ngIf="detailsOfproduct">
+<div class="spinning-loader" *ngIf="isLoader1">
+	<div class="spinner-border" role="status">
+		<span class="sr-only">Loading...</span>
+	</div>
+	<h1 style="margin: 0; margin-left: 20px; color: black;"> loading...</h1>
+</div>
+<div class="row productDetails" *ngIf="detailsOfproduct && !isLoader1">
     <div class="col-sm-6">
         <img class="product-image" src="{{detailsOfproduct.productURL}}" alt="">
     </div>
@@ -25,15 +31,19 @@
                 </div>
             </div>
             <h6>Discription: {{detailsOfproduct.productDisc}}</h6>
-            <button [disabled] = "Selectsize=='Select Size'" class="button-details" style="width: 121.2px;" (click)="AddtoCartProduct()" *ngIf="!removeCard">Add
+            <button [disabled]="isLoader" class="button-details" style="width: 121.2px;" (click)="AddtoCartProduct()" *ngIf="!removeCard"><div *ngIf="isLoader" class="spinner-border spinner-border-sm" role="status">
+                <span class="sr-only">Loading...</span>
+              </div> Add
                 to Cart</button>
-            <button class="button-details" (click)="RemovetoCartProduct(detailsOfproduct.id)" *ngIf="removeCard">Remove
+            <button [disabled]="isLoader" class="button-details" (click)="RemovetoCartProduct(detailsOfproduct.id)" *ngIf="removeCard"><div *ngIf="isLoader" class="spinner-border spinner-border-sm" role="status">
+                <span class="sr-only">Loading...</span>
+              </div> Remove
                 to Cart</button>
             <button class="button-details" id="buynow">Buy Now</button>
             <div class="quantity-group">
-                <button [disabled]="removeCard" (click)="handleQuantity('min')">-</button>
+                <button [disabled]="removeCard || isLoader" (click)="handleQuantity('min')">-</button>
                 <button style="cursor: default; width: 50px;">{{productQuantity}}</button>
-                <button [disabled]="removeCard" (click)="handleQuantity('plus')">+</button>
+                <button [disabled]="removeCard || isLoader" (click)="handleQuantity('plus')">+</button>
             </div>
         </div>
     </div>

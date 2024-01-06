@@ -11,6 +11,7 @@ import { faTrash,faEdit } from '@fortawesome/free-solid-svg-icons'
 })
 export class SellerHomepageComponent implements OnInit {
 
+  isLoader: boolean = false;
   flipHeading:boolean = false;
   productList: undefined | product[];
   deleteIcon = faTrash;
@@ -25,22 +26,28 @@ export class SellerHomepageComponent implements OnInit {
       this.productlistfun();
     }
     else{
+      this.isLoader = true;
       this.product.FilterProductService(data).subscribe((result) => {
         this.productList = result;
+        this.isLoader = false;
       })
     }
   }
   deleteProduct(data: number) {
+    this.isLoader = true;
     this.product.deleteProductservice(data).subscribe((result) => {
       if (result) {
+        this.isLoader = false;
         this.productlistfun();
       }
     })
   }
 
   productlistfun() {
+    this.isLoader = true;
     this.product.productListservice().subscribe((result) => {
       console.log('HELLO' + result);
+      this.isLoader = false;
       this.productList = result;
     })
   }

@@ -1,14 +1,15 @@
-.product-list{
+.product-list {
     margin-top: 30px;
     margin-bottom: 90px;
 }
-table{
+
+table {
     text-align: center;
     color: black;
     border-collapse: collapse;
 }
 
-.filter{
+.filter {
     display: flex;
     justify-content: space-between;
     padding-right: 80px;
@@ -16,28 +17,31 @@ table{
     padding-bottom: 30px;
 }
 
-.filter .btn-primary{
+.filter .btn-primary {
     background-color: rgb(225, 110, 110);
     border: none;
     height: 50px;
 }
 
-table td, table th{
+table td,
+table th {
     border: 1.5px solid rgb(225, 110, 110);
     padding: 10px;
     min-height: 160px;
 
 }
-img{
+
+img {
     width: 100px;
     height: 100px;
     cursor: pointer;
 }
 
-table fa-icon{
+table fa-icon {
     cursor: pointer;
 }
-p{
+
+p {
     cursor: pointer;
 }
 
@@ -48,44 +52,63 @@ p{
     font-size: 16px;
     border: none;
     width: 90px;
-  }
-  
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
     position: relative;
     display: inline-block;
-  }
-  
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
     color: black;
     padding: 6px 16px;
     text-decoration: none;
     display: block;
     cursor: pointer;
-  }
-  
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #ddd;}
-  
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {display: block;}
-  
-  /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {background-color: rgb(224, 93, 93);}
+}
 
-  @media screen and (max-width: 767px) {
-    .product, .filter{
+.spinning-loader {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: rgb(224, 93, 93);
+}
+
+@media screen and (max-width: 767px) {
+
+    .product,
+    .filter {
         display: none;
     }
-  }
+
+    .spinning-loader {
+        height: 60vh;
+    }
+}

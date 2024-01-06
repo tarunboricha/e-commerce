@@ -31,7 +31,9 @@
                 <span>Product Image URL</span>
             </div>
             <div class="inputbox">
-                <button class="inputbox" ngModule>Add-Product</button>
+                <button class="inputbox" ngModule><div *ngIf="isLoader" class="spinner-border spinner-border-sm" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div> Add-Product</button>
             </div>
         </form>
         <p style="color: rgb(25, 209, 99);">{{ AddproductMessage }}</p>

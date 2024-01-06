@@ -1,7 +1,7 @@
 <nav class="nav">
     <div class="heading">
         <fa-icon (click)="flipSidebar(); $event.stopPropagation();" (blur)="showSidebar = false;" class="fa-2xl barIcon"
-            [icon]="barIcon" *ngIf="switchCaseCondition != 'seller'"></fa-icon>
+            [icon]="barIcon"></fa-icon>
         <ul class="Category" (click)="$event.stopPropagation();" *ngIf="showSidebar">
             <h6>Shop by Category</h6>
             <p>4u Men's Wear</p>
@@ -11,7 +11,7 @@
         </ul>
         <h1 routerLink="/">4u Men's Wear</h1>
     </div>
-    <div *ngIf="switchCaseCondition != 'seller'" class="nav-search">
+    <div class="nav-search">
         <input #SearchProduct type="text" placeholder="Search for Products" />
         <button (click)="searchProducts(SearchProduct.value)">Search</button>
         <!-- <ul class="search-suggestion-result" *ngIf="searchSuggestion">
@@ -35,8 +35,8 @@
         </ul>
         <ul *ngSwitchCase="'user'">
             <li><a routerLink="seller">Seller</a></li>
-            <li><a routerLink="/">{{Username | titlecase}}</a></li>
-            <li><a routerLink="my-orders">My Orders</a></li>
+            <li><a routerLink="">Home</a></li>
+            <li><a >{{Username | titlecase}}</a></li>
             <li><a (click)="UserLogoutfun()">Logout</a></li>
             <li><a routerLink="/addToCart">Cart({{CartItem}})</a></li>
         </ul>

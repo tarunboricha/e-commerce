@@ -59,7 +59,19 @@ h5,h3,h6{
     cursor: initial;
 }
 
+.spinning-loader{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 767px) {
+
+    .spinning-loader{
+        height: 60vh;
+    }
+    
     .details{
         margin-bottom: 50px;
     }

@@ -12,8 +12,6 @@ export class UserSerService {
     'Authorization': 'Bearer YourAccessToken', // Add any other headers you need
     'ngrok-skip-browser-warning': 'your-custom-value'
   });
-
-  UserLoginFailed = new EventEmitter<boolean>(false);
   constructor(private htttp: HttpClient, private router: Router) { }
   userSignupservice(data: signUp) {
     data.userID = 0;
@@ -25,16 +23,7 @@ export class UserSerService {
     }
   }
   UserLoginservice(data: Login) {
-    this.htttp.get(`https://1763-103-250-162-221.ngrok-free.app/users/${data.email}/${data.password}`,
-      { headers: this.headers, observe: 'response' }).subscribe((result: any) => {
-        console.log(result);
-        if (result && result.body && result.body.length) {
-          localStorage.setItem('user', JSON.stringify(result.body));
-          this.router.navigate(['']);
-        }
-        else{
-          this.UserLoginFailed.emit(true);
-        }
-      });
+    return this.htttp.get(`https://1763-103-250-162-221.ngrok-free.app/users/${data.email}/${data.password}`,
+      { headers: this.headers, observe: 'response' });
   }
 }

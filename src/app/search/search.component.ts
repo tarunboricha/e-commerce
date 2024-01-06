@@ -11,6 +11,7 @@ import { query } from '@angular/animations';
 })
 export class SearchComponent implements OnInit {
 
+  isLoader: boolean = false;
   isDetailsLoad: boolean = false;
   searchProductData: undefined | product[];
   constructor(private router: ActivatedRoute, private product: ProductSerService) { }
@@ -19,12 +20,14 @@ export class SearchComponent implements OnInit {
   }
   loadDetails() {
     if (!this.isDetailsLoad) {
+      this.isLoader = true;
       let Query = this.router.snapshot.paramMap.get('query');
       if (Query) {
         console.log("HELOOOOOO");
         
         Query && this.product.searchProductService(Query).subscribe((result) => {
           this.searchProductData = result;
+          this.isLoader = false;
         });
         this.isDetailsLoad = true;
       }
@@ -32,6 +35,7 @@ export class SearchComponent implements OnInit {
         let Category = this.router.snapshot.paramMap.get('cat');
         Category && this.product.FilterProductService(Category).subscribe((result) => {
           if (result) {
+            this.isLoader = false;
             this.searchProductData = result;
           }
         });

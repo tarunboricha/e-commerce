@@ -1,17 +1,25 @@
-<div class="cart-page">
+<div class="spinning-loader" *ngIf="isLoader1">
+	<div class="spinner-border" role="status">
+		<span class="sr-only">Loading...</span>
+	</div>
+	<h1 style="margin-left: 20px;"> loading...</h1>
+</div>
+<div class="cart-page" *ngIf="!isLoader1">
     <h1>
         Cart Page
     </h1>
     <div class="row">
         <div class="container">
             <div class="cart-item" *ngFor="let item of CartDetails">
-                <img src="{{item.productURL}}" alt="Product Image">
+                <img routerLink="/product/{{item.id}}" style="cursor: pointer;" src="{{item.productURL}}" alt="Product Image">
                 <div class="item-details">
                     <h6>{{item.productName}}</h6>
                     <p>Price: {{item.productPrice | currency: 'INR'}}</p>
                     <p>Quantity: {{item.productQuantity}}</p>
                 </div>
-                <button (click)="RemovetoCart(item.id)" class="form-button">Remove</button>
+                <button (click)="RemovetoCart(item.id)" class="form-button"><div *ngIf="isLoader" class="spinner-border spinner-border-sm" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div> Remove</button>
             </div>
         </div>
         <div class="col-sm-4 summary">

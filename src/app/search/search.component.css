@@ -3,7 +3,7 @@
     /* width: 800px; */
     border-top: 1px solid #ddd;
     padding: 10px;
-    margin-bottom: 70px;
+    margin-bottom: 30px;
     margin-top: 40px;
 }
 
@@ -26,4 +26,18 @@
 
 .item-search p{
     margin: 5px;
+}
+
+.spinning-loader{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 851px) {
+
+    .spinning-loader {
+        height: 60vh;
+    }
 }

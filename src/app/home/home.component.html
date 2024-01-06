@@ -1,31 +1,39 @@
-<ngb-carousel class="home-cont" *ngIf="popularProducts">
-	<ng-template *ngFor="let item of popularProducts" ngbSlide>
-		<div class="picsum-img-wrapper">
-			<img class="product-img" src="{{item.productURL}}" alt="Random first slide" />
-		</div>
-		<div class="carousel-caption">
-			<h3 routerLink="/product/{{item.id}}">{{item.productName}}</h3>
-			<p>{{item.productDisc}}</p>
-		</div>
-	</ng-template>
-</ngb-carousel>
-<div class="product-list-home">
-	<h1>Trendy Products</h1>
-	<div class="row">
-		<div class="col-sm-3" *ngFor="let item of trendingProducts">
-			<div class="product-item">
-				<img src="{{item.productURL}}" alt="">
-				<div class="product-details">
-					<h6 class="name-head">{{item.productName}}</h6>
-					<div class="product-price">
-						<p>Price: {{item.productPrice | currency: 'INR'}}</p>
+<div class="spinning-loader" *ngIf="isLoader">
+	<div class="spinner-border" role="status">
+		<span class="sr-only">Loading...</span>
+	</div>
+	<h1 style="margin-left: 20px;"> Home page is loading...</h1>
+</div>
+<div *ngIf="!isLoader">
+	<ngb-carousel class="home-cont" *ngIf="popularProducts">
+		<ng-template *ngFor="let item of popularProducts" ngbSlide>
+			<div class="picsum-img-wrapper">
+				<img class="product-img" src="{{item.productURL}}" alt="Random first slide" />
+			</div>
+			<div class="carousel-caption">
+				<h3 routerLink="/product/{{item.id}}">{{item.productName}}</h3>
+				<p>{{item.productDisc}}</p>
+			</div>
+		</ng-template>
+	</ngb-carousel>
+	<div class="product-list-home">
+		<h1>Trendy Products</h1>
+		<div class="row">
+			<div class="col-sm-3" *ngFor="let item of trendingProducts">
+				<div class="product-item">
+					<img src="{{item.productURL}}" alt="">
+					<div class="product-details">
+						<h6 class="name-head">{{item.productName}}</h6>
+						<div class="product-price">
+							<p>Price: {{item.productPrice | currency: 'INR'}}</p>
+						</div>
+						<div class="product-type">
+							<p>Category: {{item.productType}}</p>
+						</div>
 					</div>
-					<div class="product-type">
-						<p>Category: {{item.productType}}</p>
+					<div class="product-footer">
+						<a routerLink="/product/{{item.id}}">View Details</a>
 					</div>
-				</div>
-				<div class="product-footer">
-					<a routerLink="/product/{{item.id}}">View Details</a>
 				</div>
 			</div>
 		</div>

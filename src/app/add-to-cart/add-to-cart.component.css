@@ -77,7 +77,18 @@ h2 {
     text-align: center;
 }
 
+.spinning-loader {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 767px) {
+
+    .spinning-loader {
+        height: 60vh;
+    }
 
     .container {
         max-width: 100vw;

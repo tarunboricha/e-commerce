@@ -113,6 +113,22 @@ body {
     cursor: pointer;
 }
 
+
+.spinning-loader{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .center .inputbox:hover button {
     background: linear-gradient(45deg, rgb(225, 110, 110), rgb(231, 96, 81));
+}
+
+
+@media only screen and (max-width: 851px) {
+
+    .spinning-loader {
+        height: 60vh;
+    }
 }
