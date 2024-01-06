@@ -66,5 +66,6 @@ h5,h3,h6{
 
     .product-image{
         margin-bottom: 20px;
+        height: 45vh;
     }    
 }
