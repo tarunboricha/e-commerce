@@ -10,6 +10,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  cartListRequestInProgress: boolean = false;
 
   @HostListener('document:click', ['$event']) onDocumentClick(event: any) {
     event.stopPropagation()
@@ -40,7 +41,16 @@ export class HeaderComponent implements OnInit {
           let UserTemp = localStorage.getItem('user');
           let UserData = UserTemp && JSON.parse(UserTemp)[0];
           this.Username = UserData.name;
-          this.product.getCartlist(UserData.userID);
+          if (!this.cartListRequestInProgress) {
+            this.cartListRequestInProgress = true;
+    
+            // Make the API call
+            this.product.getCartlist(UserData.userID)
+              .add(() => {
+                // Set the flag to false when the request is complete, whether successful or not
+                this.cartListRequestInProgress = false;
+              });
+          }
         }
       }
     });
