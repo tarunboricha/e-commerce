@@ -16,14 +16,14 @@ export class UserSerService {
   userSignupservice(data: signUp) {
     data.userID = 0;
     if (data.name != '' && data.email != '' && data.password != '') {
-      this.htttp.post('https://1763-103-250-162-221.ngrok-free.app/users',
+      this.htttp.post('https://f938-2409-4041-2d9e-4268-d5aa-8760-5533-37a1.ngrok-free.app/users',
         data, { headers: this.headers, observe: 'response' }).subscribe((result) => {
           this.router.navigate(['']);
         });
     }
   }
   UserLoginservice(data: Login) {
-    return this.htttp.get(`https://1763-103-250-162-221.ngrok-free.app/users/${data.email}/${data.password}`,
+    return this.htttp.get(`https://f938-2409-4041-2d9e-4268-d5aa-8760-5533-37a1.ngrok-free.app/users/${data.email}/${data.password}`,
       { headers: this.headers, observe: 'response' });
   }
 }
