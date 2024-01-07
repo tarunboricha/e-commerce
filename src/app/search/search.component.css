@@ -39,6 +39,7 @@
 
     .spinning-loader {
         height: 60vh;
+        width: 100vw;
     }
 
     .last{
