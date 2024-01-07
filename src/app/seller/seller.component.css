@@ -16,7 +16,7 @@ body {
     flex-direction: column;
     width: 300px;
     position: relative;
-    padding-top: 35px;
+    padding-top: 5px;
     background: #fff;
     border-radius: 10px;
 }
@@ -29,7 +29,7 @@ body {
     padding: 10px;
     color: rgb(225, 110, 110);
     letter-spacing: 5px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     font-weight: bold;
     border-bottom: 2px solid rgb(225, 110, 110);
 }

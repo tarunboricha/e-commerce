@@ -22,7 +22,24 @@ export class UserComponent implements OnInit {
   }
   showSignUp: boolean = false;
   signUp(data: signUp) {
-    this.user.userSignupservice(data);
+    this.isLoader = true;
+    data.userID = 0;
+    if (data.name != '' && data.email != '' && data.password != '') {
+      this.user.userSignupservice(data).subscribe((result) => {
+        this.router.navigate(['']);
+      },
+      (error) => {
+        this.isLoader = false;
+        if (error.error.code === 'ER_DUP_ENTRY') {
+          this.LoginFailedmessage = "Email is already registered";
+          setTimeout(() => this.LoginFailedmessage = undefined, 2000);
+        }
+        else {
+          this.LoginFailedmessage = "Server is down please contact to Tarun";
+          setTimeout(() => this.LoginFailedmessage = undefined, 2000);
+        }
+      });
+    }
   }
 
   Login(data: Login) {
@@ -40,6 +57,11 @@ export class UserComponent implements OnInit {
         this.isLoader = false;
         setTimeout(() => this.LoginFailedmessage = undefined, 2000);
       }
+    },
+    (error) => {
+      this.isLoader = false;
+      this.LoginFailedmessage = "Server is down please contact to Tarun";
+      setTimeout(() => this.LoginFailedmessage = undefined, 2000);
     });
   }
 

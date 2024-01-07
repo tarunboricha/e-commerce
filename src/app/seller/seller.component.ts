@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class SellerComponent implements OnInit {
 
   isLoader: boolean = false;
-  SellerLoginfailed:undefined|string;
+  SellerLoginfailed: undefined | string;
   constructor(private sellsign: SellerSerService, private router: Router) { }
   ngOnInit(): void {
     this.sellsign.sellerReloadpage();
@@ -20,22 +20,26 @@ export class SellerComponent implements OnInit {
   login(data: Login) {
     if (data.email == '' || data.password == '') {
       this.SellerLoginfailed = "Fields are Empty.";
-      setTimeout(()=>this.SellerLoginfailed = undefined, 2000);
+      setTimeout(() => this.SellerLoginfailed = undefined, 2000);
     }
     else {
       this.isLoader = true;
       this.sellsign.sellerLoginservice(data).subscribe((result: any) => {
+        this.isLoader = false;
         if (result && result.body && result.body.length) {
-          this.isLoader = false;
           localStorage.setItem('seller', JSON.stringify(result.body));
           this.router.navigate(['seller-homepage']);
         }
         else {
-          this.isLoader = false;
           this.SellerLoginfailed = "Email or Passwrod is not correct";
-          setTimeout(()=>this.SellerLoginfailed = undefined, 2000);
+          setTimeout(() => this.SellerLoginfailed = undefined, 2000);
         }
-      });
+      },
+        (error) => {
+          this.isLoader = false;
+          this.SellerLoginfailed = "Server is down please contact to Tarun";
+          setTimeout(() => this.SellerLoginfailed = undefined, 2000);
+        });
     }
   }
 }

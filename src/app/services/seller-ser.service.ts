@@ -14,6 +14,7 @@ export class SellerSerService {
     'ngrok-skip-browser-warning': 'your-custom-value'
   });
 
+  serverError: boolean = false;
   SellerLoginFailed = new EventEmitter<boolean>(false);
   checkSellerlogin = new BehaviorSubject<boolean>(false);
   constructor(private htttp: HttpClient, private router: Router) { }

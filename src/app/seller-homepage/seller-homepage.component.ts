@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductSerService } from '../services/product-ser.service';
 import { product } from '../data-type';
 import { Router } from '@angular/router';
-import { faTrash,faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { SellerSerService } from '../services/seller-ser.service';
 
 @Component({
   selector: 'app-seller-homepage',
@@ -12,11 +13,11 @@ import { faTrash,faEdit } from '@fortawesome/free-solid-svg-icons'
 export class SellerHomepageComponent implements OnInit {
 
   isLoader: boolean = false;
-  flipHeading:boolean = false;
+  flipHeading: boolean = false;
   productList: undefined | product[];
   deleteIcon = faTrash;
   updateIcon = faEdit;
-  constructor(private product: ProductSerService, private router: Router) { }
+  constructor(private product: ProductSerService, private router: Router, protected seller:SellerSerService) { }
   ngOnInit(): void {
     this.productlistfun();
   }
@@ -25,7 +26,7 @@ export class SellerHomepageComponent implements OnInit {
     if (data == 'All') {
       this.productlistfun();
     }
-    else{
+    else {
       this.isLoader = true;
       this.product.FilterProductService(data).subscribe((result) => {
         this.productList = result;
@@ -49,6 +50,12 @@ export class SellerHomepageComponent implements OnInit {
       console.log('HELLO' + result);
       this.isLoader = false;
       this.productList = result;
-    })
+    },
+      (error) => {
+        console.error('Error fetching search product data:', error);
+        this.seller.serverError = true;
+        // Handle error as needed
+      }
+    );
   }
 }

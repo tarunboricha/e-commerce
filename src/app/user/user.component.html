@@ -1,7 +1,7 @@
 <div class="seller-auth">
     <div *ngIf="showSignUp" class="form">
         <h1>User Sign-Up</h1>
-        <div *ngIf="!isLoader" style="display: flex; justify-content: center; margin-bottom: 10px; align-items: center;">
+        <div *ngIf="isLoader" style="display: flex; justify-content: center; margin-bottom: 10px; align-items: center;">
             <div style="margin-right: 10px;" class="spinner-border spinner-border-sm" role="status">
                 <span class="sr-only">Loading...</span>
             </div> Please wait...
@@ -26,6 +26,9 @@
                 <button class="inputbox" ngModule>SignUp</button>
             </div>
         </form>
+        <div style="color: red;">
+            <p>{{LoginFailedmessage}}</p>
+        </div>
     </div>
 
 

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ProductSerService } from '../services/product-ser.service';
 import { product } from '../data-type';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { SellerSerService } from '../services/seller-ser.service';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +24,7 @@ export class HeaderComponent implements OnInit {
   switchCaseCondition: string = 'default';
   showSidebar: boolean = false;
   barIcon = faBars;
-  constructor(private router: Router, private product: ProductSerService) { }
+  constructor(private router: Router, private product: ProductSerService, protected seller:SellerSerService) { }
   ngOnInit(): void {
     this.router.events.subscribe((value: any) => {
       if (value.url) {

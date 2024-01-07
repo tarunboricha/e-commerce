@@ -11,6 +11,7 @@ export class ProductSerService {
     'ngrok-skip-browser-warning': 'your-custom-value'
   });
   
+  serverError: boolean = false;
   isLoader: boolean = false;
   cartData = new EventEmitter<product[] | []>();
   addProductMessage: string = '';
@@ -106,6 +107,8 @@ export class ProductSerService {
         if (result && result.body) {
           this.cartData.emit(result.body);
         }
+      }, (error) => {
+        this.serverError = true;
       });
   }
   orderNow(data: order) {

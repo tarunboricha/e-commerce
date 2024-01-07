@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductSerService } from '../services/product-ser.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { addToCart, product } from '../data-type';
 
 @Component({
@@ -18,14 +18,17 @@ export class DetailsOfProductComponent implements OnInit {
   productQuantity: number = 1;
   detailsOfproduct: undefined | product;
   cartDetails: product | undefined;
-  constructor(private product: ProductSerService, private route: ActivatedRoute) { }
+  constructor(private product: ProductSerService, private route: ActivatedRoute, private router:Router) { }
   ngOnInit(): void {
     this.isLoader1 = true;
     let id = this.route.snapshot.paramMap.get('Productid');
-    id && this.product.getProductservice(id).subscribe((result) => {
+    id && this.product.getProductservice(id).subscribe((result) => {  
       this.isLoader1 = false;
       console.log('PRODUCT DETAILS: ' + result);
       this.detailsOfproduct = result[0];
+    }, (error) => {
+      this.router.navigate(['']);
+      this.isLoader1 = false;
     });
     if (localStorage.getItem('4uUser')) {
       this.product.cartData.subscribe((result) => {

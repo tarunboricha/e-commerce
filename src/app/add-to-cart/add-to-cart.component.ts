@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-to-cart.component.css']
 })
 export class AddToCartComponent implements OnInit {
-  isLoader1: boolean = false;
+  
   isLoader: boolean = false;
   CartDetails: undefined | any;
   userID: number | undefined;
@@ -25,7 +25,6 @@ export class AddToCartComponent implements OnInit {
     if (localStorage.getItem('4uUser')) {
       this.product.cartData.subscribe((result) => {
         if (result.length) {
-          this.isLoader1 = true;
           this.CartDetails = result;
           let price = 0;
           if (this.CartDetails.length) {
@@ -43,7 +42,6 @@ export class AddToCartComponent implements OnInit {
             this.priceSummary.delivery = 100;
             this.priceSummary.total = price + 100;
           }
-          this.isLoader1 = false;
         }
         else {
           this.CartDetails = undefined;

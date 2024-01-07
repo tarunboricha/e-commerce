@@ -78,7 +78,8 @@ h2 {
 }
 
 .spinning-loader {
-    height: 80vh;
+    width: 59.375vw;
+    /* height: 80vh; */
     display: flex;
     justify-content: center;
     align-items: center;
