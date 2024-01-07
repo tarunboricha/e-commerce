@@ -39,7 +39,10 @@
 
     .spinning-loader {
         height: 60vh;
-        width: 100vw;
+    }
+
+    .spinning-loader h1{
+        text-align: center;
     }
 
     .last{

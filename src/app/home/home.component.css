@@ -60,6 +60,10 @@
         height: 60vh;
     }
 
+    .spinning-loader h1{
+        text-align: center;
+    }
+
     .product-img{
         height: 50vh;
     }

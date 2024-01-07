@@ -88,7 +88,7 @@ h2 {
 @media screen and (max-width: 767px) {
 
     .spinning-loader {
-        height: 60vh;
+        height: 20vh;
         width: 100vw;
     }
 
