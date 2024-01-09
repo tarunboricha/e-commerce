@@ -84,7 +84,7 @@ export class DetailsOfProductComponent implements OnInit {
         console.log(Cartdata);
         this.product.UseraddTocart(Cartdata).subscribe((result) => {
           if (result) {
-            this.product.getCartlist(userID);
+            this.product.getCartlist(userID, 'AddtoCart');
             this.removeCard = true;
             this.isLoader = false;
           }
@@ -111,7 +111,7 @@ export class DetailsOfProductComponent implements OnInit {
       let userID = user && JSON.parse(user)[0].userID;
       this.cartDetails && this.product.userremoveTocart(this.cartDetails.id, userID).subscribe((result) => {
         if (result) {
-          this.product.getCartlist(userID);
+          this.product.getCartlist(userID, 'RemovefromCart');
           this.removeCard = false;
           this.productQuantity = 1;
           this.Selectsize = 'Select Size';

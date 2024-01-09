@@ -84,7 +84,7 @@ export class UserComponent implements OnInit {
         data.push(temp);
       });
       this.product.UseraddTocarts(data).subscribe((result) => {
-        this.product.getCartlist(uID);
+        this.product.getCartlist(uID, 'localCarttoUserCart');
       });
     }
   }

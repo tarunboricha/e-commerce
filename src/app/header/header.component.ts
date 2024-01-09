@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
     event.stopPropagation()
     this.showSidebar = false;
   }
+  currUrl: string = '';
   searchSuggestion: undefined | product[];
   SellerName: undefined | string;
   Username: undefined | string;
@@ -26,31 +27,37 @@ export class HeaderComponent implements OnInit {
   barIcon = faBars;
   constructor(private router: Router, private product: ProductSerService, protected seller:SellerSerService) { }
   ngOnInit(): void {
+    console.log('headeroninitCalled');
     this.router.events.subscribe((value: any) => {
       if (value.url) {
-        if (localStorage.getItem('seller') && value.url.includes('seller')) {
-          this.switchCaseCondition = 'seller';
-          let sellerTemp = localStorage.getItem('seller');
-          let sellerData = sellerTemp && JSON.parse(sellerTemp)[0];
-          this.SellerName = sellerData.name;
-        }
-        else if (!localStorage.getItem('4uUser')) {
-          this.switchCaseCondition = 'default';
-        }
-        else {
-          this.switchCaseCondition = 'user';
-          let UserTemp = localStorage.getItem('4uUser');
-          let UserData = UserTemp && JSON.parse(UserTemp)[0];
-          this.Username = UserData.name;
-          if (!this.cartListRequestInProgress) {
-            this.cartListRequestInProgress = true;
-    
-            // Make the API call
-            this.product.getCartlist(UserData.userID)
-              .add(() => {
-                // Set the flag to false when the request is complete, whether successful or not
-                this.cartListRequestInProgress = false;
-              });
+        if(this.currUrl != value.url){
+          if (localStorage.getItem('seller') && value.url.includes('seller')) {
+            this.currUrl = value.url;
+            this.switchCaseCondition = 'seller';
+            let sellerTemp = localStorage.getItem('seller');
+            let sellerData = sellerTemp && JSON.parse(sellerTemp)[0];
+            this.SellerName = sellerData.name;
+          }
+          else if (!localStorage.getItem('4uUser')) {
+            this.currUrl = value.url;
+            this.switchCaseCondition = 'default';
+          }
+          else {
+            this.currUrl = value.url;
+            this.switchCaseCondition = 'user';
+            let UserTemp = localStorage.getItem('4uUser');
+            let UserData = UserTemp && JSON.parse(UserTemp)[0];
+            this.Username = UserData.name;
+            if (!this.cartListRequestInProgress) {
+              this.cartListRequestInProgress = true;
+      
+              // Make the API call
+              this.product.getCartlist(UserData.userID, 'headerOninit')
+                .add(() => {
+                  // Set the flag to false when the request is complete, whether successful or not
+                  this.cartListRequestInProgress = false;
+                });
+            }
           }
         }
       }

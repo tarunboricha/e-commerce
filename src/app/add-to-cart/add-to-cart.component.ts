@@ -66,7 +66,7 @@ export class AddToCartComponent implements OnInit {
     let userID = user && JSON.parse(user)[0].userID;
     this.product.userremoveTocart(data, userID).subscribe((result) => {
       if (result) {
-        this.product.getCartlist(userID);
+        this.product.getCartlist(userID, 'RemovetoCart');
         setTimeout(() => {
           this.isLoader = false;
         }, 100);

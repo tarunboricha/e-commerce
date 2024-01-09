@@ -55,7 +55,9 @@
 }
 
   .picsum-img-wrapperr{
-    height: 80vh; 
+    height: 80vh;
+    width: 80%;
+    margin: 0 auto;
     background-color: rgb(228, 228, 228);
   }
 @media only screen and (max-width: 851px){
@@ -70,6 +72,7 @@
 
     .product-img, .picsum-img-wrapperr{
         height: 50vh;
+        width: 100%;
     }
 
     .product-footer{

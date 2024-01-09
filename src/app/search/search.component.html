@@ -1,22 +1,22 @@
 <div *ngIf="isLoader" style="position: relative;">
     <div class="row item-search">
-        <div class="col-sm-3 mob" style="height: 150px; width: 150px; margin-right: 50px; background-color: rgb(228, 228, 228);">
+        <div class="col-sm-3 mob">
         </div>
         <div class="col-sm-8 details-product picsum-img-wrapperr">
             <h6 style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</h6>
-            <p class="product-price" style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
-            <p class="product-price" style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
-            <p style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
+            <p class="product-price" style="margin-left: 0; background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
+            <p class="product-price" style="margin-left: 0; background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
+            <p style="margin-left: 0; background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
         </div>
     </div>
     <div class="row item-search">
-        <div class="col-sm-3 mob" style="height: 150px; width: 150px; margin-right: 50px;  background-color: rgb(228, 228, 228);">
+        <div class="col-sm-3 mob">
         </div>
         <div class="col-sm-8 details-product picsum-img-wrapperr">
             <h6 style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</h6>
-            <p class="product-price" style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
-            <p class="product-price" style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
-            <p style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
+            <p class="product-price" style="margin-left: 0; background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
+            <p class="product-price" style="margin-left: 0; background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
+            <p style="margin-left: 0; background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
         </div>
     </div>
 </div>
@@ -27,9 +27,9 @@
         </div>
         <div class="col-sm-8 details-product">
             <h6 routerLink="/product/{{item.id}}">{{item.productName}}</h6>
-            <p class="product-price">Price: {{item.productPrice | currency: 'INR'}}</p>
-            <p class="product-price">Type: {{item.productType}}</p>
-            <p>{{item.productDisc}}</p>
+            <p style="margin-left: 0;" class="product-price">Price: {{item.productPrice | currency: 'INR'}}</p>
+            <p style="margin-left: 0;" class="product-price">Type: {{item.productType}}</p>
+            <p style="margin-left: 0;">{{item.productDisc}}</p>
         </div>
     </div>
 </div>

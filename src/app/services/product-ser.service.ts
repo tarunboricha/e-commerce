@@ -99,7 +99,8 @@ export class ProductSerService {
     }
   }
 
-  getCartlist(data: number) {
+  getCartlist(data: number, fun:string) {
+    console.log('getCartlist called with function: ', fun);
     this.isLoader = true;
     return this.http.get<product[]>(`https://b866-103-250-162-221.ngrok-free.app/Cart/${data}`,
       { headers: this.headers, observe: 'response' }).subscribe((result) => {

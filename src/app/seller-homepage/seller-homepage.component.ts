@@ -12,17 +12,21 @@ import { SellerSerService } from '../services/seller-ser.service';
 })
 export class SellerHomepageComponent implements OnInit {
 
+  productType: string = 'All';
   isLoader: boolean = false;
-  flipHeading: boolean = false;
   productList: undefined | product[];
   deleteIcon = faTrash;
   updateIcon = faEdit;
   constructor(private product: ProductSerService, private router: Router, protected seller:SellerSerService) { }
   ngOnInit(): void {
+    console.log('sellerhomepageoninitCalled');
     this.productlistfun();
   }
 
   Filterproduct(data: string) {
+    if(data == this.productType)
+      return;
+    this.productType = data;
     if (data == 'All') {
       this.productlistfun();
     }

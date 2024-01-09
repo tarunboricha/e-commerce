@@ -7,6 +7,10 @@
     margin-top: 40px;
 }
 
+.details-product p{
+    margin-left: 0;
+}
+
 .item-search img{
     width: 100%;
     object-fit: contain;
@@ -28,6 +32,13 @@
     margin: 5px;
 }
 
+.mob {
+    height: 150px; 
+    width: 150px; 
+    margin: 0 50px;  
+    background-color: rgb(228, 228, 228);
+}
+
 .spinning-loader{
     height: 80vh;
     display: flex;
@@ -47,6 +58,7 @@
 
     .mob{
         margin-left: 30%;
+        margin-bottom: 10px;
     }
 
     .last{
