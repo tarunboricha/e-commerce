@@ -74,7 +74,7 @@ h5,h3,h6{
 @media screen and (max-width: 767px) {
 
     .spinning-loader{
-        height: 60vh;
+        /* height: 60vh; */
         flex-direction: column;
     }
     
@@ -88,5 +88,7 @@ h5,h3,h6{
     }
     .immg{
         margin-bottom: 20px;
+        height: 45vh;
+        width: 90%;
     }
 }
