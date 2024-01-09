@@ -45,6 +45,10 @@
         text-align: center;
     }
 
+    .mob{
+        margin-left: 30%;
+    }
+
     .last{
         margin-bottom: 60px;
     }

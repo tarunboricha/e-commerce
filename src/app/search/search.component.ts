@@ -1,8 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductSerService } from '../services/product-ser.service';
 import { product } from '../data-type';
-import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-search',
@@ -11,11 +10,10 @@ import { query } from '@angular/animations';
 })
 export class SearchComponent implements OnInit {
 
-  serverError: boolean = false;
   isLoader: boolean = false;
   isDetailsLoad: boolean = false;
   searchProductData: undefined | product[];
-  constructor(private router: ActivatedRoute, private product: ProductSerService) { }
+  constructor(private router: ActivatedRoute, private product: ProductSerService, private rout:Router) { }
   ngOnInit(): void {
     this.loadDetails();
   }
@@ -45,7 +43,7 @@ export class SearchComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching search product data:', error);
-        this.serverError = true;
+        this.rout.navigate(['']);
         // Handle error as needed
       }
     );
@@ -61,7 +59,7 @@ export class SearchComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching filtered product data:', error);
-        this.serverError = true;
+        this.rout.navigate(['']);
         // Handle error as needed
       }
     );

@@ -1,10 +1,35 @@
-<div class="spinning-loader" *ngIf="isLoader1">
-	<div class="spinner-border" role="status">
-		<span class="sr-only">Loading...</span>
-	</div>
-	<h1 style="margin: 0; margin-left: 20px; color: black;"> loading...</h1>
+<div *ngIf="isLoader1" style="position: relative;">
+    <div class="spinning-loader picsum-img-wrapperr">
+        <div class="col-sm-6 immg">
+        </div>
+        <div class="col-sm-6">
+            <div class="details">
+                <h1 style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</h1>
+                <h3 style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</h3>
+                <div class="temp">
+                    <h5 style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</h5>
+                    <h5 style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</h5>
+                </div>
+                <div class="col" style="margin-bottom: 10px;">
+                    <div ngbDropdown class="d-inline-block">
+                        <button style="color:rgb(225, 110, 110); border-color: rgb(225, 110, 110);" type="button" class="btn" id="dropdownBasic1">
+                            Select Size
+                        </button>
+                    </div>
+                </div>
+                <h6 style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</h6>
+                <button class="button-details" style="width: 121.2px;" >Add to Cart</button>
+                <button class="button-details" id="buynow">Buy Now</button>
+                <div class="quantity-group">
+                    <button>-</button>
+                    <button style="cursor: default; width: 50px;">1</button>
+                    <button>+</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="row productDetails" *ngIf="detailsOfproduct && !isLoader1">
+<div class="row productDetails" *ngIf="detailsOfproduct">
     <div class="col-sm-6">
         <img class="product-image" src="{{detailsOfproduct.productURL}}" alt="">
     </div>

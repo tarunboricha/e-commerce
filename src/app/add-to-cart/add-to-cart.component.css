@@ -59,6 +59,13 @@ h2 {
     margin-right: 10px;
 }
 
+.image-loader{
+    height: 80px;
+    width: 80px;
+    background-color: rgb(228, 228, 228);
+    margin-right: 20px;
+}
+
 .item-details {
     flex-grow: 1;
 }

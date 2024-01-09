@@ -54,6 +54,10 @@
     align-items: center;
 }
 
+  .picsum-img-wrapperr{
+    height: 80vh; 
+    background-color: rgb(228, 228, 228);
+  }
 @media only screen and (max-width: 851px){
 
     .spinning-loader{
@@ -64,7 +68,7 @@
         text-align: center;
     }
 
-    .product-img{
+    .product-img, .picsum-img-wrapperr{
         height: 50vh;
     }
 

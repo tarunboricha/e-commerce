@@ -60,16 +60,22 @@ h5,h3,h6{
 }
 
 .spinning-loader{
-    height: 80vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-top: 45px;
+}
+.immg{
+    height: 70vh;
+    width: 40%;
+    margin: 0 5%;
+    margin-right: 6.5%;
+    background-color: rgb(228, 228, 228);
 }
 
 @media screen and (max-width: 767px) {
 
     .spinning-loader{
         height: 60vh;
+        flex-direction: column;
     }
     
     .details{
@@ -79,5 +85,8 @@ h5,h3,h6{
     .product-image{
         margin-bottom: 20px;
         height: 45vh;
-    }    
+    }
+    .immg{
+        margin-bottom: 20px;
+    }
 }
