@@ -61,6 +61,7 @@ export class AddToCartComponent implements OnInit {
     this.tempFun();
   }
   RemovetoCart(data: number, index:number) {
+    this.isLoader = true;
     this.CartDetails[index].isloader = true;
     let user = localStorage.getItem('4uUser');
     let userID = user && JSON.parse(user)[0].userID;

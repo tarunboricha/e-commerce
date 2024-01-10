@@ -120,6 +120,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['']);
   }
   UserLogoutfun() {
+    this.currUrl = '';
     localStorage.removeItem('4uUser');
     this.product.cartData.emit([]);
     this.router.navigate(['']);
