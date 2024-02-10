@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {Login, signUp } from '../data-type';
 
@@ -14,11 +14,11 @@ export class UserSerService {
   });
   constructor(private htttp: HttpClient, private router: Router) { }
   userSignupservice(data: signUp) {
-    return this.htttp.post('https://9a6f-2409-4041-2d08-3bec-b5f1-5de1-9880-eca1.ngrok-free.app/users',
+    return this.htttp.post('https://039c-2409-4041-2615-445d-189d-1b9a-fdf6-5343.ngrok-free.app/users',
             data, { headers: this.headers, observe: 'response' });
   }
   UserLoginservice(data: Login) {
-    return this.htttp.get(`https://9a6f-2409-4041-2d08-3bec-b5f1-5de1-9880-eca1.ngrok-free.app/users/${data.email}/${data.password}`,
+    return this.htttp.get(`https://039c-2409-4041-2615-445d-189d-1b9a-fdf6-5343.ngrok-free.app/users/${data.email}/${data.password}`,
       { headers: this.headers, observe: 'response' });
   }
 }
