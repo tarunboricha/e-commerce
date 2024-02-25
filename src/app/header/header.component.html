@@ -4,12 +4,12 @@
             [icon]="barIcon"></fa-icon>
         <ul class="Category" (click)="$event.stopPropagation();" *ngIf="showSidebar">
             <h6>Shop by Category</h6>
-            <p>4u Men's Wear</p>
+            <p>D.&J. Fashion</p>
             <li><a (click)="showSidebar = false; CategoryProducts('Shirt');">Shirt</a></li>
             <li><a (click)="showSidebar = false; CategoryProducts('T-Shirt');">T-Shirt</a></li>
             <li><a (click)="showSidebar = false; CategoryProducts('Jeans');">Jeans</a></li>
         </ul>
-        <h1 routerLink="/">4u Men's Wear</h1>
+        <h1 routerLink="/">D.&J. Fashion</h1>
     </div>
     <div class="nav-search">
         <input #SearchProduct type="text" placeholder="Search for Products" />
