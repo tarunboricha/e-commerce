@@ -26,7 +26,7 @@ export class SellerSerService {
     }
   }
   sellerLoginservice(data: Login) {
-    return this.htttp.get(`https://abe9-2405-204-800a-c9e4-6d75-6c52-7954-cedd.ngrok-free.app/seller/${data.email}/${data.password}`,
+    return this.htttp.get(`http://localhost:5000/seller/${data.email}/${data.password}`,
       { headers: this.headers, observe: 'response' });
   }
 }
