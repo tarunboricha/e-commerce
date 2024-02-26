@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
     "productDisc": "Stretch cotton T-shirt featuring a round neck, short sleeves and contrast prints on the front and back.",
     "productURL": "https://static.zara.net/photos///2023/V/0/2/p/6224/313/250/2/w/750/6224313250_2_1_1.jpg?ts=1677597823189",
     "id": 8
-  }]
+  }];
   isLoader: boolean = true;
   popularProducts:product[] = [];
   trendingProducts:product[] = [];
