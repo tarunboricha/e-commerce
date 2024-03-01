@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .form .inputbox {
     position: relative;
     width: 300px;

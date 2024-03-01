@@ -1,44 +1,69 @@
-<nav class="nav">
-    <div class="heading">
-        <fa-icon (click)="flipSidebar(); $event.stopPropagation();" (blur)="showSidebar = false;" class="fa-2xl barIcon"
-            [icon]="barIcon"></fa-icon>
-        <ul class="Category" (click)="$event.stopPropagation();" *ngIf="showSidebar">
-            <h6>Shop by Category</h6>
-            <p>D.&J. Fashion</p>
-            <li><a (click)="showSidebar = false; CategoryProducts('Shirt');">Shirt</a></li>
-            <li><a (click)="showSidebar = false; CategoryProducts('T-Shirt');">T-Shirt</a></li>
-            <li><a (click)="showSidebar = false; CategoryProducts('Jeans');">Jeans</a></li>
-        </ul>
-        <h1 routerLink="/">D.&J. Fashion</h1>
-    </div>
-    <div class="nav-search">
-        <input #SearchProduct type="text" placeholder="Search for Products" />
-        <button (click)="searchProducts(SearchProduct.value)">Search</button>
-        <!-- <ul class="search-suggestion-result" *ngIf="searchSuggestion">
-            <li *ngFor="let item of searchSuggestion">
-                <a (mousedown)="redirectPage(item.id)">{{item.productName}}</a>
-            </li>
-        </ul> -->
-    </div>
-    <div class="nav-itemss" [ngSwitch]="switchCaseCondition">
-        <ul *ngSwitchCase="'default'">
-            <li><a routerLink="">Home</a></li>
-            <li><a routerLink="seller">Seller</a></li>
-            <li><a routerLink="user">User</a></li>
-            <li><a routerLink="user">Cart({{CartItem}})</a></li>
-        </ul>
-        <ul *ngSwitchCase="'seller'">
-            <li><a routerLink="/seller-homepage">Products</a></li>
-            <li><a routerLink="seller-add-product" [class.disabled]="seller.serverError ? true : null">Add-Product</a></li>
-            <li><a (click)="SellerLogoutfun()">Log-out</a></li>
-            <li><a routerLink="/">{{ SellerName | titlecase}}</a></li>
-        </ul>
-        <ul *ngSwitchCase="'user'">
-            <li><a routerLink="seller">Seller</a></li>
-            <li><a routerLink="">Home</a></li>
-            <li><a >{{Username | titlecase}}</a></li>
-            <li><a (click)="UserLogoutfun()">Logout</a></li>
-            <li><a routerLink="/addToCart">Cart({{CartItem}})</a></li>
-        </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/">D.&J. Fashion</a>
+        <button class="navbar-toggler" type="button" (click)="showSidebar = !showSidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse hide" id="mobile">
+            <form class="d-flex mx-auto">
+                <input #SearchProduct class="form-control me-2" type="search" placeholder="Search for Products" aria-label="Search">
+                <button class="btn btn-outline-success" type="button" (click)="searchProducts(SearchProduct.value)">Search</button>
+            </form>
+        </div>
+        <div class="collapse navbar-collapse" [ngClass]="{ 'show': showSidebar }">
+            <div id="notmobile">
+                <form class="d-flex mx-auto">
+                    <input #SearchProduct class="form-control me-2" type="search" placeholder="Search for Products" aria-label="Search">
+                    <button class="btn btn-outline-success" type="button" (click)="searchProducts(SearchProduct.value)">Search</button>
+                </form>
+            </div>
+            <div [ngSwitch]="switchCaseCondition">
+                <ul class="navbar-nav mb-2 mb-lg-0" *ngSwitchCase="'default'">
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller" routerLinkActive="active">Seller</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="user" routerLinkActive="active">User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="addToCart" routerLinkActive="active">Cart ({{ CartItem }})</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mb-2 mb-lg-0" *ngSwitchCase="'seller'">
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller-homepage" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller-add-product" routerLinkActive="active">Add-Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="showSidebar = !showSidebar" (click)="SellerLogoutfun()">Log-out</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="">{{ SellerName | titlecase}}</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mb-2 mb-lg-0" *ngSwitchCase="'user'">
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller" routerLinkActive="active">Seller</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="">{{Username | titlecase}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="cursor: pointer;" (click)="showSidebar = !showSidebar" (click)="UserLogoutfun()">Log-out</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="addToCart" routerLinkActive="active">Cart ({{ CartItem }})</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </nav>

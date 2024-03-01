@@ -12,11 +12,6 @@ import { SellerSerService } from '../services/seller-ser.service';
 })
 export class HeaderComponent implements OnInit {
   cartListRequestInProgress: boolean = false;
-
-  @HostListener('document:click', ['$event']) onDocumentClick(event: any) {
-    event.stopPropagation()
-    this.showSidebar = false;
-  }
   currUrl: string = '';
   searchSuggestion: undefined | product[];
   SellerName: undefined | string;
@@ -87,12 +82,7 @@ export class HeaderComponent implements OnInit {
       })
     }
   }
-  flipSidebar() {
-    if (this.showSidebar)
-      this.showSidebar = false;
-    else
-      this.showSidebar = true;
-  }
+
   searchProducts(data: string) {
     this.router.navigate(['']);
     setTimeout(() => {

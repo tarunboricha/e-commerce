@@ -89,43 +89,43 @@ export class ProductSerService {
   addProductMessage: string = '';
   constructor(private http: HttpClient, private router:Router) { }
   AddProductservice(data: product) {
-    return this.http.post('https://4b3c-103-250-162-216.ngrok-free.app/products', data, { headers: this.headers, observe: 'response' });
+    return this.http.post('http://localhost:5000/products', data, { headers: this.headers, observe: 'response' });
   }
 
   productListservice() {
-    return this.http.get<product[]>('https://4b3c-103-250-162-216.ngrok-free.app/products', { headers: this.headers });
+    return this.http.get<product[]>('http://localhost:5000/products', { headers: this.headers });
   }
 
   deleteProductservice(data: number) {
-    return this.http.delete(`https://4b3c-103-250-162-216.ngrok-free.app/products/${data}`, { headers: this.headers });
+    return this.http.delete(`http://localhost:5000/products/${data}`, { headers: this.headers });
   }
 
   getProductservice(data: string) {
-    return this.http.get<product[]>(`https://4b3c-103-250-162-216.ngrok-free.app/products/${data}`, { headers: this.headers });
+    return this.http.get<product[]>(`http://localhost:5000/products/${data}`, { headers: this.headers });
   }
 
   updateProductservice(data: product) {
-    return this.http.put(`https://4b3c-103-250-162-216.ngrok-free.app/products/${data.id}`, data, { headers: this.headers });
+    return this.http.put(`http://localhost:5000/products/${data.id}`, data, { headers: this.headers });
   }
 
   popularProductservice() {
-    return this.http.get<product[]>('https://4b3c-103-250-162-216.ngrok-free.app/popular_products', { headers: this.headers });
+    return this.http.get<product[]>('http://localhost:5000/popular_products', { headers: this.headers });
   }
 
   trendingProductservice() {
-    return this.http.get<product[]>('https://4b3c-103-250-162-216.ngrok-free.app/trending_products', { headers: this.headers });
+    return this.http.get<product[]>('http://localhost:5000/trending_products', { headers: this.headers });
   }
 
   searchSuggestionservice(data: string) {
-    return this.http.get<product[]>(`https://4b3c-103-250-162-216.ngrok-free.app/products?q=${data}`, { headers: this.headers });
+    return this.http.get<product[]>(`http://localhost:5000/products?q=${data}`, { headers: this.headers });
   }
 
   searchProductService(data: string) {
-    return this.http.get<product[]>(`https://4b3c-103-250-162-216.ngrok-free.app/products/productType/${data}`, { headers: this.headers });
+    return this.http.get<product[]>(`http://localhost:5000/products/productType/${data}`, { headers: this.headers });
   }
 
   FilterProductService(data: string) {
-    return this.http.get<product[]>(`https://4b3c-103-250-162-216.ngrok-free.app/products/productType/${data}`, { headers: this.headers });
+    return this.http.get<product[]>(`http://localhost:5000/products/productType/${data}`, { headers: this.headers });
   }
 
   localAddtoCartservice(data: product) {
@@ -144,15 +144,15 @@ export class ProductSerService {
   }
 
   UseraddTocart(data: addToCart) {
-    return this.http.post('https://4b3c-103-250-162-216.ngrok-free.app/Cart', data, { headers: this.headers });
+    return this.http.post('http://localhost:5000/Cart', data, { headers: this.headers });
   }
 
   UseraddTocarts(data: addToCart[]) {
-    return this.http.post('https://4b3c-103-250-162-216.ngrok-free.app/Carts', data, { headers: this.headers });
+    return this.http.post('http://localhost:5000/Carts', data, { headers: this.headers });
   }
 
   userremoveTocart(data: number, userID: number) {
-    return this.http.delete('https://4b3c-103-250-162-216.ngrok-free.app/Cart/' + data + '/' + userID, { headers: this.headers });
+    return this.http.delete('http://localhost:5000/Cart/' + data + '/' + userID, { headers: this.headers });
   }
 
   localremoveTocart(data: number) {
@@ -174,7 +174,7 @@ export class ProductSerService {
   getCartlist(data: number, fun:string) {
     console.log('getCartlist called with function: ', fun);
     this.isLoader = true;
-    return this.http.get<product[]>(`https://4b3c-103-250-162-216.ngrok-free.app/Cart/${data}`,
+    return this.http.get<product[]>(`http://localhost:5000/Cart/${data}`,
       { headers: this.headers, observe: 'response' }).subscribe((result) => {
         this.isLoader = false;
         if (result && result.body) {
