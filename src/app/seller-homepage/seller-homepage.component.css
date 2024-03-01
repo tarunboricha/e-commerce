@@ -28,13 +28,14 @@ table th {
     border: 1.5px solid rgb(225, 110, 110);
     padding: 10px;
     min-height: 160px;
-
 }
 
 img {
     width: 100px;
     height: 100px;
     cursor: pointer;
+    object-fit: cover;
+    object-position: 50% 20%;
 }
 
 table fa-icon {
@@ -111,7 +112,8 @@ p {
     .spinning-loader {
         height: 60vh;
     }
-    .spinning-loader h1{
+
+    .spinning-loader h1 {
         text-align: center;
     }
 }

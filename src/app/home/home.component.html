@@ -9,7 +9,9 @@
 			</div>
 		</ng-template>
 	</ngb-carousel>
-	<div class="spinning-loader"><h1 *ngIf="serverError" style="margin-left: 20px; color: red;"> Server is down please contact to Tarun</h1></div>
+	<div class="spinning-loader">
+		<h1 *ngIf="serverError" style="margin-left: 20px; color: red;"> Server is down please contact to Tarun</h1>
+	</div>
 </div>
 <div *ngIf="!isLoader" class="home">
 	<ngb-carousel class="home-cont" *ngIf="popularProducts">

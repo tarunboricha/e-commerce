@@ -1,7 +1,8 @@
-ul{
+ul {
     margin: 0;
     padding: 0;
 }
+
 .footer {
     padding: 15px 40px;
     text-align: center;
@@ -11,18 +12,20 @@ ul{
     left: 0;
     background-color: #fff;
 }
-.footer ul{
+
+.footer ul {
     list-style-type: none;
     display: flex;
     justify-content: space-between;
 }
-.footer ul li a{
+
+.footer ul li a {
     color: rgb(225, 110, 110);
     text-decoration: none;
 }
 
 @media screen and (max-width: 767px) {
-    .hide{
+    .hide {
         display: none;
     }
 }
