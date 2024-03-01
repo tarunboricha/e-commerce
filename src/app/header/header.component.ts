@@ -19,9 +19,13 @@ export class HeaderComponent implements OnInit {
   CartItem: number = 0;
   switchCaseCondition: string = 'default';
   showSidebar: boolean = false;
-  showSidenav:boolean = false;
+  showSidenav: boolean = false;
+  touchstartX:number = 0;
+  touchendX:number = 0;
   constructor(private router: Router, private product: ProductSerService, protected seller: SellerSerService) { }
   ngOnInit(): void {
+    document.addEventListener('touchstart', this.handleTouchStart, false);
+    document.addEventListener('touchend', this.handleTouchEnd, false);
     console.log('headeroninitCalled');
     this.router.events.subscribe((value: any) => {
       if (value.url) {
@@ -69,6 +73,31 @@ export class HeaderComponent implements OnInit {
         });
       }
     }, 1);
+  }
+
+  handleTouchStart(event:any) {
+    this.touchstartX = event.changedTouches[0].screenX;
+  }
+
+  // Function to handle touch end event
+  handleTouchEnd(event:any) {
+    this.touchendX = event.changedTouches[0].screenX;
+    this.handleSwipe();
+  }
+
+  // Function to handle swipe gesture
+  handleSwipe() {
+    if (this.touchendX - this.touchstartX > 50) { // Minimum swipe distance
+      this.showSidenav = true;
+    }
+  }
+
+  CategoryProducts(data: string) {
+    this.showSidenav = false;
+    this.router.navigate(['']);
+    setTimeout(() => {
+      this.router.navigate(['category/' + data]);
+    }, 0);
   }
 
   searchProducts(data: string) {

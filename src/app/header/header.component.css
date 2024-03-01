@@ -1,8 +1,12 @@
 /* Custom Navbar Styling */
+a {
+    cursor: pointer;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
-    padding: 0% 5%;
+    padding: 1% 5%;
     position: fixed;
     top: 0;
     width: 100%;
@@ -25,7 +29,7 @@
 }
 
 .navbar-toggler {
-    border: none;   
+    border: none;
 }
 
 .nav-link {
@@ -81,7 +85,9 @@
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add shadow */
+    z-index: 999;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    /* Add shadow */
 }
 
 .sidenav a {
@@ -110,14 +116,20 @@
 
 /* Responsive styles */
 @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
 }
 
 @media (max-width: 576px) {
 
     .navbar {
-        justify-content:left;
+        justify-content: left;
+        position: static;
     }
 
     .form-control {
@@ -132,5 +144,11 @@
     .nav-link {
         margin: 0;
         font-size: 1rem;
+    }
+
+    .navbar-collapseee {
+        flex-basis: 100%;
+        flex-grow: 1;
+        align-items: center;
     }
 }

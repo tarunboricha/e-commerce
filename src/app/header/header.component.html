@@ -1,15 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <span class="openbtn" (click)="showSidenav = true">&#9776;</span>
-    <a class="navbar-brand" routerLink="/">D.&J. Fashion</a>
-    <div class="navbar-collapse">
-        <form class="d-flex mx-auto">
+    <div>
+        <span class="openbtn" (click)="showSidenav = true">&#9776;</span>
+        <a class="navbar-brand" routerLink="/">D.&J. Fashion</a>
+    </div>
+    <div class="navbar-collapseee">
+        <form class="d-flex mx-auto" *ngIf="switchCaseCondition == 'default' || switchCaseCondition == 'user'">
             <input #SearchProduct class="form-control me-2" type="search" placeholder="Search for Products"
                 aria-label="Search">
             <button class="btn btn-outline-success" type="button"
                 (click)="searchProducts(SearchProduct.value)">Search</button>
         </form>
     </div>
-    <div class="navbar-collapse" [ngSwitch]="switchCaseCondition">
+    <div class="navbar-collapseee" [ngSwitch]="switchCaseCondition">
         <ul class="nav-items" *ngSwitchCase="'default'">
             <li class="nav-item">
                 <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="" routerLinkActive="active"
@@ -57,8 +59,7 @@
                 <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="">{{Username | titlecase}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="cursor: pointer;" (click)="showSidebar = !showSidebar"
-                    (click)="UserLogoutfun()">Log-out</a>
+                <a class="nav-link" (click)="showSidebar = !showSidebar" (click)="UserLogoutfun()">Log-out</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="addToCart"
@@ -69,8 +70,8 @@
     <div class="sidenav" [ngStyle]="{'left': showSidenav ? '0' : '-250px'}">
         <h4>Shop by Category</h4>
         <a href="javascript:void(0)" class="closebtn" (click)="showSidenav = false">&times;</a>
-        <a href="#">Shirt</a>
-        <a href="#">T-Shirt</a>
-        <a href="#">Jeans</a>
+        <a (click)="CategoryProducts('Shirt');">Shirt</a>
+        <a (click)="CategoryProducts('T-Shirt');">T-Shirt</a>
+        <a (click)="CategoryProducts('Jeans');">Jeans</a>
     </div>
 </nav>

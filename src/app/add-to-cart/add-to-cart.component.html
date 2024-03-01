@@ -30,7 +30,7 @@
                     <p>Quantity: {{item.productQuantity}}</p>
                 </div>
                 <button [disabled]="isLoader" (click)="RemovetoCart(item.id, i)" class="form-button"><div *ngIf="item.isloader" class="spinner-border spinner-border-sm" role="status">
-                    <span class="sr-only">Loading...</span>
+                    <span class="visually-hidden">Loading...</span>
                   </div> Remove</button>
             </div>
         </div>

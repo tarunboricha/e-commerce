@@ -13,7 +13,7 @@
     </div>
     <div class="spinning-loader" *ngIf="isLoader">
         <div *ngIf="!seller.serverError" class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
+            <span class="visually-hidden">Loading...</span>
         </div>
         <h1 *ngIf="!seller.serverError" style="margin-left: 20px;"> loading...</h1>
         <h1 *ngIf="seller.serverError" style="margin-left: 20px; color: red;"> Server is down please contact to Tarun</h1>

@@ -3,7 +3,7 @@
         <h1>User Sign-Up</h1>
         <div *ngIf="isLoader" style="display: flex; justify-content: center; margin-bottom: 10px; align-items: center;">
             <div style="margin-right: 10px;" class="spinner-border spinner-border-sm" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="visually-hidden">Loading...</span>
             </div> Please wait...
         </div>
         <form #userSignUp="ngForm" (ngSubmit)="signUp(userSignUp.value)">
@@ -39,7 +39,7 @@
         <h1>User Login</h1>
         <div *ngIf="isLoader" style="display: flex; justify-content: center; margin-bottom: 10px; align-items: center;">
             <div style="margin-right: 10px;" class="spinner-border spinner-border-sm" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="visually-hidden">Loading...</span>
             </div> Please wait...
         </div>
         <form #userLogin="ngForm" (ngSubmit)="Login(userLogin.value)">
