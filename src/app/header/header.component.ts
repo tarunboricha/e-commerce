@@ -19,13 +19,13 @@ export class HeaderComponent implements OnInit {
   CartItem: number = 0;
   switchCaseCondition: string = 'default';
   showSidebar: boolean = false;
-  barIcon = faBars;
-  constructor(private router: Router, private product: ProductSerService, protected seller:SellerSerService) { }
+  showSidenav:boolean = false;
+  constructor(private router: Router, private product: ProductSerService, protected seller: SellerSerService) { }
   ngOnInit(): void {
     console.log('headeroninitCalled');
     this.router.events.subscribe((value: any) => {
       if (value.url) {
-        if(this.currUrl != value.url){
+        if (this.currUrl != value.url) {
           if (localStorage.getItem('seller') && value.url.includes('seller')) {
             this.currUrl = value.url;
             this.switchCaseCondition = 'seller';
@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
             this.Username = UserData.name;
             if (!this.cartListRequestInProgress) {
               this.cartListRequestInProgress = true;
-      
+
               // Make the API call
               this.product.getCartlist(UserData.userID, 'headerOninit')
                 .add(() => {
@@ -58,29 +58,17 @@ export class HeaderComponent implements OnInit {
       }
     });
     setTimeout(() => {
-      if(localStorage.getItem('LocaladdToCart')){
+      if (localStorage.getItem('LocaladdToCart')) {
         let Cart = localStorage.getItem('LocaladdToCart');
         let Cartdata = Cart && JSON.parse(Cart);
         this.CartItem = Cartdata.length;
       }
-      else{
+      else {
         this.product.cartData.subscribe((result) => {
           this.CartItem = result.length;
         });
       }
     }, 1);
-  }
-  
-  SearchSuggetionfun(data: KeyboardEvent) {
-    if (data) {
-      const search = data.target as HTMLInputElement;
-      this.product.searchSuggestionservice(search.value).subscribe((result) => {
-        if (result.length > 5) {
-          result.length = 5;
-        }
-        this.searchSuggestion = result;
-      })
-    }
   }
 
   searchProducts(data: string) {
@@ -89,36 +77,16 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/search/' + data]);
     }, 0.0001);
   }
-  CategoryProducts(data: string) {
-    this.router.navigate(['']);
-    setTimeout(() => {
-      this.router.navigate(['category/' + data]);
-    }, 0.0001);
-  }
-  HideSuggestion(data:boolean) {
-    if(data){
-      setTimeout(() => {
-        this.searchSuggestion = undefined;
-      }, 80);
-    }
-    else{
-      this.searchSuggestion = undefined;
-    }
-  }
+
   SellerLogoutfun() {
     localStorage.removeItem('seller');
     this.router.navigate(['']);
   }
+
   UserLogoutfun() {
     this.currUrl = '';
     localStorage.removeItem('4uUser');
     this.product.cartData.emit([]);
     this.router.navigate(['']);
-  }
-  redirectPage(data: number) {
-    this.router.navigate(['']);
-    setTimeout(() => {
-      this.router.navigate([`/product/${data}`]);
-    }, 1);
   }
 }

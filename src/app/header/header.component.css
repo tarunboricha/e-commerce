@@ -1,5 +1,8 @@
 /* Custom Navbar Styling */
 .navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0% 5%;
     position: fixed;
     top: 0;
     width: 100%;
@@ -57,33 +60,77 @@
     --bs-btn-active-border-color: black;
 }
 
-#mobile {
-    display: none !important;
+.navbar-collapse {
+    flex-direction: row-reverse;
 }
 
-#notmobile {
-    display: initial;
+.nav-items {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: #fff;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add shadow */
+}
+
+.sidenav a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 20px;
+    color: rgb(225, 110, 110);
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav h4 {
+    text-align: center;
+}
+
+/* Open/close button styles */
+.openbtn {
+    /* position: fixed; */
+    font-size: 30px;
+    cursor: pointer;
+    /* left: 3%; */
+    color: #333;
+    padding: 10px 15px;
+    border: none;
+}
+
+/* Responsive styles */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
 }
 
 @media (max-width: 576px) {
 
-    #notmobile {
-        display: none;
-    }
-
-    #mobile {
-        display: block !important;
+    .navbar {
+        justify-content:left;
     }
 
     .form-control {
         width: 100%;
     }
 
-    .navbar-brand {
-        margin-left: 1%;
+    .nav-items {
+        margin: 2% 0;
+        justify-content: space-evenly;
     }
 
-    .navbar-toggler {
-        padding: 1%;
+    .nav-link {
+        margin: 0;
+        font-size: 1rem;
     }
 }
