@@ -15,6 +15,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   constructor(private router: Router, private product: ProductSerService, protected seller: SellerSerService) { }
 
+  @HostListener('document:click', ['$event']) onDocumentClick(event: any) {
+    if (this.showSidenav) {
+      this.showSidenav = false;
+    }
+  }
   height: number = 0;
   cartListRequestInProgress: boolean = false;
   currUrl: string = '';
@@ -75,7 +80,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     // Measure the height after the view and child views are initialized
     if(this.componentContainer){
       if(this.componentContainer.nativeElement.offsetWidth > 576)
-        this.height = this.componentContainer.nativeElement.offsetHeight;
+      this.height = this.componentContainer.nativeElement.offsetHeight;
     }
   }
 

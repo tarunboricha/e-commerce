@@ -83,7 +83,7 @@ a {
     left: -250px;
     background-color: #fff;
     overflow-x: hidden;
-    padding-top: 60px;
+    padding-top: 30px;
     transition: 0.5s;
     z-index: 999;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -150,5 +150,9 @@ a {
         flex-basis: 100%;
         flex-grow: 1;
         align-items: center;
+    }
+
+    .sidenav {
+        padding-top: 60px;
     }
 }
