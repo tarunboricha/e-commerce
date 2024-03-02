@@ -7,7 +7,9 @@ import { Router } from '@angular/router';
 })
 export class ProductSerService {
 
-  staticProducts:any[] = [{
+  constructor(private http: HttpClient, private router: Router) { }
+
+  staticProducts: any[] = [{
     "productName": "DENNISLINGO",
     "productPrice": "900",
     "productType": "Shirt",
@@ -83,49 +85,48 @@ export class ProductSerService {
     'Authorization': 'Bearer YourAccessToken', // Add any other headers you need
     'ngrok-skip-browser-warning': 'your-custom-value'
   });
-  
   isLoader: boolean = false;
   cartData = new EventEmitter<product[] | []>();
   addProductMessage: string = '';
-  constructor(private http: HttpClient, private router:Router) { }
+
   AddProductservice(data: product) {
-    return this.http.post('https://519c-103-250-162-216.ngrok-free.app/products', data, { headers: this.headers, observe: 'response' });
+    return this.http.post('https://18c1-103-250-162-216.ngrok-free.app/products', data, { headers: this.headers, observe: 'response' });
   }
 
   productListservice() {
-    return this.http.get<product[]>('https://519c-103-250-162-216.ngrok-free.app/products', { headers: this.headers });
+    return this.http.get<product[]>('https://18c1-103-250-162-216.ngrok-free.app/products', { headers: this.headers });
   }
 
   deleteProductservice(data: number) {
-    return this.http.delete(`https://519c-103-250-162-216.ngrok-free.app/products/${data}`, { headers: this.headers });
+    return this.http.delete(`https://18c1-103-250-162-216.ngrok-free.app/products/${data}`, { headers: this.headers });
   }
 
   getProductservice(data: string) {
-    return this.http.get<product[]>(`https://519c-103-250-162-216.ngrok-free.app/products/${data}`, { headers: this.headers });
+    return this.http.get<product[]>(`https://18c1-103-250-162-216.ngrok-free.app/products/${data}`, { headers: this.headers });
   }
 
   updateProductservice(data: product) {
-    return this.http.put(`https://519c-103-250-162-216.ngrok-free.app/products/${data.id}`, data, { headers: this.headers });
+    return this.http.put(`https://18c1-103-250-162-216.ngrok-free.app/products/${data.id}`, data, { headers: this.headers });
   }
 
   popularProductservice() {
-    return this.http.get<product[]>('https://519c-103-250-162-216.ngrok-free.app/popular_products', { headers: this.headers });
+    return this.http.get<product[]>('https://18c1-103-250-162-216.ngrok-free.app/popular_products', { headers: this.headers });
   }
 
   trendingProductservice() {
-    return this.http.get<product[]>('https://519c-103-250-162-216.ngrok-free.app/trending_products', { headers: this.headers });
+    return this.http.get<product[]>('https://18c1-103-250-162-216.ngrok-free.app/trending_products', { headers: this.headers });
   }
 
   searchSuggestionservice(data: string) {
-    return this.http.get<product[]>(`https://519c-103-250-162-216.ngrok-free.app/products?q=${data}`, { headers: this.headers });
+    return this.http.get<product[]>(`https://18c1-103-250-162-216.ngrok-free.app/products?q=${data}`, { headers: this.headers });
   }
 
   searchProductService(data: string) {
-    return this.http.get<product[]>(`https://519c-103-250-162-216.ngrok-free.app/products/productType/${data}`, { headers: this.headers });
+    return this.http.get<product[]>(`https://18c1-103-250-162-216.ngrok-free.app/products/productType/${data}`, { headers: this.headers });
   }
 
   FilterProductService(data: string) {
-    return this.http.get<product[]>(`https://519c-103-250-162-216.ngrok-free.app/products/productType/${data}`, { headers: this.headers });
+    return this.http.get<product[]>(`https://18c1-103-250-162-216.ngrok-free.app/products/productType/${data}`, { headers: this.headers });
   }
 
   localAddtoCartservice(data: product) {
@@ -144,15 +145,15 @@ export class ProductSerService {
   }
 
   UseraddTocart(data: addToCart) {
-    return this.http.post('https://519c-103-250-162-216.ngrok-free.app/Cart', data, { headers: this.headers });
+    return this.http.post('https://18c1-103-250-162-216.ngrok-free.app/Cart', data, { headers: this.headers });
   }
 
   UseraddTocarts(data: addToCart[]) {
-    return this.http.post('https://519c-103-250-162-216.ngrok-free.app/Carts', data, { headers: this.headers });
+    return this.http.post('https://18c1-103-250-162-216.ngrok-free.app/Carts', data, { headers: this.headers });
   }
 
   userremoveTocart(data: number, userID: number) {
-    return this.http.delete('https://519c-103-250-162-216.ngrok-free.app/Cart/' + data + '/' + userID, { headers: this.headers });
+    return this.http.delete('https://18c1-103-250-162-216.ngrok-free.app/Cart/' + data + '/' + userID, { headers: this.headers });
   }
 
   localremoveTocart(data: number) {
@@ -171,10 +172,10 @@ export class ProductSerService {
     }
   }
 
-  getCartlist(data: number, fun:string) {
+  getCartlist(data: number, fun: string) {
     console.log('getCartlist called with function: ', fun);
     this.isLoader = true;
-    return this.http.get<product[]>(`https://519c-103-250-162-216.ngrok-free.app/Cart/${data}`,
+    return this.http.get<product[]>(`https://18c1-103-250-162-216.ngrok-free.app/Cart/${data}`,
       { headers: this.headers, observe: 'response' }).subscribe((result) => {
         this.isLoader = false;
         if (result && result.body) {
@@ -184,17 +185,21 @@ export class ProductSerService {
         this.router.navigate(['']);
       });
   }
+
   orderNow(data: order) {
     return this.http.post('http://localhost:3000/orders', data);
   }
+
   cancelOrder(orderId: number) {
     return this.http.delete('http://localhost:3000/orders/' + orderId)
   }
+
   deleteCartItems(cartId: number) {
     return this.http.delete('http://localhost:3000/Cart/' + cartId).subscribe((result) => {
       this.cartData.emit([]);
     })
   }
+
   orderList() {
     let userStore = localStorage.getItem('4uUser');
     let userData = userStore && JSON.parse(userStore);

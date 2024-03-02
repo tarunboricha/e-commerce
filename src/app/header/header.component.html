@@ -1,14 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" #componentContainer>
     <div>
-        <span class="openbtn" (click)="showSidenav = true">&#9776;</span>
-        <a class="navbar-brand" routerLink="/">D.&J. Fashion</a>
+        <span class="openbtn" (click)="showSidenav = !showSidenav">&#9776;</span>
+        <a class="navbar-brand" (click)="scrollTop()" routerLink="/">D.&J. Fashion</a>
     </div>
     <div class="navbar-collapseee">
-        <form class="d-flex mx-auto" *ngIf="switchCaseCondition == 'default' || switchCaseCondition == 'user'">
-            <input #SearchProduct class="form-control me-2" type="search" placeholder="Search for Products"
+        <form #searchProduct="ngForm" (ngSubmit)="searchProducts(SearchProduct.value)" class="d-flex mx-auto" *ngIf="switchCaseCondition == 'default' || switchCaseCondition == 'user'">
+            <input #SearchProduct ngModel class="form-control me-2" type="search" placeholder="Search for Products"
                 aria-label="Search">
-            <button class="btn btn-outline-success" type="button"
-                (click)="searchProducts(SearchProduct.value)">Search</button>
+            <button class="btn btn-outline-success" type="submit" ngModel>Search</button>
         </form>
     </div>
     <div class="navbar-collapseee" [ngSwitch]="switchCaseCondition">
@@ -67,7 +66,7 @@
             </li>
         </ul>
     </div>
-    <div class="sidenav" [ngStyle]="{'left': showSidenav ? '0' : '-250px'}">
+    <div class="sidenav" [style.top.px]="height" [ngStyle]="{'left': showSidenav ? '0' : '-250px'}">
         <h4>Shop by Category</h4>
         <a href="javascript:void(0)" class="closebtn" (click)="showSidenav = false">&times;</a>
         <a (click)="CategoryProducts('Shirt');">Shirt</a>

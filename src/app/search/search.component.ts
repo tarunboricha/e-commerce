@@ -13,7 +13,7 @@ export class SearchComponent implements OnInit {
   isLoader: boolean = false;
   isDetailsLoad: boolean = false;
   searchProductData: product[] = [];
-  constructor(private router: ActivatedRoute, private product: ProductSerService, private rout:Router) { }
+  constructor(private router: ActivatedRoute, private product: ProductSerService, private rout: Router) { }
   ngOnInit(): void {
     this.loadDetails();
   }
@@ -36,6 +36,15 @@ export class SearchComponent implements OnInit {
   }
 
   searchProduct(query: string): void {
+    if(query == 'shirt') {
+      query = 'Shirt';
+    }
+    else if(query == 'tshirt') {
+      query = 'T-Shirt';
+    }
+    else if(query == 'jeans'){
+      query = 'Jeans';
+    }
     this.product.searchProductService(query).subscribe(
       (result) => {
         this.searchProductData = result;
@@ -46,24 +55,25 @@ export class SearchComponent implements OnInit {
         // this.rout.navigate(['']);
         // Handle error as needed
         this.isLoader = false;
+        console.log("HELLOOOOOO");
         let size = this.product.staticProducts.length;
-        if(query == 'Shirt') {
-          for(let i = 0; i<size; i++) {
-            if(this.product.staticProducts[i].productType == 'Shirt') {
+        if (query === 'Shirt') {
+          for (let i = 0; i < size; i++) {
+            if (this.product.staticProducts[i].productType == 'Shirt') {
               this.searchProductData.push(this.product.staticProducts[i]);
             }
           }
         }
-        else if (query == 'T-Shirt'){
-          for(let i = 0; i<size; i++) {
-            if(this.product.staticProducts[i].productType == 'T-Shirt') {
+        else if (query === 'T-Shirt') {
+          for (let i = 0; i < size; i++) {
+            if (this.product.staticProducts[i].productType == 'T-Shirt') {
               this.searchProductData.push(this.product.staticProducts[i]);
             }
           }
         }
-        else if (query == 'Jeans'){
-          for(let i = 0; i<size; i++) {
-            if(this.product.staticProducts[i].productType == 'Jeans') {
+        else if (query === 'Jeans') {
+          for (let i = 0; i < size; i++) {
+            if (this.product.staticProducts[i].productType == 'Jeans') {
               this.searchProductData.push(this.product.staticProducts[i]);
             }
           }
@@ -86,23 +96,23 @@ export class SearchComponent implements OnInit {
         // Handle error as needed
         this.isLoader = false;
         let size = this.product.staticProducts.length;
-        if(category == 'Shirt') {
-          for(let i = 0; i<size; i++) {
-            if(this.product.staticProducts[i].productType == 'Shirt') {
+        if (category == 'Shirt') {
+          for (let i = 0; i < size; i++) {
+            if (this.product.staticProducts[i].productType == 'Shirt') {
               this.searchProductData.push(this.product.staticProducts[i]);
             }
           }
         }
-        else if (category == 'T-Shirt'){
-          for(let i = 0; i<size; i++) {
-            if(this.product.staticProducts[i].productType == 'T-Shirt') {
+        else if (category == 'T-Shirt') {
+          for (let i = 0; i < size; i++) {
+            if (this.product.staticProducts[i].productType == 'T-Shirt') {
               this.searchProductData.push(this.product.staticProducts[i]);
             }
           }
         }
-        else if (category == 'Jeans'){
-          for(let i = 0; i<size; i++) {
-            if(this.product.staticProducts[i].productType == 'Jeans') {
+        else if (category == 'Jeans') {
+          for (let i = 0; i < size; i++) {
+            if (this.product.staticProducts[i].productType == 'Jeans') {
               this.searchProductData.push(this.product.staticProducts[i]);
             }
           }

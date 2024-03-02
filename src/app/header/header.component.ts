@@ -1,8 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductSerService } from '../services/product-ser.service';
 import { product } from '../data-type';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { SellerSerService } from '../services/seller-ser.service';
 
 @Component({
@@ -10,7 +9,13 @@ import { SellerSerService } from '../services/seller-ser.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('componentContainer') componentContainer: ElementRef | undefined;
+
+  constructor(private router: Router, private product: ProductSerService, protected seller: SellerSerService) { }
+
+  height: number = 0;
   cartListRequestInProgress: boolean = false;
   currUrl: string = '';
   searchSuggestion: undefined | product[];
@@ -22,11 +27,11 @@ export class HeaderComponent implements OnInit {
   showSidenav: boolean = false;
   touchstartX: number = 0;
   touchendX: number = 0;
-  constructor(private router: Router, private product: ProductSerService, protected seller: SellerSerService) { }
+
   ngOnInit(): void {
-    document.addEventListener('touchstart', this.handleTouchStart, false);
-    document.addEventListener('touchend', this.handleTouchEnd, false);
-    console.log('headeroninitCalled');
+    this.product.cartData.subscribe((result) => {
+      this.CartItem = result.length;
+    });
     this.router.events.subscribe((value: any) => {
       if (value.url) {
         if (this.currUrl != value.url) {
@@ -40,6 +45,11 @@ export class HeaderComponent implements OnInit {
           else if (!localStorage.getItem('4uUser')) {
             this.currUrl = value.url;
             this.switchCaseCondition = 'default';
+            if (localStorage.getItem('LocaladdToCart')) {
+              let Cart = localStorage.getItem('LocaladdToCart');
+              let Cartdata = Cart && JSON.parse(Cart);
+              this.CartItem = Cartdata.length;
+            }
           }
           else {
             this.currUrl = value.url;
@@ -49,8 +59,6 @@ export class HeaderComponent implements OnInit {
             this.Username = UserData.name;
             if (!this.cartListRequestInProgress) {
               this.cartListRequestInProgress = true;
-
-              // Make the API call
               this.product.getCartlist(UserData.userID, 'headerOninit')
                 .add(() => {
                   // Set the flag to false when the request is complete, whether successful or not
@@ -61,35 +69,21 @@ export class HeaderComponent implements OnInit {
         }
       }
     });
-    setTimeout(() => {
-      if (localStorage.getItem('LocaladdToCart')) {
-        let Cart = localStorage.getItem('LocaladdToCart');
-        let Cartdata = Cart && JSON.parse(Cart);
-        this.CartItem = Cartdata.length;
-      }
-      else {
-        this.product.cartData.subscribe((result) => {
-          this.CartItem = result.length;
-        });
-      }
-    }, 1);
   }
 
-  handleTouchStart(event: any) {
-    this.touchstartX = event.changedTouches[0].screenX;
-  }
-
-  // Function to handle touch end event
-  handleTouchEnd(event: any) {
-    this.touchendX = event.changedTouches[0].screenX;
-    this.handleSwipe();
-  }
-
-  // Function to handle swipe gesture
-  handleSwipe() {
-    if (this.touchendX - this.touchstartX > 50) { // Minimum swipe distance
-      this.showSidenav = true;
+  ngAfterViewInit() {
+    // Measure the height after the view and child views are initialized
+    if(this.componentContainer){
+      if(this.componentContainer.nativeElement.offsetWidth > 576)
+        this.height = this.componentContainer.nativeElement.offsetHeight;
     }
+  }
+
+  scrollTop() {
+    window.scroll({
+      top: 0,
+      left: 0
+    });
   }
 
   CategoryProducts(data: string) {
@@ -101,6 +95,7 @@ export class HeaderComponent implements OnInit {
   }
 
   searchProducts(data: string) {
+    data = data.toLowerCase().replace(/\W/g, '');
     this.router.navigate(['']);
     setTimeout(() => {
       this.router.navigate(['/search/' + data]);
@@ -108,6 +103,7 @@ export class HeaderComponent implements OnInit {
   }
 
   SellerLogoutfun() {
+    this.currUrl = '';
     localStorage.removeItem('seller');
     this.router.navigate(['']);
   }
