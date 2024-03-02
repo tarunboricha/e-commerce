@@ -11,11 +11,12 @@ import { forkJoin } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
 
+  loaders:number[] = [1, 2, 3, 4]
   isLoader: boolean = true;
   popularProducts:product[] = [];
   trendingProducts:product[] = [];
   serverError: boolean = false;
-  constructor(private product:ProductSerService){}
+  constructor(protected product:ProductSerService){}
   ngOnInit(): void {
     const popularProduct$ = this.product.popularProductservice();
     const trendingProduct$ = this.product.trendingProductservice();

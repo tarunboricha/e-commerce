@@ -4,7 +4,7 @@
     border-top: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 30px;
-    margin-top: 40px;
+    /* margin-top: 40px; */
 }
 
 .details-product p{
@@ -20,16 +20,17 @@
 
 .item-search h6{
     font-size: 24px;
-    color: rgb(225, 110, 110);
     cursor: pointer;
 }
 
 .item-search .product-price{
     font-weight: 600;
+    color: rgb(84, 83, 83);
 }
 
 .item-search p{
     margin: 5px;
+    color: rgb(80, 79, 79);
 }
 
 .mob {

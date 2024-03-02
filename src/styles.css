@@ -15,7 +15,7 @@ body::-webkit-scrollbar {
     top: 0;
     left: 0;
     width: 100%;
-    border: 2px solid rgb(225, 110, 110);
+    border: 2px solid black;
     outline: none;
     background: none;
     padding: 10px;
@@ -43,13 +43,13 @@ body::-webkit-scrollbar {
 }
 
 .form a {
-    color: rgb(225, 110, 110);
+    color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
 .form .inputbox-btn button {
-    background: rgb(225, 110, 110);
+    background: black;
     width: 50%;
     color: #fff;
     border: #fff;
@@ -58,22 +58,16 @@ body::-webkit-scrollbar {
 }
 
 .form .inputbox:hover button {
-    background: linear-gradient(45deg, rgb(225, 110, 110), rgb(231, 96, 81));
+    background: linear-gradient(45deg, black, rgb(231, 96, 81));
 }
 
 .form .inputbox-btn {
     padding-left: 95px;
 }
 
-.carousel-caption {
-    background-color: #00000082;
-    border-radius: 5px;
-}
-
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
-    background-color: black;
-    border: 5px;
+    display: none;
 }
 
 @keyframes loading {

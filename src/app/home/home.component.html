@@ -1,4 +1,4 @@
-<div *ngIf="isLoader">
+<div *ngIf="isLoader" class="home">
 	<ngb-carousel class="home-cont" *ngIf="!serverError">
 		<ng-template ngbSlide>
 			<div class="picsum-img-wrapperr">
@@ -9,23 +9,85 @@
 			</div>
 		</ng-template>
 	</ngb-carousel>
+	<div class="trending-products">
+		<h2>Trending Products</h2>
+		<div class="row">
+			<div class="col-md-3 mb-3" *ngFor="let product of loaders">
+				<div class="card product-card">
+					<img [src]="" class="card-img-top" [alt]="">
+					<div class="card-body">
+						<h5 class="card-title"></h5>
+						<p class="card-text"></p>
+						<!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="spinning-loader">
 		<h1 *ngIf="serverError" style="margin-left: 20px; color: red;"> Server is down please contact to Tarun</h1>
 	</div>
 </div>
 <div *ngIf="!isLoader" class="home">
-	<ngb-carousel class="home-cont" *ngIf="popularProducts">
+	<ngb-carousel>
+		<ng-template ngbSlide>
+			<div class="picsum-img-wrapper">
+				<img src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img1.png"
+					alt="Random first slide" />
+			</div>
+			<div class="carousel-caption">
+				<h3></h3>
+				<p></p>
+			</div>
+		</ng-template>
+		<ng-template ngbSlide>
+			<div class="picsum-img-wrapper">
+				<img src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img2.png"
+					alt="Random second slide" />
+			</div>
+			<div class="carousel-caption">
+				<h3></h3>
+				<p></p>
+			</div>
+		</ng-template>
+		<ng-template ngbSlide>
+			<div class="picsum-img-wrapper">
+				<img src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img4.png"
+					alt="Random third slide" />
+			</div>
+			<div class="carousel-caption">
+				<h3></h3>
+				<p></p>
+			</div>
+		</ng-template>
+	</ngb-carousel>
+	<div class="trending-products">
+		<h2>Trending Products</h2>
+		<div class="row">
+			<div class="col-md-3 mb-3" *ngFor="let product of trendingProducts">
+				<div class="card product-card" routerLink="/product/{{product.id}}">
+					<img [src]="product.productURL" class="card-img-top" [alt]="product.productName">
+					<div class="card-body">
+						<h5 class="card-title">{{ product.productName }}</h5>
+						<p class="card-text">{{ product.productPrice | currency: 'INR'}}</p>
+						<!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <ngb-carousel class="home-cont" *ngIf="popularProducts">
 		<ng-template *ngFor="let item of popularProducts" ngbSlide>
 			<div class="picsum-img-wrapper">
-				<img class="product-img" src="{{item.productURL}}" alt="Random first slide" />
+				<img class="product-img" src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img1.png" alt="Random first slide" />
 			</div>
 			<div class="carousel-caption">
 				<h3 routerLink="/product/{{item.id}}">{{item.productName}}</h3>
 				<p>{{item.productDisc}}</p>
 			</div>
 		</ng-template>
-	</ngb-carousel>
-	<div class="product-list-home">
+	</ngb-carousel> -->
+	<!-- <div class="product-list-home">
 		<h1>Trendy Products</h1>
 		<div class="row">
 			<div class="col-sm-3 col-md-6 col-xl-3" *ngFor="let item of trendingProducts">
@@ -46,5 +108,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </div>

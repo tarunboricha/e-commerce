@@ -18,14 +18,14 @@ table {
 }
 
 .filter .btn-primary {
-    background-color: rgb(225, 110, 110);
+    background-color: black;
     border: none;
     height: 50px;
 }
 
 table td,
 table th {
-    border: 1.5px solid rgb(225, 110, 110);
+    border: 1.5px solid black;
     padding: 10px;
     min-height: 160px;
 }
@@ -47,7 +47,7 @@ p {
 }
 
 .dropbtn {
-    background-color: rgb(225, 110, 110);
+    background-color: black;
     color: white;
     padding: 10px;
     font-size: 16px;

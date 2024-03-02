@@ -12,7 +12,7 @@ body {
     text-align: center;
     display: flex;
     margin: auto;
-    margin-top: 0px;
+    margin-top: 10px;
     flex-direction: column;
     width: 300px;
     position: relative;
@@ -27,15 +27,15 @@ body {
     margin-right: auto;
     font-size: 1.5em;
     padding: 10px;
-    color: rgb(225, 110, 110);
+    color: black;
     letter-spacing: 5px;
     margin-bottom: 30px;
     font-weight: bold;
-    border-bottom: 2px solid rgb(225, 110, 110);
+    border-bottom: 2px solid black;
 }
 
 .form a{
-    color: rgb(225, 110, 110);
+    color: black;
     text-decoration: none;
     cursor: pointer;
 }
@@ -45,7 +45,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-    background: rgb(225, 110, 110);
+    background: black;
     color: #fff;
     border: #fff;
     border-radius: 10px;
@@ -53,5 +53,5 @@ body {
 }
 
 .form .inputbox:hover button {
-    background: linear-gradient(45deg, rgb(225, 110, 110), rgb(231, 96, 81));
+    background: linear-gradient(45deg, black, rgb(231, 96, 81));
 }
