@@ -6,11 +6,9 @@ ul {
 .footer {
     padding: 15px 40px;
     text-align: center;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    /* position: fixed; */
     background-color: #fff;
+    box-shadow: 0 0 10px 0 #0000004d;
 }
 
 .footer ul {

@@ -119,13 +119,14 @@ nav {
 }
 
 /* Responsive styles */
-@media screen and (max-height: 450px) {
-    .sidenav {
-        padding-top: 15px;
+@media screen and (max-width: 1070px) {
+
+    .nav-link {
+        font-size: 1rem;
     }
 
-    .sidenav a {
-        font-size: 18px;
+    .form-control {
+        width: 25vw;
     }
 }
 
@@ -158,5 +159,16 @@ nav {
 
     .sidenav {
         padding-top: 60px;
+    }
+}
+
+/* Responsive styles */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
     }
 }

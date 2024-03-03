@@ -1,10 +1,10 @@
-.item-search{
+/* .item-search{
     margin: 25px auto;
-    /* width: 800px; */
+    width: 800px;
     border-top: 1px solid #ddd;
     padding: 10px;
     margin-bottom: 30px;
-    /* margin-top: 40px; */
+    margin-top: 40px;
 }
 
 .details-product p{
@@ -64,5 +64,162 @@
 
     .last{
         margin-bottom: 60px;
+    }
+} */
+
+
+img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    object-position: 50% 20%;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.containerr{
+    margin: 0 30px;
+}
+
+.filters {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    position: fixed;
+    width: 20%;
+    margin-top: 20px;
+}
+
+.filters h4 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.filter-item {
+    margin-bottom: 20px;
+}
+
+.filter-item h5 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.form-check {
+    margin-bottom: 10px;
+}
+
+.form-check-input {
+    margin-right: 5px;
+}
+
+.form-check-label {
+    font-size: 16px;
+    color: #555;
+}
+
+.form-range {
+    width: 100%;
+}
+
+.search-results {
+    padding: 20px;
+}
+
+/* Add more CSS as needed for product cards */
+
+
+.product-card {
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    /* height: 50px; */
+    /* Limiting height to ensure consistent card size */
+    height: 20px;
+    /* Limiting height to approximately 3 lines */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    /* Limit to 3 lines */
+    -webkit-box-orient: vertical;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+    height: 20px;
+    /* Limiting height to approximately 3 lines */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    /* Limit to 3 lines */
+    -webkit-box-orient: vertical;
+}
+
+.card-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #388e3c;
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    background-color: #2874f0;
+    border-color: #2874f0;
+    width: 100%;
+    /* Make button full-width */
+}
+
+.btn-primary:hover {
+    background-color: #1e5aa7;
+    border-color: #1e5aa7;
+}
+
+@media (max-width: 576px) {
+
+
+    .containerr {
+        margin: 10px;
+    }
+
+    .search-results {
+        padding: 5px;
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    img {
+        height: 120px;
+    }
+
+    .filters {
+        display: none;
     }
 }

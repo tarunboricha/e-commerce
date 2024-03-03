@@ -13,7 +13,17 @@ export class SearchComponent implements OnInit {
   isLoader: boolean = false;
   isDetailsLoad: boolean = false;
   searchProductData: product[] = [];
-  constructor(private router: ActivatedRoute, private product: ProductSerService, private rout: Router) { }
+  productsData: any[] = this.product.staticProducts; // Sample product data
+  filteredProducts: any[] = [];
+  categories: string[] = ['Shirt', 'T-Shirt', 'Jeans'];
+  colors: string[] = ['Red', 'Green', 'Blue'];
+  selectedCategory: string = 'All';
+  selectedColor: string = 'All';
+  priceRange: number = 0;
+  minRating: number = 0;
+
+  constructor(private router: ActivatedRoute, protected product: ProductSerService, private rout: Router) { }
+  
   ngOnInit(): void {
     this.loadDetails();
   }
@@ -119,5 +129,52 @@ export class SearchComponent implements OnInit {
         }
       }
     );
+  }
+
+  applyFilters() {
+    this.filteredProducts = this.productsData.filter(product => {
+      let passCategory = true;
+      let passPrice = true;
+      let passRating = true;
+      let passColor = true;
+
+      if (this.selectedCategory !== 'All') {
+        passCategory = product.productType === this.selectedCategory;
+      }
+
+      if (this.priceRange > 0) {
+        passPrice = product.price <= this.priceRange;
+      }
+
+      if (this.minRating > 0) {
+        passRating = product.rating >= this.minRating;
+      }
+
+      if (this.selectedColor !== 'All') {
+        passColor = product.color === this.selectedColor;
+      }
+
+      return passCategory && passPrice && passRating && passColor;
+    });
+  }
+
+  resetFilters() {
+    this.selectedCategory = 'All';
+    this.selectedColor = 'All';
+    this.priceRange = 0;
+    this.minRating = 0;
+    this.filteredProducts = this.productsData.slice();
+  }
+
+  getCategories(): any[] {
+    const categoriesSet = new Set();
+    this.productsData.forEach(product => categoriesSet.add(product.category));
+    return ['All', ...Array.from(categoriesSet)];
+  }
+
+  getColors(): any[] {
+    const colorsSet = new Set();
+    this.productsData.forEach(product => colorsSet.add(product.color));
+    return ['All', ...Array.from(colorsSet)];
   }
 }

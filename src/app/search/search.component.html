@@ -1,4 +1,4 @@
-<div *ngIf="isLoader" style="position: relative;">
+<!-- <div *ngIf="isLoader" style="position: relative;">
     <div class="row item-search">
         <div class="col-sm-3 mob">
         </div>
@@ -30,6 +30,48 @@
             <p style="margin-left: 0;" class="product-price">Price: {{item.productPrice | currency: 'INR'}}</p>
             <p style="margin-left: 0;" class="product-price">Type: {{item.productType}}</p>
             <p style="margin-left: 0;">{{item.productDisc}}</p>
+        </div>
+    </div>
+</div> -->
+
+<div class="containerr mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="filters">
+                <h4>Filters</h4>
+                <div class="filter-item">
+                    <h5>Category</h5>
+                    <ul>
+                        <li><input type="checkbox" id="category1"> <label for="category1">Category 1</label></li>
+                        <li><input type="checkbox" id="category2"> <label for="category2">Category 2</label></li>
+                        <li><input type="checkbox" id="category3"> <label for="category3">Category 3</label></li>
+                        <!-- Add more categories as needed -->
+                    </ul>
+                </div>
+                <div class="filter-item">
+                    <h5>Price</h5>
+                    <input type="range" class="form-range" min="0" max="1000" step="50">
+                </div>
+                <!-- Add more filters here -->
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="search-results">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let product of searchProductData">
+                        <div class="card product-card">
+                            <img routerLink="/product/{{product.id}}" class="card-img-top" [src]="product.productURL" alt="Product Image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.productName }}</h5>
+                                <p class="card-text">{{ product.productDisc }}</p>
+                                <p class="card-text">{{ product.productPrice | currency:'INR' }}</p>
+                                <!-- <button routerLink="/product/{{product.id}}" class="btn btn-primary btn-block">View
+                                    Details</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
