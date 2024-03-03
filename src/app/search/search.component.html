@@ -37,30 +37,73 @@
 <div class="containerr mt-4">
     <div class="row">
         <div class="col-md-3">
-            <div class="filters">
-                <h4>Filters</h4>
-                <div class="filter-item">
-                    <h5>Category</h5>
-                    <ul>
-                        <li><input type="checkbox" id="category1"> <label for="category1">Category 1</label></li>
-                        <li><input type="checkbox" id="category2"> <label for="category2">Category 2</label></li>
-                        <li><input type="checkbox" id="category3"> <label for="category3">Category 3</label></li>
-                        <!-- Add more categories as needed -->
-                    </ul>
+            <div class="filter-container card">
+                <h3 class="card-header">Filters</h3>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Category:</label>
+                        <select class="form-control" [(ngModel)]="selectedCategory">
+                            <option value="">All</option>
+                            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Price Range:</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" placeholder="Min" [(ngModel)]="minPrice">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">to</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="Max" [(ngModel)]="maxPrice">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Ratings:</label>
+                        <select class="form-control" [(ngModel)]="selectedRatings">
+                            <option value="">All</option>
+                            <option value="1">1 star</option>
+                            <option value="2">2 stars</option>
+                            <option value="3">3 stars</option>
+                            <option value="4">4 stars</option>
+                            <option value="5">5 stars</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Color:</label>
+                        <select class="form-control" [(ngModel)]="selectedColor">
+                            <option value="">All</option>
+                            <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary btn-block" (click)="applyFilters()">Apply Filters</button>
                 </div>
-                <div class="filter-item">
-                    <h5>Price</h5>
-                    <input type="range" class="form-range" min="0" max="1000" step="50">
-                </div>
-                <!-- Add more filters here -->
             </div>
         </div>
         <div class="col-md-9">
-            <div class="search-results">
+            <div class="search-results" *ngIf="isLoader">
                 <div class="row">
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let product of searchProductData">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
+                        *ngFor="let product of loaderfilteredProducts">
                         <div class="card product-card">
-                            <img routerLink="/product/{{product.id}}" class="card-img-top" [src]="product.productURL" alt="Product Image">
+                            <img class="card-img-top" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAADACAMAAAB/Pny7AAAAA1BMVEWlpaUNBb2aAAAAPUlEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgyZwAABCrx9CgAAAABJRU5ErkJggg==" alt="Product Image">
+                            <div class="card-body">
+                                <h5 class="card-title" style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</h5>
+                                <p class="card-text" style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</p>
+                                <p class="card-text" style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</p>
+                                <!-- <button routerLink="/product/{{product.id}}" class="btn btn-primary btn-block">View
+                                    Details</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="search-results" *ngIf="!isLoader">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
+                        *ngFor="let product of filteredProducts">
+                        <div class="card product-card">
+                            <img routerLink="/product/{{product.id}}" class="card-img-top" [src]="product.productURL"
+                                alt="Product Image">
                             <div class="card-body">
                                 <h5 class="card-title">{{ product.productName }}</h5>
                                 <p class="card-text">{{ product.productDisc }}</p>

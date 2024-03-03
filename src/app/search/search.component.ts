@@ -10,20 +10,21 @@ import { product } from '../data-type';
 })
 export class SearchComponent implements OnInit {
 
+  loaderfilteredProducts = [1,2];
   isLoader: boolean = false;
   isDetailsLoad: boolean = false;
-  searchProductData: product[] = [];
-  productsData: any[] = this.product.staticProducts; // Sample product data
+  searchProductData: any[] = [];
   filteredProducts: any[] = [];
-  categories: string[] = ['Shirt', 'T-Shirt', 'Jeans'];
-  colors: string[] = ['Red', 'Green', 'Blue'];
-  selectedCategory: string = 'All';
-  selectedColor: string = 'All';
-  priceRange: number = 0;
-  minRating: number = 0;
+  selectedCategory: string = '';
+  minPrice: number = 0;
+  maxPrice: number = 0;
+  selectedRatings: string = '';
+  selectedColor: string = '';
+  categories = new Set<string[]>; // Example categories
+  colors = new Set<string[]>; // Example colors
 
   constructor(private router: ActivatedRoute, protected product: ProductSerService, private rout: Router) { }
-  
+
   ngOnInit(): void {
     this.loadDetails();
   }
@@ -46,48 +47,18 @@ export class SearchComponent implements OnInit {
   }
 
   searchProduct(query: string): void {
-    if(query == 'shirt') {
-      query = 'Shirt';
-    }
-    else if(query == 'tshirt') {
-      query = 'T-Shirt';
-    }
-    else if(query == 'jeans'){
-      query = 'Jeans';
-    }
+    console.log("product is searched with", query);
     this.product.searchProductService(query).subscribe(
       (result) => {
         this.searchProductData = result;
         this.isLoader = false;
+        this.applyFilters();
+        console.log(this.selectedCategory);
       },
       (error) => {
         console.error('Error fetching search product data:', error);
-        // this.rout.navigate(['']);
+        this.rout.navigate(['']);
         // Handle error as needed
-        this.isLoader = false;
-        console.log("HELLOOOOOO");
-        let size = this.product.staticProducts.length;
-        if (query === 'Shirt') {
-          for (let i = 0; i < size; i++) {
-            if (this.product.staticProducts[i].productType == 'Shirt') {
-              this.searchProductData.push(this.product.staticProducts[i]);
-            }
-          }
-        }
-        else if (query === 'T-Shirt') {
-          for (let i = 0; i < size; i++) {
-            if (this.product.staticProducts[i].productType == 'T-Shirt') {
-              this.searchProductData.push(this.product.staticProducts[i]);
-            }
-          }
-        }
-        else if (query === 'Jeans') {
-          for (let i = 0; i < size; i++) {
-            if (this.product.staticProducts[i].productType == 'Jeans') {
-              this.searchProductData.push(this.product.staticProducts[i]);
-            }
-          }
-        }
       }
     );
   }
@@ -98,6 +69,7 @@ export class SearchComponent implements OnInit {
         if (result) {
           this.isLoader = false;
           this.searchProductData = result;
+          this.applyFilters();
         }
       },
       (error) => {
@@ -127,54 +99,22 @@ export class SearchComponent implements OnInit {
             }
           }
         }
+        this.applyFilters();
       }
     );
   }
 
   applyFilters() {
-    this.filteredProducts = this.productsData.filter(product => {
-      let passCategory = true;
-      let passPrice = true;
-      let passRating = true;
-      let passColor = true;
-
-      if (this.selectedCategory !== 'All') {
-        passCategory = product.productType === this.selectedCategory;
-      }
-
-      if (this.priceRange > 0) {
-        passPrice = product.price <= this.priceRange;
-      }
-
-      if (this.minRating > 0) {
-        passRating = product.rating >= this.minRating;
-      }
-
-      if (this.selectedColor !== 'All') {
-        passColor = product.color === this.selectedColor;
-      }
-
-      return passCategory && passPrice && passRating && passColor;
+    this.filteredProducts = this.searchProductData.filter(product => {
+      this.categories.add(product.productType);
+      this.colors.add(product.productColor);
+      let passCategory = !this.selectedCategory || product.productType === this.selectedCategory;
+      let passPrice = (!this.minPrice || product.productPrice >= this.minPrice) &&
+        (!this.maxPrice || product.productPrice <= this.maxPrice);
+      // let passRatings = !this.selectedRatings || product.productRatings === parseInt(this.selectedRatings);
+      let passColor = !this.selectedColor || product.productColor === this.selectedColor;
+      return passCategory && passPrice && passColor;
     });
-  }
-
-  resetFilters() {
-    this.selectedCategory = 'All';
-    this.selectedColor = 'All';
-    this.priceRange = 0;
-    this.minRating = 0;
-    this.filteredProducts = this.productsData.slice();
-  }
-
-  getCategories(): any[] {
-    const categoriesSet = new Set();
-    this.productsData.forEach(product => categoriesSet.add(product.category));
-    return ['All', ...Array.from(categoriesSet)];
-  }
-
-  getColors(): any[] {
-    const colorsSet = new Set();
-    this.productsData.forEach(product => colorsSet.add(product.color));
-    return ['All', ...Array.from(colorsSet)];
+    // console.log(this.searchProductData);
   }
 }

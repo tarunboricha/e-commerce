@@ -93,6 +93,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   CategoryProducts(data: string) {
+    data = data.toLowerCase().replace(/\W/g, '');
     this.showSidenav = false;
     this.router.navigate(['']);
     setTimeout(() => {
