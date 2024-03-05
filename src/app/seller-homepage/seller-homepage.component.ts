@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProductSerService } from '../services/product-ser.service';
 import { product } from '../data-type';
 import { Router } from '@angular/router';
-import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { SellerSerService } from '../services/seller-ser.service';
 
 @Component({
@@ -15,9 +14,9 @@ export class SellerHomepageComponent implements OnInit {
   productType: string = 'All';
   isLoader: boolean = false;
   productList: undefined | product[];
-  deleteIcon = faTrash;
-  updateIcon = faEdit;
+
   constructor(private product: ProductSerService, private router: Router, protected seller:SellerSerService) { }
+  
   ngOnInit(): void {
     console.log('sellerhomepageoninitCalled');
     this.productlistfun();

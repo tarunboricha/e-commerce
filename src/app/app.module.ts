@@ -15,11 +15,9 @@ import { SearchComponent } from './search/search.component';
 import { DetailsOfProductComponent } from './details-of-product/details-of-product.component';
 import { UserComponent } from './user/user.component';
 import { FooterComponent } from './footer/footer.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 @NgModule({
   declarations: [
@@ -43,8 +41,7 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    HttpClientModule,
-    FontAwesomeModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,3 +1,14 @@
+a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+hr {
+    margin: 5px;
+    border: 0;
+}
+
 .product-list {
     margin-top: 30px;
     margin-bottom: 90px;
@@ -107,9 +118,11 @@ p {
     .image {
         width: 33.33%;
     }
+
     .action {
         width: 10%;
     }
+
     .product,
     .filter {
         display: none;

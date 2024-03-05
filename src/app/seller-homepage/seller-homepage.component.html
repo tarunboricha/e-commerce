@@ -41,9 +41,9 @@
                 <td class="product" style="text-align: left;">{{item.productDisc}}</td>
                 <td class="action">
                     <div>
-                        <fa-icon style="margin-right: 10px;" (click)="deleteProduct(item.id)"
-                            [icon]="deleteIcon"></fa-icon>
-                        <fa-icon routerLink="/seller-update-product/{{item.id}}" [icon]="updateIcon"></fa-icon>
+                        <a (click)="deleteProduct(item.id)">Delete</a>
+                        <hr>
+                        <a routerLink="/seller-update-product/{{item.id}}">Edit</a>
                     </div>
                 </td>
             </tr>
