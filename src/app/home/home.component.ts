@@ -11,30 +11,29 @@ import { forkJoin } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
 
-  loaders:number[] = [1, 2, 3, 4]
+  loaders: number[] = [1, 2, 3, 4]
   isLoader: boolean = true;
-  popularProducts:product[] = [];
-  trendingProducts:product[] = [];
+  popularProducts: product[] = [];
+  trendingProducts: product[] = [];
   serverError: boolean = false;
-  constructor(protected product:ProductSerService){}
+  constructor(protected product: ProductSerService) { }
   ngOnInit(): void {
-    const popularProduct$ = this.product.popularProductservice();
-    const trendingProduct$ = this.product.trendingProductservice();
-  
-    forkJoin([popularProduct$, trendingProduct$]).subscribe(
-      ([popularProducts, trendingProducts]) => {
-        // this.popularProducts = popularProducts;
-        this.trendingProducts = trendingProducts;
-        this.isLoader = false;
-      },
-      (error) => {
+    this.product.trendingProductservice().subscribe((result) => {
+      this.trendingProducts = result;
+      this.isLoader = false;
+      if (!this.product.isVisitor) {
+        this.product.popularProductservice().subscribe((result) => {
+          this.product.isVisitor = true;
+        });
+      }
+    },
+      (error: any) => {
         // Handle errors if needed
         console.error('Error fetching data:', error);
         this.isLoader = false;
         // this.serverError = true;
         this.popularProducts = this.product.staticProducts.slice(0, 3);
         this.trendingProducts = this.product.staticProducts;
-      }
-    );
+      });
   }
 }

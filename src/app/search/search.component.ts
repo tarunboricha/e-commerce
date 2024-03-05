@@ -20,8 +20,8 @@ export class SearchComponent implements OnInit {
   maxPrice: number = 0;
   selectedRatings: string = '';
   selectedColor: string = '';
-  categories = new Set<string[]>; // Example categories
-  colors = new Set<string[]>; // Example colors
+  categories = new Set<string>; // Example categories
+  colors = new Set<string>; // Example colors
 
   constructor(private router: ActivatedRoute, protected product: ProductSerService, private rout: Router) { }
 
