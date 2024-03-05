@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" #componentContainer>
     <div>
-        <span class="openbtn" (click)="showSidenav = !showSidenav; $event.stopPropagation();" (blur)="showSidenav = false;">&#9776;</span>
+        <span class="openbtn" (click)="toogle(); $event.stopPropagation();" (blur)="showSidenav = false;">&#9776;</span>
         <a class="navbar-brand" (click)="scrollTop()" routerLink="/">D.&J. Fashion</a>
     </div>
     <div class="navbar-collapseee">
@@ -13,36 +13,31 @@
     <div class="navbar-collapseee" [ngSwitch]="switchCaseCondition">
         <ul class="nav-items" *ngSwitchCase="'default'">
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }">Home</a>
+                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller"
-                    routerLinkActive="active">Seller</a>
+                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller">Seller</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="user"
-                    routerLinkActive="active">User</a>
+                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="user">User</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="addToCart"
-                    routerLinkActive="active">Cart ({{ CartItem }})</a>
+                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="addToCart">Cart ({{ CartItem
+                    }})</a>
             </li>
         </ul>
         <ul class="nav-items" *ngSwitchCase="'seller'">
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller-homepage"
-                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Products</a>
+                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller-homepage">Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller-add-product"
-                    routerLinkActive="active">Add-Product</a>
+                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller-add-product">Add-Product</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" (click)="showSidebar = !showSidebar" (click)="SellerLogoutfun()">Log-out</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="">{{ SellerName | titlecase}}</a>
+                <a class="nav-link" (click)="showSidebar = !showSidebar">{{ SellerName | titlecase}}</a>
             </li>
         </ul>
         <ul class="nav-items" *ngSwitchCase="'user'">
@@ -66,11 +61,37 @@
             </li>
         </ul>
     </div>
-    <div class="sidenav" (click)="$event.stopPropagation();" [style.top.px]="product.headerComHeight" [ngStyle]="{'left': showSidenav ? '0' : '-250px'}">
-        <h4>Shop by Category</h4>
-        <a href="javascript:void(0)" class="closebtn" (click)="showSidenav = false">&times;</a>
-        <a (click)="CategoryProducts('Shirt');">Shirt</a>
-        <a (click)="CategoryProducts('T-Shirt');">T-Shirt</a>
-        <a (click)="CategoryProducts('Jeans');">Jeans</a>
+    <div class="sidenav-overlay" *ngIf="showSidenav" (click)="toogle();"></div>
+    <div class="sidenav" (click)="$event.stopPropagation();" [ngStyle]="{'left': showSidenav ? '0' : '-300px'}">
+        <a class="closebtn" style="padding: 5px;" (click)="toogle();">&times;</a>
+        <div class="sidenav-content">
+            <div class="navbar-brand">
+                <h1>D.&J. Fashion</h1>
+            </div>
+            <div class="user-options">
+                <div (click)="toogle()">
+                    <a routerLink="user" *ngIf="switchCaseCondition == 'default'">Sign In</a>
+                    <a routerLink="" *ngIf="switchCaseCondition == 'user'">Hello, {{Username | titlecase}}</a>
+                </div>
+            </div>
+            <hr>
+            <div class="navigation-links">
+                <h4>Shop by Category</h4>
+                <ul>
+                    <li><a (click)="CategoryProducts('shirt')">Shirt</a></li>
+                    <li><a (click)="CategoryProducts('tshirt')">T-Shirt</a></li>
+                    <li><a (click)="CategoryProducts('jeans')">Jeans</a></li>
+                    <!-- Add more categories here -->
+                </ul>
+            </div>
+            <hr>
+            <div class="navigation-links">
+                <h4>Help & Settings</h4>
+                <ul>
+                    <li><a>Your Account</a></li>
+                    <li><a>Customer Service</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </nav>

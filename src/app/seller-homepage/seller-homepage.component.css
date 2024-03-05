@@ -104,6 +104,12 @@ p {
 
 @media screen and (max-width: 767px) {
 
+    .image {
+        width: 33.33%;
+    }
+    .action {
+        width: 10%;
+    }
     .product,
     .filter {
         display: none;

@@ -31,6 +31,7 @@ export class SellerHomepageComponent implements OnInit {
       this.productlistfun();
     }
     else {
+      data = data.toLowerCase().replace(/\W/g, '');
       this.isLoader = true;
       this.product.FilterProductService(data).subscribe((result) => {
         this.productList = result;

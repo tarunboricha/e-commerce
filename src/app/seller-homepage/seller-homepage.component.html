@@ -33,13 +33,13 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of productList">
-                <td><img routerLink="/product/{{item.id}}" src="{{item.productURL}}" alt=""></td>
-                <td>{{item.productName}}</td>
+                <td class="image"><img routerLink="/product/{{item.id}}" src="{{item.productURL}}" alt=""></td>
+                <td class="name">{{item.productName}}</td>
                 <td class="product">{{item.productPrice}}</td>
                 <td class="product">{{item.productType}}</td>
                 <td class="product">{{item.productColor}}</td>
                 <td class="product" style="text-align: left;">{{item.productDisc}}</td>
-                <td>
+                <td class="action">
                     <div>
                         <fa-icon style="margin-right: 10px;" (click)="deleteProduct(item.id)"
                             [icon]="deleteIcon"></fa-icon>

@@ -3,6 +3,10 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+.disable-scroll {
+    overflow: hidden;
+}
+
 .form .inputbox {
     position: relative;
     width: 300px;
@@ -68,6 +72,25 @@ body::-webkit-scrollbar {
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
     display: none;
+}
+
+.loaded {
+    animation-duration: 1.2s;
+    animation-delay: .3s;
+    animation-timing-function: cubic-bezier(.215, .61, .355, 1);
+    animation-fill-mode: backwards;
+    animation-duration: .8s;
+    animation-name: fade-in;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes loading {

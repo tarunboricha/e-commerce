@@ -10,11 +10,11 @@ import { product } from '../data-type';
 })
 export class SearchComponent implements OnInit {
 
-  loaderfilteredProducts = [1,2];
+  loaderfilteredProducts = [1, 2]
   isLoader: boolean = false;
   isDetailsLoad: boolean = false;
-  searchProductData: any[] = [];
   filteredProducts: any[] = [];
+  searchProductData: any[] = [];
   selectedCategory: string = '';
   minPrice: number = 0;
   maxPrice: number = 0;
@@ -78,21 +78,21 @@ export class SearchComponent implements OnInit {
         // Handle error as needed
         this.isLoader = false;
         let size = this.product.staticProducts.length;
-        if (category == 'Shirt') {
+        if (category == 'shirt') {
           for (let i = 0; i < size; i++) {
             if (this.product.staticProducts[i].productType == 'Shirt') {
               this.searchProductData.push(this.product.staticProducts[i]);
             }
           }
         }
-        else if (category == 'T-Shirt') {
+        else if (category == 'tshirt') {
           for (let i = 0; i < size; i++) {
             if (this.product.staticProducts[i].productType == 'T-Shirt') {
               this.searchProductData.push(this.product.staticProducts[i]);
             }
           }
         }
-        else if (category == 'Jeans') {
+        else if (category == 'jeans') {
           for (let i = 0; i < size; i++) {
             if (this.product.staticProducts[i].productType == 'Jeans') {
               this.searchProductData.push(this.product.staticProducts[i]);

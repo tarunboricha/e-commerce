@@ -41,11 +41,11 @@ nav {
     margin-left: 15px;
     /* color: #64af3d !important; */
     /* White color */
-    transition: color 0.3s ease;
+    transition: transform 0.3s ease-in-out;
 }
 
-.active {
-    font-weight: bold;
+.nav-link:hover{
+    transform: scale(1.1);
 }
 
 .form-control {
@@ -81,41 +81,112 @@ nav {
 
 .sidenav {
     height: 100%;
-    width: 250px;
+    width: 300px;
     position: fixed;
-    /* top: 74px; */
-    left: -250px;
-    background-color: #fff;
+    left: -300px;
+    top: 0;
+    background-color: #ffffff;
     overflow-x: hidden;
-    padding-top: 30px;
-    transition: 0.5s;
+    padding-top: 20px;
+    transition: 0.3s;
     z-index: 999;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    /* Add shadow */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .sidenav a {
-    padding: 10px 15px;
+    padding: 10px 0px;
     text-decoration: none;
-    font-size: 20px;
-    /* color: #64af3d; */
+    font-size: 18px;
+    color: #333333;
     display: block;
     transition: 0.3s;
 }
 
-.sidenav h4 {
-    text-align: center;
+.sidenav a:hover {
+    background-color: #f4f4f4;
 }
 
-/* Open/close button styles */
+.sidenav .sidenav-content {
+    padding: 20px;
+}
+
+.sidenav h4 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #333333;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 10px; /* Move it slightly upwards */
+    right: 20px; /* Move it slightly to the right */
+    font-size: 24px;
+    color: #666;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it's above everything */
+}
+
 .openbtn {
-    /* position: fixed; */
     font-size: 30px;
     cursor: pointer;
-    /* left: 3%; */
-    color: #333;
-    padding: 10px 15px;
+    color: #333333;
+    padding: 20px;
     border: none;
+}
+
+.sidenav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Adjust opacity as needed */
+    z-index: 998;
+    /* Ensure it's below the sidenav but above the main content */
+}
+
+.branding h1 {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-options {
+    margin-bottom: 20px;
+}
+
+.navigation-links {
+    margin-bottom: 30px;
+}
+
+.navigation-links h4 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.navigation-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation-links li {
+    margin-bottom: 10px;
+}
+
+.navigation-links a {
+    text-decoration: none;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.navigation-links a:hover {
+    color: #333;
 }
 
 /* Responsive styles */

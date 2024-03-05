@@ -23,7 +23,7 @@
         </div>
         <div class="container" *ngIf="!product.isLoader">
             <div class="cart-item" *ngFor="let item of CartDetails; index as i">
-                <img routerLink="/product/{{item.id}}" style="cursor: pointer;" src="{{item.productURL}}" alt="Product Image">
+                <img class="loaded" loading="lazy" routerLink="/product/{{item.id}}" style="cursor: pointer;" src="{{item.productURL}}" alt="Product Image">
                 <div class="item-details">
                     <h6>{{item.productName}}</h6>
                     <p>Price: {{item.productPrice | currency: 'INR'}}</p>
@@ -46,7 +46,8 @@
                     </span> <span>
                         <h4>{{priceSummary.total | currency: 'INR'}}</h4>
                     </span></li>
-                <button [disabled]="true" class="form-button max-width">Checkout</button>
+                <button *ngIf="isuser" [disabled]="true" class="form-button max-width">Checkout</button>
+                <button *ngIf="!isuser" routerLink="/user" class="form-button max-width">Checkout</button>
             </ul>
         </div>
     </div>

@@ -12,7 +12,7 @@
 	<div class="trending-products">
 		<h2>Trending Products</h2>
 		<div class="row">
-			<div class="col-md-3 mb-3" *ngFor="let product of loaders">
+			<div class="col-6 col-md-3 mb-3" *ngFor="let product of loaders">
 				<div class="card product-card">
 					<img [src]="" class="card-img-top" [alt]="">
 					<div class="card-body">
@@ -32,7 +32,7 @@
 	<ngb-carousel>
 		<ng-template ngbSlide>
 			<div class="picsum-img-wrapper">
-				<img src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img1.png"
+				<img class="loaded" loading="lazy" src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img1.png"
 					alt="Random first slide" />
 			</div>
 			<div class="carousel-caption">
@@ -42,7 +42,7 @@
 		</ng-template>
 		<ng-template ngbSlide>
 			<div class="picsum-img-wrapper">
-				<img src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img2.png"
+				<img class="loaded" loading="lazy" src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img2.png"
 					alt="Random second slide" />
 			</div>
 			<div class="carousel-caption">
@@ -52,7 +52,7 @@
 		</ng-template>
 		<ng-template ngbSlide>
 			<div class="picsum-img-wrapper">
-				<img src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img4.png"
+				<img class="loaded" loading="lazy" src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img4.png"
 					alt="Random third slide" />
 			</div>
 			<div class="carousel-caption">
@@ -64,9 +64,9 @@
 	<div class="trending-products">
 		<h2>Trending Products</h2>
 		<div class="row">
-			<div class="col-md-3 mb-3" *ngFor="let product of trendingProducts">
+			<div class="col-6 col-md-3 mb-3" *ngFor="let product of trendingProducts">
 				<div class="card product-card" routerLink="/product/{{product.id}}">
-					<img [src]="product.productURL" class="card-img-top" [alt]="product.productName">
+					<img [src]="product.productURL" class="card-img-top loaded" loading="lazy" [alt]="product.productName">
 					<div class="card-body">
 						<h5 class="card-title">{{ product.productName }}</h5>
 						<p class="card-text">{{ product.productPrice | currency: 'INR'}}</p>

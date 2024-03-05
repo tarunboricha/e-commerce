@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   
     forkJoin([popularProduct$, trendingProduct$]).subscribe(
       ([popularProducts, trendingProducts]) => {
-        this.popularProducts = popularProducts;
+        // this.popularProducts = popularProducts;
         this.trendingProducts = trendingProducts;
         this.isLoader = false;
       },

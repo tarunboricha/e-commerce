@@ -38,6 +38,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       this.CartItem = result.length;
     });
     this.router.events.subscribe((value: any) => {
+      document.body.classList.remove('disable-scroll');
       if (value.url) {
         if (this.currUrl != value.url) {
           if (localStorage.getItem('seller') && value.url.includes('seller')) {
@@ -76,10 +77,21 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     });
   }
 
+  toogle() {
+    if (!this.showSidenav) {
+      this.showSidenav = true;
+      document.body.classList.add('disable-scroll');
+    }
+    else{
+      this.showSidenav = false;
+      document.body.classList.remove('disable-scroll');
+    }
+  }
+
   ngAfterViewInit() {
     // Measure the height after the view and child views are initialized
-    if(this.componentContainer){
-      if(this.componentContainer.nativeElement.offsetWidth > 576){
+    if (this.componentContainer) {
+      if (this.componentContainer.nativeElement.offsetWidth > 576) {
         this.product.headerComHeight = this.componentContainer.nativeElement.offsetHeight;
       }
     }

@@ -6,7 +6,7 @@
 }
 
 .spinning-loader {
-    height: 50vh;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;

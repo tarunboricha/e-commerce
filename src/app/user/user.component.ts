@@ -71,7 +71,7 @@ export class UserComponent implements OnInit {
     let CartData: product[] = Data && JSON.parse(Data);
     let userData = localStorage.getItem('4uUser');
     let uID = userData && JSON.parse(userData)[0].userID;
-    if (CartData.length && uID) {
+    if (CartData && uID) {
       let data: addToCart[] = [];
       CartData.forEach((product: product, index) => {
         let temp: addToCart = {

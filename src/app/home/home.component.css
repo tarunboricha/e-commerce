@@ -40,6 +40,7 @@
 .product-card img {
     height: 250px;
     object-fit: cover;
+    cursor: pointer;
     object-position: 50% 10%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -78,8 +79,12 @@
 
 @media (max-width: 535px) {
 
+    .product-card img {
+        height: 150px;
+    }
+
     .home {
-        padding: 30px 5%;
+        padding: 5%;
     }
 
     .trending-products{
