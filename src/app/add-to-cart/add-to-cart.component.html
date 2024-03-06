@@ -1,6 +1,10 @@
 <div class="temppp"></div>
 <div class="cart-container" [style.min-height]="calMinhight()">
-    <div *ngIf="isCartempty" class="empty"><img src="https://www.99fashionbrands.com/wp-content/uploads/2020/12/empty_cart.png" alt=""></div>
+    <div *ngIf="isCartempty" class="empty">
+        <img src="https://rukminim2.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90" alt="">
+        <h5>Your cart is empty!</h5>
+        <h6>Explore our wide selection and find something you like</h6>
+    </div>
     <div class="cart-items" *ngIf="!isCartempty">
         <div *ngFor="let item of CartDetails, index as i" class="cart-item">
             <img [src]="item.productURL" alt="{{ item.productName }}">

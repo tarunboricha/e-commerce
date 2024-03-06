@@ -15,7 +15,13 @@
 .empty {
     width: 70%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.empty img{
+    width: 50%;
 }
 
 .cart-item {
@@ -93,6 +99,12 @@
 @media (max-width: 1050px) {
     .empty { 
         width: 100%;
+    }
+    .empty img{
+        width: 90%;
+    }
+    .empty h6 {
+        font-size: small;
     }
     .cart-items {
         width: 100%;
