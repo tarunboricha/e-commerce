@@ -12,6 +12,11 @@
     width: 70%;
 }
 
+.loaderinmob {
+    position: absolute;
+    width: 70%;
+}
+
 .empty {
     width: 70%;
     display: flex;
@@ -108,6 +113,11 @@
         font-size: small;
     }
     .cart-items {
+        width: 100%;
+    }
+
+    .loaderinmob {
+        position: static;
         width: 100%;
     }
     .cart-container {

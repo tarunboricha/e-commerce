@@ -6,7 +6,7 @@
         <h6>Explore our wide selection and find something you like</h6>
     </div>
     <div class="cart-items" *ngIf="product.isLoader" style="position: relative;">
-        <div style="position: absolute; width: 70%;" >
+        <div class="loaderinmob">
             <div *ngFor="let item of loaderItem, index as i" class="cart-item picsum-img-wrapperr">
                 <img src="https://png.pngtree.com/thumb_back/fh260/background/20210207/pngtree-simple-gray-solid-color-background-image_557027.jpg" alt="loader">
                 <div class="item-details">
