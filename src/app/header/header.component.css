@@ -147,14 +147,6 @@ nav {
     /* Ensure it's below the sidenav but above the main content */
 }
 
-.branding h1 {
-    font-size: 24px;
-    color: #333;
-    margin: 0;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
 .user-options {
     margin-bottom: 20px;
 }

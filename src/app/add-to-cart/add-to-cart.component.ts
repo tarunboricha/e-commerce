@@ -24,6 +24,7 @@ export class AddToCartComponent implements OnInit, OnDestroy {
     total: 0
   }
   isCartempty:boolean = false;
+  loaderItem = [1,2];
 
   constructor(protected product: ProductSerService, private router: Router) { }
 

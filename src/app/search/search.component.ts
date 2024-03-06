@@ -10,7 +10,7 @@ import { product } from '../data-type';
 })
 export class SearchComponent implements OnInit {
 
-  loaderfilteredProducts = [1, 2]
+  loaderfilteredProducts: boolean[] = [false, false, false, false,false, false,false, false]
   isLoader: boolean = false;
   isDetailsLoad: boolean = false;
   filteredProducts: any[] = [];
