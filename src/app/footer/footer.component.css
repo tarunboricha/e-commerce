@@ -12,6 +12,10 @@
     color: #666;
 }
 
+.links {
+    display: flex;
+}
+
 .quick-links {
     list-style: none;
     padding: 0;
@@ -55,6 +59,11 @@
     .footer {
         padding: 30px 15px;
         text-align: left;
+    }
+
+    .links {
+        padding: 0 2rem;
+        justify-content: space-between;
     }
 
     .footer .container {

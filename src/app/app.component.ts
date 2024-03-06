@@ -10,7 +10,7 @@ export class AppComponent {
   title = '4u-mens-wear';
   constructor (protected product:ProductSerService) {}
   calculateMinHeight() {
-    if(this.product.headerComHeight === 0) {
+    if(this.product.headerComHeight === -1) {
       return `calc(100vh - 120px)`;
     }
     return `calc(100vh - ${this.product.headerComHeight}px)`;

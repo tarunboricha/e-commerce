@@ -1,54 +1,25 @@
-<div class="cart-page">
-    <h1>
-        Cart Page
-    </h1>
-    <div class="roww">
-        <div class="container" *ngIf="product.isLoader" style="position: relative;">
-            <div class="cart-item picsum-img-wrapperr">
-                <div class="image-loader"></div>
-                <div class="item-details">
-                    <h6 style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228); width: 100px;">.</h6>
-                    <p style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228); width: 100px;">.</p>
-                    <p style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228); width: 100px;">.</p>
-                </div>
+<div class="temppp"></div>
+<div class="cart-container">
+    <div class="cart-items">
+        <div *ngFor="let item of CartDetails, index as i" class="cart-item">
+            <img [src]="item.productURL" alt="{{ item.productName }}">
+            <div class="item-details">
+                <h3>{{ item.productName }}</h3>
+                <p>Price: {{ item.productPrice | currency:'INR' }}</p>
+                <p>Quantity: {{ item.productQuantity }}</p>
             </div>
-            <div class="cart-item picsum-img-wrapperr">
-                <div class="image-loader"></div>
-                <div class="item-details">
-                    <h6 style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228); width: 100px;">.</h6>
-                    <p style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228); width: 100px;">.</p>
-                    <p style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228); width: 100px;">.</p>
-                </div>
-            </div>
+            <button class="remove-btn" (click)="RemovetoCart(item.id, i)"><div *ngIf="item.isloader" class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div> Remove</button>
         </div>
-        <div class="container" *ngIf="!product.isLoader">
-            <div class="cart-item" *ngFor="let item of CartDetails; index as i">
-                <img class="loaded" loading="lazy" routerLink="/product/{{item.id}}" style="cursor: pointer;" src="{{item.productURL}}" alt="Product Image">
-                <div class="item-details">
-                    <h6>{{item.productName}}</h6>
-                    <p>Price: {{item.productPrice | currency: 'INR'}}</p>
-                    <p>Quantity: {{item.productQuantity}}</p>
-                </div>
-                <button [disabled]="isLoader" (click)="RemovetoCart(item.id, i)" class="form-button"><div *ngIf="item.isloader" class="spinner-border spinner-border-sm" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                  </div> Remove</button>
-            </div>
-        </div>
-        <div class="col-sm-4 summary">
-            <h3>Summary</h3>
-            <ul>
-                <li> <span>Amount:</span><span>{{priceSummary.price | currency: 'INR'}}</span></li>
-                <li> <span>Tax:</span><span>{{priceSummary.tax | currency: 'INR'}}</span></li>
-                <li> <span>Delivery:</span><span>{{priceSummary.delivery | currency: 'INR'}}</span></li>
-                <li> <span>Discount:</span><span>{{priceSummary.discount | currency: 'INR'}}</span></li>
-                <li> <span>
-                        <h4>Total</h4>
-                    </span> <span>
-                        <h4>{{priceSummary.total | currency: 'INR'}}</h4>
-                    </span></li>
-                <button *ngIf="isuser" [disabled]="true" class="form-button max-width">Checkout</button>
-                <button *ngIf="!isuser" routerLink="/user" class="form-button max-width">Checkout</button>
-            </ul>
-        </div>
+    </div>
+    <div class="cart-summary">
+        <h2>Cart Summary</h2>
+        <p>Amount: {{priceSummary.price | currency: 'INR'}}</p>
+        <p>Tax: {{priceSummary.tax | currency: 'INR'}}</p>
+        <p>Delivery: {{priceSummary.delivery | currency: 'INR'}}</p>
+        <p>Discount: {{priceSummary.discount | currency: 'INR'}}</p>
+        <h4>Total: {{priceSummary.total | currency: 'INR'}}</h4>
+        <button class="checkout-btn">Proceed to Checkout</button>
     </div>
 </div>

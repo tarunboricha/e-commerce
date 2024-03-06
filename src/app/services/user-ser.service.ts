@@ -14,11 +14,11 @@ export class UserSerService {
   });
   constructor(private htttp: HttpClient, private router: Router) { }
   userSignupservice(data: signUp) {
-    return this.htttp.post('https://5d9a-103-250-162-216.ngrok-free.app/users',
+    return this.htttp.post('https://281f-103-250-162-216.ngrok-free.app/users',
       data, { headers: this.headers, observe: 'response' });
   }
   UserLoginservice(data: Login) {
-    return this.htttp.get(`https://5d9a-103-250-162-216.ngrok-free.app/users/${data.email}/${data.password}`,
+    return this.htttp.get(`https://281f-103-250-162-216.ngrok-free.app/users/${data.email}/${data.password}`,
       { headers: this.headers, observe: 'response' });
   }
 }

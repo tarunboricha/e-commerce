@@ -1,5 +1,7 @@
 .search {
-    min-height: 100vh;
+    margin: 1.5rem;
+    margin-top: 0;
+    background-color: #fff;
 }
 
 img {
@@ -110,6 +112,11 @@ img {
 
 @media (max-width: 576px) {
 
+
+    .search {
+        margin: 1rem;
+        margin-top: 0;
+    }
 
     .containerr {
         margin: 10px;

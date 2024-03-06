@@ -1,5 +1,7 @@
 .home {
-    padding: 1.5% 5%;
+    background-color: #f1f2f4;
+    padding: 1.5rem;
+    /* margin-bottom: 20px; */
 }
 
 .picsum-img-wrapper img {
@@ -16,7 +18,9 @@
 }
 
 .trending-products {
-    padding: 50px 0;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: #fff;
 }
 
 .trending-products h2 {
@@ -84,11 +88,11 @@
     }
 
     .home {
-        padding: 5%;
+        padding: 1rem;
     }
 
     .trending-products{
-        padding: 50 20px;
+        padding: 1rem;
     }
 
     .picsum-img-wrapperr {

@@ -3,8 +3,17 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+body {
+    background-color: #f1f2f4;
+}
+
 .disable-scroll {
     overflow: hidden;
+}
+
+.temppp{
+    height: 1.5rem;
+    background-color: #f1f2f4;
 }
 
 .form .inputbox {
@@ -116,4 +125,12 @@ body::-webkit-scrollbar {
     height: 100%;
     top: 0;
     left: 0;
+}
+
+@media (max-width: 1050px) {
+    .temppp {
+        height: 1rem;
+        /* display: none; */
+        /* background-color: transparent; */
+    }
 }
