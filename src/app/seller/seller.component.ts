@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SellerSerService } from '../services/seller-ser.service';
 import { Login } from '../data-type';
 import { Router } from '@angular/router';
+import { ProductSerService } from '../services/product-ser.service';
 
 @Component({
   selector: 'app-seller',
@@ -12,9 +13,16 @@ export class SellerComponent implements OnInit {
 
   isLoader: boolean = false;
   SellerLoginfailed: undefined | string;
-  constructor(private sellsign: SellerSerService, private router: Router) { }
+  constructor(private sellsign: SellerSerService, private router: Router, private product:ProductSerService) { }
   ngOnInit(): void {
     this.sellsign.sellerReloadpage();
+  }
+
+  calMinhight() {
+    if(this.product.headerComHeight === -1) {
+      return `calc(100vh - 120px - 2rem - 50px)`;
+    }
+    return `calc(100vh - ${this.product.headerComHeight}px - 1.5rem - 50px)`;
   }
 
   login(data: Login) {

@@ -12,6 +12,12 @@
     width: 70%;
 }
 
+.empty {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+}
+
 .cart-item {
     display: flex;
     align-items: center;
@@ -74,6 +80,7 @@
     color: #fff;
     border: none;
     padding: 6px 16px;
+    width: 100%;
     border-radius: 5px;
     cursor: pointer;
     font-size: 18px;
@@ -84,6 +91,9 @@
 }
 
 @media (max-width: 1050px) {
+    .empty { 
+        width: 100%;
+    }
     .cart-items {
         width: 100%;
     }

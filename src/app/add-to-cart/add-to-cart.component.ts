@@ -23,7 +23,10 @@ export class AddToCartComponent implements OnInit, OnDestroy {
     delivery: 0,
     total: 0
   }
+  isCartempty:boolean = false;
+
   constructor(protected product: ProductSerService, private router: Router) { }
+
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
@@ -52,6 +55,7 @@ export class AddToCartComponent implements OnInit, OnDestroy {
           }
         }
         else {
+          this.isCartempty = true;
           this.CartDetails = undefined;
           this.priceSummary.price = 0;
           this.priceSummary.discount = 0;
@@ -66,6 +70,13 @@ export class AddToCartComponent implements OnInit, OnDestroy {
     }
   }
 
+  calMinhight() {
+    if(this.product.headerComHeight === -1) {
+      return `calc(100vh - 120px - 2rem)`;
+    }
+    return `calc(100vh - ${this.product.headerComHeight}px - 3rem)`;
+  }
+ 
   getlocalStoragedata() {
     let localData = localStorage.getItem('LocaladdToCart');
     if (localData) {
@@ -90,6 +101,7 @@ export class AddToCartComponent implements OnInit, OnDestroy {
       }
     }
     else {
+      this.isCartempty = true;
       this.CartDetails = [];
       this.CartDetails = undefined;
       this.priceSummary.price = 0;

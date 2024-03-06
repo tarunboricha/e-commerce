@@ -1,6 +1,7 @@
 <div class="temppp"></div>
-<div class="cart-container">
-    <div class="cart-items">
+<div class="cart-container" [style.min-height]="calMinhight()">
+    <div *ngIf="isCartempty" class="empty"><img src="https://www.99fashionbrands.com/wp-content/uploads/2020/12/empty_cart.png" alt=""></div>
+    <div class="cart-items" *ngIf="!isCartempty">
         <div *ngFor="let item of CartDetails, index as i" class="cart-item">
             <img [src]="item.productURL" alt="{{ item.productName }}">
             <div class="item-details">
@@ -20,6 +21,6 @@
         <p>Delivery: {{priceSummary.delivery | currency: 'INR'}}</p>
         <p>Discount: {{priceSummary.discount | currency: 'INR'}}</p>
         <h4>Total: {{priceSummary.total | currency: 'INR'}}</h4>
-        <button class="checkout-btn">Proceed to Checkout</button>
+        <button [disabled]="isCartempty" class="checkout-btn">Proceed to Checkout</button>
     </div>
 </div>

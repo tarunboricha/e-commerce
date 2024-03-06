@@ -46,6 +46,13 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  calMinhight() {
+    if(this.product.headerComHeight === -1) {
+      return `calc(100vh - 120px - 2rem)`;
+    }
+    return `calc(100vh - ${this.product.headerComHeight}px - 1.5rem)`;
+  }
+
   searchProduct(query: string): void {
     console.log("product is searched with", query);
     this.product.searchProductService(query).subscribe(
