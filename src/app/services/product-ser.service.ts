@@ -96,6 +96,14 @@ export class ProductSerService {
     return this.http.post('https://6fcd-103-250-162-216.ngrok-free.app/products', data, { headers: this.headers, observe: 'response' });
   }
 
+  addTrendingproduct(data:number) {
+    return this.http.put(`https://6fcd-103-250-162-216.ngrok-free.app/addtrendingProducts/${data}`, { headers: this.headers });
+  }
+
+  removeTrendingproduct(data:number) {
+    return this.http.put(`https://6fcd-103-250-162-216.ngrok-free.app/removetrendingProducts/${data}`, { headers: this.headers });
+  }
+
   productListservice() {
     return this.http.get<product[]>('https://6fcd-103-250-162-216.ngrok-free.app/products', { headers: this.headers });
   }

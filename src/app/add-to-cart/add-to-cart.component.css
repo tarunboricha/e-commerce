@@ -114,6 +114,7 @@
     }
     .empty h6 {
         font-size: small;
+        margin-bottom: 20px;
     }
     .cart-items {
         width: 100%;

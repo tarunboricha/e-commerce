@@ -10,7 +10,7 @@ import { product } from '../data-type';
 })
 export class SearchComponent implements OnInit {
 
-  loaderfilteredProducts: boolean[] = [false, false, false, false,false, false,false, false]
+  loaderfilteredProducts: boolean[] = [false, false, false, false, false, false, false, false]
   isLoader: boolean = false;
   isDetailsLoad: boolean = false;
   filteredProducts: any[] = [];
@@ -37,6 +37,8 @@ export class SearchComponent implements OnInit {
       const category = this.router.snapshot.paramMap.get('cat');
 
       if (query) {
+        if (!(query === 'shirt' || query === "tshirt" || query === 'jeans'))
+          this.loaderfilteredProducts = [false, false];
         this.searchProduct(query);
       } else if (category) {
         this.filterProduct(category);
@@ -47,7 +49,7 @@ export class SearchComponent implements OnInit {
   }
 
   calMinhight() {
-    if(this.product.headerComHeight === -1) {
+    if (this.product.headerComHeight === -1) {
       return `calc(100vh - 120px - 2rem)`;
     }
     return `calc(100vh - ${this.product.headerComHeight}px - 1.5rem)`;

@@ -115,12 +115,14 @@ p {
 
 @media screen and (max-width: 767px) {
 
-    .image {
-        width: 33.33%;
+    .container-fluid {
+        padding: 0;
     }
-
-    .action {
-        width: 10%;
+    table {
+        max-width: 100%;
+    }
+    .action, .trending {
+        width: 5%;
     }
 
     .product,

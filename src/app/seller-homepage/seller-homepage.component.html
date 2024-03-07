@@ -29,6 +29,7 @@
                 <th class="product">Color</th>
                 <th class="product">Discription</th>
                 <th>Action</th>
+                <th>Is Trending</th>
             </tr>
         </thead>
         <tbody>
@@ -46,6 +47,7 @@
                         <a routerLink="/seller-update-product/{{item.id}}">Edit</a>
                     </div>
                 </td>
+                <td class="trending"><input type="checkbox" [(ngModel)]="item.trending" (change)="trendingProduct($event, item.id)"></td>
             </tr>
         </tbody>
     </table>

@@ -21,6 +21,7 @@ export interface product {
     id: number,
     productID: undefined | number,
     productSize: number|undefined,
+    trending:boolean|undefined
 }
 
 export interface User {

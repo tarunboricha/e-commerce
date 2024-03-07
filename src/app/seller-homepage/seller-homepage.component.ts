@@ -15,15 +15,15 @@ export class SellerHomepageComponent implements OnInit {
   isLoader: boolean = false;
   productList: undefined | product[];
 
-  constructor(private product: ProductSerService, private router: Router, protected seller:SellerSerService) { }
-  
+  constructor(private product: ProductSerService, private router: Router, protected seller: SellerSerService) { }
+
   ngOnInit(): void {
     console.log('sellerhomepageoninitCalled');
     this.productlistfun();
   }
 
   Filterproduct(data: string) {
-    if(data == this.productType)
+    if (data == this.productType)
       return;
     this.productType = data;
     if (data == 'All') {
@@ -48,6 +48,30 @@ export class SellerHomepageComponent implements OnInit {
     })
   }
 
+  trendingProduct(e:any, id:number) {
+    this.isLoader = true;
+    if(e.target.checked) {
+      this.product.addTrendingproduct(id).subscribe((result) => {
+        console.log(result);
+        this.isLoader = false;
+      },
+      (error) => {
+        console.log(error);
+        this.isLoader = false;
+      });
+    }
+    else {
+      this.product.removeTrendingproduct(id).subscribe((result) => {
+        console.log(result);
+        this.isLoader = false;
+      },
+      (error) => {
+        console.log(error);
+        this.isLoader = false;
+      });
+    }
+  }
+
   productlistfun() {
     this.isLoader = true;
     this.product.productListservice().subscribe((result) => {
@@ -59,7 +83,6 @@ export class SellerHomepageComponent implements OnInit {
         console.error('Error fetching search product data:', error);
         this.seller.serverError = true;
         // Handle error as needed
-      }
-    );
+      });
   }
 }
