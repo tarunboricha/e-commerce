@@ -11,7 +11,7 @@ body {
     overflow: hidden;
 }
 
-.temppp{
+.temppp {
     height: 1.5rem;
     background-color: #f1f2f4;
 }
@@ -78,8 +78,8 @@ body {
     padding-left: 95px;
 }
 
-.carousel-control-next-icon,
-.carousel-control-prev-icon {
+.carousel-control-prev,
+.carousel-control-next {
     display: none;
 }
 

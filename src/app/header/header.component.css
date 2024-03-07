@@ -184,10 +184,6 @@ nav {
 /* Responsive styles */
 @media screen and (max-width: 1070px) {
 
-    nav {
-        box-shadow: none;
-    }
-
     .nav-link {
         font-size: 1rem;
     }
@@ -199,9 +195,15 @@ nav {
 
 @media (max-width: 576px) {
 
+    nav {
+        /* box-shadow: none; */
+        margin-bottom: 10px;
+    }
+
     .navbar {
         justify-content: left;
         position: static;
+        padding-top: 2%;
     }
 
     .form-control {

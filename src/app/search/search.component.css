@@ -113,6 +113,10 @@ img {
 @media (max-width: 576px) {
 
 
+    .temppp {
+        height: calc(1rem - 10px);
+    }
+
     .search {
         margin: 1rem;
         margin-top: 0;

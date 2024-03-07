@@ -89,6 +89,7 @@
 
     .home {
         padding: 1rem;
+        padding-top: calc(1rem - 10px);
     }
 
     .trending-products{

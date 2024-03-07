@@ -106,6 +106,9 @@
     .empty { 
         width: 100%;
     }
+    .temppp {
+        height: calc(1rem - 10px);
+    }
     .empty img{
         width: 90%;
     }
