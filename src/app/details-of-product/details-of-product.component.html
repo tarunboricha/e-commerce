@@ -6,11 +6,11 @@
 </div>
 
 <div class="temppp"></div>
-<main class="containerr" *ngIf="!isLoader1 && detailsOfproduct">
+<main class="containerr" *ngIf="!isLoader1 && detailsOfProduct">
 
     <!-- Left Column / Headphones Image -->
     <div class="left-column">
-        <img class="active loaded" loading="lazy" data-image="black" [src]="detailsOfproduct.productURL" alt="">
+        <img class="active loaded" loading="lazy" data-image="black" [src]="detailsOfProduct.productURL" alt="">
     </div>
 
 
@@ -19,9 +19,9 @@
 
         <!-- Product Description -->
         <div class="product-description">
-            <span>{{detailsOfproduct.productType}}</span>
-            <h1>{{detailsOfproduct.productName}}</h1>
-            <p>{{detailsOfproduct.productDisc}}</p>
+            <span>{{detailsOfProduct.productType}}</span>
+            <h1>{{detailsOfProduct.productName}}</h1>
+            <p>{{detailsOfProduct.productDisc}}</p>
         </div>
 
         <!-- Product Configuration -->
@@ -29,22 +29,22 @@
 
             <!-- Product Color -->
             <div class="product-color">
-                <span style="margin-top: 5px; margin-right: 20px;">Colour: {{detailsOfproduct.productColor}}</span>
+                <span style="margin-top: 5px; margin-right: 20px;">Colour: {{detailsOfProduct.productColor}}</span>
             </div>
         </div>
 
         <!-- Product Pricing -->
         <div class="product-price">
-            <span>{{detailsOfproduct.productPrice | currency:'INR'}}</span>
+            <span>{{detailsOfProduct.productPrice | currency:'INR'}}</span>
         </div>
 
         <div class="product-color">
-            <button [disabled]="isLoader" (click)="AddtoCartProduct()" *ngIf="!removeCard" class="cart-btn">
+            <button [disabled]="isLoader" (click)="addToCartProduct()" *ngIf="!removeCard" class="cart-btn">
                 <div *ngIf="isLoader" class="spinner-border spinner-border-sm" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div> Add to cart
             </button>
-            <button [disabled]="isLoader" (click)="RemovetoCartProduct(detailsOfproduct.id)" *ngIf="removeCard"
+            <button [disabled]="isLoader" (click)="removeCartProduct(detailsOfProduct.id)" *ngIf="removeCard"
                 class="cart-btn">
                 <div *ngIf="isLoader" class="spinner-border spinner-border-sm" role="status">
                     <span class="visually-hidden">Loading...</span>
@@ -53,7 +53,7 @@
             <div ngbDropdown class="d-inline-block" style="margin-left: 30px; margin-top: 5px;">
                 <button [disabled]="removeCard" style="border-color: black;" type="button" class="btn"
                     id="dropdownBasic1" ngbDropdownToggle>
-                    {{Selectsize}}
+                    {{selectedSize}}
                 </button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                     <button (click)="size(38)" ngbDropdownItem>38</button>
@@ -89,7 +89,7 @@
     <span class="visually-hidden">Loading...</span>
   </div> Add
     to Cart</button>
-<button [disabled]="isLoader" class="button-details" (click)="RemovetoCartProduct(detailsOfproduct.id)" *ngIf="removeCard"><div *ngIf="isLoader" class="spinner-border spinner-border-sm" role="status">
+<button [disabled]="isLoader" class="button-details" (click)="RemovetoCartProduct(detailsOfProduct.id)" *ngIf="removeCard"><div *ngIf="isLoader" class="spinner-border spinner-border-sm" role="status">
     <span class="visually-hidden">Loading...</span>
   </div> Remove
     to Cart</button>

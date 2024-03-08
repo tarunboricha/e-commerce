@@ -12,133 +12,146 @@ export class DetailsOfProductComponent implements OnInit {
 
   isLoader: boolean = false;
   isLoader1: boolean = false;
-  Selectsize: string = 'Select Size';
+  selectedSize: string = 'Select Size';
   productSize: number | undefined;
   removeCard: boolean = false;
   productQuantity: number = 1;
-  detailsOfproduct: undefined | product;
+  detailsOfProduct: product | undefined;
   similarProducts: product[] | undefined;
   cartDetails: product | undefined;
-  constructor(protected product: ProductSerService, private route: ActivatedRoute, private router: Router) { }
+
+  constructor(private productService: ProductSerService, private route: ActivatedRoute, private router: Router) { }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.isLoader1 = true;
-      let id = params.get('Productid');
-      id && this.product.getProductservice(id).subscribe((result) => {
-        this.isLoader1 = false;
-        console.log('PRODUCT DETAILS: ' + result);
-        this.detailsOfproduct = result[0];
-        this.product.similarProductservice(this.detailsOfproduct.productType, this.detailsOfproduct.id).subscribe((result) => {
+      const id = params.get('Productid');
+      if (!id) return;
+
+      this.productService.getProductservice(id).subscribe(
+        (result:any) => {
+          this.isLoader1 = false;
+          this.detailsOfProduct = result[0];
+          this.loadSimilarProducts();
+          this.loadCartDetails(id);
+        },
+        (error:any) => {
+          this.isLoader1 = false;
+          this.detailsOfProduct = this.productService.staticProducts[parseInt(id, 10) - 1];
+          this.loadSimilarProducts();
+        }
+      );
+    });
+  }
+
+  loadSimilarProducts() {
+    if (this.detailsOfProduct) {
+      this.productService.similarProductservice(this.detailsOfProduct.productType, this.detailsOfProduct.id).subscribe(
+        (result) => {
           this.similarProducts = result;
         },
-          (error) => {
-            console.log(error);
-          });
-      }, (error) => {
-        // this.router.navigate(['']);
-        this.isLoader1 = false;
-        if (id) {
-          this.detailsOfproduct = this.product.staticProducts[parseInt(id, 10) - 1];
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  loadCartDetails(id: string) {
+    if (localStorage.getItem('4uUser')) {
+      this.productService.cartData.subscribe((result) => {
+        if (result) {
+          this.cartDetails = result.find((item: product) => id === item.productID?.toString());
+          if (this.cartDetails) {
+            this.removeCard = true;
+            this.productQuantity = this.cartDetails.productQuantity || 1;
+            this.selectedSize = 'Size: ' + (this.cartDetails.productSize || 'Select Size').toString();
+          }
         }
       });
-      if (localStorage.getItem('4uUser')) {
-        this.product.cartData.subscribe((result) => {
-          if (result) {
-            result = result.filter((item: product) => id == item.productID?.toString());
-            if (result.length) {
-              this.cartDetails = result[0];
-              this.removeCard = true;
-              if (result[0].productQuantity)
-                this.productQuantity = result[0].productQuantity;
-              if (result[0].productSize)
-                this.Selectsize = 'Size: ' + result[0].productSize.toString();
-            }
-          }
-        });
-      }
-      else {
-        let cartData = localStorage.getItem('LocaladdToCart');
-        if (id && cartData?.length) {
-          let itemData = JSON.parse(cartData);
-          itemData = itemData.filter((item: product) => id == item.id.toString());
-          if (itemData.length != 0) {
-            this.removeCard = true;
-            this.productQuantity = itemData[0].productQuantity;
-            this.Selectsize = itemData[0].productSize;
-          }
-          else {
-            this.removeCard = false;
-          }
+    } else {
+      const cartData = localStorage.getItem('LocaladdToCart');
+      if (id && cartData) {
+        const itemData = JSON.parse(cartData);
+        const item = itemData.find((item: product) => id === item.id.toString());
+        if (item) {
+          this.removeCard = true;
+          this.productQuantity = item.productQuantity || 1;
+          this.selectedSize = item.productSize || 'Select Size';
         }
       }
-    });
+    }
   }
 
   size(data: number) {
     this.productSize = data;
-    this.Selectsize = 'Size: ' + data.toString();
+    this.selectedSize = 'Size: ' + data.toString();
   }
 
-  AddtoCartProduct() {
-    if (this.Selectsize == 'Select Size') {
+  addToCartProduct() {
+    if (this.selectedSize === 'Select Size') {
       alert('Please Select Size');
       return;
     }
-    if (this.detailsOfproduct) {
-      let userData = localStorage.getItem('4uUser');
+    if (this.detailsOfProduct) {
+      const userData = localStorage.getItem('4uUser');
       if (userData) {
         this.isLoader = true;
-        let userID = JSON.parse(userData)[0].userID;
-        let Cartdata: addToCart = {
+        const userID = JSON.parse(userData)[0].userID;
+        const cartData: addToCart = {
           userID,
-          productID: this.detailsOfproduct.id,
+          productID: this.detailsOfProduct.id,
           productSize: this.productSize,
           productQuantity: this.productQuantity
-        }
-        console.log(Cartdata);
-        this.product.UseraddTocart(Cartdata).subscribe((result) => {
-          if (result) {
-            this.product.getCartlist(userID, 'AddtoCart');
-            this.removeCard = true;
-            this.isLoader = false;
+        };
+        this.productService.UseraddTocart(cartData).subscribe(
+          (result) => {
+            if (result) {
+              this.productService.getCartlist(userID, 'AddtoCart');
+              this.removeCard = true;
+              this.isLoader = false;
+            }
           }
-        });
-      }
-      else {
-        this.detailsOfproduct.productQuantity = this.productQuantity
-        this.detailsOfproduct.productSize = this.productSize;
-        this.product.localAddtoCartservice(this.detailsOfproduct);
+        );
+      } else {
+        this.detailsOfProduct.productQuantity = this.productQuantity;
+        this.detailsOfProduct.productSize = this.productSize;
+        this.productService.localAddtoCartservice(this.detailsOfProduct);
         this.removeCard = true;
       }
     }
   }
-  RemovetoCartProduct(data: number) {
+
+  removeCartProduct(data: number) {
     if (!localStorage.getItem('4uUser')) {
-      this.product.localremoveTocart(data);
+      this.productService.localremoveTocart(data);
       this.removeCard = false;
       this.productQuantity = 1;
-      this.Selectsize = 'Select Size';
-    }
-    else {
+      this.selectedSize = 'Select Size';
+    } else {
       this.isLoader = true;
-      let user = localStorage.getItem('4uUser');
-      let userID = user && JSON.parse(user)[0].userID;
-      this.cartDetails && this.product.userremoveTocart(this.cartDetails.id, userID).subscribe((result) => {
-        if (result) {
-          this.product.getCartlist(userID, 'RemovefromCart');
-          this.removeCard = false;
-          this.productQuantity = 1;
-          this.Selectsize = 'Select Size';
-          this.isLoader = false;
-        }
-      });
+      const user = localStorage.getItem('4uUser');
+      const userID = user && JSON.parse(user)[0].userID;
+      if (userID && this.cartDetails) {
+        this.productService.userremoveTocart(this.cartDetails.id, userID).subscribe(
+          (result) => {
+            if (result) {
+              this.productService.getCartlist(userID, 'RemovefromCart');
+              this.removeCard = false;
+              this.productQuantity = 1;
+              this.selectedSize = 'Select Size';
+              this.isLoader = false;
+            }
+          }
+        );
+      }
     }
   }
 
-  handleQuantity(data: string) {
-    if (data == 'plus' && this.productQuantity < 20)
+  handleQuantity(action: string) {
+    if (action === 'plus' && this.productQuantity < 20)
       this.productQuantity++;
-    else if (data == 'min' && this.productQuantity > 1)
+    else if (action === 'min' && this.productQuantity > 1)
       this.productQuantity--;
   }
 }
