@@ -79,13 +79,6 @@ export class DetailsOfProductComponent implements OnInit {
     this.Selectsize = 'Size: ' + data.toString();
   }
 
-  calmaxhight() {
-    if (this.product.headerComHeight === -1) {
-      return `calc(100vh - 200px - 2rem)`;
-    }
-    return `calc(100vh - ${this.product.headerComHeight}px - 3rem)`;
-  }
-
   AddtoCartProduct() {
     if (this.Selectsize == 'Select Size') {
       alert('Please Select Size');

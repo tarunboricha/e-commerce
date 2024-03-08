@@ -25,6 +25,7 @@
 
 .left-column img {
     width: 60%;
+    height: 75vh;
     object-fit: cover;
     object-position: 50% 20%;
 }
@@ -191,6 +192,7 @@
 
     .left-column {
         text-align: center;
+        overflow: visible;
     }
 
     .left-column img {
