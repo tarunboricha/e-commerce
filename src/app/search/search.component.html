@@ -1,43 +1,60 @@
-<!-- <div *ngIf="isLoader" style="position: relative;">
-    <div class="row item-search">
-        <div class="col-sm-3 mob">
-        </div>
-        <div class="col-sm-8 details-product picsum-img-wrapperr">
-            <h6 style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</h6>
-            <p class="product-price" style="margin-left: 0; background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
-            <p class="product-price" style="margin-left: 0; background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
-            <p style="margin-left: 0; background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
-        </div>
-    </div>
-    <div class="row item-search">
-        <div class="col-sm-3 mob">
-        </div>
-        <div class="col-sm-8 details-product picsum-img-wrapperr">
-            <h6 style="background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</h6>
-            <p class="product-price" style="margin-left: 0; background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
-            <p class="product-price" style="margin-left: 0; background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
-            <p style="margin-left: 0; background-color: rgb(228, 228, 228); color: rgb(228, 228, 228);">.</p>
-        </div>
-    </div>
-</div>
-<div *ngIf="!isLoader">
-    <div class="row item-search" *ngFor="let item of searchProductData;  let last = last" [ngClass]="{ 'last' : last }">
-        <div class="col-sm-3">
-            <img routerLink="/product/{{item.id}}" src="{{item.productURL}}" alt="">
-        </div>
-        <div class="col-sm-8 details-product">
-            <h6 routerLink="/product/{{item.id}}">{{item.productName}}</h6>
-            <p style="margin-left: 0;" class="product-price">Price: {{item.productPrice | currency: 'INR'}}</p>
-            <p style="margin-left: 0;" class="product-price">Type: {{item.productType}}</p>
-            <p style="margin-left: 0;">{{item.productDisc}}</p>
-        </div>
-    </div>
-</div> -->
 <div class="search" [style.min-height]="calMinhight()">
     <div class="temppp"></div>
     <div class="containerr mt-4">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-xl-3 col-md-4 col-12">
+                <div class="filterbtn" id="mob"><button class="filter-button btn btn-primary"
+                        (click)="toggleFilter()">Filter</button></div>
+                <div class="filter-overlay" *ngIf="showFilter">
+                    <button class="close-btn" (click)="toggleFilter()">Close</button>
+                    <div class="filter-containerr card">
+                        <!-- <button class="close-btn" (click)="toggleFilter()">Close</button> -->
+
+                        <h3 class="card-header">Filters</h3>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Category:</label>
+                                <select class="form-control" [(ngModel)]="selectedCategory">
+                                    <option value="">All</option>
+                                    <option *ngFor="let category of categories" [value]="category">{{ category }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Price Range:</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Min" [(ngModel)]="minPrice">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">to</span>
+                                    </div>
+                                    <input type="number" class="form-control" placeholder="Max" [(ngModel)]="maxPrice">
+                                </div>
+                            </div>
+                            <!-- <div class="form-group">
+                                    <label>Ratings:</label>
+                                    <select class="form-control" [(ngModel)]="selectedRatings">
+                                        <option value="">All</option>
+                                        <option value="1">1 star</option>
+                                        <option value="2">2 stars</option>
+                                        <option value="3">3 stars</option>
+                                        <option value="4">4 stars</option>
+                                        <option value="5">5 stars</option>
+                                    </select>
+                                </div> -->
+                            <div class="form-group">
+                                <label>Color:</label>
+                                <select class="form-control" [(ngModel)]="selectedColor">
+                                    <option value="">All</option>
+                                    <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+                                </select>
+                            </div>
+                            <button style="width: 50%;" class="btn btn-primary btn-block" (click)="applyFilters(); toggleFilter();">Apply
+                                Filters</button>
+                                <button style="width: 50%;" class="btn btn-primary btn-block" (click)="clearFilters(); toggleFilter();">Clear
+                                    Filters</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="filter-container card">
                     <h3 class="card-header">Filters</h3>
                     <div class="card-body">
@@ -80,17 +97,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-xl-9 col-md-8 col-12">
                 <div class="search-results" *ngIf="isLoader">
                     <div class="row">
                         <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
                             *ngFor="let product of loaderfilteredProducts">
                             <div class="card product-card picsum-img-wrapperr">
-                                <img class="card-img-top" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAADACAMAAAB/Pny7AAAAA1BMVEWlpaUNBb2aAAAAPUlEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgyZwAABCrx9CgAAAABJRU5ErkJggg==" alt="Product Image">
+                                <img class="card-img-top"
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAADACAMAAAB/Pny7AAAAA1BMVEWlpaUNBb2aAAAAPUlEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgyZwAABCrx9CgAAAABJRU5ErkJggg=="
+                                    alt="Product Image">
                                 <div class="card-body">
-                                    <h5 class="card-title" style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</h5>
-                                    <p class="card-text" style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</p>
-                                    <p class="card-text" style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</p>
+                                    <h5 class="card-title"
+                                        style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</h5>
+                                    <p class="card-text"
+                                        style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</p>
+                                    <p class="card-text"
+                                        style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</p>
                                     <!-- <button routerLink="/product/{{product.id}}" class="btn btn-primary btn-block">View
                                         Details</button> -->
                                 </div>
@@ -103,8 +125,8 @@
                         <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
                             *ngFor="let product of filteredProducts">
                             <div class="card product-card">
-                                <img routerLink="/product/{{product.id}}" class="card-img-top loaded" loading="lazy" [src]="product.productURL"
-                                    alt="Product Image">
+                                <img routerLink="/product/{{product.id}}" class="card-img-top loaded" loading="lazy"
+                                    [src]="product.productURL" alt="Product Image">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ product.productName }}</h5>
                                     <p class="card-text">{{ product.productDisc }}</p>

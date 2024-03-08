@@ -5,7 +5,8 @@
     <h1 style="margin-left: 20px;"> loading...</h1>
 </div>
 
-<main class="container" *ngIf="!isLoader1 && detailsOfproduct">
+<div class="temppp"></div>
+<main class="containerr" *ngIf="!isLoader1 && detailsOfproduct" [style.max-height]="calmaxhight()">
 
     <!-- Left Column / Headphones Image -->
     <div class="left-column">
@@ -65,6 +66,22 @@
         </div>
     </div>
 </main>
+
+<div class="trending-products">
+    <h2>Similar Products</h2>
+    <div class="row">
+        <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let product of similarProducts">
+            <div class="card product-card" routerLink="/product/{{product.id}}">
+                <img [src]="product.productURL" class="card-img-top loaded" loading="lazy" [alt]="product.productName">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.productName }}</h5>
+                    <p class="card-text">{{ product.productPrice | currency: 'INR'}}</p>
+                    <!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

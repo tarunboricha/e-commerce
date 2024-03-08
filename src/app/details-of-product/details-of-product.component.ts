@@ -17,57 +17,75 @@ export class DetailsOfProductComponent implements OnInit {
   removeCard: boolean = false;
   productQuantity: number = 1;
   detailsOfproduct: undefined | product;
+  similarProducts: product[] | undefined;
   cartDetails: product | undefined;
-  constructor(private product: ProductSerService, private route: ActivatedRoute, private router:Router) { }
+  constructor(protected product: ProductSerService, private route: ActivatedRoute, private router: Router) { }
   ngOnInit(): void {
-    this.isLoader1 = true;
-    let id = this.route.snapshot.paramMap.get('Productid');
-    id && this.product.getProductservice(id).subscribe((result) => {  
-      this.isLoader1 = false;
-      console.log('PRODUCT DETAILS: ' + result);
-      this.detailsOfproduct = result[0];
-    }, (error) => {
-      // this.router.navigate(['']);
-      this.isLoader1 = false;
-      if(id) {
-        this.detailsOfproduct = this.product.staticProducts[parseInt(id, 10) - 1];
-      }
-    });
-    if (localStorage.getItem('4uUser')) {
-      this.product.cartData.subscribe((result) => {
-        if (result) {
-          result = result.filter((item: product) => id == item.productID?.toString());
-          if (result.length) {
-            this.cartDetails = result[0];
-            this.removeCard = true;
-            if (result[0].productQuantity)
-              this.productQuantity = result[0].productQuantity;
-            if (result[0].productSize)
-              this.Selectsize = 'Size: ' + result[0].productSize.toString();
-          }
+    this.route.paramMap.subscribe(params => {
+      this.isLoader1 = true;
+      let id = params.get('Productid');
+      id && this.product.getProductservice(id).subscribe((result) => {
+        this.isLoader1 = false;
+        console.log('PRODUCT DETAILS: ' + result);
+        this.detailsOfproduct = result[0];
+        this.product.similarProductservice(this.detailsOfproduct.productType, this.detailsOfproduct.id).subscribe((result) => {
+          this.similarProducts = result;
+        },
+          (error) => {
+            console.log(error);
+          });
+      }, (error) => {
+        // this.router.navigate(['']);
+        this.isLoader1 = false;
+        if (id) {
+          this.detailsOfproduct = this.product.staticProducts[parseInt(id, 10) - 1];
         }
       });
-    }
-    else {
-      let cartData = localStorage.getItem('LocaladdToCart');
-      if (id && cartData?.length) {
-        let itemData = JSON.parse(cartData);
-        itemData = itemData.filter((item: product) => id == item.id.toString());
-        if (itemData.length != 0) {
-          this.removeCard = true;
-          this.productQuantity = itemData[0].productQuantity;
-          this.Selectsize = itemData[0].productSize;
-        }
-        else {
-          this.removeCard = false;
+      if (localStorage.getItem('4uUser')) {
+        this.product.cartData.subscribe((result) => {
+          if (result) {
+            result = result.filter((item: product) => id == item.productID?.toString());
+            if (result.length) {
+              this.cartDetails = result[0];
+              this.removeCard = true;
+              if (result[0].productQuantity)
+                this.productQuantity = result[0].productQuantity;
+              if (result[0].productSize)
+                this.Selectsize = 'Size: ' + result[0].productSize.toString();
+            }
+          }
+        });
+      }
+      else {
+        let cartData = localStorage.getItem('LocaladdToCart');
+        if (id && cartData?.length) {
+          let itemData = JSON.parse(cartData);
+          itemData = itemData.filter((item: product) => id == item.id.toString());
+          if (itemData.length != 0) {
+            this.removeCard = true;
+            this.productQuantity = itemData[0].productQuantity;
+            this.Selectsize = itemData[0].productSize;
+          }
+          else {
+            this.removeCard = false;
+          }
         }
       }
-    }
+    });
   }
+
   size(data: number) {
     this.productSize = data;
     this.Selectsize = 'Size: ' + data.toString();
   }
+
+  calmaxhight() {
+    if (this.product.headerComHeight === -1) {
+      return `calc(100vh - 200px - 2rem)`;
+    }
+    return `calc(100vh - ${this.product.headerComHeight}px - 3rem)`;
+  }
+
   AddtoCartProduct() {
     if (this.Selectsize == 'Select Size') {
       alert('Please Select Size');

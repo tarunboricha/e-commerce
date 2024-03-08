@@ -1,8 +1,8 @@
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 15px 5%;
+.containerr {
+    padding: 1.5rem 5%;
     display: flex;
+    background-color: #fff;
+    margin: 0 1.5rem;
 }
 
 .spinning-loader {
@@ -15,6 +15,7 @@
 .left-column {
     width: 65%;
     position: relative;
+    overflow: hidden;
 }
 
 .right-column {
@@ -23,8 +24,7 @@
 }
 
 .left-column img {
-    width: 70%;
-    height: 80vh;
+    width: 60%;
     object-fit: cover;
     object-position: 50% 20%;
 }
@@ -94,10 +94,63 @@
     background-color: #64af3d;
 }
 
+
+.trending-products {
+    margin: 1.5rem;
+    padding: 1.5rem;
+    background-color: #fff;
+}
+
+.trending-products h2 {
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #333;
+}
+
+.product-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    height: 250px;
+    object-fit: cover;
+    cursor: pointer;
+    object-position: 50% 10%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.product-card .card-body {
+    padding: 20px;
+}
+
+.product-card .card-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.product-card .card-text {
+    color: #6c757d;
+}
+
 @media (max-width: 940px) {
-    .container {
+    .containerr {
         flex-direction: column;
-        margin-top: 60px;
+        padding: 1rem;
     }
 
     .left-column,
@@ -115,8 +168,21 @@
 
 @media (max-width: 535px) {
 
-    .container {
-        margin-top: 10px;
+    .containerr {
+        margin: 0 1rem;
+    }
+
+    .trending-products {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .product-card img {
+        height: 150px;
+    }
+
+    .temppp {
+        height: calc(1rem - 10px);
     }
 
     .product-color, .product-price {

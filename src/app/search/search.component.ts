@@ -12,6 +12,7 @@ export class SearchComponent implements OnInit {
 
   loaderfilteredProducts: boolean[] = [false, false, false, false, false, false, false, false]
   isLoader: boolean = false;
+  showFilter:boolean = false;
   isDetailsLoad: boolean = false;
   filteredProducts: any[] = [];
   searchProductData: any[] = [];
@@ -37,7 +38,7 @@ export class SearchComponent implements OnInit {
       const category = this.router.snapshot.paramMap.get('cat');
 
       if (query) {
-        if (!(query === 'shirt' || query === "tshirt" || query === 'jeans'))
+        if ((query == 'shirt' || query == "tshirt" || query == 'jeans'))
           this.loaderfilteredProducts = [false, false];
         this.searchProduct(query);
       } else if (category) {
@@ -46,6 +47,18 @@ export class SearchComponent implements OnInit {
 
       this.isDetailsLoad = true;
     }
+  }
+
+  toggleFilter() {
+    this.showFilter = !this.showFilter;
+  }
+
+  clearFilters() {
+    this.filteredProducts = this.searchProductData;
+    this.selectedCategory = '';
+    this.selectedColor = '';
+    this.minPrice = 0;
+    this.maxPrice = 0;
   }
 
   calMinhight() {
