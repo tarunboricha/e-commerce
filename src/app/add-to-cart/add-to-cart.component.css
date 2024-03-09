@@ -3,9 +3,9 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin: 1.5rem;
+    margin: 1rem;
     margin-top: 0;
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 .cart-items {
@@ -107,7 +107,7 @@
         width: 100%;
     }
     .temppp {
-        height: calc(1rem - 10px);
+        height: calc(0.5rem - 7px);
     }
     .empty img{
         width: 90%;
@@ -126,8 +126,9 @@
     }
     .cart-container {
         flex-direction: column;
-        margin: 1rem;
+        margin: 0.5rem;
         margin-top: 0;
+        padding: 0.5rem;
     }
 
     .remove-btn {

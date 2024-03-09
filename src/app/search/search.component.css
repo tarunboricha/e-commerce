@@ -1,5 +1,5 @@
 .search {
-    margin: 1.5rem;
+    margin: 1rem;
     margin-top: 0;
     background-color: #fff;
 }
@@ -149,11 +149,11 @@ img {
     }
 
     .temppp {
-        height: calc(1rem - 10px);
+        height: calc(0.5rem - 7px);
     }
 
     .search {
-        margin: 1rem;
+        margin: 0.5rem;
         margin-top: 0;
     }
 

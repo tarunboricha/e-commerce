@@ -12,7 +12,7 @@ body {
 }
 
 .temppp {
-    height: 1.5rem;
+    height: 1rem;
     background-color: #f1f2f4;
 }
 
@@ -129,7 +129,7 @@ body {
 
 @media (max-width: 1050px) {
     .temppp {
-        height: 1rem;
+        height: 0.5rem;
         /* display: none; */
         /* background-color: transparent; */
     }

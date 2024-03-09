@@ -1,6 +1,6 @@
 .home {
     background-color: #f1f2f4;
-    padding: 1.5rem;
+    padding: 1rem;
     /* margin-bottom: 20px; */
 }
 
@@ -20,8 +20,8 @@
 }
 
 .trending-products {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
+    margin-top: 1rem;
+    padding: 1rem;
     background-color: #fff;
 }
 
@@ -90,12 +90,13 @@
     }
 
     .home {
-        padding: 1rem;
-        padding-top: calc(1rem - 10px);
+        padding: 0.5rem;
+        padding-top: calc(0.5rem - 10px);
     }
 
     .trending-products{
-        padding: 1rem;
+        margin-top: 0.5rem;
+        padding: 0.5rem;
     }
 
     .picsum-img-wrapperr {
