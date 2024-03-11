@@ -32,11 +32,21 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   showSidenav: boolean = false;
   touchstartX: number = 0;
   touchendX: number = 0;
+  isServerDown: boolean = false;
 
   ngOnInit(): void {
     this.product.cartData.subscribe((result) => {
       this.CartItem = result.length;
     });
+    this.product.isServerDown.subscribe((result) => {
+      if (result) {
+        this.isServerDown = true;
+        setTimeout(() => {
+          this.isServerDown = false;
+          this.UserLogoutfun();
+        }, 2000);
+      }
+    })
     this.router.events.subscribe((value: any) => {
       document.body.classList.remove('disable-scroll');
       if (value.url) {
@@ -67,7 +77,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
               this.cartListRequestInProgress = true;
               this.product.getCartlist(UserData.userID, 'headerOninit')
                 .add(() => {
-                  // Set the flag to false when the request is complete, whether successful or not
                   this.cartListRequestInProgress = false;
                 });
             }
@@ -82,7 +91,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       this.showSidenav = true;
       document.body.classList.add('disable-scroll');
     }
-    else{
+    else {
       this.showSidenav = false;
       document.body.classList.remove('disable-scroll');
     }

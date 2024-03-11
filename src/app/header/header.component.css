@@ -44,7 +44,7 @@ nav {
     transition: transform 0.3s ease-in-out;
 }
 
-.nav-link:hover{
+.nav-link:hover {
     transform: scale(1.1);
 }
 
@@ -118,13 +118,16 @@ nav {
 
 .sidenav .closebtn {
     position: absolute;
-    top: 10px; /* Move it slightly upwards */
-    right: 20px; /* Move it slightly to the right */
+    top: 10px;
+    /* Move it slightly upwards */
+    right: 20px;
+    /* Move it slightly to the right */
     font-size: 24px;
     color: #666;
     text-decoration: none;
     cursor: pointer;
-    z-index: 1000; /* Ensure it's above everything */
+    z-index: 1000;
+    /* Ensure it's above everything */
 }
 
 .openbtn {
@@ -180,6 +183,40 @@ nav {
 .navigation-links a:hover {
     color: #333;
 }
+
+/* server-down-warning.component.css */
+
+.server-down-warning {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f8d7da;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+.message {
+    color: #721c24;
+    font-size: 18px;
+    text-align: center;
+}
+
+.dismiss-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #721c24;
+    font-size: 20px;
+}
+
+.dismiss-button:hover {
+    color: #f00;
+}
+
 
 /* Responsive styles */
 @media screen and (max-width: 1070px) {
