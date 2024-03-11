@@ -32,6 +32,16 @@
 	<ngb-carousel>
 		<ng-template ngbSlide>
 			<div class="picsum-img-wrapper">
+				<img class="loaded" loading="lazy" src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img1.png"
+					alt="Random first slide" />
+			</div>
+			<div class="carousel-caption">
+				<h3></h3>
+				<p></p>
+			</div>
+		</ng-template>
+		<ng-template ngbSlide>
+			<div class="picsum-img-wrapper">
 				<img class="loaded" loading="lazy" src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img2.png"
 					alt="Random second slide" />
 			</div>
@@ -66,37 +76,4 @@
 			</div>
 		</div>
 	</div>
-	<!-- <ngb-carousel class="home-cont" *ngIf="popularProducts">
-		<ng-template *ngFor="let item of popularProducts" ngbSlide>
-			<div class="picsum-img-wrapper">
-				<img class="product-img" src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img1.png" alt="Random first slide" />
-			</div>
-			<div class="carousel-caption">
-				<h3 routerLink="/product/{{item.id}}">{{item.productName}}</h3>
-				<p>{{item.productDisc}}</p>
-			</div>
-		</ng-template>
-	</ngb-carousel> -->
-	<!-- <div class="product-list-home">
-		<h1>Trendy Products</h1>
-		<div class="row">
-			<div class="col-sm-3 col-md-6 col-xl-3" *ngFor="let item of trendingProducts">
-				<div class="product-item">
-					<img src="{{item.productURL}}" alt="">
-					<div class="product-details">
-						<h6 class="name-head">{{item.productName}}</h6>
-						<div class="product-price">
-							<p>Price: {{item.productPrice | currency: 'INR'}}</p>
-						</div>
-						<div class="product-type">
-							<p>Category: {{item.productType}}</p>
-						</div>
-					</div>
-					<div class="product-footer">
-						<a routerLink="/product/{{item.id}}">View Details</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
 </div>

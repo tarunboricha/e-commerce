@@ -65,7 +65,7 @@ export class SearchComponent implements OnInit {
     if (this.product.headerComHeight === -1) {
       return `calc(100vh - 120px - 2rem)`;
     }
-    return `calc(100vh - ${this.product.headerComHeight}px - 1.5rem)`;
+    return `calc(100vh - ${this.product.headerComHeight}px - 1rem)`;
   }
 
   searchProduct(query: string): void {

@@ -29,18 +29,47 @@ export class DetailsOfProductComponent implements OnInit {
       if (!id) return;
 
       this.productService.getProductservice(id).subscribe(
-        (result:any) => {
+        (result: any) => {
           this.isLoader1 = false;
           this.detailsOfProduct = result[0];
           this.loadSimilarProducts();
-          this.loadCartDetails(id);
         },
-        (error:any) => {
+        (error: any) => {
           this.isLoader1 = false;
           this.detailsOfProduct = this.productService.staticProducts[parseInt(id, 10) - 1];
           this.loadSimilarProducts();
         }
       );
+      if (localStorage.getItem('4uUser')) {
+        this.productService.cartData.subscribe((result) => {
+          if (result) {
+            result = result.filter((item: product) => id == item.productID?.toString());
+            if (result.length) {
+              this.cartDetails = result[0];
+              this.removeCard = true;
+              if (result[0].productQuantity)
+                this.productQuantity = result[0].productQuantity;
+              if (result[0].productSize)
+                this.selectedSize = 'Size: ' + result[0].productSize.toString();
+            }
+          }
+        });
+      }
+      else {
+        let cartData = localStorage.getItem('LocaladdToCart');
+        if (id && cartData?.length) {
+          let itemData = JSON.parse(cartData);
+          itemData = itemData.filter((item: product) => id == item.id.toString());
+          if (itemData.length != 0) {
+            this.removeCard = true;
+            this.productQuantity = itemData[0].productQuantity;
+            this.selectedSize = itemData[0].productSize;
+          }
+          else {
+            this.removeCard = false;
+          }
+        }
+      }
     });
   }
 
@@ -54,32 +83,6 @@ export class DetailsOfProductComponent implements OnInit {
           console.log(error);
         }
       );
-    }
-  }
-
-  loadCartDetails(id: string) {
-    if (localStorage.getItem('4uUser')) {
-      this.productService.cartData.subscribe((result) => {
-        if (result) {
-          this.cartDetails = result.find((item: product) => id === item.productID?.toString());
-          if (this.cartDetails) {
-            this.removeCard = true;
-            this.productQuantity = this.cartDetails.productQuantity || 1;
-            this.selectedSize = 'Size: ' + (this.cartDetails.productSize || 'Select Size').toString();
-          }
-        }
-      });
-    } else {
-      const cartData = localStorage.getItem('LocaladdToCart');
-      if (id && cartData) {
-        const itemData = JSON.parse(cartData);
-        const item = itemData.find((item: product) => id === item.id.toString());
-        if (item) {
-          this.removeCard = true;
-          this.productQuantity = item.productQuantity || 1;
-          this.selectedSize = item.productSize || 'Select Size';
-        }
-      }
     }
   }
 
@@ -145,6 +148,14 @@ export class DetailsOfProductComponent implements OnInit {
           }
         );
       }
+    }
+  }
+
+  toggleWishlist(product: product) {
+    if (product.wishlist) {
+      this.productService.removeFromWishlist(product.id);
+    } else {
+      this.productService.addToWishlist(product);
     }
   }
 

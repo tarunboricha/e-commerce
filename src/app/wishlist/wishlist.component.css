@@ -1,0 +1,67 @@
+/* wishlist.component.css */
+
+.wishlist {
+    padding: 20px;
+  }
+  
+  .wishlist h2 {
+    margin-bottom: 20px;
+  }
+  
+  .wishlist-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .wishlist-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: 50% 20%;
+    margin-right: 20px;
+  }
+  
+  .wishlist-item-details {
+    flex: 1;
+  }
+  
+  .wishlist-item button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .wishlist-item button:hover {
+    background-color: #cc0000;
+  }
+  
+  /* wishlist.component.css */
+
+.empty-message {
+    opacity: 0;
+  }
+  
+  .empty-message.ng-enter,
+  .empty-message.ng-leave {
+    transition: opacity 0.5s;
+  }
+  
+  .empty-message.ng-enter {
+    opacity: 0;
+  }
+  
+  .empty-message.ng-enter-active,
+  .empty-message.ng-leave-active {
+    opacity: 1;
+  }
+  
+  .empty-message.ng-leave {
+    opacity: 0;
+  }
+  

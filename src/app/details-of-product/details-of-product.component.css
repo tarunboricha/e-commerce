@@ -45,7 +45,7 @@
 
 .product-description h1 {
     font-weight: 300;
-    font-size: 52px;
+    font-size: 2.5rem;
     color: #43484D;
     letter-spacing: -2px;
 }
@@ -97,8 +97,8 @@
 
 
 .trending-products {
-    margin: 1.5rem;
-    padding: 1.5rem;
+    margin: 1rem;
+    padding: 1rem;
     background-color: #fff;
 }
 
@@ -148,7 +148,7 @@
     color: #6c757d;
 }
 
-@media (max-width: 940px) {
+@media (max-width: 1024px) {
     .containerr {
         flex-direction: column;
         padding: 0.5rem;
@@ -160,10 +160,8 @@
     }
 
     .left-column img {
-        width: 300px;
-        right: 0;
-        top: -65px;
-        left: initial;
+        height: 50vh;
+        width: 100%;
     }
 }
 
@@ -173,10 +171,10 @@
         margin: 0 0.5rem;
     }
 
-    .trending-products {
-        margin: 0.5rem;
-        padding: 0.5rem;
-    }
+        .trending-products {
+            margin: 0.5rem;
+            padding: 0.5rem;
+        }
 
     .product-card img {
         height: 150px;

@@ -75,9 +75,9 @@ export class AddToCartComponent implements OnInit, OnDestroy {
     if(this.product.headerComHeight === -1) {
       return `calc(100vh - 200px - 2rem)`;
     }
-    return `calc(100vh - ${this.product.headerComHeight}px - 3rem)`;
+    return `calc(100vh - ${this.product.headerComHeight}px - 2rem)`;
   }
- 
+  
   getlocalStoragedata() {
     let localData = localStorage.getItem('LocaladdToCart');
     if (localData) {
