@@ -19,7 +19,7 @@
     </div>
     <div class="cart-items" *ngIf="!isCartempty && !product.isLoader">
         <div *ngFor="let item of CartDetails, index as i" class="cart-item">
-            <img [src]="item.productURL" alt="{{ item.productName }}">
+            <img routerLink="/product/{{item.id}}" [src]="item.productURL" alt="{{ item.productName }}">
             <div class="item-details">
                 <h3>{{ item.productName }}</h3>
                 <p>Price: {{ item.productPrice | currency:'INR' }}</p>

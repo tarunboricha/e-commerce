@@ -33,13 +33,14 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   touchstartX: number = 0;
   touchendX: number = 0;
   isServerDown: boolean = false;
+  isUserLogin:boolean = true;
 
   ngOnInit(): void {
     this.product.cartData.subscribe((result) => {
       this.CartItem = result.length;
     });
     this.product.isServerDown.subscribe((result) => {
-      if (result) {
+      if (result && this.isUserLogin) {
         this.isServerDown = true;
         setTimeout(() => {
           this.isServerDown = false;
@@ -64,11 +65,14 @@ export class HeaderComponent implements OnInit, AfterViewInit {
             if (localStorage.getItem('LocaladdToCart')) {
               let Cart = localStorage.getItem('LocaladdToCart');
               let Cartdata = Cart && JSON.parse(Cart);
-              this.CartItem = Cartdata.length;
+              setTimeout(() => {
+                this.product.cartData.emit(Cartdata);
+              }, 0);
             }
           }
           else {
             this.currUrl = value.url;
+            this.isUserLogin = true;
             this.switchCaseCondition = 'user';
             let UserTemp = localStorage.getItem('4uUser');
             let UserData = UserTemp && JSON.parse(UserTemp)[0];
@@ -138,6 +142,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   UserLogoutfun() {
     this.currUrl = '';
+    this.isUserLogin = false;
     localStorage.removeItem('4uUser');
     this.product.cartData.emit([]);
     this.router.navigate(['']);

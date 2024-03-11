@@ -128,7 +128,7 @@
                                 <img routerLink="/product/{{product.id}}" class="card-img-top loaded" loading="lazy"
                                     [src]="product.productURL" alt="Product Image">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ product.productName }}</h5>
+                                    <h5 routerLink="/product/{{product.id}}" class="card-title">{{ product.productName }}</h5>
                                     <p class="card-text">{{ product.productDisc }}</p>
                                     <p class="card-text">{{ product.productPrice | currency:'INR' }}</p>
                                     <!-- <button routerLink="/product/{{product.id}}" class="btn btn-primary btn-block">View

@@ -10,8 +10,8 @@ body {
 }
 
 .seller-auth{
-    margin-top: 10px;
-    margin-bottom: 80px;
+    margin: 1rem;
+    background-color: #fff;
 }
 
 .center form{
@@ -113,4 +113,11 @@ body {
 
 .center .inputbox:hover button {
     background: linear-gradient(45deg, black, rgb(231, 96, 81));
+}
+
+@media only screen and (max-width: 851px) {
+
+    .seller-auth{
+        margin: 0.5rem;
+    }
 }

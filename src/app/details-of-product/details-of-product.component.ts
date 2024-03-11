@@ -38,6 +38,7 @@ export class DetailsOfProductComponent implements OnInit {
           this.isLoader1 = false;
           this.detailsOfProduct = this.productService.staticProducts[parseInt(id, 10) - 1];
           this.loadSimilarProducts();
+          this.productService.isServerDown.emit(true);
         }
       );
       if (localStorage.getItem('4uUser')) {
@@ -63,7 +64,7 @@ export class DetailsOfProductComponent implements OnInit {
           if (itemData.length != 0) {
             this.removeCard = true;
             this.productQuantity = itemData[0].productQuantity;
-            this.selectedSize = itemData[0].productSize;
+            this.selectedSize = 'Size: ' + itemData[0].productSize;
           }
           else {
             this.removeCard = false;

@@ -87,6 +87,7 @@ img {
     -webkit-line-clamp: 1;
     /* Limit to 3 lines */
     -webkit-box-orient: vertical;
+    cursor: pointer;
 }
 
 .card-text {
