@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { priceSummary, product } from '../data-type';
 import { ProductSerService } from '../services/product-ser.service';
 import { Router } from '@angular/router';
@@ -10,6 +10,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./add-to-cart.component.css']
 })
 export class AddToCartComponent implements OnInit, OnDestroy {
+
+  @ViewChild('priceSummaryContainer') priceSummaryContainer: ElementRef | undefined;
 
   subscription: Subscription | undefined;
   isLoader: boolean = false;
@@ -62,6 +64,16 @@ export class AddToCartComponent implements OnInit, OnDestroy {
         this.priceSummary.total = 0;
       }
     });
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if (this.priceSummaryContainer && scrollPosition >= parseFloat(getComputedStyle(document.documentElement).fontSize)) {
+      this.priceSummaryContainer.nativeElement.style.top = `calc(${this.product.headerComHeight}px + 1rem)`;
+    } else if(this.priceSummaryContainer){
+      this.priceSummaryContainer.nativeElement.style.top = '1rem';
+    }
   }
 
   calMinhight() {

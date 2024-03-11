@@ -14,7 +14,11 @@ img {
 }
 
 .containerr {
-    margin: 0 30px;
+    margin: 0;
+}
+
+.row {
+    margin: 0;
 }
 
 .filter-container {
@@ -46,7 +50,7 @@ img {
 }
 
 .search-results {
-    padding: 20px;
+    padding-top: 1rem;
 }
 
 /* Add more CSS as needed for product cards */

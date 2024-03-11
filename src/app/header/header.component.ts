@@ -69,6 +69,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
                 this.product.cartData.emit(Cartdata);
               }, 0);
             }
+            else {
+              setTimeout(() => {
+                this.product.cartData.emit([]);
+              }, 0);
+            }
           }
           else {
             this.currUrl = value.url;

@@ -30,7 +30,7 @@
               </div> Remove</button>
         </div>
     </div>
-    <div class="cart-summary">
+    <div class="cart-summary" #priceSummaryContainer>
         <h2>Cart Summary</h2>
         <p>Amount: {{priceSummary.price | currency: 'INR'}}</p>
         <p>Tax: {{priceSummary.tax | currency: 'INR'}}</p>

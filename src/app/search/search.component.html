@@ -1,6 +1,6 @@
 <div class="search" [style.min-height]="calMinhight()">
     <div class="temppp"></div>
-    <div class="containerr mt-4">
+    <div class="containerr">
         <div class="row">
             <div class="col-xl-3 col-md-4 col-12">
                 <div class="filterbtn" id="mob"><button class="filter-button btn btn-primary"
@@ -100,7 +100,7 @@
             <div class="col-xl-9 col-md-8 col-12">
                 <div class="search-results" *ngIf="isLoader">
                     <div class="row">
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
+                        <div style="padding-right: 0;" class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
                             *ngFor="let product of loaderfilteredProducts">
                             <div class="card product-card picsum-img-wrapperr">
                                 <img class="card-img-top"
@@ -122,7 +122,7 @@
                 </div>
                 <div class="search-results" *ngIf="!isLoader">
                     <div class="row">
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
+                        <div style="padding-right: 0;" class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
                             *ngFor="let product of filteredProducts">
                             <div class="card product-card">
                                 <img routerLink="/product/{{product.id}}" class="card-img-top loaded" loading="lazy"

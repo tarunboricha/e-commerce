@@ -204,20 +204,6 @@ nav {
     text-align: center;
 }
 
-.dismiss-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    color: #721c24;
-    font-size: 20px;
-}
-
-.dismiss-button:hover {
-    color: #f00;
-}
-
-
 /* Responsive styles */
 @media screen and (max-width: 1070px) {
 
@@ -235,6 +221,10 @@ nav {
     nav {
         /* box-shadow: none; */
         margin-bottom: 10px;
+    }
+
+    .server-down-warning {
+        width: 80%;
     }
 
     .navbar {

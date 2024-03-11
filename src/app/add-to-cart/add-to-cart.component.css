@@ -78,11 +78,15 @@
 }
 
 .cart-summary {
-    width: 25%;
+    position:sticky;
+    top:1rem;
+    right: 1rem;
     padding: 20px;
+    width: 25%;
     background-color: #f9f9f9;
     border: 1px solid #e0e0e0;
     border-radius: 5px;
+    /* z-index: 1000000; */
 }
 
 .cart-summary h2 {
@@ -162,6 +166,7 @@
     }
 
     .cart-summary {
+        position: static;
         width: 100%;
     }
 }
