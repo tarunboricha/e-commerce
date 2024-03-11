@@ -78,8 +78,8 @@
 }
 
 .cart-summary {
-    position:sticky;
-    top:1rem;
+    position: sticky;
+    top: 1rem;
     right: 1rem;
     padding: 20px;
     width: 25%;
@@ -109,6 +109,29 @@
 
 .checkout-btn:hover {
     background-color: #43a047;
+}
+
+.one-line-footer {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #f8f9fa;
+    color: #212529;
+    padding: 30px 20px;
+    font-size: 14px;
+}
+
+.one-line-footer a {
+    color: #565656;
+    text-decoration: none;
+}
+
+.one-line-footer a:hover {
+    text-decoration: underline;
+}
+
+.brand {
+    color: #212529;
+    cursor: pointer;
 }
 
 @media (max-width: 1050px) {
