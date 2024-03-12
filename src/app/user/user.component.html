@@ -1,9 +1,10 @@
 <!-- signup.component.html -->
 <div [style.min-height]="calMinhight()">
+    <p style="text-align: center; color: #dc3545; margin: 0;">{{LoginFailedmessage}}</p>
     <div class="container">
         <h4 *ngIf="signup">Sign up</h4>
         <h4 *ngIf="!signup">Sign in</h4>
-        <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm.value)" class="signup-form" novalidate>
+        <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)" class="signup-form" novalidate>
             <div class="form-group" *ngIf="signup">
                 <label for="name">Name</label>
                 <input type="text" id="name" class="form-control" name="name" ngModel required minlength="2"
@@ -38,8 +39,8 @@
                         characters long.</div>
                 </div>
             </div>
-            <button *ngIf="signup" type="submit" class="btn btn-primary btn-block">Sign Up</button>
-            <button *ngIf="!signup" type="submit" class="btn btn-primary btn-block">Sign in</button>
+            <button *ngIf="signup" type="submit" class="btn btn-primary btn-block mt-2">Sign Up</button>
+            <button *ngIf="!signup" type="submit" class="btn btn-primary btn-block mt-2">Sign in</button>
         </form>
     </div>
     <p *ngIf="signup" style="text-align: center; margin: 0; padding: 0;">Already have an account? <span (click)="signup = false;">click to sign in</span></p>

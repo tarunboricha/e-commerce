@@ -1,7 +1,7 @@
 <div [style.min-height]="calMinhight()">
     <div class="container">
         <h4>Seller Sign up</h4>
-        <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" class="signup-form" novalidate>
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="signup-form">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" class="form-control" name="email" ngModel required email>
@@ -22,9 +22,10 @@
                         characters long.</div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            <button type="submit" class="btn btn-primary btn-block mt-2">Sign Up</button>
         </form>
     </div>
+    <p style="text-align: center; color: #dc3545;">{{SellerLoginfailed}}</p>
 </div>
 
 <app-footer></app-footer>

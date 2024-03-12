@@ -3,6 +3,7 @@ import { SellerSerService } from '../services/seller-ser.service';
 import { Login } from '../data-type';
 import { Router } from '@angular/router';
 import { ProductSerService } from '../services/product-ser.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-seller',
@@ -13,26 +14,22 @@ export class SellerComponent implements OnInit {
 
   isLoader: boolean = false;
   SellerLoginfailed: undefined | string;
-  constructor(private sellsign: SellerSerService, private router: Router, private product:ProductSerService) { }
+  constructor(private sellsign: SellerSerService, private router: Router, private product: ProductSerService) { }
   ngOnInit(): void {
     this.sellsign.sellerReloadpage();
   }
 
   calMinhight() {
-    if(this.product.headerComHeight === -1) {
+    if (this.product.headerComHeight === -1) {
       return `calc(100vh - 120px - 2rem)`;
     }
     return `calc(100vh - ${this.product.headerComHeight}px)`;
   }
 
-  login(data: Login) {
-    if (data.email == '' || data.password == '') {
-      this.SellerLoginfailed = "Fields are Empty.";
-      setTimeout(() => this.SellerLoginfailed = undefined, 2000);
-    }
-    else {
+  login(form: NgForm) {
+    if (form.valid) {
       this.isLoader = true;
-      this.sellsign.sellerLoginservice(data).subscribe((result: any) => {
+      this.sellsign.sellerLoginservice(form.value).subscribe((result: any) => {
         this.isLoader = false;
         if (result && result.body && result.body.length) {
           localStorage.setItem('seller', JSON.stringify(result.body));
@@ -49,5 +46,15 @@ export class SellerComponent implements OnInit {
           setTimeout(() => this.SellerLoginfailed = undefined, 2000);
         });
     }
+    else {
+      this.markAllControlsAsTouched(form);
+    }
+  }
+
+  markAllControlsAsTouched(form: NgForm) {
+    Object.keys(form.controls).forEach(controlName => {
+      const control = form.controls[controlName];
+      control.markAsTouched();
+    });
   }
 }

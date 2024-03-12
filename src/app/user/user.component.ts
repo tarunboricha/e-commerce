@@ -3,7 +3,7 @@ import { Login, addToCart, product, signUp } from '../data-type';
 import { UserSerService } from '../services/user-ser.service';
 import { Router } from '@angular/router';
 import { ProductSerService } from '../services/product-ser.service';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
@@ -23,12 +23,15 @@ export class UserComponent implements OnInit {
     }
   }
 
-  onSubmit(data:any) {
+  onSubmit(form:NgForm) {
+
+    if(!form.valid) 
+      return;
     if(this.signup) {
-      this.signUp(data);
+      this.signUp(form.value);
     }
     else {
-      this.Login(data);
+      this.Login(form.value);
     }
   }
 
@@ -37,7 +40,7 @@ export class UserComponent implements OnInit {
     data.userID = 0;
     if (data.name != '' && data.email != '' && data.password != '') {
       this.user.userSignupservice(data).subscribe((result) => {
-        this.router.navigate(['']);
+        this.signup = false;  
       },
       (error) => {
         this.isLoader = false;
