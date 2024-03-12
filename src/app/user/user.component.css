@@ -1,52 +1,64 @@
-body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: sans-serif;
-}
-.form {
-    text-align: center;
-    display: flex;
-    margin: auto;
-    margin-top: 10px;
-    flex-direction: column;
-    width: 300px;
-    position: relative;
-    padding-top: 5px;
-    border-radius: 10px;
+
+.container {
+  max-width: 350px;
+  margin: 20px auto;
+  margin-bottom: 0;
+  padding: 30px 40px;
+  background-color: #fff;
+  border-radius: 5px;
 }
 
-.form h1 {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 1.5em;
-    padding: 10px;
-    color: black;
-    letter-spacing: 5px;
-    margin-bottom: 30px;
-    font-weight: bold;
-    border-bottom: 2px solid black;
-}
-.form a{
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-.form .inputbox button {
-    position: relative;
-    width: 50%;
-    background: black;
-    color: #fff;
-    border: #fff;
-    border-radius: 10px;
-    cursor: pointer;
+h4 {
+  text-align: center;
+  margin-bottom: 10px;
 }
 
-.form .inputbox:hover button {
-    background: linear-gradient(45deg, black, rgb(231, 96, 81));
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+span {
+  cursor: pointer;
+}
+
+span:hover {
+  text-decoration: underline;
+}
+
+button {
+  display: inline-block;
+  background-color: #7DC855;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 8px 30px;
+  width: 100%;
+  transition: all .5s;
+}
+
+button:hover {
+  background-color: #64af3d;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  position: absolute;
 }

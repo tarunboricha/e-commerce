@@ -1,66 +1,49 @@
-<div class="seller-auth" [style.min-height]="calMinhight()">
-    <div *ngIf="showSignUp" class="form">
-        <h1>User Sign-Up</h1>
-        <div *ngIf="isLoader" style="display: flex; justify-content: center; margin-bottom: 10px; align-items: center;">
-            <div style="margin-right: 10px;" class="spinner-border spinner-border-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div> Please wait...
-        </div>
-        <form #userSignUp="ngForm" (ngSubmit)="signUp(userSignUp.value)">
-            <div class="inputbox">
-                <input type="text" ngModel name="name" required="required">
-                <span>Name</span>
+<!-- signup.component.html -->
+<div [style.min-height]="calMinhight()">
+    <div class="container">
+        <h4 *ngIf="signup">Sign up</h4>
+        <h4 *ngIf="!signup">Sign in</h4>
+        <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm.value)" class="signup-form" novalidate>
+            <div class="form-group" *ngIf="signup">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control" name="name" ngModel required minlength="2"
+                    maxlength="20">
+                <div *ngIf="signupForm.controls['name'].invalid && (signupForm.controls['name'].dirty || signupForm.controls['name'].touched)"
+                    class="error-message">
+                    <div *ngIf="signupForm.controls['name'].errors?.['required']">Name is required.</div>
+                    <div *ngIf="signupForm.controls['name'].errors?.['minlength']">Name must be at least 2
+                        characters long.</div>
+                    <div *ngIf="signupForm.controls['name'].errors?.['maxlength']">Name cannot be more than
+                        20
+                        characters long.</div>
+                </div>
             </div>
-            <div class="inputbox">
-                <input type="text" ngModel name="email" required="required">
-                <span>Email</span>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" name="email" ngModel required email>
+                <div *ngIf="signupForm.controls['email'].invalid && (signupForm.controls['email'].dirty || signupForm.controls['email'].touched)"
+                    class="error-message">
+                    <div *ngIf="signupForm.controls['email'].errors?.['required']">Email is required.</div>
+                    <div *ngIf="signupForm.controls['email'].errors?.['email']">Invalid email format.</div>
+                </div>
             </div>
-            <div class="inputbox" style="margin-bottom: 5px;">
-                <input type="password" ngModel name="password" required="required">
-                <span>Password</span>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" name="password" ngModel required
+                    minlength="6">
+                <div *ngIf="signupForm.controls['password'].invalid && (signupForm.controls['password'].dirty || signupForm.controls['password'].touched)"
+                    class="error-message">
+                    <div *ngIf="signupForm.controls['password'].errors?.['required']">Password is required.</div>
+                    <div *ngIf="signupForm.controls['password'].errors?.['minlength']">Password must be at least 6
+                        characters long.</div>
+                </div>
             </div>
-            <div class="form-p">
-                <p>Already have an Account? <a (click)="flipPage()">Click to Login</a></p>
-            </div>
-            <div class="inputbox">
-                <button class="inputbox" ngModule>SignUp</button>
-            </div>
+            <button *ngIf="signup" type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            <button *ngIf="!signup" type="submit" class="btn btn-primary btn-block">Sign in</button>
         </form>
-        <div style="color: red;">
-            <p>{{LoginFailedmessage}}</p>
-        </div>
     </div>
-
-
-    <!--------- Login --------->
-
-
-    <div *ngIf="!showSignUp" class="form">
-        <h1>User Login</h1>
-        <div *ngIf="isLoader" style="display: flex; justify-content: center; margin-bottom: 10px; align-items: center;">
-            <div style="margin-right: 10px;" class="spinner-border spinner-border-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div> Please wait...
-        </div>
-        <form #userLogin="ngForm" (ngSubmit)="Login(userLogin.value)">
-            <div class="inputbox">
-                <input type="text" ngModel name="email" required="required">
-                <span>Email</span>
-            </div>
-            <div class="inputbox" style="margin-bottom: 5px;">
-                <input type="password" ngModel name="password" required="required">
-                <span>Password</span>
-            </div>
-            <div class="form-p">
-                <p>Don't have an Account? <a (click)="flipPage()">Click to Sign-Up</a></p>
-            </div>
-            <div class="inputbox">
-                <button class="inputbox" ngModule>Login</button>
-            </div>
-        </form>
-        <div style="color: red;">
-            <p>{{LoginFailedmessage}}</p>
-        </div>
-    </div>
+    <p *ngIf="signup" style="text-align: center; margin: 0; padding: 0;">Already have an account? <span (click)="signup = false;">click to sign in</span></p>
+    <p *ngIf="!signup" style="text-align: center; margin: 0; padding: 0;">Dont't have an account? <span (click)="signup = true;">click to sign up</span></p>
 </div>
+
 <app-footer></app-footer>

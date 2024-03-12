@@ -71,8 +71,6 @@ export class AddToCartComponent implements OnInit, OnDestroy {
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     if (this.priceSummaryContainer && scrollPosition >= parseFloat(getComputedStyle(document.documentElement).fontSize)) {
       this.priceSummaryContainer.nativeElement.style.top = `calc(${this.product.headerComHeight}px + 1rem)`;
-    } else if(this.priceSummaryContainer){
-      this.priceSummaryContainer.nativeElement.style.top = '1rem';
     }
   }
 

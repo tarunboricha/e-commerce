@@ -1,27 +1,30 @@
-<div class="seller-auth" [style.min-height]="calMinhight()">
-    <div class="form">
-        <h1>Seller Login</h1>
-        <div *ngIf="isLoader" style="display: flex; justify-content: center; margin-bottom: 10px; align-items: center;">
-            <div style="margin-right: 10px;" class="spinner-border spinner-border-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div> Please wait...
-        </div>
-        <form  #sellerLogin = "ngForm" (ngSubmit) = "login(sellerLogin.value)">
-            <div class="inputbox">
-                <input type="text" ngModel name = "email" required="required">
-                <span>Email</span>
+<div [style.min-height]="calMinhight()">
+    <div class="container">
+        <h4>Seller Sign up</h4>
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" class="signup-form" novalidate>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" name="email" ngModel required email>
+                <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)"
+                    class="error-message">
+                    <div *ngIf="loginForm.controls['email'].errors?.['required']">Email is required.</div>
+                    <div *ngIf="loginForm.controls['email'].errors?.['email']">Invalid email format.</div>
+                </div>
             </div>
-            <div class="inputbox" style="margin-bottom: 5px;">
-                <input type="password" ngModel name = "password" required="required">
-                <span>Password</span>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" name="password" ngModel required
+                    minlength="6">
+                <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
+                    class="error-message">
+                    <div *ngIf="loginForm.controls['password'].errors?.['required']">Password is required.</div>
+                    <div *ngIf="loginForm.controls['password'].errors?.['minlength']">Password must be at least 6
+                        characters long.</div>
+                </div>
             </div>
-            <div class="inputbox" style="margin-top: 30px;">
-                <button class="inputbox" ngModule>Login</button>
-            </div>
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
         </form>
-        <div style="color: red;">
-            <p>{{ SellerLoginfailed }}</p>
-        </div>
     </div>
 </div>
+
 <app-footer></app-footer>

@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   touchstartX: number = 0;
   touchendX: number = 0;
   isServerDown: boolean = false;
-  isUserLogin:boolean = true;
+  isUserLogin:boolean = false;
 
   ngOnInit(): void {
     this.product.cartData.subscribe((result) => {
@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
           this.UserLogoutfun();
         }, 2000);
       }
-    })
+    });
     this.router.events.subscribe((value: any) => {
       document.body.classList.remove('disable-scroll');
       if (value.url) {

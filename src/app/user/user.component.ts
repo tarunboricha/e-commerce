@@ -3,6 +3,7 @@ import { Login, addToCart, product, signUp } from '../data-type';
 import { UserSerService } from '../services/user-ser.service';
 import { Router } from '@angular/router';
 import { ProductSerService } from '../services/product-ser.service';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
@@ -14,13 +15,23 @@ export class UserComponent implements OnInit {
   isLoader: boolean = false;
   productid: number[] | undefined;
   LoginFailedmessage: undefined | string;
+  signup:boolean = true;
   constructor(private user: UserSerService, private router: Router, private product: ProductSerService) { }
   ngOnInit(): void {
     if (localStorage.getItem('4uUser')) {
       this.router.navigate(['']);
     }
   }
-  showSignUp: boolean = false;
+
+  onSubmit(data:any) {
+    if(this.signup) {
+      this.signUp(data);
+    }
+    else {
+      this.Login(data);
+    }
+  }
+
   signUp(data: signUp) {
     this.isLoader = true;
     data.userID = 0;
@@ -94,14 +105,5 @@ export class UserComponent implements OnInit {
       return `calc(100vh - 120px - 2rem)`;
     }
     return `calc(100vh - ${this.product.headerComHeight}px)`;
-  }
-
-  flipPage() {
-    if (this.showSignUp) {
-      this.showSignUp = false;
-    }
-    else {
-      this.showSignUp = true;
-    }
   }
 }
