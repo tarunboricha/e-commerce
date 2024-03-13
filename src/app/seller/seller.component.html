@@ -1,5 +1,10 @@
 <div [style.min-height]="calMinhight()">
     <div class="container">
+        <div *ngIf="isLoader" style="display: flex; justify-content: center; margin-bottom: 10px; align-items: center;">
+            <div style="margin-right: 10px;" class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div> Please wait...
+        </div>
         <h4>Seller Sign up</h4>
         <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="signup-form">
             <div class="form-group">

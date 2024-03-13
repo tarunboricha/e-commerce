@@ -2,6 +2,11 @@
 <div [style.min-height]="calMinhight()">
     <p style="text-align: center; color: #dc3545; margin: 0;">{{LoginFailedmessage}}</p>
     <div class="container">
+        <div *ngIf="isLoader" style="display: flex; justify-content: center; margin-bottom: 10px; align-items: center;">
+            <div style="margin-right: 10px;" class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div> <span *ngIf="!signup">Signing in Please wait...</span> <span *ngIf="signup">Signing up Please wait...</span>
+        </div>
         <h4 *ngIf="signup">Sign up</h4>
         <h4 *ngIf="!signup">Sign in</h4>
         <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)" class="signup-form" novalidate>
