@@ -1,6 +1,6 @@
 .home {
     background-color: #f1f2f4;
-    padding: 1rem;
+    margin: 1rem;
     /* margin-bottom: 20px; */
 }
 
@@ -90,8 +90,7 @@
     }
 
     .home {
-        padding: 0.5rem;
-        padding-top: calc(0.5rem - 10px);
+        margin: 0.5rem;
     }
 
     .trending-products{

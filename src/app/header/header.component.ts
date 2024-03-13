@@ -109,9 +109,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     // Measure the height after the view and child views are initialized
     if (this.componentContainer) {
-      if (this.componentContainer.nativeElement.offsetWidth > 576) {
-        this.product.headerComHeight = this.componentContainer.nativeElement.offsetHeight;
-      }
+      this.product.headerComHeight = this.componentContainer.nativeElement.offsetHeight;
     }
   }
 

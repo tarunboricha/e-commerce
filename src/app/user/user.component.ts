@@ -49,7 +49,7 @@ export class UserComponent implements OnInit {
           setTimeout(() => this.LoginFailedmessage = undefined, 2000);
         }
         else {
-          this.LoginFailedmessage = "Server is down please contact to Tarun";
+          this.LoginFailedmessage = "Server is down try later";
           setTimeout(() => this.LoginFailedmessage = undefined, 2000);
         }
       });

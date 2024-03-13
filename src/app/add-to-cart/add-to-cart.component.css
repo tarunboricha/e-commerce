@@ -166,7 +166,6 @@
     .cart-container {
         flex-direction: column;
         margin: 0.5rem;
-        margin-top: 0;
         padding: 0.5rem;
     }
 
@@ -189,5 +188,12 @@
     .cart-summary {
         position: static;
         width: 100%;
+    }
+}
+
+
+@media (max-width: 535px) {
+    .one-line-footer {
+        display: none;
     }
 }

@@ -1,7 +1,7 @@
 .search {
     margin: 1rem;
-    margin-top: 0;
     background-color: #fff;
+    padding: 1rem;
 }
 
 img {
@@ -13,26 +13,21 @@ img {
     border-bottom: 1px solid #e0e0e0;
 }
 
-.containerr {
-    margin: 0 30px;
-}
-
 .filter-container {
     background-color: #fff;
-    /* border-radius: 10px; */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    margin-top: 20px;
 }
 
 .card-header {
     background-color: #787878;
     color: #fff;
-    /* border-radius: 10px 10px 0 0; */
+    border-radius: 0;
 }
 
 .card-body {
     padding: 20px;
+    border-radius: 0;
 }
 
 .form-group {
@@ -46,11 +41,8 @@ img {
 }
 
 .search-results {
-    padding: 20px;
+    padding: 0px;
 }
-
-/* Add more CSS as needed for product cards */
-
 
 .product-card {
     border: none;
@@ -61,6 +53,11 @@ img {
 
 .product-card:hover {
     transform: translateY(-5px);
+}
+
+.card {
+    border-radius: 0;
+    border: none;
 }
 
 .card-img-top {
@@ -77,15 +74,11 @@ img {
     font-weight: bold;
     color: #333;
     margin-bottom: 10px;
-    /* height: 50px; */
-    /* Limiting height to ensure consistent card size */
     height: 20px;
-    /* Limiting height to approximately 3 lines */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 1;
-    /* Limit to 3 lines */
     -webkit-box-orient: vertical;
     cursor: pointer;
 }
@@ -95,12 +88,10 @@ img {
     color: #555;
     margin-bottom: 10px;
     height: 20px;
-    /* Limiting height to approximately 3 lines */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 1;
-    /* Limit to 3 lines */
     -webkit-box-orient: vertical;
 }
 
@@ -115,14 +106,12 @@ img {
     display: none;
 }
 
-
 @media (max-width: 576px) {
 
     #mob {
         display: block;
     }
 
-    /* Hide filter container by default */
     .filter-overlay {
         position: fixed;
         display: flex;
@@ -132,12 +121,9 @@ img {
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        /* semi-transparent overlay */
         z-index: 1000;
-        /* higher z-index to appear above other content */
     }
 
-    /* Style the close button */
     .close-btn {
         position: absolute;
         top: 10px;
@@ -149,21 +135,10 @@ img {
         cursor: pointer;
     }
 
-    .temppp {
-        height: calc(0.5rem - 7px);
-    }
-
     .search {
         margin: 0.5rem;
         margin-top: 0;
-    }
-
-    .containerr {
-        margin: 10px;
-    }
-
-    .search-results {
-        padding: 5px;
+        padding: 0.5rem;
     }
 
     .card-body {
@@ -179,14 +154,22 @@ img {
     }
 
     .filter-containerr {
-        background-color: #fff; 
+        background-color: #fff;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         margin: 0 1rem;
         border: none;
     }
 
     .filterbtn {
-        margin: 1rem;
-        margin-top: 0;
+        position: sticky;
+        z-index: 1;
+        margin: 0.5rem;
+        padding: 0.5rem;
+        background-color: #fff;
+        border: none;
+    }
+
+    .filterbtn button{
+        border-radius: none;
     }
 }

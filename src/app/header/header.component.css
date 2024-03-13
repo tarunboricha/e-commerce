@@ -218,18 +218,11 @@ nav {
 
 @media (max-width: 576px) {
 
-    nav {
-        /* box-shadow: none; */
-        margin-bottom: 10px;
-    }
-
     .server-down-warning {
         width: 80%;
     }
 
     .navbar {
-        justify-content: left;
-        position: static;
         padding-top: 2%;
     }
 
