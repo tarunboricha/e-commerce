@@ -24,16 +24,7 @@ export class DetailsOfProductComponent implements OnInit {
   userCartDetail: product[] | undefined;
 
   constructor(private productService: ProductSerService, private route: ActivatedRoute, private router: Router) { }
-
-  // ngOnInit(): void {
-  //   this.userCartSubscription = this.productService.cartData.subscribe((result) => {
-  //     this.userCartDetail = result;
-  //   });
-  //   this.routeSubscription = this.route.paramMap.subscribe(params => {
-      
-  //   });
-  // }
-
+  
   async ngOnInit(): Promise<void> {
     this.isLoader1 = true;
     await new Promise<void>((resolve) => {
@@ -163,13 +154,6 @@ export class DetailsOfProductComponent implements OnInit {
     } else {
       this.productService.addToWishlist(product);
     }
-  }
-
-  handleQuantity(action: string) {
-    if (action === 'plus' && this.productQuantity < 20)
-      this.productQuantity++;
-    else if (action === 'min' && this.productQuantity > 1)
-      this.productQuantity--;
   }
 
   ngOnDestroy(): void {
