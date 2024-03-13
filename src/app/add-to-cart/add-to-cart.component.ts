@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { priceSummary, product } from '../data-type';
+import { priceSummary } from '../data-type';
 import { ProductSerService } from '../services/product-ser.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -75,10 +75,11 @@ export class AddToCartComponent implements OnInit, OnDestroy {
   }
 
   calMinhight() {
-    if (this.product.headerComHeight === -1) {
-      return `calc(100vh - 200px - 2rem)`;
-    }
     return `calc(100vh - ${this.product.headerComHeight}px - 2rem)`;
+  }
+
+  calMinhightofCarts() {
+    return `calc(100vh - ${this.product.headerComHeight}px - 4rem)`;
   }
 
   RemovetoCart(data: number, index: number) {

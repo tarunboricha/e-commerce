@@ -11,6 +11,7 @@ img {
     object-fit: cover;
     object-position: 50% 20%;
     border-bottom: 1px solid #e0e0e0;
+    border-radius: 0;
 }
 
 .filter-container {
@@ -34,10 +35,11 @@ img {
     margin-bottom: 15px;
 }
 
-.btn-primary {
+.btn {
     background-color: #787878;
     border-color: #787878;
     width: 100%;
+    color: #fff;
 }
 
 .search-results {
@@ -46,7 +48,6 @@ img {
 
 .product-card {
     border: none;
-    border-radius: 5px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
@@ -169,7 +170,8 @@ img {
         border: none;
     }
 
-    .filterbtn button{
-        border-radius: none;
+    .btn:hover {
+        background-color: #b8b8b8;
+        color: #fff;
     }
 }

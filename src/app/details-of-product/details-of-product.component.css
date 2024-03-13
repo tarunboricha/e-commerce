@@ -1,8 +1,8 @@
 .containerr {
-    padding: 1rem 5%;
+    padding: 1rem;
     display: flex;
     background-color: #fff;
-    margin: 0 1rem;
+    margin: 1rem;
 }
 
 .spinning-loader {
@@ -13,13 +13,13 @@
 }
 
 .left-column {
-    width: 65%;
+    width: 55%;
     position: relative;
     overflow: hidden;
 }
 
 .right-column {
-    width: 35%;
+    width: 45%;
     margin-top: 10px;
 }
 
@@ -97,6 +97,7 @@
 
 
 .trending-products {
+    margin-top: 0;
     margin: 1rem;
     padding: 1rem;
     background-color: #fff;
@@ -110,7 +111,7 @@
 
 .product-card {
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 0;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
@@ -124,8 +125,7 @@
     object-fit: cover;
     cursor: pointer;
     object-position: 50% 10%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-radius: 0px;
 }
 
 .product-card .card-body {
@@ -168,13 +168,14 @@
 @media (max-width: 535px) {
 
     .containerr {
-        margin: 0 0.5rem;
+        margin: 0.5rem;
     }
 
-        .trending-products {
-            margin: 0.5rem;
-            padding: 0.5rem;
-        }
+    .trending-products {
+        margin-top: 0;
+        margin: 0.5rem;
+        padding: 0.5rem;
+    }
 
     .product-card img {
         height: 150px;
@@ -184,7 +185,8 @@
         height: calc(0.5rem - 7px);
     }
 
-    .product-color, .product-price {
+    .product-color,
+    .product-price {
         margin-bottom: 20px;
     }
 

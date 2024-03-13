@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductSerService } from '../services/product-ser.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { addToCart, product } from '../data-type';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-details-of-product',
@@ -18,21 +19,41 @@ export class DetailsOfProductComponent implements OnInit {
   productQuantity: number = 1;
   detailsOfProduct: product | undefined;
   similarProducts: product[] | undefined;
-  cartDetails: product | undefined;
+  userCartSubscription: Subscription | undefined;
+  routeSubscription: Subscription | undefined;
+  userCartDetail: product[] | undefined;
 
   constructor(private productService: ProductSerService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.userCartSubscription = this.productService.cartData.subscribe((result) => {
+      this.userCartDetail = result;
+    });
+    this.routeSubscription = this.route.paramMap.subscribe(params => {
       this.isLoader1 = true;
       const id = params.get('Productid');
       if (!id) return;
-
       this.productService.getProductservice(id).subscribe(
         (result: any) => {
-          this.isLoader1 = false;
           this.detailsOfProduct = result[0];
           this.loadSimilarProducts();
+          this.isLoader1 = false;
+          let product = this.userCartDetail?.filter(product => {
+            return this.detailsOfProduct?.id === product.id;
+          });
+          if (product?.length) {
+            this.removeCard = true;
+            if (product[0].productQuantity)
+              this.productQuantity = product[0].productQuantity;
+            if (product[0].productSize)
+              this.selectedSize = 'Size: ' + product[0].productSize.toString();
+          }
+          else {
+            this.removeCard = false;
+            this.productQuantity = 1;
+            this.selectedSize = 'Select Size';
+            this.productSize = undefined;
+          }
         },
         (error: any) => {
           this.isLoader1 = false;
@@ -41,36 +62,6 @@ export class DetailsOfProductComponent implements OnInit {
           this.productService.isServerDown.emit(true);
         }
       );
-      if (localStorage.getItem('4uUser')) {
-        this.productService.cartData.subscribe((result) => {
-          if (result) {
-            result = result.filter((item: product) => id == item.productID?.toString());
-            if (result.length) {
-              this.cartDetails = result[0];
-              this.removeCard = true;
-              if (result[0].productQuantity)
-                this.productQuantity = result[0].productQuantity;
-              if (result[0].productSize)
-                this.selectedSize = 'Size: ' + result[0].productSize.toString();
-            }
-          }
-        });
-      }
-      else {
-        let cartData = localStorage.getItem('LocaladdToCart');
-        if (id && cartData?.length) {
-          let itemData = JSON.parse(cartData);
-          itemData = itemData.filter((item: product) => id == item.id.toString());
-          if (itemData.length != 0) {
-            this.removeCard = true;
-            this.productQuantity = itemData[0].productQuantity;
-            this.selectedSize = 'Size: ' + itemData[0].productSize;
-          }
-          else {
-            this.removeCard = false;
-          }
-        }
-      }
     });
   }
 
@@ -136,8 +127,8 @@ export class DetailsOfProductComponent implements OnInit {
       this.isLoader = true;
       const user = localStorage.getItem('4uUser');
       const userID = user && JSON.parse(user)[0].userID;
-      if (userID && this.cartDetails) {
-        this.productService.userremoveTocart(this.cartDetails.id, userID).subscribe(
+      if (userID && this.detailsOfProduct) {
+        this.productService.userremoveTocart(this.detailsOfProduct.id, userID).subscribe(
           (result) => {
             if (result) {
               this.productService.getCartlist(userID, 'RemovefromCart');
@@ -165,5 +156,10 @@ export class DetailsOfProductComponent implements OnInit {
       this.productQuantity++;
     else if (action === 'min' && this.productQuantity > 1)
       this.productQuantity--;
+  }
+
+  ngOnDestroy(): void {
+    this.userCartSubscription?.unsubscribe();
+    this.routeSubscription?.unsubscribe();
   }
 }

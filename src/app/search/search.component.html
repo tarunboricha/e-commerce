@@ -1,4 +1,4 @@
-<div class="filterbtn" id="mob" [style.top.px]="product.headerComHeight"><button class="filter-button btn btn-primary"
+<div class="filterbtn" id="mob" [style.top.px]="product.headerComHeight"><button class="filter-button btn"
     (click)="toggleFilter()">Filter</button></div>
 <div class="search" [style.min-height]="calMinhight()">
     <div class="containerr">
@@ -102,7 +102,7 @@
                         <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
                             *ngFor="let product of loaderfilteredProducts">
                             <div class="card product-card picsum-img-wrapperr">
-                                <img class="card-img-top"
+                                <img style="border-radius: 0;" class="card-img-top"
                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAADACAMAAAB/Pny7AAAAA1BMVEWlpaUNBb2aAAAAPUlEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgyZwAABCrx9CgAAAABJRU5ErkJggg=="
                                     alt="Product Image">
                                 <div class="card-body">
@@ -124,7 +124,7 @@
                         <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
                             *ngFor="let product of filteredProducts">
                             <div class="card product-card">
-                                <img routerLink="/product/{{product.id}}" class="card-img-top loaded" loading="lazy"
+                                <img style="border-radius: 0;" routerLink="/product/{{product.id}}" class="card-img-top loaded" loading="lazy"
                                     [src]="product.productURL" alt="Product Image">
                                 <div class="card-body">
                                     <h5 routerLink="/product/{{product.id}}" class="card-title">{{ product.productName }}</h5>

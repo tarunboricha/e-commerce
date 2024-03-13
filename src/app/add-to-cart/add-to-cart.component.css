@@ -1,28 +1,29 @@
 .cart-container {
-    background-color: #fff;
+    background-color: #f1f2f4;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin: 1rem;
-    margin-top: 0;
     padding: 1rem;
 }
 
 .cart-items {
-    width: 70%;
+    background-color: #fff;
+    width: calc(75% - 1rem);
+    padding: 1rem;
 }
 
 .loaderinmob {
     position: absolute;
-    width: 70%;
+    width: calc(75% - 1rem);
 }
 
 .empty {
-    width: 70%;
+    width: calc(75% - 1rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #fff;
 }
 
 .empty img {
@@ -33,11 +34,11 @@
     display: flex;
     align-items: center;
     border-bottom: 1px solid #e0e0e0;
-    padding: 20px 0;
+    padding: 1rem 0;
 }
 
 .cart-item:first-child {
-    padding-top: calc(20px - 1rem);
+    padding-top: 0;
 }
 
 .cart-item img {
@@ -65,7 +66,7 @@
 }
 
 .remove-btn {
-    background-color: #4caf50;
+    background-color: #7DC855;
     color: #fff;
     border: none;
     padding: 8px 16px;
@@ -74,17 +75,14 @@
 }
 
 .remove-btn:hover {
-    background-color: #43a047;
+    background-color: #64af3d;
 }
 
 .cart-summary {
     position: sticky;
     padding: 20px;
     width: 25%;
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    /* z-index: 1000000; */
+    background-color: #fff;
 }
 
 .cart-summary h2 {
@@ -95,7 +93,7 @@
 }
 
 .checkout-btn {
-    background-color: #4caf50;
+    background-color: #7DC855;
     color: #fff;
     border: none;
     padding: 6px 16px;
@@ -106,7 +104,7 @@
 }
 
 .checkout-btn:hover {
-    background-color: #43a047;
+    background-color: #64af3d;
 }
 
 .one-line-footer {
@@ -137,10 +135,6 @@
         width: 100%;
     }
 
-    .temppp {
-        height: calc(0.5rem - 7px);
-    }
-
     .empty img {
         width: 90%;
     }
@@ -151,6 +145,7 @@
     }
 
     .cart-items {
+        padding: 0.5rem;
         width: 100%;
     }
 
@@ -165,7 +160,6 @@
 
     .cart-container {
         flex-direction: column;
-        margin: 0.5rem;
         padding: 0.5rem;
     }
 
@@ -186,8 +180,13 @@
     }
 
     .cart-summary {
-        position: static;
-        width: 100%;
+        position: sticky;
+        bottom: 0.5rem;
+        width: calc(100% + 1rem);
+        transform: translate(-0.5rem, 0.5rem);
+    }
+    .cart-summary p{
+        display: none;
     }
 }
 

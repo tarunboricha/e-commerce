@@ -1,12 +1,12 @@
-<div class="cart-container" [style.min-height]="calMinhight()">
-    <div *ngIf="isCartempty" class="empty">
+<div class="cart-container">
+    <div *ngIf="isCartempty" class="empty" [style.min-height]="calMinhight()">
         <img class="loaded" loading="lazy"
             src="https://rukminim2.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90"
             alt="">
         <h5>Your cart is empty!</h5>
         <h6>Explore our wide selection and find something you like</h6>
     </div>
-    <div class="cart-items" *ngIf="product.isLoader" style="position: relative;">
+    <div class="cart-items"  [style.min-height]="calMinhight()" *ngIf="product.isLoader" style="position: relative;">
         <div class="loaderinmob">
             <div *ngFor="let item of loaderItem, index as i" class="cart-item picsum-img-wrapperr">
                 <img src="https://png.pngtree.com/thumb_back/fh260/background/20210207/pngtree-simple-gray-solid-color-background-image_557027.jpg"
@@ -23,18 +23,20 @@
         </div>
     </div>
     <div class="cart-items" *ngIf="!isCartempty && !product.isLoader">
-        <div *ngFor="let item of CartDetails, index as i" class="cart-item">
-            <img routerLink="/product/{{item.id}}" [src]="item.productURL" alt="{{ item.productName }}">
-            <div class="item-details">
-                <h3>{{ item.productName }}</h3>
-                <p>Price: {{ item.productPrice | currency:'INR' }}</p>
-                <p>Quantity: {{ item.productQuantity }}</p>
+        <div [style.min-height]="calMinhightofCarts()">
+            <div *ngFor="let item of CartDetails, index as i" class="cart-item">
+                <img routerLink="/product/{{item.id}}" [src]="item.productURL" alt="{{ item.productName }}">
+                <div class="item-details">
+                    <h3>{{ item.productName }}</h3>
+                    <p>Price: {{ item.productPrice | currency:'INR' }}</p>
+                    <p>Quantity: {{ item.productQuantity }}</p>
+                </div>
+                <button class="remove-btn" (click)="RemovetoCart(item.id, i)">
+                    <div *ngIf="item.isloader" class="spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div> Remove
+                </button>
             </div>
-            <button class="remove-btn" (click)="RemovetoCart(item.id, i)">
-                <div *ngIf="item.isloader" class="spinner-border spinner-border-sm" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div> Remove
-            </button>
         </div>
     </div>
     <div class="cart-summary" #priceSummaryContainer>
