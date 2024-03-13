@@ -25,14 +25,28 @@ export class DetailsOfProductComponent implements OnInit {
 
   constructor(private productService: ProductSerService, private route: ActivatedRoute, private router: Router) { }
 
-  ngOnInit(): void {
-    this.userCartSubscription = this.productService.cartData.subscribe((result) => {
-      this.userCartDetail = result;
+  // ngOnInit(): void {
+  //   this.userCartSubscription = this.productService.cartData.subscribe((result) => {
+  //     this.userCartDetail = result;
+  //   });
+  //   this.routeSubscription = this.route.paramMap.subscribe(params => {
+      
+  //   });
+  // }
+
+  async ngOnInit(): Promise<void> {
+    this.isLoader1 = true;
+    await new Promise<void>((resolve) => {
+      this.userCartSubscription = this.productService.cartData.subscribe((result) => {
+        this.userCartDetail = result;
+        resolve();
+      });
     });
+  
     this.routeSubscription = this.route.paramMap.subscribe(params => {
-      this.isLoader1 = true;
       const id = params.get('Productid');
       if (!id) return;
+      this.isLoader1 = true;
       this.productService.getProductservice(id).subscribe(
         (result: any) => {
           this.detailsOfProduct = result[0];
