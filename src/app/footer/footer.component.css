@@ -57,6 +57,7 @@
 }
 
 @media (max-width: 767px) {
+
     .footer {
         padding: 30px 15px;
         text-align: left;
@@ -78,8 +79,4 @@
     .col-md-4 {
         margin-bottom: 30px;
     }
-/* 
-    .social-icons {
-        text-align: center;
-    } */
 }
