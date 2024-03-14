@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { priceSummary } from '../data-type';
 import { ProductSerService } from '../services/product-ser.service';
 import { Router } from '@angular/router';
@@ -11,10 +11,9 @@ import { Subscription } from 'rxjs';
 })
 export class AddToCartComponent implements OnInit, OnDestroy {
 
-  @ViewChild('priceSummaryContainer') priceSummaryContainer: ElementRef | undefined;
-
+  numberofSaveLater:number = 0;
+  numberOfCartItem:number = 0;
   subscription: Subscription | undefined;
-  isLoader: boolean = false;
   CartDetails: undefined | any;
   userID: number | undefined;
   priceSummary: priceSummary = {
@@ -26,6 +25,8 @@ export class AddToCartComponent implements OnInit, OnDestroy {
   }
   isCartempty: boolean = false;
   loaderItem = [1, 2];
+  cartItems:any = [];
+  saveLaterItem:any = [];
 
   constructor(protected product: ProductSerService, private router: Router) { }
 
@@ -36,15 +37,27 @@ export class AddToCartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.product.cartData.subscribe((result) => {
       if (result.length) {
+        this.numberOfCartItem = result.length;
         this.CartDetails = result;
+        this.cartItems = [];
+        this.saveLaterItem = [];
+        this.userID = this.CartDetails[0].userID;
         let price = 0;
         if (this.CartDetails.length) {
           this.CartDetails.forEach((item: any) => {
-            if (item.productQuantity) {
+            item.isloaderRemoveCart = false;
+            item.isloaderSaveLater = false;
+            if (item.productQuantity && !item.savelater) {
               price = price + (+item.productPrice * +item.productQuantity)
             }
-            item.isloader = false;
-          })
+            if(!item.savelater) {
+              this.cartItems.push(item);
+            }
+            else {
+              this.saveLaterItem.push(item);
+            }
+          });
+
           this.priceSummary.price = price;
           this.priceSummary.discount = price / 10;
           this.priceSummary.discount = Math.floor(this.priceSummary.discount);
@@ -52,9 +65,19 @@ export class AddToCartComponent implements OnInit, OnDestroy {
           this.priceSummary.tax = Math.floor(this.priceSummary.tax);
           this.priceSummary.delivery = 100;
           this.priceSummary.total = price + 100;
+          if(!this.cartItems.length) {
+            this.isCartempty = true;
+            this.priceSummary.delivery = 0;
+            this.priceSummary.total = 0;
+          }
+          else {
+            this.isCartempty = false;
+          }
         }
       }
       else {
+        this.cartItems = [];
+        this.saveLaterItem = [];
         this.isCartempty = true;
         this.CartDetails = undefined;
         this.priceSummary.price = 0;
@@ -66,39 +89,76 @@ export class AddToCartComponent implements OnInit, OnDestroy {
     });
   }
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    if (this.priceSummaryContainer && scrollPosition >= parseFloat(getComputedStyle(document.documentElement).fontSize)) {
-      this.priceSummaryContainer.nativeElement.style.top = `calc(${this.product.headerComHeight}px + 1rem)`;
-    }
-  }
-
-  calMinhight() {
-    return `calc(100vh - ${this.product.headerComHeight}px - 2rem)`;
-  }
-
-  calMinhightofCarts() {
-    return `calc(100vh - ${this.product.headerComHeight}px - 4rem)`;
-  }
-
-  RemovetoCart(data: number, index: number) {
-    // this.isLoader = true;
+  saveLater(item:any) {
+    console.log(item);
     if (localStorage.getItem('4uUser')) {
-      this.CartDetails[index].isloader = true;
-      let user = localStorage.getItem('4uUser');
-      let userID = user && JSON.parse(user)[0].userID;
-      this.product.userremoveTocart(data, userID).subscribe((result) => {
+      item.isloaderSaveLater = true;
+      this.product.saveLater(item.id, this.userID? this.userID : 0).subscribe((result) => {
         if (result) {
-          this.product.getCartlist(userID, 'RemovetoCart');
-          setTimeout(() => {
-            this.isLoader = false;
-          }, 100);
+          this.product.getCartlist(this.userID? this.userID : 0, 'RemovetoCart');
         }
       });
     }
     else {
-      this.product.localremoveTocart(data);
+      this.product.localSaveLater(item.id);
+    }
+  }
+
+  moveToCart(item:any) {
+    if (localStorage.getItem('4uUser')) {
+      item.isloaderSaveLater = true;
+      this.product.moveToCartService(item.id, this.userID? this.userID : 0).subscribe((result) => {
+        if (result) {
+          this.product.getCartlist(this.userID? this.userID : 0, 'RemovetoCart');
+        }
+      });
+    }
+    else {
+      this.product.localMoveToCart(item.id);
+    }
+  }
+
+  calMinhight() {
+    if(this.product.isMobile) {
+      return `calc(100vh - ${this.product.headerComHeight}px - ${this.product.headerComHeight}px)`;
+    }
+    return `calc(100vh - ${this.product.headerComHeight}px - 2rem)`;
+  }
+
+  priceSummaryTopValue() {
+    return `calc(${this.product.headerComHeight}px + 1rem)`;
+  }
+
+  calMinhightofCarts() {
+    if(this.product.isMobile) {
+      return `calc(100vh - ${this.product.headerComHeight}px - ${this.product.headerComHeight}px - 3.4rem)`;
+    }
+    return `calc(100vh - ${this.product.headerComHeight}px - 2rem)`;
+  }
+
+  RemovetoCart(item:any) {
+    if (localStorage.getItem('4uUser')) {
+      item.isloaderRemoveCart = true;
+      let user = localStorage.getItem('4uUser');
+      let userID = user && JSON.parse(user)[0].userID;
+      this.product.userremoveTocart(item.id, userID).subscribe((result) => {
+        if (result) {
+          this.product.getCartlist(userID, 'RemovetoCart');
+        }
+      });
+    }
+    else {
+      this.product.localremoveTocart(item.id);
+    }
+  }
+
+  increaseQuantity(item: any): void {
+    item.productQuantity++;
+  }
+
+  decreaseQuantity(item: any): void {
+    if (item.productQuantity > 1) {
+      item.productQuantity--;
     }
   }
 }

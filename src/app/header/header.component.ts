@@ -36,8 +36,14 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   isUserLogin:boolean = false;
 
   ngOnInit(): void {
-    this.product.cartData.subscribe((result) => {
-      this.CartItem = result.length;
+    this.product.cartData.subscribe((result:any) => {
+      let temp = 0;
+      for(let i = 0; i<result.length; i++) {
+        if(!result[i].savelater) {
+          temp = temp + 1;
+        }
+      }
+      this.CartItem = temp;
     });
     this.product.isServerDown.subscribe((result) => {
       if (result && this.isUserLogin) {
@@ -110,6 +116,9 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     // Measure the height after the view and child views are initialized
     if (this.componentContainer) {
       this.product.headerComHeight = this.componentContainer.nativeElement.offsetHeight;
+    }
+    if(this.componentContainer?.nativeElement.offsetWidth < 536) {
+      this.product.isMobile = true;
     }
   }
 

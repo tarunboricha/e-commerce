@@ -5,9 +5,9 @@
     </div>
     <div class="navbar-collapseee">
         <form #searchProduct="ngForm" (ngSubmit)="searchProducts(SearchProduct.value)" class="d-flex mx-auto">
-            <input #SearchProduct ngModel class="form-control me-2" type="search" placeholder="Search for Products"
+            <input style="border-radius: 0;" #SearchProduct ngModel class="form-control me-2" type="search" placeholder="Search for Products"
                 aria-label="Search">
-            <button class="btn btn-outline-success" type="submit" ngModel>Search</button>
+            <button class="btn btn-outline-success" style="border-radius: 0;" type="submit" ngModel>Search</button>
         </form>
     </div>
     <div class="navbar-collapseee" [ngSwitch]="switchCaseCondition">

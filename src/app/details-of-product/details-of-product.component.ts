@@ -23,8 +23,8 @@ export class DetailsOfProductComponent implements OnInit {
   routeSubscription: Subscription | undefined;
   userCartDetail: product[] | undefined;
 
-  constructor(private productService: ProductSerService, private route: ActivatedRoute, private router: Router) { }
-  
+  constructor(protected productService: ProductSerService, private route: ActivatedRoute, private router: Router) { }
+
   async ngOnInit(): Promise<void> {
     this.isLoader1 = true;
     await new Promise<void>((resolve) => {
@@ -33,7 +33,7 @@ export class DetailsOfProductComponent implements OnInit {
         resolve();
       });
     });
-  
+
     this.routeSubscription = this.route.paramMap.subscribe(params => {
       const id = params.get('Productid');
       if (!id) return;
@@ -107,9 +107,10 @@ export class DetailsOfProductComponent implements OnInit {
         this.productService.UseraddTocart(cartData).subscribe(
           (result) => {
             if (result) {
-              this.productService.getCartlist(userID, 'AddtoCart');
-              this.removeCard = true;
-              this.isLoader = false;
+              this.productService.getCartlist(userID, 'AddtoCart').add(() => {
+                this.removeCard = true;
+                this.isLoader = false;
+              });
             }
           }
         );
@@ -136,11 +137,12 @@ export class DetailsOfProductComponent implements OnInit {
         this.productService.userremoveTocart(this.detailsOfProduct.id, userID).subscribe(
           (result) => {
             if (result) {
-              this.productService.getCartlist(userID, 'RemovefromCart');
-              this.removeCard = false;
-              this.productQuantity = 1;
-              this.selectedSize = 'Select Size';
-              this.isLoader = false;
+              this.productService.getCartlist(userID, 'RemovefromCart').add(() => {
+                this.removeCard = false;
+                this.productQuantity = 1;
+                this.selectedSize = 'Select Size';
+                this.isLoader = false;
+              });
             }
           }
         );
