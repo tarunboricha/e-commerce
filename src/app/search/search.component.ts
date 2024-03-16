@@ -26,30 +26,42 @@ export class SearchComponent implements OnInit {
   correctedQuery:string = '';
   originalQuery:string = '';
 
-  constructor(private router: ActivatedRoute, protected product: ProductSerService, private rout: Router) { }
+  constructor(private route: ActivatedRoute, private router: ActivatedRoute, protected product: ProductSerService, private rout: Router) { }
 
   ngOnInit(): void {
-    this.loadDetails();
-  }
-
-  loadDetails(): void {
-    if (!this.isDetailsLoad) {
+    this.route.queryParams.subscribe(params => {
+      let query = params['que'];
+      let correc = params['correc'];
+      let category = params['cat'];
       this.isLoader = true;
-
-      const query = this.router.snapshot.paramMap.get('query');
-      const category = this.router.snapshot.paramMap.get('cat');
-
-      if (query) {
-        if ((query == 'shirt' || query == "tshirt" || query == 'jeans'))
-          this.loaderfilteredProducts = [false, false];
-        this.searchProduct(query);
-      } else if (category) {
+      if(query) {
+        this.loaderfilteredProducts = [false, false];
+        this.searchProduct(query, correc);
+      }
+      else {
         this.filterProduct(category);
       }
-
-      this.isDetailsLoad = true;
-    }
+    });
   }
+
+  // loadDetails(): void {
+  //   if (!this.isDetailsLoad) {
+  //     this.isLoader = true;
+
+  //     const query = this.router.snapshot.paramMap.get('query');
+  //     const category = this.router.snapshot.paramMap.get('cat');
+
+  //     if (query) {
+  //       if ((query == 'shirt' || query == "tshirt" || query == 'jeans'))
+  //         this.loaderfilteredProducts = [false, false];
+  //       this.searchProduct(query);
+  //     } else if (category) {
+  //       this.filterProduct(category);
+  //     }
+
+  //     this.isDetailsLoad = true;
+  //   }
+  // }
 
   toggleFilter() {
     this.showFilter = !this.showFilter;
@@ -68,12 +80,12 @@ export class SearchComponent implements OnInit {
   }
 
   calFilterContainerTop() {
-    return `calc(${this.product.headerComHeight} + 1rem)`;
+    return `calc(${this.product.headerComHeight}px + 1rem)`;
   }
 
-  searchProduct(query: string): void {
+  searchProduct(query: string, correc:boolean): void {
     console.log("product is searched with", query);
-    this.product.searchProductService(query).subscribe(
+    this.product.searchProductService(query, correc).subscribe(
       (result:any) => {
         this.originalQuery = query;
         this.correctedQuery = result.correctedQuery;

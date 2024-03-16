@@ -133,7 +133,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.showSidenav = false;
     this.router.navigate(['']);
     setTimeout(() => {
-      this.router.navigate(['category/' + data]);
+      this.router.navigate(['category'], { queryParams: { cat: data } });
     }, 0);
   }
 
@@ -141,7 +141,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     data = data.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '');
     this.router.navigate(['']);
     setTimeout(() => {
-      this.router.navigate(['/search/' + data]);
+      this.router.navigate(['search'], { queryParams: { que: data, correc:true } });
     }, 0);
   }
 

@@ -147,8 +147,8 @@ export class ProductSerService {
     return this.http.get<product[]>(`https://86ad-103-250-162-216.ngrok-free.app/products?q=${data}`, { headers: this.headers });
   }
 
-  searchProductService(data: string) {
-    return this.http.get<product[]>(`https://86ad-103-250-162-216.ngrok-free.app/search?query=${encodeURIComponent(data)}`, { headers: this.headers });
+  searchProductService(data: string, correc:boolean) {
+    return this.http.get<product[]>(`https://86ad-103-250-162-216.ngrok-free.app/search?query=${encodeURIComponent(data)}&correction=${encodeURIComponent(correc)}`, { headers: this.headers });
   }
 
   FilterProductService(data: string) {

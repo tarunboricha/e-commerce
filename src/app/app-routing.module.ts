@@ -39,7 +39,7 @@ const routes: Routes = [
     canActivate: [SellerAuthenticationGuard],
   },
   {
-    path: 'search/:query',
+    path: 'search',
     component: SearchComponent
   },
   {
@@ -51,7 +51,7 @@ const routes: Routes = [
     component: UserComponent
   },
   {
-    path: 'category/:cat',
+    path: 'category',
     component: SearchComponent
   },
   {

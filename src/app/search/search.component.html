@@ -131,7 +131,7 @@
                             <div style="display: inline-block;
                             margin-left: 10px;
                             color: #878787;">
-                            Show results for <a style="color: #878787;" routerLink="/">{{originalQuery}}</a> instead
+                            Show results for <a style="color: #878787;" [routerLink]="['/search']" [queryParams]="{ que: originalQuery, correc:false }">{{originalQuery}}</a> instead
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
