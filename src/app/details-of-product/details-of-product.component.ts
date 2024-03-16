@@ -25,9 +25,9 @@ export class DetailsOfProductComponent implements OnInit {
 
   constructor(protected productService: ProductSerService, private route: ActivatedRoute, private router: Router) { }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.isLoader1 = true;
-    await new Promise<void>((resolve) => {
+    const myPromise = new Promise<void>((resolve) => {
       this.userCartSubscription = this.productService.cartData.subscribe((result) => {
         this.userCartDetail = result;
         resolve();
@@ -43,22 +43,24 @@ export class DetailsOfProductComponent implements OnInit {
           this.detailsOfProduct = result[0];
           this.loadSimilarProducts();
           this.isLoader1 = false;
-          let product = this.userCartDetail?.filter(product => {
-            return this.detailsOfProduct?.id === product.id;
+          myPromise.then((result) => {
+            let product = this.userCartDetail?.filter(product => {
+              return this.detailsOfProduct?.id === product.id;
+            });
+            if (product?.length && !product[0].savelater) {
+              this.removeCard = true;
+              if (product[0].productQuantity)
+                this.productQuantity = product[0].productQuantity;
+              if (product[0].productSize)
+                this.selectedSize = 'Size: ' + product[0].productSize.toString();
+            }
+            else {
+              this.removeCard = false;
+              this.productQuantity = 1;
+              this.selectedSize = 'Select Size';
+              this.productSize = undefined;
+            }
           });
-          if (product?.length) {
-            this.removeCard = true;
-            if (product[0].productQuantity)
-              this.productQuantity = product[0].productQuantity;
-            if (product[0].productSize)
-              this.selectedSize = 'Size: ' + product[0].productSize.toString();
-          }
-          else {
-            this.removeCard = false;
-            this.productQuantity = 1;
-            this.selectedSize = 'Select Size';
-            this.productSize = undefined;
-          }
         },
         (error: any) => {
           this.isLoader1 = false;
@@ -99,22 +101,23 @@ export class DetailsOfProductComponent implements OnInit {
         this.isLoader = true;
         const userID = JSON.parse(userData)[0].userID;
         const cartData: addToCart = {
+          id: this.detailsOfProduct.id,
           userID,
           productID: this.detailsOfProduct.id,
           productSize: this.productSize,
-          productQuantity: this.productQuantity
+          productQuantity: this.productQuantity,
+          savelater: false
         };
-        this.productService.UseraddTocart(cartData).subscribe(
-          (result) => {
+        this.productService.UseraddTocart(cartData).subscribe((result) => {
             if (result) {
               this.productService.getCartlist(userID, 'AddtoCart').add(() => {
                 this.removeCard = true;
                 this.isLoader = false;
               });
             }
-          }
-        );
-      } else {
+        });
+      }
+      else {
         this.detailsOfProduct.productQuantity = this.productQuantity;
         this.detailsOfProduct.productSize = this.productSize;
         this.productService.localAddtoCartservice(this.detailsOfProduct);

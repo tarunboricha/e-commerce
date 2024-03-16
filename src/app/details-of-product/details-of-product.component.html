@@ -49,11 +49,11 @@
                 </div> Remove to Cart
             </button>
             <div ngbDropdown class="d-inline-block" style="margin-left: 30px; margin-top: 5px;">
-                <button [disabled]="removeCard" style="border-color: black;" type="button" class="btn"
+                <button [disabled]="removeCard" style="border-radius: 0; border-color: black;" type="button" class="btn"
                     id="dropdownBasic1" ngbDropdownToggle>
                     {{selectedSize}}
                 </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="border-radius: 0;">
                     <button (click)="size(38)" ngbDropdownItem>38</button>
                     <button (click)="size(40)" ngbDropdownItem>40</button>
                     <button (click)="size(42)" ngbDropdownItem>42</button>

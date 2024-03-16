@@ -22,7 +22,8 @@ export interface product {
     productID: undefined | number,
     productSize: number|undefined,
     trending:boolean|undefined,
-    wishlist:boolean|undefined
+    wishlist:boolean|undefined,
+    savelater:boolean|undefined
 }
 
 export interface User {
@@ -33,10 +34,12 @@ export interface User {
 }
 
 export interface addToCart {
+    id:number,
     productQuantity: number | undefined,
     userID: number,
     productID: number,
     productSize: number|undefined,
+    savelater:boolean|undefined
 }
 
 export interface priceSummary {

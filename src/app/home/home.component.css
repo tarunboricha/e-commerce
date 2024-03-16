@@ -43,8 +43,13 @@
     transform: translateY(-5px);
 }
 
+.loader-image {
+    height: 170px;
+    background-color: rgb(228, 228, 228);
+}
+
 .product-card img {
-    height: 250px;
+    height: 170px;
     object-fit: cover;
     cursor: pointer;
     object-position: 50% 10%;

@@ -12,13 +12,14 @@ export class UserSerService {
     'Authorization': 'Bearer YourAccessToken', // Add any other headers you need
     'ngrok-skip-browser-warning': 'your-custom-value'
   });
+
   constructor(private htttp: HttpClient, private router: Router) { }
   userSignupservice(data: signUp) {
-    return this.htttp.post('https://d975-103-250-162-216.ngrok-free.app/users',
+    return this.htttp.post('https://86ad-103-250-162-216.ngrok-free.app/users',
       data, { headers: this.headers, observe: 'response' });
   }
   UserLoginservice(data: Login) {
-    return this.htttp.get(`https://d975-103-250-162-216.ngrok-free.app/users/${data.email}/${data.password}`,
+    return this.htttp.get(`https://86ad-103-250-162-216.ngrok-free.app/users/${data.email}/${data.password}`,
       { headers: this.headers, observe: 'response' });
   }
 }

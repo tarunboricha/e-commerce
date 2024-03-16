@@ -1,5 +1,5 @@
 <div class="filterbtn" id="mob" [style.top.px]="product.headerComHeight"><button class="filter-button btn"
-    (click)="toggleFilter()">Filter</button></div>
+        (click)="toggleFilter()">Filter</button></div>
 <div class="search" [style.min-height]="calMinhight()">
     <div class="containerr">
         <div class="row">
@@ -47,14 +47,17 @@
                                     <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
                                 </select>
                             </div>
-                            <div style="display: flex; justify-content: space-evenly;"><button style="width: 45%;" class="btn btn-primary btn-block" (click)="applyFilters(); toggleFilter();">Apply
-                                Filters</button>
-                                <button style="width: 45%;" class="btn btn-primary btn-block" (click)="clearFilters(); toggleFilter();">Clear
-                                    Filters</button></div>
+                            <div style="display: flex; justify-content: space-evenly;"><button style="width: 45%;"
+                                    class="btn btn-primary btn-block" (click)="applyFilters(); toggleFilter();">Apply
+                                    Filters</button>
+                                <button style="width: 45%;" class="btn btn-primary btn-block"
+                                    (click)="clearFilters(); toggleFilter();">Clear
+                                    Filters</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="filter-container card">
+                <div class="filter-container card" [style.top]="calFilterContainerTop()">
                     <h3 class="card-header">Filters</h3>
                     <div class="card-body">
                         <div class="form-group">
@@ -92,7 +95,8 @@
                                 <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
                             </select>
                         </div>
-                        <button class="btn btn-primary btn-block" (click)="applyFilters()">Apply Filters</button>
+                        <button style="border-radius: 0;" class="btn btn-primary btn-block"
+                            (click)="applyFilters()">Apply Filters</button>
                     </div>
                 </div>
             </div>
@@ -102,9 +106,7 @@
                         <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
                             *ngFor="let product of loaderfilteredProducts">
                             <div class="card product-card picsum-img-wrapperr">
-                                <img style="border-radius: 0;" class="card-img-top"
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAADACAMAAAB/Pny7AAAAA1BMVEWlpaUNBb2aAAAAPUlEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgyZwAABCrx9CgAAAABJRU5ErkJggg=="
-                                    alt="Product Image">
+                                <div class="loader-image"></div>
                                 <div class="card-body">
                                     <h5 class="card-title"
                                         style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</h5>
@@ -119,15 +121,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="search-results" *ngIf="!isLoader">
+                <div class="search-results" *ngIf="!isLoader" [style.min-height]="calMinhight()">
                     <div class="row">
+                        <div *ngIf="correctedQuery !== originalQuery">
+                            <div style="font-weight: 500;
+                            font-size: 16px;
+                            margin-bottom: 1rem;
+                            display: inline-block;">Showing result for "{{correctedQuery}}"</div>
+                            <div style="display: inline-block;
+                            margin-left: 10px;
+                            color: #878787;">
+                            Show results for <a style="color: #878787;" routerLink="/">{{originalQuery}}</a> instead
+                            </div>
+                        </div>
                         <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
                             *ngFor="let product of filteredProducts">
                             <div class="card product-card">
-                                <img style="border-radius: 0;" routerLink="/product/{{product.id}}" class="card-img-top loaded" loading="lazy"
-                                    [src]="product.productURL" alt="Product Image">
+                                <img style="border-radius: 0;" routerLink="/product/{{product.id}}"
+                                    class="card-img-top loaded" loading="lazy" [src]="product.productURL"
+                                    alt="Product Image">
                                 <div class="card-body">
-                                    <h5 routerLink="/product/{{product.id}}" class="card-title">{{ product.productName }}</h5>
+                                    <h5 routerLink="/product/{{product.id}}" class="card-title">{{ product.productName
+                                        }}</h5>
                                     <p class="card-text">{{ product.productDisc }}</p>
                                     <p class="card-text">{{ product.productPrice | currency:'INR' }}</p>
                                     <!-- <button routerLink="/product/{{product.id}}" class="btn btn-primary btn-block">View

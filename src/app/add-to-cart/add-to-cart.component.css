@@ -24,9 +24,15 @@
     width: 50%;
 }
 
+.loader-image {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(228, 228, 228);
+}
+
 .cart-item {
     display: flex;
-    align-items: center;
+    gap: 20px;
     border-bottom: 1px solid #e0e0e0;
     padding: 1rem 0;
 }
@@ -35,7 +41,7 @@
     padding-top: 0;
 }
 
-.cart-item img {
+.product-image {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -43,30 +49,45 @@
     cursor: pointer;
 }
 
-.item-details {
-    flex: 1;
+.product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.item-details h3 {
-    margin: 0;
-    font-size: 20px;
-    color: #333;
+.quantity-controls {
+    display: flex;
+    justify-content: space-around;
 }
 
-.item-details p {
-    margin: 5px 0;
-    color: #666;
+.quantity-btn {
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
 }
 
-.remove-btn {
+.quantity-input {
+    width: 40px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.action-btn {
     background-color: #7DC855;
     color: #fff;
     border: none;
     padding: 8px 16px;
     cursor: pointer;
+    font-size: small;
 }
 
-.remove-btn:hover {
+.action-btn:hover {
     background-color: #64af3d;
 }
 
@@ -129,6 +150,11 @@
     cursor: pointer;
     font-size: 18px;
 }
+
+.place-order:hover {
+    background-color: #64af3d;
+}
+
 
 .place-order:disabled {
     cursor: default;
@@ -202,57 +228,4 @@
     .temp {
         display: none;
     }
-}
-
-.cart-item {
-    display: flex;
-    gap: 20px;
-}
-
-.product-image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-}
-
-.product-details {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.quantity-controls {
-    display: flex;
-    justify-content: space-around;
-}
-
-.quantity-btn {
-    padding: 5px 10px;
-    background-color: #f0f0f0;
-    border: none;
-    cursor: pointer;
-}
-
-.quantity-input {
-    width: 40px;
-    padding: 5px;
-    border: 1px solid #ccc;
-}
-
-.actions {
-    display: flex;
-    gap: 1rem;
-}
-
-.action-btn {
-    background-color: #7DC855;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-size: small;
-}
-
-.action-btn:hover {
-    background-color: #64af3d;
 }

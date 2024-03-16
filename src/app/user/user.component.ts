@@ -15,7 +15,7 @@ export class UserComponent implements OnInit {
   isLoader: boolean = false;
   productid: number[] | undefined;
   LoginFailedmessage: undefined | string;
-  signup:boolean = true;
+  signup: boolean = true;
   constructor(private user: UserSerService, private router: Router, private product: ProductSerService) { }
   ngOnInit(): void {
     if (localStorage.getItem('4uUser')) {
@@ -23,11 +23,11 @@ export class UserComponent implements OnInit {
     }
   }
 
-  onSubmit(form:NgForm) {
+  onSubmit(form: NgForm) {
 
-    if(!form.valid) 
+    if (!form.valid)
       return;
-    if(this.signup) {
+    if (this.signup) {
       this.signUp(form.value);
     }
     else {
@@ -40,19 +40,19 @@ export class UserComponent implements OnInit {
     data.userID = 0;
     if (data.name != '' && data.email != '' && data.password != '') {
       this.user.userSignupservice(data).subscribe((result) => {
-        this.signup = false;  
+        this.signup = false;
       },
-      (error) => {
-        this.isLoader = false;
-        if (error.error.code === 'ER_DUP_ENTRY') {
-          this.LoginFailedmessage = "Email is already registered";
-          setTimeout(() => this.LoginFailedmessage = undefined, 2000);
-        }
-        else {
-          this.LoginFailedmessage = "Server is down try later";
-          setTimeout(() => this.LoginFailedmessage = undefined, 2000);
-        }
-      });
+        (error) => {
+          this.isLoader = false;
+          if (error.error.code === 'ER_DUP_ENTRY') {
+            this.LoginFailedmessage = "Email is already registered";
+            setTimeout(() => this.LoginFailedmessage = undefined, 2000);
+          }
+          else {
+            this.LoginFailedmessage = "Server is down try later";
+            setTimeout(() => this.LoginFailedmessage = undefined, 2000);
+          }
+        });
     }
   }
 
@@ -72,11 +72,11 @@ export class UserComponent implements OnInit {
         setTimeout(() => this.LoginFailedmessage = undefined, 2000);
       }
     },
-    (error) => {
-      this.isLoader = false;
-      this.LoginFailedmessage = "Server is down please contact to Tarun";
-      setTimeout(() => this.LoginFailedmessage = undefined, 2000);
-    });
+      (error) => {
+        this.isLoader = false;
+        this.LoginFailedmessage = "Server is down please contact to Tarun";
+        setTimeout(() => this.LoginFailedmessage = undefined, 2000);
+      });
   }
 
   localCarttoUserCart() {
@@ -89,14 +89,17 @@ export class UserComponent implements OnInit {
       let data: addToCart[] = [];
       CartData.forEach((product: product, index) => {
         let temp: addToCart = {
+          id: product.id,
           productID: product.id,
           productQuantity: product.productQuantity,
           productSize: product.productSize,
-          userID: uID
+          userID: uID,
+          savelater: product.savelater
         };
         console.log(uID);
         data.push(temp);
       });
+      console.log(data);
       this.product.UseraddTocarts(data).subscribe((result) => {
         this.product.getCartlist(uID, 'localCarttoUserCart');
       });

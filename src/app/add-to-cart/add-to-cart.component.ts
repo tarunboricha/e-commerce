@@ -24,7 +24,6 @@ export class AddToCartComponent implements OnInit, OnDestroy {
     total: 0
   }
   isCartempty: boolean = false;
-  loaderItem = [1, 2];
   cartItems:any = [];
   saveLaterItem:any = [];
 
@@ -139,11 +138,9 @@ export class AddToCartComponent implements OnInit, OnDestroy {
   RemovetoCart(item:any) {
     if (localStorage.getItem('4uUser')) {
       item.isloaderRemoveCart = true;
-      let user = localStorage.getItem('4uUser');
-      let userID = user && JSON.parse(user)[0].userID;
-      this.product.userremoveTocart(item.id, userID).subscribe((result) => {
+      this.product.userremoveTocart(item.id, item.userID).subscribe((result) => {
         if (result) {
-          this.product.getCartlist(userID, 'RemovetoCart');
+          this.product.getCartlist(item.userID, 'RemovetoCart');
         }
       });
     }

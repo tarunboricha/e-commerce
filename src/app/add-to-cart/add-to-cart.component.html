@@ -1,16 +1,23 @@
 <div class="cart-container">
     <div class="cart-items" [style.min-height]="calMinhight()" *ngIf="product.isLoader" style="position: relative;">
         <div class="loaderinmob">
-            <div *ngFor="let item of loaderItem, index as i" class="cart-item picsum-img-wrapperr">
-                <img src="https://png.pngtree.com/thumb_back/fh260/background/20210207/pngtree-simple-gray-solid-color-background-image_557027.jpg"
-                    alt="loader">
-                <div class="item-details">
-                    <h3 style="background-color: rgb(183, 183, 183); width: 40%; color: rgb(183, 183, 183);;">........
-                    </h3>
-                    <p style="background-color: rgb(183, 183, 183); width: 40%; color: rgb(183, 183, 183);;">.........
-                    </p>
-                    <p style="background-color: rgb(183, 183, 183); width: 40%; color: rgb(183, 183, 183);;">.........
-                    </p>
+            <div class="cart-item picsum-img-wrapperr">
+                <div class="product-details">
+                    <div class="loader-image"></div>
+                    <div class="quantity-controls">
+                        <div style="cursor: pointer;">-</div>
+                        <div>.</div>
+                        <div style="cursor: pointer;">+</div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h4 style="background-color: rgb(183, 183, 183); width: 50%; color: rgb(183, 183, 183);;">...........</h4>
+                    <p style="background-color: rgb(183, 183, 183); width: 50%; color: rgb(183, 183, 183);;">............</p>
+                    <p style="background-color: rgb(183, 183, 183); width: 50%; color: rgb(183, 183, 183);;">............</p>
+                    <div class="actions">
+                        <button class="action-btn">Remove</button>
+                        <button class="action-btn">Save for Later</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -25,7 +32,7 @@
         </div>
         <div *ngFor="let item of cartItems; index as i" class="cart-item">
             <div class="product-details">
-                <img [src]="item.productURL" alt="Product Image" class="product-image">
+                <img routerLink="/product/{{item.id}}" [src]="item.productURL" alt="Product Image" class="product-image">
                 <div class="quantity-controls">
                     <div (click)="decreaseQuantity(item)" style="cursor: pointer;">-</div>
                     <div>{{item.productQuantity}}</div>
@@ -52,7 +59,7 @@
             <hr style="width: calc(100% + 2rem); transform: translate(-1rem, 0);">
             <div *ngFor="let item of saveLaterItem" class="cart-item">
                 <div class="product-details">
-                    <img [src]="item.productURL" alt="Product Image" class="product-image">
+                    <img routerLink="/product/{{item.id}}" [src]="item.productURL" alt="Product Image" class="product-image">
                     <div class="quantity-controls">
                         <div (click)="decreaseQuantity(item)" style="cursor: pointer;">-</div>
                         <div>{{item.productQuantity}}</div>

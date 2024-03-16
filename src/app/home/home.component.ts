@@ -11,7 +11,7 @@ import { forkJoin } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
 
-  loaders: number[] = [1, 2, 3, 4]
+  loaders: number[] = [1, 2, 3, 4, 5, 6]
   isLoader: boolean = true;
   popularProducts: product[] = [];
   trendingProducts: product[] = [];

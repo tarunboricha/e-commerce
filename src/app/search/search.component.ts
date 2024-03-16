@@ -23,6 +23,8 @@ export class SearchComponent implements OnInit {
   selectedColor: string = '';
   categories = new Set<string>; // Example categories
   colors = new Set<string>; // Example colors
+  correctedQuery:string = '';
+  originalQuery:string = '';
 
   constructor(private router: ActivatedRoute, protected product: ProductSerService, private rout: Router) { }
 
@@ -62,17 +64,23 @@ export class SearchComponent implements OnInit {
   }
 
   calMinhight() {
-    return `calc(100vh - ${this.product.headerComHeight}px - 1rem)`;
+    return `calc(100vh - ${this.product.headerComHeight}px - 4rem)`;
+  }
+
+  calFilterContainerTop() {
+    return `calc(${this.product.headerComHeight} + 1rem)`;
   }
 
   searchProduct(query: string): void {
     console.log("product is searched with", query);
     this.product.searchProductService(query).subscribe(
-      (result) => {
-        this.searchProductData = result;
+      (result:any) => {
+        this.originalQuery = query;
+        this.correctedQuery = result.correctedQuery;
+        this.searchProductData = result.result;
+        console.log(result);
         this.isLoader = false;
         this.applyFilters();
-        console.log(this.selectedCategory);
       },
       (error) => {
         console.error('Error fetching search product data:', error);

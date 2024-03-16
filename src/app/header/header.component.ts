@@ -117,7 +117,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     if (this.componentContainer) {
       this.product.headerComHeight = this.componentContainer.nativeElement.offsetHeight;
     }
-    if(this.componentContainer?.nativeElement.offsetWidth < 536) {
+    if (this.componentContainer?.nativeElement.offsetWidth < 536) {
       this.product.isMobile = true;
     }
   }
@@ -130,7 +130,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   CategoryProducts(data: string) {
-    data = data.toLowerCase().replace(/\W/g, '');
     this.showSidenav = false;
     this.router.navigate(['']);
     setTimeout(() => {
@@ -139,11 +138,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   searchProducts(data: string) {
-    data = data.toLowerCase().replace(/\W/g, '');
+    data = data.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '');
     this.router.navigate(['']);
     setTimeout(() => {
       this.router.navigate(['/search/' + data]);
-    }, 0.0001);
+    }, 0);
   }
 
   SellerLogoutfun() {
