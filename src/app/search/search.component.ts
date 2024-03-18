@@ -12,7 +12,7 @@ export class SearchComponent implements OnInit {
 
   loaderfilteredProducts: boolean[] = [false, false, false, false, false, false, false, false]
   isLoader: boolean = false;
-  showFilter:boolean = false;
+  showFilter: boolean = false;
   isDetailsLoad: boolean = false;
   filteredProducts: any[] = [];
   searchProductData: any[] = [];
@@ -23,18 +23,23 @@ export class SearchComponent implements OnInit {
   selectedColor: string = '';
   categories = new Set<string>; // Example categories
   colors = new Set<string>; // Example colors
-  correctedQuery:string = '';
-  originalQuery:string = '';
+  correctedQuery: string = '';
+  originalQuery: string = '';
+  isEmpty: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: ActivatedRoute, protected product: ProductSerService, private rout: Router) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
+      this.isEmpty = false;
       let query = params['que'];
       let correc = params['correc'];
       let category = params['cat'];
+      this.clearFilters();
+      this.categories.clear();
+      this.colors.clear();
       this.isLoader = true;
-      if(query) {
+      if (query) {
         this.loaderfilteredProducts = [false, false];
         this.searchProduct(query, correc);
       }
@@ -43,25 +48,6 @@ export class SearchComponent implements OnInit {
       }
     });
   }
-
-  // loadDetails(): void {
-  //   if (!this.isDetailsLoad) {
-  //     this.isLoader = true;
-
-  //     const query = this.router.snapshot.paramMap.get('query');
-  //     const category = this.router.snapshot.paramMap.get('cat');
-
-  //     if (query) {
-  //       if ((query == 'shirt' || query == "tshirt" || query == 'jeans'))
-  //         this.loaderfilteredProducts = [false, false];
-  //       this.searchProduct(query);
-  //     } else if (category) {
-  //       this.filterProduct(category);
-  //     }
-
-  //     this.isDetailsLoad = true;
-  //   }
-  // }
 
   toggleFilter() {
     this.showFilter = !this.showFilter;
@@ -83,16 +69,23 @@ export class SearchComponent implements OnInit {
     return `calc(${this.product.headerComHeight}px + 1rem)`;
   }
 
-  searchProduct(query: string, correc:boolean): void {
+  searchProduct(query: string, correc: boolean): void {
     console.log("product is searched with", query);
     this.product.searchProductService(query, correc).subscribe(
-      (result:any) => {
+      (result: any) => {
         this.originalQuery = query;
         this.correctedQuery = result.correctedQuery;
-        this.searchProductData = result.result;
-        console.log(result);
         this.isLoader = false;
-        this.applyFilters();
+        if (result.result.length) {
+          this.searchProductData = result.result;
+          console.log(result);
+          this.applyFilters();
+        }
+        else {
+          this.searchProductData = [];
+          this.filteredProducts = [];
+          this.isEmpty = true;
+        }
       },
       (error) => {
         console.error('Error fetching search product data:', error);

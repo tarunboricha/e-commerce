@@ -9,7 +9,7 @@
         <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="signup-form">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" class="form-control" name="email" ngModel required email>
+                <input type="email" id="email" class="form-control" name="email" ngModel standalone required email>
                 <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)"
                     class="error-message">
                     <div *ngIf="loginForm.controls['email'].errors?.['required']">Email is required.</div>
@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" name="password" ngModel required
+                <input type="password" id="password" class="form-control" name="password" ngModel standalone required
                     minlength="6">
                 <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
                     class="error-message">

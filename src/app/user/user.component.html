@@ -12,7 +12,7 @@
         <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)" class="signup-form" novalidate>
             <div class="form-group" *ngIf="signup">
                 <label for="name">Name</label>
-                <input type="text" id="name" class="form-control" name="name" ngModel required minlength="2"
+                <input type="text" id="name" class="form-control" name="name" ngModel standalone required minlength="2"
                     maxlength="20">
                 <div *ngIf="signupForm.controls['name'].invalid && (signupForm.controls['name'].dirty || signupForm.controls['name'].touched)"
                     class="error-message">
@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" class="form-control" name="email" ngModel required email>
+                <input type="email" id="email" class="form-control" name="email" ngModel standalone required email>
                 <div *ngIf="signupForm.controls['email'].invalid && (signupForm.controls['email'].dirty || signupForm.controls['email'].touched)"
                     class="error-message">
                     <div *ngIf="signupForm.controls['email'].errors?.['required']">Email is required.</div>
@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" name="password" ngModel required
+                <input type="password" id="password" class="form-control" name="password" ngModel standalone required
                     minlength="6">
                 <div *ngIf="signupForm.controls['password'].invalid && (signupForm.controls['password'].dirty || signupForm.controls['password'].touched)"
                     class="error-message">
@@ -48,8 +48,8 @@
             <button *ngIf="!signup" type="submit" class="btn btn-primary btn-block mt-2">Sign in</button>
         </form>
     </div>
-    <p *ngIf="signup" style="text-align: center; margin: 0; padding: 0;">Already have an account? <span (click)="signup = false;">click to sign in</span></p>
-    <p *ngIf="!signup" style="text-align: center; margin: 0; padding: 0;">Dont't have an account? <span (click)="signup = true;">click to sign up</span></p>
+    <p *ngIf="signup" style="text-align: center; margin: 0; padding: 0;">Already have an account? <span (click)="signup = false; markAllControlsAsUntouched(signupForm)">click to sign in</span></p>
+    <p *ngIf="!signup" style="text-align: center; margin: 0; padding: 0;">Dont't have an account? <span (click)="signup = true; markAllControlsAsUntouched(signupForm)">click to sign up</span></p>
 </div>
 
 <app-footer></app-footer>

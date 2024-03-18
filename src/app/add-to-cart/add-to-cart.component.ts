@@ -26,6 +26,7 @@ export class AddToCartComponent implements OnInit, OnDestroy {
   isCartempty: boolean = false;
   cartItems:any = [];
   saveLaterItem:any = [];
+  isLoader:boolean = false;
 
   constructor(protected product: ProductSerService, private router: Router) { }
 
@@ -92,8 +93,10 @@ export class AddToCartComponent implements OnInit, OnDestroy {
     console.log(item);
     if (localStorage.getItem('4uUser')) {
       item.isloaderSaveLater = true;
+      this.isLoader = true;
       this.product.saveLater(item.id, this.userID? this.userID : 0).subscribe((result) => {
         if (result) {
+          this.isLoader = false;
           this.product.getCartlist(this.userID? this.userID : 0, 'RemovetoCart');
         }
       });
@@ -106,8 +109,10 @@ export class AddToCartComponent implements OnInit, OnDestroy {
   moveToCart(item:any) {
     if (localStorage.getItem('4uUser')) {
       item.isloaderSaveLater = true;
+      this.isLoader = true;
       this.product.moveToCartService(item.id, this.userID? this.userID : 0).subscribe((result) => {
         if (result) {
+          this.isLoader = false;
           this.product.getCartlist(this.userID? this.userID : 0, 'RemovetoCart');
         }
       });
@@ -138,8 +143,10 @@ export class AddToCartComponent implements OnInit, OnDestroy {
   RemovetoCart(item:any) {
     if (localStorage.getItem('4uUser')) {
       item.isloaderRemoveCart = true;
+      this.isLoader = true;
       this.product.userremoveTocart(item.id, item.userID).subscribe((result) => {
         if (result) {
+          this.isLoader = false;
           this.product.getCartlist(item.userID, 'RemovetoCart');
         }
       });

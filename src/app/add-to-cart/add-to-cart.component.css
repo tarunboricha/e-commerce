@@ -160,10 +160,21 @@
     cursor: default;
 }
 
-@media (max-width: 1050px) {
+.line {
+    width: calc(100% + 2rem);
+    transform: translate(-1rem, 0);
+    margin: 0;
+}
+
+@media (max-width: 875px) {
 
     .cart-item {
         padding: 0.5rem 0;
+    }
+
+    .line {
+        width: calc(100% + 1rem);
+        transform: translate(-0.5rem, 0);
     }
 
     .empty {
@@ -217,15 +228,15 @@
         bottom: 0;
         width: 100%;
     }
+    
+    .temp {
+        display: none;
+    }
 }
 
 
 @media (max-width: 535px) {
     .one-line-footer {
-        display: none;
-    }
-
-    .temp {
         display: none;
     }
 }

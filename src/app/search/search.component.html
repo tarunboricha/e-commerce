@@ -95,13 +95,18 @@
                                 <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
                             </select>
                         </div>
-                        <button style="border-radius: 0;" class="btn btn-primary btn-block"
-                            (click)="applyFilters()">Apply Filters</button>
+                        <div style="display: flex; justify-content: space-between;"><button style="border-radius: 0; font-size: small; width: 48%;"
+                                class="btn btn-primary btn-block" (click)="applyFilters();">Apply
+                                Filters</button>
+                            <button style="border-radius: 0; font-size: small; width: 48%;" class="btn btn-primary btn-block"
+                                (click)="clearFilters();">Clear
+                                Filters</button>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-9 col-md-8 col-12">
-                <div class="search-results" *ngIf="isLoader">
+                <div class="search-results" *ngIf="isLoader" [style.min-height]="calMinhight()">
                     <div class="row">
                         <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
                             *ngFor="let product of loaderfilteredProducts">
@@ -122,16 +127,19 @@
                     </div>
                 </div>
                 <div class="search-results" *ngIf="!isLoader" [style.min-height]="calMinhight()">
+                    <div class="search-empty" *ngIf="isEmpty">
+                        <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/error-no-search-results_2353c5.png"
+                            alt="">
+                        <h3>Sorry, no result found!</h3>
+                        <p>Sorry, no results found!
+                            Please check the spelling or try searching for something else</p>
+                    </div>
                     <div class="row">
-                        <div *ngIf="correctedQuery !== originalQuery">
-                            <div style="font-weight: 500;
-                            font-size: 16px;
-                            margin-bottom: 1rem;
-                            display: inline-block;">Showing result for "{{correctedQuery}}"</div>
-                            <div style="display: inline-block;
-                            margin-left: 10px;
-                            color: #878787;">
-                            Show results for <a style="color: #878787;" [routerLink]="['/search']" [queryParams]="{ que: originalQuery, correc:false }">{{originalQuery}}</a> instead
+                        <div class="correc-con" *ngIf="correctedQuery !== originalQuery && !isEmpty">
+                            <div class="correction">Showing result for "{{correctedQuery}}"</div>
+                            <div class="instead">
+                                Show results for <a style="color: #878787;" [routerLink]="['/search']"
+                                    [queryParams]="{ que: originalQuery, correc:false }">{{originalQuery}}</a> instead
                             </div>
                         </div>
                         <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"

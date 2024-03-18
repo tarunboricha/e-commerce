@@ -2,10 +2,10 @@
     margin: 1rem;
     background-color: #fff;
     padding: 1rem;
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
 }
 
-img {
+.product-card img {
     width: 100%;
     height: 170px;
     cursor: pointer;
@@ -15,11 +15,42 @@ img {
     border-radius: 0;
 }
 
+.search-empty img {
+    display: block;
+    margin: auto;
+}
+
+.search-empty h3 {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.search-empty p {
+    font-family: Roboto, Arial, sans-serif;
+    letter-spacing: 0;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #878787;
+}
+
 .filter-container {
     position: sticky;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+}
+
+.correction {
+    font-weight: 500;
+    font-size: 16px;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.instead {
+    display: inline-block;
+    margin-left: 10px;
+    color: #878787;
 }
 
 .input-group-text {
@@ -128,6 +159,20 @@ img {
 
     #mob {
         display: block;
+    }
+
+    .correc-con {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .correction {
+        margin-bottom: 0;
+    }
+
+    .instead {
+        margin-left: 0px;
+        margin-bottom: 0.5rem;
     }
 
     .filter-overlay {

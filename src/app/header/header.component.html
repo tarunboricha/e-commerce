@@ -5,9 +5,9 @@
     </div>
     <div class="navbar-collapseee">
         <form #searchProduct="ngForm" (ngSubmit)="searchProducts(SearchProduct.value)" class="d-flex mx-auto">
-            <input style="border-radius: 0;" #SearchProduct ngModel class="form-control me-2" type="search" placeholder="Search for Products"
+            <input style="border-radius: 0;" #SearchProduct ngModel [ngModelOptions]="{standalone: true}" class="form-control me-2" type="search" placeholder="Search for Products"
                 aria-label="Search">
-            <button class="btn btn-outline-success" style="border-radius: 0;" type="submit" ngModel>Search</button>
+            <button class="btn btn-outline-success" style="border-radius: 0;" type="submit">Search</button>
         </form>
     </div>
     <div class="navbar-collapseee" [ngSwitch]="switchCaseCondition">
@@ -22,8 +22,7 @@
                 <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="user">User</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="addToCart">Cart ({{ CartItem
-                    }})</a>
+                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="addToCart">Cart ({{CartItem}})</a>
             </li>
         </ul>
         <ul class="nav-items" *ngSwitchCase="'seller'">
@@ -70,17 +69,17 @@
             </div>
             <div class="user-options">
                 <div (click)="toogle()">
-                    <a routerLink="user" *ngIf="switchCaseCondition == 'default'">Sign In</a>
-                    <a routerLink="" *ngIf="switchCaseCondition == 'user'">Hello, {{Username | titlecase}}</a>
+                    <a routerLink="user" *ngIf="switchCaseCondition === 'default'">Sign In</a>
+                    <a routerLink="" *ngIf="switchCaseCondition === 'user' || switchCaseCondition === 'seller'">Hello, {{Username | titlecase}}</a>
                 </div>
             </div>
             <hr>
             <div class="navigation-links">
                 <h4>Shop by Category</h4>
                 <ul>
-                    <li><a (click)="CategoryProducts('shirt')">Shirt</a></li>
-                    <li><a (click)="CategoryProducts('tshirt')">T-Shirt</a></li>
-                    <li><a (click)="CategoryProducts('jeans')">Jeans</a></li>
+                    <li><a (click)="this.showSidenav = false;" [routerLink]="['category']" [queryParams]="{ cat: 'shirt' }">Shirt</a></li>
+                    <li><a (click)="this.showSidenav = false;" [routerLink]="['category']" [queryParams]="{ cat: 'tshirt' }">T-Shirt</a></li>
+                    <li><a (click)="this.showSidenav = false;" [routerLink]="['category']" [queryParams]="{ cat: 'jeans' }">Jeans</a></li>
                     <!-- Add more categories here -->
                 </ul>
             </div>

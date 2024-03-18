@@ -44,10 +44,10 @@
                 <p>Size: {{ item.productSize }}</p>
                 <p>Price: {{ item.productPrice | currency:'INR' }}</p>
                 <div class="actions">
-                    <button (click)="RemovetoCart(item)" class="action-btn"><div *ngIf="item.isloaderRemoveCart" class="spinner-border spinner-border-sm" role="status">
+                    <button [disabled]="isLoader" (click)="RemovetoCart(item)" class="action-btn"><div *ngIf="item.isloaderRemoveCart" class="spinner-border spinner-border-sm" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div> Remove</button>
-                    <button (click)="saveLater(item)" class="action-btn"><div *ngIf="item.isloaderSaveLater" class="spinner-border spinner-border-sm" role="status">
+                    <button [disabled]="isLoader" (click)="saveLater(item)" class="action-btn"><div *ngIf="item.isloaderSaveLater" class="spinner-border spinner-border-sm" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div> Save for Later</button>
                 </div>
@@ -56,7 +56,7 @@
 
         <div class="save-later" *ngIf="saveLaterItem.length">
             <h4 style="font-family: Roboto, Arial, sans-serif;">Saved For Later</h4>
-            <hr style="width: calc(100% + 2rem); transform: translate(-1rem, 0);">
+            <hr class="line">
             <div *ngFor="let item of saveLaterItem" class="cart-item">
                 <div class="product-details">
                     <img routerLink="/product/{{item.id}}" [src]="item.productURL" alt="Product Image" class="product-image">
@@ -71,10 +71,10 @@
                     <p>Size: {{ item.productSize }}</p>
                     <p>Price: {{ item.productPrice | currency:'INR' }}</p>
                     <div class="actions">
-                        <button (click)="RemovetoCart(item)" class="action-btn"><div *ngIf="item.isloaderRemoveCart" class="spinner-border spinner-border-sm" role="status">
+                        <button [disabled]="isLoader" (click)="RemovetoCart(item)" class="action-btn"><div *ngIf="item.isloaderRemoveCart" class="spinner-border spinner-border-sm" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div> Remove</button>
-                        <button (click)="moveToCart(item)" class="action-btn"><div *ngIf="item.isloaderSaveLater" class="spinner-border spinner-border-sm" role="status">
+                        <button [disabled]="isLoader" (click)="moveToCart(item)" class="action-btn"><div *ngIf="item.isloaderSaveLater" class="spinner-border spinner-border-sm" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div> MOVE TO CART</button>
                     </div>

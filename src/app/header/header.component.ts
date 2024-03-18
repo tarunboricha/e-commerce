@@ -33,17 +33,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   touchstartX: number = 0;
   touchendX: number = 0;
   isServerDown: boolean = false;
-  isUserLogin:boolean = false;
+  isUserLogin: boolean = false;
 
   ngOnInit(): void {
-    this.product.cartData.subscribe((result:any) => {
-      let temp = 0;
-      for(let i = 0; i<result.length; i++) {
-        if(!result[i].savelater) {
-          temp = temp + 1;
-        }
-      }
-      this.CartItem = temp;
+    this.product.cartData.subscribe((cartItems: any) => {
+      const notSaveLaterItemCount = cartItems.filter((item: { savelater: any; }) => !item.savelater).length;
+      this.CartItem = notSaveLaterItemCount;
     });
     this.product.isServerDown.subscribe((result) => {
       if (result && this.isUserLogin) {
@@ -129,20 +124,13 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     });
   }
 
-  CategoryProducts(data: string) {
-    this.showSidenav = false;
-    this.router.navigate(['']);
-    setTimeout(() => {
-      this.router.navigate(['category'], { queryParams: { cat: data } });
-    }, 0);
-  }
-
   searchProducts(data: string) {
+    if (data === '') {
+      this.router.navigate(['']);
+      return;
+    }
     data = data.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '');
-    this.router.navigate(['']);
-    setTimeout(() => {
-      this.router.navigate(['search'], { queryParams: { que: data, correc:true } });
-    }, 0);
+    this.router.navigate(['search'], { queryParams: { que: data, correc: true } });
   }
 
   SellerLogoutfun() {

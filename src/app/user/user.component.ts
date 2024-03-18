@@ -25,8 +25,10 @@ export class UserComponent implements OnInit {
 
   onSubmit(form: NgForm) {
 
-    if (!form.valid)
-      return;
+    if (!form.valid){
+      this.markAllControlsAsTouched(form);
+      return; 
+    }
     if (this.signup) {
       this.signUp(form.value);
     }
@@ -38,22 +40,20 @@ export class UserComponent implements OnInit {
   signUp(data: signUp) {
     this.isLoader = true;
     data.userID = 0;
-    if (data.name != '' && data.email != '' && data.password != '') {
-      this.user.userSignupservice(data).subscribe((result) => {
-        this.signup = false;
-      },
-        (error) => {
-          this.isLoader = false;
-          if (error.error.code === 'ER_DUP_ENTRY') {
-            this.LoginFailedmessage = "Email is already registered";
-            setTimeout(() => this.LoginFailedmessage = undefined, 2000);
-          }
-          else {
-            this.LoginFailedmessage = "Server is down try later";
-            setTimeout(() => this.LoginFailedmessage = undefined, 2000);
-          }
-        });
-    }
+    this.user.userSignupservice(data).subscribe((result) => {
+      this.signup = false;
+    },
+      (error) => {
+        this.isLoader = false;
+        if (error.error.code === 'ER_DUP_ENTRY') {
+          this.LoginFailedmessage = "Email is already registered";
+          setTimeout(() => this.LoginFailedmessage = undefined, 2000);
+        }
+        else {
+          this.LoginFailedmessage = "Server is down try later";
+          setTimeout(() => this.LoginFailedmessage = undefined, 2000);
+        }
+      });
   }
 
   Login(data: Login) {
@@ -104,6 +104,20 @@ export class UserComponent implements OnInit {
         this.product.getCartlist(uID, 'localCarttoUserCart');
       });
     }
+  }
+
+  markAllControlsAsTouched(form: NgForm) {
+    Object.keys(form.controls).forEach(controlName => {
+      const control = form.controls[controlName];
+      control.markAsTouched();
+    });
+  }
+
+  markAllControlsAsUntouched(form: NgForm) {
+    Object.keys(form.controls).forEach(controlName => {
+      const control = form.controls[controlName];
+      control.markAsUntouched();
+    });
   }
 
   calMinhight() {
