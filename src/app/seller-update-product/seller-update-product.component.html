@@ -7,10 +7,11 @@
 </div>
 
 <!-- Update Product Form -->
-<div class="update-product-container" [style.min-height]="calMinhight()">
-    <div *ngIf="!isLoader">
-        <app-product-form buttonText="Update Product" [updateProductData] = "productData" formName="Update the Product" (productAddUpdate)="updateProduct($event)"></app-product-form>
-    </div>
+<div class="update-product-container" *ngIf="!isLoader" [style.min-height]="calMinhight()">
+
+    <app-product-form buttonText="Update Product" [updateProductData]="productData" formName="Update the Product"
+        (productAddUpdate)="updateProduct($event)"></app-product-form>
+
 </div>
 
 <!-- Footer -->

@@ -30,7 +30,7 @@ export class UserCartComponent implements OnInit {
   }
 
   private subscribeToUserCartData(): void {
-    this.userCartSubcription =  this.productService.userCartData.subscribe((userCartData: userCartItem[]) => {
+    this.userCartSubcription = this.productService.userCartData.subscribe((userCartData: userCartItem[]) => {
       if (userCartData && userCartData.length) {
         this.userCartItems = userCartData.filter(item => !item.savelater);
         this.saveLaterItems = userCartData.filter(item => item.savelater);
@@ -39,6 +39,11 @@ export class UserCartComponent implements OnInit {
         this.isCartEmpty = true;
         this.userCartItems = [];
         this.saveLaterItems = [];
+        this.priceSummary.price = 0;
+        this.priceSummary.discount = 0;
+        this.priceSummary.tax = 0;
+        this.priceSummary.delivery = 0;
+        this.priceSummary.total = 0;
       }
     });
   }
@@ -108,12 +113,12 @@ export class UserCartComponent implements OnInit {
   }
 
   increaseQuantity(product: userCartItem) {
-    if(product.productQuantity)
+    if (product.productQuantity)
       product.productQuantity++;
   }
 
   decreaseQuantity(product: userCartItem) {
-    if(product.productQuantity)
+    if (product.productQuantity)
       product.productQuantity > 1 ? product.productQuantity-- : product.productQuantity = 1;
   }
 

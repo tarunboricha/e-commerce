@@ -6,7 +6,7 @@
     <h1 style="margin-left: 20px;"> loading...</h1>
 </div>
 
-<div class="seller-dashboard-container" [style.min-height]="calMinhight()">
+<div class="seller-dashboard-container"*ngIf="!isLoader" [style.min-height]="calMinhight()">
 
     <!-- All Products List -->
     <table class="table table-striped table-bordered">
