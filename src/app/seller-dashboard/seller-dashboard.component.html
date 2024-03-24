@@ -1,0 +1,47 @@
+<!-- Loader -->
+<div class="d-flex justify-content-center align-items-center" *ngIf="isLoader" [style.min-height]="calMinhight()">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <h1 style="margin-left: 20px;"> loading...</h1>
+</div>
+
+<div class="seller-dashboard-container" [style.min-height]="calMinhight()">
+
+    <!-- All Products List -->
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Category</th>
+                <th scope="col">Color</th>
+                <th scope="col">Action</th>
+                <th scope="col">Is Trending</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of filterProducts">
+                <td routerLink="/product/{{product.id}}">
+                    <img [src]="product.productURL" [alt]="'The flag of ' + product.productName" class="me-2" />
+                </td>
+                <td>{{product.productName}}</td>
+                <td>{{product.productPrice | currency:'INR'}}</td>
+                <td>{{product.productType}}</td>
+                <td>{{product.productColor}}</td>
+                <td class="action">
+                    <div>
+                        <a (click)="deleteProduct(product.id)">Delete</a>
+                        <hr>
+                        <a routerLink="/seller-update-product/{{product.id}}">Edit</a>
+                    </div>
+                </td>
+                <td class="trending"><input type="checkbox" [(ngModel)]="product.trending" (change)="trendingProduct()"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Footer -->
+<app-footer></app-footer>

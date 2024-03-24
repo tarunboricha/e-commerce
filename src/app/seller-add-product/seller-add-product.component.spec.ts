@@ -8,10 +8,10 @@ describe('SellerAddProductComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SellerAddProductComponent ]
+      declarations: [SellerAddProductComponent]
     })
     .compileComponents();
-
+    
     fixture = TestBed.createComponent(SellerAddProductComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

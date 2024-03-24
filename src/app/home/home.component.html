@@ -1,56 +1,31 @@
-<div *ngIf="isLoader" class="home">
-	<ngb-carousel class="home-cont" *ngIf="!serverError">
-		<ng-template ngbSlide>
-			<div class="picsum-img-wrapperr">
-			</div>
-			<div class="carousel-caption">
-				<h3></h3>
-				<p></p>
-			</div>
-		</ng-template>
-	</ngb-carousel>
+<div *ngIf="isLoader" class="home-container">
+
+	<!-- Skeleton Loader -->
+	<div class="picsum-img-loader">
+	</div>
 	<div class="trending-products">
 		<h2>Trending Products</h2>
 		<div class="row">
 			<div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4" *ngFor="let product of loaders">
 				<div class="card product-card">
-					<div class="loader-image picsum-img-wrapperr"></div>
+					<div class="loader-image picsum-img-loader"></div>
 					<div class="card-body">
-						<h5 class="card-title"></h5>
-						<p class="card-text"></p>
-						<!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+						<h5 class="card-title" style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);">.</h5>
+						<p class="card-text" style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);">.</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<div *ngIf="!isLoader" class="home">
+
+<div *ngIf="!isLoader" class="home-container">
+
+	<!-- Home Carousel -->
 	<ngb-carousel>
-		<ng-template ngbSlide>
+		<ng-template ngbSlide *ngFor="let carouselImage of carouselImages, index as i">
 			<div class="picsum-img-wrapper">
-				<img class="loaded" loading="lazy" src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img2.png"
-					alt="Random second slide" />
-			</div>
-			<div class="carousel-caption">
-				<h3></h3>
-				<p></p>
-			</div>
-		</ng-template>
-		<ng-template ngbSlide>
-			<div class="picsum-img-wrapper">
-				<img class="loaded" loading="lazy" src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img4.png"
-					alt="Random third slide" />
-			</div>
-			<div class="carousel-caption">
-				<h3></h3>
-				<p></p>
-			</div>
-		</ng-template>
-		<ng-template ngbSlide>
-			<div class="picsum-img-wrapper">
-				<img class="loaded" loading="lazy" src="https://raw.githubusercontent.com/lassiecoder/E-CommerceWebsite/ce9366326d7b7991d1f898cfb1b7fa386923ae0a/img/img1.png"
-					alt="Random first slide" />
+				<img class="loaded" loading="lazy" [src]="carouselImage" alt="Random slide {{i + 1}}" />
 			</div>
 			<div class="carousel-caption">
 				<h3></h3>
@@ -58,6 +33,8 @@
 			</div>
 		</ng-template>
 	</ngb-carousel>
+
+	<!-- Trending Products  -->
 	<div class="trending-products">
 		<h2>Trending Products</h2>
 		<div class="row">
@@ -67,11 +44,12 @@
 					<div class="card-body">
 						<h5 class="card-title">{{ product.productName }}</h5>
 						<p class="card-text">{{ product.productPrice | currency: 'INR'}}</p>
-						<!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<!-- Footer -->
 <app-footer></app-footer>

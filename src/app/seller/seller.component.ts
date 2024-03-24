@@ -1,57 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { SellerSerService } from '../services/seller-ser.service';
-import { Login } from '../data-type';
+import { AuthService } from '../services/auth.service';
+import { ProductService } from '../services/product.service';
+import { Seller } from '../data-type';
 import { Router } from '@angular/router';
-import { ProductSerService } from '../services/product-ser.service';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-seller',
   templateUrl: './seller.component.html',
-  styleUrls: ['./seller.component.css']
+  styleUrl: './seller.component.css'
 })
 export class SellerComponent implements OnInit {
 
-  isLoader: boolean = false;
-  SellerLoginfailed: undefined | string;
-  constructor(private sellsign: SellerSerService, private router: Router, private product: ProductSerService) { }
+  constructor(private authService: AuthService, private productService: ProductService, private router: Router) { }
+
   ngOnInit(): void {
-    this.sellsign.sellerReloadpage();
+    if (localStorage.getItem('seller'))
+      this.router.navigate(['seller-dashboard']);
+  }
+
+  onSellerSignIn(credentials: { email: string, password: string }): void {
+    this.authService.sellerSignIn(credentials.email, credentials.password).subscribe({
+      next: (sellerDetail: Seller[]) => {
+        if (sellerDetail && sellerDetail.length) {
+          localStorage.setItem('seller', JSON.stringify(sellerDetail[0]));
+          this.router.navigate(['seller-dashboard']);
+        }
+        else
+          this.authService.authFailedMessage.emit("Email or Passwrod is not correct");
+      },
+      error: (error) => {
+        console.log(error);
+        this.authService.authFailedMessage.emit("Server is down please try again later.");
+      }
+    });
   }
 
   calMinhight() {
-    return `calc(100vh - ${this.product.headerComHeight}px)`;
-  }
-
-  login(form: NgForm) {
-    if (form.valid) {
-      this.isLoader = true;
-      this.sellsign.sellerLoginservice(form.value).subscribe((result: any) => {
-        this.isLoader = false;
-        if (result && result.body && result.body.length) {
-          localStorage.setItem('seller', JSON.stringify(result.body));
-          this.router.navigate(['seller-homepage']);
-        }
-        else {
-          this.SellerLoginfailed = "Email or Passwrod is not correct";
-          setTimeout(() => this.SellerLoginfailed = undefined, 2000);
-        }
-      },
-        (error) => {
-          this.isLoader = false;
-          this.SellerLoginfailed = "Server is down please contact to Tarun";
-          setTimeout(() => this.SellerLoginfailed = undefined, 2000);
-        });
-    }
-    else {
-      this.markAllControlsAsTouched(form);
-    }
-  }
-
-  markAllControlsAsTouched(form: NgForm) {
-    Object.keys(form.controls).forEach(controlName => {
-      const control = form.controls[controlName];
-      control.markAsTouched();
-    });
+    return `calc(100vh - ${this.productService.headerHeight}px - 1rem)`;
   }
 }

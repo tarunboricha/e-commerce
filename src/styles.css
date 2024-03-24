@@ -1,85 +1,101 @@
-body::-webkit-scrollbar {
-    display: none;
+* {
+    padding: 0;
+    margin: 0;
 }
 
 body {
     background-color: #f1f2f4;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .disable-scroll {
     overflow: hidden;
 }
 
-.temppp {
-    height: 1rem;
-    background-color: #f1f2f4;
+.form-group {
+    margin-bottom: 1rem;
 }
 
-.form .inputbox {
-    position: relative;
-    width: 300px;
-    height: 50px;
-    margin-bottom: 25px;
+.form-group h1 {
+    margin: 0;
+    font-size: 1.5rem;
 }
 
-.form .inputbox input {
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    border: 1px solid;
+    border-radius: 0;
+    width: 100%;
+}
+
+.signin-container button,
+.signup-container button {
+    border-radius: 0;
+    margin-top: 0.5rem;
+    padding: 0.4rem 1rem;
+}
+
+.signin-container .form-group .ng-invalid.ng-touched,
+.signup-container .form-group .ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+.form-group small {
+    display: block;
     position: absolute;
+    color: red;
+    font-size: small;
+}
+
+.failed-message {
+    color: red;
+    position: absolute;
+    transform: translate(-2rem);
+    text-align: center;
+    width: 300px;
+}
+
+.success-message {
+    color: green;
+    position: absolute;
+    transform: translate(-2rem);
+    text-align: center;
+    width: 300px;
+}
+
+.picsum-img-loader::before {
+    content: '';
+    position: absolute;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.9),
+            transparent);
+    animation: loading 1s infinite;
+    width: 50%;
+    height: 100%;
     top: 0;
     left: 0;
-    width: 100%;
-    border: 2px solid black;
-    outline: none;
-    background: none;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 1.2em;
 }
 
-.form .inputbox:last-child {
-    margin-bottom: 0;
-}
+@keyframes loading {
+    0% {
+        transform: skewX(-10deg) translateX(-100%);
+    }
 
-.form .inputbox span {
-    position: absolute;
-    top: 14px;
-    left: 20px;
-    font-size: 1em;
-    transition: 0.6s;
-    font-family: sans-serif;
-}
-
-.form .inputbox input:focus~span,
-.form .inputbox input:valid~span {
-    transform: translateX(-13px) translateY(-35px);
-    font-size: 1em;
-}
-
-.form a {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.form .inputbox-btn button {
-    background: black;
-    width: 50%;
-    color: #fff;
-    border: #fff;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.form .inputbox:hover button {
-    background: linear-gradient(45deg, black, rgb(231, 96, 81));
-}
-
-.form .inputbox-btn {
-    padding-left: 95px;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-    display: none;
+    100% {
+        transform: skewX(-10deg) translateX(200%);
+    }
 }
 
 .loaded {
@@ -99,29 +115,4 @@ body {
     100% {
         opacity: 1;
     }
-}
-
-@keyframes loading {
-    0% {
-        transform: skewX(-10deg) translateX(-100%);
-    }
-
-    100% {
-        transform: skewX(-10deg) translateX(200%);
-    }
-}
-
-
-.picsum-img-wrapperr::before {
-    content: '';
-    position: absolute;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.9),
-            transparent);
-    animation: loading 1s infinite;
-    width: 50%;
-    height: 100%;
-    top: 0;
-    left: 0;
 }

@@ -1,0 +1,91 @@
+<div class="product-form-container">
+  <div class="form-group">
+    <h1>Seller</h1>
+    <h1>{{formName}}</h1>
+  </div>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="add-product-form">
+      <div class="left">
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input type="text" autocomplete="current-productName" formControlName="productName" id="productName" />
+          <small *ngIf="
+                        productForm.get('productName')?.errors &&
+                        productForm.get('productName')?.errors?.['required'] &&
+                        productForm.get('productName')?.touched
+                      ">Product Name is required</small>
+        </div>
+        <div class="form-group">
+          <label for="productPrice">Product Price</label>
+          <input type="text" autocomplete="current-productPrice" formControlName="productPrice" id="productPrice" />
+          <small *ngIf="
+                        productForm.get('productPrice')?.errors &&
+                        productForm.get('productPrice')?.errors?.['required'] &&
+                        productForm.get('productPrice')?.touched
+                      ">Product Price is required</small>
+          <small *ngIf="
+            productForm.get('productPrice')?.errors &&
+            productForm.get('productPrice')?.errors?.['pattern'] &&
+            productForm.get('productPrice')?.touched
+          ">Please enter a valid number</small>
+        </div>
+        <div class="form-group">
+          <label for="dropdownBasic1">Product Category</label>
+          <div ngbDropdown>
+            <button
+              style="border-radius: 0; border-color: black; height: 1.5rem; width: 100%; padding: 0; text-align: left; padding: 0 0.5rem;"
+              type="button" class="btn" id="dropdownBasic1" ngbDropdownToggle>{{productForm.get('productType')?.value ?
+              productForm.get('productType')?.value : 'Select Category'}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="border-radius: 0;">
+              <button ngbDropdownItem type="button" (click)="productForm.get('productType')?.patchValue('shirt')">Shirt</button>
+              <button ngbDropdownItem type="button" (click)="productForm.get('productType')?.patchValue('tshirt')">T-Shirt</button>
+              <button ngbDropdownItem type="button" (click)="productForm.get('productType')?.patchValue('jeans')">Jeans</button>
+            </div>
+          </div>
+          <small *ngIf="
+            productForm.get('productType')?.errors &&
+            productForm.get('productType')?.errors?.['required'] &&
+            productForm.get('productType')?.touched
+          ">Product Category is required</small>
+        </div>
+        <div class="form-group">
+          <label for="productColor">Product Color</label>
+          <input type="text" autocomplete="current-email" formControlName="productColor" id="productColor" />
+          <small *ngIf="
+                        productForm.get('productColor')?.errors &&
+                        productForm.get('productColor')?.errors?.['required'] &&
+                        productForm.get('productColor')?.touched
+                      ">Product Color is required</small>
+        </div>
+      </div>
+      <div class="right">
+        <div class="form-group">
+          <label for="productDescription">Product Description</label>
+          <textarea style="width: 100%; height: 5.95rem; border: 1px solid; resize: none;" autocomplete="current-email" formControlName="productDisc"
+          id="productDescription"></textarea>
+          <small *ngIf="
+                        productForm.get('productDisc')?.errors &&
+                        productForm.get('productDisc')?.errors?.['required'] &&
+                        productForm.get('productDisc')?.touched
+                      ">Product Discription is required</small>
+        </div>
+        <div class="form-group">
+          <label for="productURL">Product URL</label>
+          <input type="text" autocomplete="current-email" formControlName="productURL" id="productURL" />
+          <small *ngIf="
+                        productForm.get('productURL')?.errors &&
+                        productForm.get('productURL')?.errors?.['required'] &&
+                        productForm.get('productURL')?.touched
+                      ">Product URL is required</small>
+        </div>
+        <button type="submit" [disabled]="authSucessMessage || isLoader" class="btn btn-primary" style="margin-top: 1.25rem;">
+          <div *ngIf="isLoader" class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div> {{buttonText}}
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="success-message" style="width: 600px;">{{authSucessMessage}}</div>
+  <div class="failed-message" style="width: 600px;">{{authFailedMessage}}</div>
+</div>

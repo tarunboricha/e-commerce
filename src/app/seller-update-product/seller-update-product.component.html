@@ -1,47 +1,17 @@
-<div class="spinning-loader" *ngIf="isLoader1">
-	<div class="spinner-border" role="status">
-		<span class="visually-hidden">Loading...</span>
-	</div>
-	<h1 style="margin-left: 20px;"> loading...</h1>
+<!-- Loader -->
+<div class="d-flex justify-content-center align-items-center" *ngIf="isLoader" [style.min-height]="calMinhight()">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <h1 style="margin-left: 20px;"> loading...</h1>
 </div>
-<div class="seller-auth" *ngIf="!isLoader1">
-    <div class="center">
-        <h1>Update Product</h1>
-        <form #updateproduct = "ngForm" (ngSubmit)="updateProduct(updateproduct.value)">
-            <div class="inputbox">
-                <input type="text" ngModel="{{productData?.productName}}" name="productName" required="required">
-                <span>Product Name</span>
-            </div>
-            <div class="inputbox">
-                <input type="text" ngModel="{{productData?.productPrice}}" name="productPrice" required="required">
-                <span>Product Price</span>
-            </div>
-            <div class="inputbox">
-                <select id="category" ngModel="{{productData?.productType}}" name="productType">
-                    <option value="shirt">Shirt</option>
-                    <option value="tshirt">T-Shirt</option>
-                    <option value="jeans">Jeans</option>
-                  </select>
-            </div>
-            <div class="inputbox">
-                <input type="text" ngModel="{{productData?.productColor}}" name="productColor" required="required">
-                <span>Product Color</span>
-            </div>
-            <div class="inputbox">
-                <input type="text" ngModel="{{productData?.productDisc}}" name="productDisc" required="required">
-                <span>Product Discription</span>
-            </div>
-            <div class="inputbox" style="margin-bottom: 20px;">
-                <input type="text" ngModel="{{productData?.productURL}}" name="productURL" required="required">
-                <span>Product Image URL</span>
-            </div>
-            <div class="inputbox">
-                <button class="inputbox" ngModule><div *ngIf="isLoader" class="spinner-border spinner-border-sm" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                  </div> Update-Product</button>
-            </div>
-        </form>
-        <p style="color: rgb(25, 209, 99);">{{ UpdateproductMessage }}</p>
+
+<!-- Update Product Form -->
+<div class="update-product-container" [style.min-height]="calMinhight()">
+    <div *ngIf="!isLoader">
+        <app-product-form buttonText="Update Product" [updateProductData] = "productData" formName="Update the Product" (productAddUpdate)="updateProduct($event)"></app-product-form>
     </div>
 </div>
+
+<!-- Footer -->
 <app-footer></app-footer>

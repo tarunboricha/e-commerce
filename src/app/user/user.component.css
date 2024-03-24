@@ -1,64 +1,49 @@
-
-.container {
-  max-width: 350px;
-  margin: 20px auto;
-  margin-bottom: 0;
-  padding: 30px 40px;
-  background-color: #fff;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
+.user-container{
+    margin-top: 1rem;
 }
 
-h4 {
-  text-align: center;
-  margin-bottom: 10px;
+.signup-container {
+    width: 300px;
+    background-color: #fff;
+    padding: 2rem;
+    padding-top: 1rem;
+    margin: 0 auto;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
 }
 
-.form-group {
-  margin-bottom: 20px;
+.form-group-name {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
 }
 
-label {
-  display: block;
-  font-weight: bold;
+.fname, .lname{
+    width: 48%;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 0;
-  box-sizing: border-box;
+.fname input, .lname input {
+    width: 100%;
+    border: 1px solid;
+    border-radius: 0;
 }
 
-span {
-  cursor: pointer;
+.form-group-name label {
+    margin-bottom: 0.5rem;
 }
 
-span:hover {
-  text-decoration: underline;
+.form-group-name small {
+    display: block;
+    position: absolute;
+    color: red;
+    font-size: 0.7rem;
 }
 
-button {
-  display: inline-block;
-  background-color: #7DC855;
-  border: none;
-  border-radius: 0;
-  font-size: 16px;
-  color: #FFFFFF;
-  text-decoration: none;
-  padding: 8px 30px;
-  width: 100%;
-  transition: all .5s;
+.form-group-name .ng-invalid.ng-touched{
+    border: 1px solid red;
 }
 
-button:hover {
-  background-color: #64af3d;
-}
-
-.error-message {
-  color: #dc3545;
-  font-size: 14px;
-  position: absolute;
+.form-toogle:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }

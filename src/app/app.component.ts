@@ -1,15 +1,23 @@
-import { Component } from '@angular/core';
-import { ProductSerService } from './services/product-ser.service';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ProductService } from './services/product.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = '4u-mens-wear';
-  constructor (protected product:ProductSerService) {}
-  calculateMinHeight() {
-    return `calc(100vh - ${this.product.headerComHeight}px)`;
+
+  @ViewChild('appContainer') appContainer: ElementRef | undefined;
+
+  constructor(protected productService:ProductService) {}
+
+  title = 'e-commerce';
+
+  ngAfterViewInit() {
+    if (this.appContainer) {
+      const containerElement = this.appContainer.nativeElement as HTMLElement;
+      containerElement.style.paddingTop = `${this.productService.headerHeight}px`;
+    }
   }
 }

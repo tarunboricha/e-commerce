@@ -1,0 +1,38 @@
+.seller-dashboard-container {
+    margin: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+hr {
+    margin: 5px;
+    border: 0;
+}
+
+table {
+    text-align: center;
+    color: black;
+    border-collapse: collapse;
+}
+
+table td,
+table th {
+    padding: 10px;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    object-fit: cover;
+    object-position: 50% 20%;
+}
+
+
+p {
+    cursor: pointer;
+}

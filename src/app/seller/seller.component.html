@@ -1,36 +1,8 @@
-<div [style.min-height]="calMinhight()">
-    <div class="container">
-        <div *ngIf="isLoader" style="display: flex; justify-content: center; margin-bottom: 10px; align-items: center;">
-            <div style="margin-right: 10px;" class="spinner-border spinner-border-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div> Please wait...
-        </div>
-        <h4>Seller Sign up</h4>
-        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="signup-form">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" class="form-control" name="email" ngModel standalone required email>
-                <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)"
-                    class="error-message">
-                    <div *ngIf="loginForm.controls['email'].errors?.['required']">Email is required.</div>
-                    <div *ngIf="loginForm.controls['email'].errors?.['email']">Invalid email format.</div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" name="password" ngModel standalone required
-                    minlength="6">
-                <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
-                    class="error-message">
-                    <div *ngIf="loginForm.controls['password'].errors?.['required']">Password is required.</div>
-                    <div *ngIf="loginForm.controls['password'].errors?.['minlength']">Password must be at least 6
-                        characters long.</div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block mt-2">Sign Up</button>
-        </form>
-    </div>
-    <p style="text-align: center; color: #dc3545;">{{SellerLoginfailed}}</p>
+<div class="seller-container" [style.min-height]="calMinhight()">
+
+    <!-- Seller Sign In -->
+    <app-signin buttonText="Seller Sign In" (signIn)="onSellerSignIn($event)"></app-signin>
 </div>
 
+<!-- Footer -->
 <app-footer></app-footer>

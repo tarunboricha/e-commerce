@@ -1,0 +1,133 @@
+<div class="cart-container">
+
+    <!-- Skeleton Loader -->
+    <div class="cart-items" *ngIf="productService.isLoader" [style.min-height]="calMinhight()"
+        style="position: relative;">
+        <div class="cart-item picsum-img-loader">
+            <div class="product-details">
+                <div class="loader-image"></div>
+                <div class="quantity-controls">
+                    <div>-</div>
+                    <div>1</div>
+                    <div>+</div>
+                </div>
+            </div>
+            <div class="product-info">
+                <h4 style="background-color: rgb(183, 183, 183); width: 50%; color: rgb(183, 183, 183);;">
+                    ...........</h4>
+                <p style="background-color: rgb(183, 183, 183); width: 50%; color: rgb(183, 183, 183);;">
+                    ............</p>
+                <p style="background-color: rgb(183, 183, 183); width: 50%; color: rgb(183, 183, 183);;">
+                    ............</p>
+                <div class="actions">
+                    <button class="action-btn">Remove</button>
+                    <button class="action-btn">Save for Later</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-items" *ngIf="!productService.isLoader" [style.min-height]="calMinhight()">
+
+        <!-- Empty Cart Message -->
+        <div *ngIf="isCartEmpty" class="empty">
+            <img class="loaded" loading="lazy"
+                src="https://rukminim2.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90"
+                alt="">
+            <h5>Your cart is empty!</h5>
+            <h6>Explore our wide selection and find something you like</h6>
+        </div>
+
+        <!-- User Cart Items Without Save Later -->
+        <div *ngFor="let product of userCartItems; index as i" class="cart-item">
+            <div class="product-details">
+                <img routerLink="/product/{{product.id}}" [src]="product.productURL" alt="Product Image">
+                <div class="quantity-controls">
+                    <div (click)="decreaseQuantity(product)" class="quantity-btn">-</div>
+                    <div>{{product.productQuantity}}</div>
+                    <div (click)="increaseQuantity(product)" class="quantity-btn">+</div>
+                </div>
+            </div>
+            <div class="product-info">
+                <h4>{{ product.productName }}</h4>
+                <p>Size: {{ product.productSize }}</p>
+                <p>Price: {{ product.productPrice | currency:'INR' }}</p>
+                <div class="actions">
+                    <button [disabled]="isLoader" (click)="removeToCart(product)" class="action-btn">
+                        <div *ngIf="product.isloaderRemoveCart" class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div> Remove
+                    </button>
+                    <button [disabled]="isLoader" (click)="saveLater(product)" class="action-btn">
+                        <div *ngIf="product.isloaderSaveLater" class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div> Save for Later
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Cart Items With Save Later -->
+        <div class="save-later" *ngIf="saveLaterItems.length">
+            <h4 style="font-family: Roboto, Arial, sans-serif;">Saved For Later</h4>
+            <hr class="line">
+            <div *ngFor="let product of saveLaterItems" class="cart-item">
+                <div class="product-details">
+                    <img routerLink="/product/{{product.id}}" [src]="product.productURL" alt="Product Image">
+                    <div class="quantity-controls">
+                        <div (click)="decreaseQuantity(product)" class="quantity-btn">-</div>
+                        <div>{{product.productQuantity}}</div>
+                        <div (click)="increaseQuantity(product)" class="quantity-btn">+</div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h4>{{ product.productName }}</h4>
+                    <p>Size: {{ product.productSize }}</p>
+                    <p>Price: {{ product.productPrice | currency:'INR' }}</p>
+                    <div class="actions">
+                        <button [disabled]="isLoader" (click)="removeToCart(product)" class="action-btn">
+                            <div *ngIf="product.isloaderRemoveCart" class="spinner-border spinner-border-sm"
+                                role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div> Remove
+                        </button>
+                        <button [disabled]="isLoader" (click)="moveToCart(product)" class="action-btn">
+                            <div *ngIf="product.isloaderSaveLater" class="spinner-border spinner-border-sm"
+                                role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div> MOVE TO CART
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Cart Price Summary -->
+    <div class="cart-summary" [style.top]="priceSummaryTopValue()">
+        <h5>PRICE DETAILS</h5>
+        <hr style="width: calc(100% + 2rem); transform: translate(-1rem, 0);">
+        <div class="cart-summary-item temp"><span>Price </span><span>{{priceSummary.price | currency: 'INR'}}</span>
+        </div>
+        <div class="cart-summary-item temp"><span>Tax </span><span>{{priceSummary.tax | currency: 'INR'}}</span></div>
+        <div class="cart-summary-item temp"><span>Discount</span><span style="color: #388e3c;">- {{priceSummary.discount
+                | currency: 'INR'}}</span></div>
+        <div class="cart-summary-item temp"><span>Delivery Charges</span><span>{{priceSummary.delivery | currency:
+                'INR'}}</span></div>
+        <hr class="temp" style="width: calc(100% + 2rem); transform: translate(-1rem, 0);">
+        <div class="cart-summary-item" style="margin-bottom: 10px;">
+            <h5 style="color: black; font-family: Roboto, Arial, sans-serif;">Total Amount</h5>
+            <h5 style="color: black; font-family: Roboto, Arial, sans-serif;">{{priceSummary.total | currency: 'INR'}}
+            </h5>
+        </div>
+        <button [disabled]="priceSummary.price === 0" style="margin: 0;" class="place-order action-btn">PLACE
+            ORDER</button>
+    </div>
+
+</div>
+
+<footer class="one-line-footer">
+    <div>Policies: <a href="#">Returns Policy</a> | <a href="#">Terms of Use</a> | <a href="#">Infringement</a></div>
+    <div><span class="brand">&copy; 2008-2024 Tarun's Fashion</span></div>
+    <div>Need help? Visit the <a href="#">Help Center</a> or <a href="#">Contact Us</a></div>
+</footer>

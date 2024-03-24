@@ -1,55 +1,73 @@
-<!-- signup.component.html -->
-<div [style.min-height]="calMinhight()">
-    <div class="container">
-        <div *ngIf="isLoader" style="display: flex; justify-content: center; margin-bottom: 10px; align-items: center;">
-            <div style="margin-right: 10px;" class="spinner-border spinner-border-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div> <span *ngIf="!signup">Signing in Please wait...</span> <span *ngIf="signup">Signing up Please wait...</span>
+<div class="user-container" [style.min-height]="calMinhight()">
+
+    <!-- User Sign In -->
+    <app-signin *ngIf="isSignIn" buttonText="User Sign In" (signIn)="onUserSignIn($event)"></app-signin>
+    <div *ngIf="isSignIn" style="text-align: center; font-size: 0.9rem; font-weight: 400; margin-top: 0.5rem;">Don't
+        have an Account? <span (click)="isSignIn = false" class="form-toogle">click to sign up</span></div>
+
+    <!-- User Sign Up -->
+    <div class="signup-container" *ngIf="!isSignIn">
+        <div class="form-group">
+            <h1>Sign up</h1>
+            <h1>Create your account</h1>
         </div>
-        <p style="text-align: center; color: #dc3545; margin: 0;">{{LoginFailedmessage}}</p>
-        <h4 *ngIf="signup">Sign up</h4>
-        <h4 *ngIf="!signup">Sign in</h4>
-        <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)" class="signup-form" novalidate>
-            <div class="form-group" *ngIf="signup">
-                <label for="name">Name</label>
-                <input type="text" id="name" class="form-control" name="name" ngModel standalone required minlength="2"
-                    maxlength="20">
-                <div *ngIf="signupForm.controls['name'].invalid && (signupForm.controls['name'].dirty || signupForm.controls['name'].touched)"
-                    class="error-message">
-                    <div *ngIf="signupForm.controls['name'].errors?.['required']">Name is required.</div>
-                    <div *ngIf="signupForm.controls['name'].errors?.['minlength']">Name must be at least 2
-                        characters long.</div>
-                    <div *ngIf="signupForm.controls['name'].errors?.['maxlength']">Name cannot be more than
-                        20
-                        characters long.</div>
+        <form [formGroup]="signupForm" (ngSubmit)="onUserSignUp()">
+            <div class="form-group-name">
+                <div class="fname">
+                    <label class="name" for="firstname">First Name</label>
+                    <input class="name" type="text" autocomplete="current-firstname" formControlName="firstname"
+                        id="firstname" />
+                    <small *ngIf="
+                    signupForm.get('firstname')?.errors &&
+                    signupForm.get('firstname')?.errors?.['required'] &&
+                    signupForm.get('firstname')?.touched
+                ">First Name is required</small>
+                </div>
+
+                <div class="lname">
+                    <label class="name" for="lastname">Last Name</label>
+                    <input class="name" style="border: 1px solid;" type="text" autocomplete="current-lastname" formControlName="lastname"
+                        id="lastname" />
                 </div>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" class="form-control" name="email" ngModel standalone required email>
-                <div *ngIf="signupForm.controls['email'].invalid && (signupForm.controls['email'].dirty || signupForm.controls['email'].touched)"
-                    class="error-message">
-                    <div *ngIf="signupForm.controls['email'].errors?.['required']">Email is required.</div>
-                    <div *ngIf="signupForm.controls['email'].errors?.['email']">Invalid email format.</div>
-                </div>
+                <label for="emailAddress">Email Address</label>
+                <input type="email" autocomplete="current-email" formControlName="email" id="emailAddress" />
+                <small *ngIf="
+                    signupForm.get('email')?.errors &&
+                    signupForm.get('email')?.errors?.['required'] &&
+                    signupForm.get('email')?.touched
+                  ">Email Address is required</small>
+                <small *ngIf="
+                    signupForm.get('email')?.errors &&
+                    signupForm.get('email')?.errors?.['email'] &&
+                    signupForm.get('email')?.touched
+                  ">Email Address should be valid</small>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" name="password" ngModel standalone required
-                    minlength="6">
-                <div *ngIf="signupForm.controls['password'].invalid && (signupForm.controls['password'].dirty || signupForm.controls['password'].touched)"
-                    class="error-message">
-                    <div *ngIf="signupForm.controls['password'].errors?.['required']">Password is required.</div>
-                    <div *ngIf="signupForm.controls['password'].errors?.['minlength']">Password must be at least 6
-                        characters long.</div>
-                </div>
+                <input type="password" autocomplete="current-password" formControlName="password" id="password">
+                <small *ngIf="
+                    signupForm.get('password')?.errors &&
+                    signupForm.get('password')?.errors?.['required'] &&
+                    signupForm.get('password')?.touched
+                  ">Password is required</small>
+                <small *ngIf="
+                signupForm.get('password')?.errors &&
+                signupForm.get('password')?.errors?.['minlength'] &&
+                signupForm.get('password')?.touched
+              ">must be at least 6 characters long.</small>
             </div>
-            <button *ngIf="signup" type="submit" class="btn btn-primary btn-block mt-2">Sign Up</button>
-            <button *ngIf="!signup" type="submit" class="btn btn-primary btn-block mt-2">Sign in</button>
+            <button type="submit" class="btn btn-primary"><div *ngIf="isLoader" class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div> User Sign Up</button>
         </form>
+        <div class="failed-message">{{userAuthFailedMessage}}</div>
+        <div class="success-message">{{userAuthSucessMessage}}</div>
     </div>
-    <p *ngIf="signup" style="text-align: center; margin: 0; padding: 0;">Already have an account? <span (click)="signup = false; markAllControlsAsUntouched(signupForm)">click to sign in</span></p>
-    <p *ngIf="!signup" style="text-align: center; margin: 0; padding: 0;">Dont't have an account? <span (click)="signup = true; markAllControlsAsUntouched(signupForm)">click to sign up</span></p>
+    <div *ngIf="!isSignIn" style="text-align: center; font-size: 0.9rem; font-weight: 400; margin-top: 0.5rem;">Already
+        have an Account? <span (click)="isSignIn = true; markAllUnTouched()" class="form-toogle">click to sign in</span></div>
 </div>
 
+<!-- Footer -->
 <app-footer></app-footer>

@@ -1,34 +1,28 @@
-import { Component } from '@angular/core';
-import { ProductSerService } from '../services/product-ser.service';
-import { product } from '../data-type';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-seller-add-product',
   templateUrl: './seller-add-product.component.html',
-  styleUrls: ['./seller-add-product.component.css']
+  styleUrl: './seller-add-product.component.css'
 })
-export class SellerAddProductComponent {
+export class SellerAddProductComponent implements OnInit {
 
-  isLoader:boolean = false;
-  data:string = 'Product Category';
-  AddproductMessage:string|undefined;
-  constructor(private product:ProductSerService, private route: Router){}
-  fun(){
-    this.data = '';
+  isLoader: boolean = false;
+
+  constructor(private productService: ProductService) { }
+
+  ngOnInit(): void {
+    
   }
-  addProduct(data:product){
-    this.isLoader = true;
-    data.id = 0;
-    console.log(data);
-    this.product.AddProductservice(data).subscribe((result)=>{
-      if(result){
-        document.querySelectorAll('form')[0].reset();
-        this.isLoader = false;
-        this.AddproductMessage = "Product is Successfully Added!";
-        setTimeout(()=>this.AddproductMessage = undefined, 1000);
-        setTimeout(() => this.route.navigate(['/seller-homepage']), 1000);
-      }
-    });
+
+  addProduct(product: any) {
+    console.log(product);
   }
+
+  calMinhight() {
+    return `calc(100vh - ${this.productService.headerHeight}px - 2rem)`;
+  }
+
 }

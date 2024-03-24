@@ -1,66 +1,91 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" #componentContainer>
+
+    <!-- Brand Name -->
     <div>
         <span class="openbtn" (click)="toogle(); $event.stopPropagation();" (blur)="showSidenav = false;">&#9776;</span>
         <a class="navbar-brand" (click)="scrollTop()" routerLink="/">Tarun's Fashion</a>
     </div>
+
+    <!-- Search Bar -->
     <div class="navbar-collapseee">
-        <form #searchProduct="ngForm" (ngSubmit)="searchProducts(SearchProduct.value)" class="d-flex mx-auto">
-            <input style="border-radius: 0;" #SearchProduct ngModel [ngModelOptions]="{standalone: true}" class="form-control me-2" type="search" placeholder="Search for Products"
-                aria-label="Search">
+        <form *ngIf="switchCaseCondition !== 'seller'" #searchProduct="ngForm"
+            (ngSubmit)="searchProducts(SearchProduct.value)" class="d-flex mx-auto">
+            <input style="border-radius: 0;" #SearchProduct [(ngModel)]="searchQuery"
+                [ngModelOptions]="{standalone: true}" class="form-control me-2" id="search-product" type="search"
+                placeholder="Search for Products" aria-label="Search">
+            <button class="btn btn-outline-success" style="border-radius: 0;" type="submit">Search</button>
+        </form>
+        <form *ngIf="switchCaseCondition === 'seller'"
+            (ngSubmit)="sellerProductSearch(sellerSearch.value)" class="d-flex mx-auto">
+            <input style="border-radius: 0;"  [formControl]="sellerSearch" class="form-control me-2" type="search"
+                placeholder="Seller Search for Products" aria-label="Search" id="seller-search">
             <button class="btn btn-outline-success" style="border-radius: 0;" type="submit">Search</button>
         </form>
     </div>
+
+    <!-- Nav Items -->
     <div class="navbar-collapseee" [ngSwitch]="switchCaseCondition">
+
+        <!-- Default -->
         <ul class="nav-items" *ngSwitchCase="'default'">
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="">Home</a>
+                <a class="nav-link" routerLink="">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller">Seller</a>
+                <a class="nav-link" routerLink="seller">Seller</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="user">User</a>
+                <a class="nav-link" routerLink="user">User</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="addToCart">Cart ({{CartItem}})</a>
+                <a class="nav-link" routerLink="viewcart">Cart ({{cartItems}})</a>
             </li>
         </ul>
+
+        <!-- Seller -->
         <ul class="nav-items" *ngSwitchCase="'seller'">
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller-homepage">Products</a>
+                <a class="nav-link" routerLink="">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller-add-product">Add-Product</a>
+                <a class="nav-link" routerLink="seller-dashboard">Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" (click)="SellerLogoutfun()">Log-out</a>
+                <a class="nav-link" routerLink="seller-add-product">Add-Product</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar">{{ SellerName | titlecase}}</a>
+                <a class="nav-link" style="cursor: pointer;" (click)="SellerLogoutfun()">Log-out</a>
             </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link">{{ sellerName | titlecase}}</a>
+            </li> -->
         </ul>
+
+        <!-- User -->
         <ul class="nav-items" *ngSwitchCase="'user'">
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="" routerLinkActive="active"
+                <a class="nav-link" routerLink="" routerLinkActive="active"
                     [routerLinkActiveOptions]="{ exact: true }">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="seller"
-                    routerLinkActive="active">Seller</a>
+                <a class="nav-link" routerLink="seller" routerLinkActive="active">Seller</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="">{{Username | titlecase}}</a>
+                <a class="nav-link" routerLink="">{{userName | titlecase}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" (click)="UserLogoutfun()">Log-out</a>
+                <a class="nav-link" style="cursor: pointer;" (click)="UserLogoutfun()">Log-out</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" (click)="showSidebar = !showSidebar" routerLink="addToCart"
-                    routerLinkActive="active">Cart ({{ CartItem }})</a>
+                <a class="nav-link" routerLink="viewcart" routerLinkActive="active">Cart ({{ cartItems }})</a>
             </li>
         </ul>
     </div>
+
+    <!-- SideNav OverLay -->
     <div class="sidenav-overlay" *ngIf="showSidenav" (click)="toogle();"></div>
+
+    <!-- SideNav Bar -->
     <div class="sidenav" (click)="$event.stopPropagation();" [ngStyle]="{'left': showSidenav ? '0' : '-300px'}">
         <a class="closebtn" style="padding: 5px;" (click)="toogle();">&times;</a>
         <div class="sidenav-content">
@@ -70,17 +95,20 @@
             <div class="user-options">
                 <div (click)="toogle()">
                     <a routerLink="user" *ngIf="switchCaseCondition === 'default'">Sign In</a>
-                    <a routerLink="" *ngIf="switchCaseCondition === 'user' || switchCaseCondition === 'seller'">Hello, {{Username | titlecase}}</a>
+                    <a routerLink="" *ngIf="switchCaseCondition === 'user' || switchCaseCondition === 'seller'">Hello,
+                        {{userName | titlecase}}</a>
                 </div>
             </div>
             <hr>
             <div class="navigation-links">
                 <h4>Shop by Category</h4>
                 <ul>
-                    <li><a (click)="this.showSidenav = false;" [routerLink]="['category']" [queryParams]="{ cat: 'shirt' }">Shirt</a></li>
-                    <li><a (click)="this.showSidenav = false;" [routerLink]="['category']" [queryParams]="{ cat: 'tshirt' }">T-Shirt</a></li>
-                    <li><a (click)="this.showSidenav = false;" [routerLink]="['category']" [queryParams]="{ cat: 'jeans' }">Jeans</a></li>
-                    <!-- Add more categories here -->
+                    <li><a (click)="this.showSidenav = false;" [routerLink]="['category']"
+                            [queryParams]="{ cat: 'shirt' }">Shirt</a></li>
+                    <li><a (click)="this.showSidenav = false;" [routerLink]="['category']"
+                            [queryParams]="{ cat: 'tshirt' }">T-Shirt</a></li>
+                    <li><a (click)="this.showSidenav = false;" [routerLink]="['category']"
+                            [queryParams]="{ cat: 'jeans' }">Jeans</a></li>
                 </ul>
             </div>
             <hr>
@@ -94,9 +122,10 @@
         </div>
     </div>
 </nav>
-<!-- server-down-warning.component.html -->
+
+<!-- Server Down Message -->
 <div class="server-down-warning" *ngIf="isServerDown">
     <div class="message">
-        <p>Sorry, the server is currently down. You are being logged out.</p>
+        <p>{{serverDownMessage}}</p>
     </div>
 </div>

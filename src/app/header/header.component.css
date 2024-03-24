@@ -1,12 +1,3 @@
-/* Custom Navbar Styling */
-a {
-    cursor: pointer;
-}
-
-nav {
-    box-shadow: 0 2px 2.5px 0 rgba(0,0,0,.3);
-}
-
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -15,33 +6,18 @@ nav {
     top: 0;
     width: 100%;
     z-index: 1000;
+    box-shadow: 0 0 10px 0 #0000004d;
 }
 
 .navbar-brand {
     font-size: 1.8rem;
     font-family: Roboto, Arial, sans-serif;
     font-weight: bold;
-    /* color: #64af3d; */
-    /* White color */
-}
-
-.navbar-expand-lg .navbar-nav .nav-link {
-    padding: 0;
-}
-
-.collapse {
-    justify-content: space-evenly;
-}
-
-.navbar-toggler {
-    border: none;
 }
 
 .nav-link {
     font-size: 1.2rem;
-    margin-left: 15px;
-    /* color: #64af3d !important; */
-    /* White color */
+    margin-left: 1rem;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -53,24 +29,16 @@ nav {
     width: 30vw;
 }
 
-/* Search button animation */
 .btn-outline-success {
     background-color: transparent;
     border-color: black;
-    /* White color */
     color: black;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-outline-success:hover {
-    /* color: #64af3d; */
-    /* Blue color */
     --bs-btn-active-bg: transparent;
     --bs-btn-active-border-color: black;
-}
-
-.navbar-collapse {
-    flex-direction: row-reverse;
 }
 
 .nav-items {
@@ -100,7 +68,6 @@ nav {
     font-size: 18px;
     color: #333333;
     display: block;
-    transition: 0.3s;
 }
 
 .sidenav a:hover {
@@ -111,24 +78,13 @@ nav {
     padding: 20px;
 }
 
-.sidenav h4 {
-    margin-bottom: 20px;
-    font-size: 22px;
-    color: #333333;
-}
-
 .sidenav .closebtn {
     position: absolute;
     top: 10px;
-    /* Move it slightly upwards */
     right: 20px;
-    /* Move it slightly to the right */
     font-size: 24px;
     color: #666;
-    text-decoration: none;
     cursor: pointer;
-    z-index: 1000;
-    /* Ensure it's above everything */
 }
 
 .openbtn {
@@ -146,17 +102,7 @@ nav {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Adjust opacity as needed */
     z-index: 998;
-    /* Ensure it's below the sidenav but above the main content */
-}
-
-.user-options {
-    margin-bottom: 20px;
-}
-
-.navigation-links {
-    margin-bottom: 30px;
 }
 
 .navigation-links h4 {
@@ -174,18 +120,6 @@ nav {
 .navigation-links li {
     margin-bottom: 10px;
 }
-
-.navigation-links a {
-    text-decoration: none;
-    color: #666;
-    transition: color 0.3s ease;
-}
-
-.navigation-links a:hover {
-    color: #333;
-}
-
-/* server-down-warning.component.css */
 
 .server-down-warning {
     position: fixed;
@@ -205,8 +139,7 @@ nav {
     text-align: center;
 }
 
-/* Responsive styles */
-@media screen and (max-width: 1070px) {
+@media screen and (max-width: 1170px) {
 
     .nav-link {
         font-size: 1rem;
@@ -217,7 +150,13 @@ nav {
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 990px) {
+    .form-control {
+        width: 35vw;
+    }
+}
+
+@media (max-width: 650px) {
 
     .server-down-warning {
         width: 80%;
@@ -236,11 +175,6 @@ nav {
         justify-content: space-evenly;
     }
 
-    .nav-link {
-        margin: 0;
-        font-size: 1rem;
-    }
-
     .navbar-collapseee {
         flex-basis: 100%;
         flex-grow: 1;
@@ -252,7 +186,6 @@ nav {
     }
 }
 
-/* Responsive styles */
 @media screen and (max-height: 450px) {
     .sidenav {
         padding-top: 15px;

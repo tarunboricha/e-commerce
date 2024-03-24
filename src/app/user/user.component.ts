@@ -1,95 +1,102 @@
-import { Component, OnInit } from '@angular/core';
-import { Login, addToCart, product, signUp } from '../data-type';
-import { UserSerService } from '../services/user-ser.service';
+import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { User, addToCart, userCartItem } from '../data-type';
 import { Router } from '@angular/router';
-import { ProductSerService } from '../services/product-ser.service';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrl: './user.component.css'
 })
-export class UserComponent implements OnInit {
+export class UserComponent {
 
+  userAuthFailedMessage: string | undefined;
+  userAuthSucessMessage: string | undefined;
+  isSignIn: boolean = true;
+  signupForm!: FormGroup;
   isLoader: boolean = false;
-  productid: number[] | undefined;
-  LoginFailedmessage: undefined | string;
-  signup: boolean = true;
-  constructor(private user: UserSerService, private router: Router, private product: ProductSerService) { }
+
+  constructor(private authService: AuthService, private router: Router, private productService: ProductService) { }
+
   ngOnInit(): void {
-    if (localStorage.getItem('4uUser')) {
+    if (localStorage.getItem('4uUser'))
       this.router.navigate(['']);
-    }
+    this.signupForm = new FormGroup({
+      firstname: new FormControl<string>('', [Validators.required]),
+      lastname: new FormControl<string>('', []),
+      email: new FormControl<string>('', [Validators.required, Validators.email]),
+      password: new FormControl<string>('', [Validators.required, Validators.minLength(6)])
+    });
   }
 
-  onSubmit(form: NgForm) {
-
-    if (!form.valid){
-      this.markAllControlsAsTouched(form);
-      return; 
-    }
-    if (this.signup) {
-      this.signUp(form.value);
-    }
-    else {
-      this.Login(form.value);
-    }
+  markAllUnTouched() {
+    this.signupForm.reset();
+    Object.values(this.signupForm.controls).forEach(control => {
+      control.markAsUntouched();
+    });
   }
 
-  signUp(data: signUp) {
-    this.isLoader = true;
-    data.userID = 0;
-    this.user.userSignupservice(data).subscribe((result) => {
-      this.signup = false;
-    },
-      (error) => {
-        this.isLoader = false;
-        if (error.error.code === 'ER_DUP_ENTRY') {
-          this.LoginFailedmessage = "Email is already registered";
-          setTimeout(() => this.LoginFailedmessage = undefined, 2000);
+  onUserSignIn(credentials: { email: string, password: string }) {
+    this.authService.userSignIn(credentials.email, credentials.password).subscribe({
+      next: (result: User[]) => {
+        if (result && result.length) {
+          localStorage.setItem('4uUser', JSON.stringify(result));
+          this.router.navigate(['']);
+          this.localCarttoUserCart();
         }
         else {
-          this.LoginFailedmessage = "Server is down try later";
-          setTimeout(() => this.LoginFailedmessage = undefined, 2000);
+          this.authService.authFailedMessage.emit("Email or Password is not correct.");
         }
-      });
+      },
+      error: (error) => {
+        console.log(error);
+        this.authService.authFailedMessage.emit("Server is down please try again later.");
+      }
+    });
   }
 
-  Login(data: Login) {
+  onUserSignUp() {
+    if (this.signupForm.invalid) {
+      this.signupForm.markAllAsTouched();
+      this.signupForm.get('lastname')?.markAsUntouched();
+      return;
+    }
+    const user: User = {
+      firstname: this.signupForm.get('firstname')?.value,
+      lastname: this.signupForm.get('lastname')?.value,
+      email: this.signupForm.get('email')?.value,
+      password: this.signupForm.get('password')?.value
+    }
+    console.log(user);
     this.isLoader = true;
-    this.user.UserLoginservice(data).subscribe((result: any) => {
-      console.log(result);
-      if (result && result.body && result.body.length) {
-        localStorage.setItem('4uUser', JSON.stringify(result.body));
-        this.router.navigate(['']);
-        this.localCarttoUserCart();
+    this.authService.userSignUp(user).subscribe({
+      next: (result) => {
+        this.signupForm.reset();
         this.isLoader = false;
+        this.userAuthSucessMessage = "Sign up sucessfully!!..";
+        setTimeout(() => {
+          this.isSignIn = true;
+          this.userAuthSucessMessage = undefined;
+        }, 1500);
+      },
+      error: (error) => {
+        this.authService.authFailedMessage.emit("Server is down please try again later.");
       }
-      else {
-        this.LoginFailedmessage = "Email or Password is not Correct";
-        this.isLoader = false;
-        setTimeout(() => this.LoginFailedmessage = undefined, 2000);
-      }
-    },
-      (error) => {
-        this.isLoader = false;
-        this.LoginFailedmessage = "Server is down please contact to Tarun";
-        setTimeout(() => this.LoginFailedmessage = undefined, 2000);
-      });
+    });
   }
 
   localCarttoUserCart() {
     let Data = localStorage.getItem('LocaladdToCart');
     localStorage.removeItem('LocaladdToCart');
-    let CartData: product[] = Data && JSON.parse(Data);
+    let CartData: userCartItem[] = Data && JSON.parse(Data);
     let userData = localStorage.getItem('4uUser');
     let uID = userData && JSON.parse(userData)[0].userID;
     if (CartData && uID) {
       let data: addToCart[] = [];
-      CartData.forEach((product: product, index) => {
+      CartData.forEach((product: userCartItem, index) => {
         let temp: addToCart = {
-          id: product.id,
           productID: product.id,
           productQuantity: product.productQuantity,
           productSize: product.productSize,
@@ -100,27 +107,13 @@ export class UserComponent implements OnInit {
         data.push(temp);
       });
       console.log(data);
-      this.product.UseraddTocarts(data).subscribe((result) => {
-        this.product.getCartlist(uID, 'localCarttoUserCart');
+      this.productService.userAddToCarts(data).subscribe((result) => {
+        this.productService.getUserCartlist(uID);
       });
     }
   }
 
-  markAllControlsAsTouched(form: NgForm) {
-    Object.keys(form.controls).forEach(controlName => {
-      const control = form.controls[controlName];
-      control.markAsTouched();
-    });
-  }
-
-  markAllControlsAsUntouched(form: NgForm) {
-    Object.keys(form.controls).forEach(controlName => {
-      const control = form.controls[controlName];
-      control.markAsUntouched();
-    });
-  }
-
   calMinhight() {
-    return `calc(100vh - ${this.product.headerComHeight}px)`;
+    return `calc(100vh - ${this.productService.headerHeight}px - 1rem)`;
   }
 }

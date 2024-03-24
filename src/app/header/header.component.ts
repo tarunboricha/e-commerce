@@ -1,120 +1,94 @@
-import { Component, HostListener, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { ProductSerService } from '../services/product-ser.service';
-import { product } from '../data-type';
-import { SellerSerService } from '../services/seller-ser.service';
+import { Component, HostListener, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { NavigationEnd, Router, Event } from '@angular/router';
+import { ProductService } from '../services/product.service';
+import { filter } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit, AfterViewInit {
+export class HeaderComponent implements OnInit {
 
   @ViewChild('componentContainer') componentContainer: ElementRef | undefined;
-
-  constructor(private router: Router, protected product: ProductSerService, protected seller: SellerSerService) { }
-
   @HostListener('document:click', ['$event']) onDocumentClick(event: any) {
     if (this.showSidenav) {
       this.showSidenav = false;
     }
   }
 
-  cartListRequestInProgress: boolean = false;
-  currUrl: string = '';
-  searchSuggestion: undefined | product[];
-  SellerName: undefined | string;
-  Username: undefined | string;
-  CartItem: number = 0;
+  cartItems: number = 0;
+  sellerName: undefined | string;
+  userName: undefined | string;
   switchCaseCondition: string = 'default';
-  showSidebar: boolean = false;
+  searchQuery: string = '';
   showSidenav: boolean = false;
-  touchstartX: number = 0;
-  touchendX: number = 0;
   isServerDown: boolean = false;
   isUserLogin: boolean = false;
+  serverDownMessage: string | undefined;
+  sellerSearch = new FormControl('', { nonNullable: true });
+
+  constructor(private router: Router, private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.product.cartData.subscribe((cartItems: any) => {
-      const notSaveLaterItemCount = cartItems.filter((item: { savelater: any; }) => !item.savelater).length;
-      this.CartItem = notSaveLaterItemCount;
+    this.productService.userCartData.subscribe((cartItems: any) => {
+      const notSaveLaterItemCount = cartItems.filter((item: { savelater: boolean; }) => !item.savelater).length;
+      this.cartItems = notSaveLaterItemCount;
     });
-    this.product.isServerDown.subscribe((result) => {
-      if (result && this.isUserLogin) {
-        this.isServerDown = true;
-        setTimeout(() => {
-          this.isServerDown = false;
-          this.UserLogoutfun();
-        }, 2000);
+    this.productService.isServerDown.subscribe((serverDownMessage: boolean) => {
+      if (this.isUserLogin) {
+        this.UserLogoutfun();
+        this.serverDownMessage = "Sorry, the server is currently down. You are being logged out."
       }
+      else
+        this.serverDownMessage = "Sorry, the server is currently down. You are exploring static website currently.";
+      this.isServerDown = true;
+      setTimeout(() => {
+        this.isServerDown = false;
+      }, 2000);
     });
-    this.router.events.subscribe((value: any) => {
-      document.body.classList.remove('disable-scroll');
-      if (value.url) {
-        if (this.currUrl != value.url) {
-          if (localStorage.getItem('seller') && value.url.includes('seller')) {
-            this.currUrl = value.url;
-            this.switchCaseCondition = 'seller';
-            let sellerTemp = localStorage.getItem('seller');
-            let sellerData = sellerTemp && JSON.parse(sellerTemp)[0];
-            this.SellerName = sellerData.name;
-          }
-          else if (!localStorage.getItem('4uUser')) {
-            this.currUrl = value.url;
-            this.switchCaseCondition = 'default';
-            if (localStorage.getItem('LocaladdToCart')) {
-              let Cart = localStorage.getItem('LocaladdToCart');
-              let Cartdata = Cart && JSON.parse(Cart);
-              setTimeout(() => {
-                this.product.cartData.emit(Cartdata);
-              }, 0);
-            }
-            else {
-              setTimeout(() => {
-                this.product.cartData.emit([]);
-              }, 0);
-            }
-          }
-          else {
-            this.currUrl = value.url;
-            this.isUserLogin = true;
-            this.switchCaseCondition = 'user';
-            let UserTemp = localStorage.getItem('4uUser');
-            let UserData = UserTemp && JSON.parse(UserTemp)[0];
-            this.Username = UserData.name;
-            if (!this.cartListRequestInProgress) {
-              this.cartListRequestInProgress = true;
-              this.product.getCartlist(UserData.userID, 'headerOninit')
-                .add(() => {
-                  this.cartListRequestInProgress = false;
-                });
-            }
-          }
-        }
-      }
-    });
-  }
+    this.router.events.pipe(
+      filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)).subscribe((value: NavigationEnd) => {
+        document.body.classList.remove('disable-scroll');
+        const userCartData = JSON.parse(localStorage.getItem('LocaladdToCart') || '[]');
+        const sellerData = JSON.parse(localStorage.getItem('seller') || '[]');
+        const userData = JSON.parse(localStorage.getItem('4uUser') || '[]')[0];
 
-  toogle() {
-    if (!this.showSidenav) {
-      this.showSidenav = true;
-      document.body.classList.add('disable-scroll');
-    }
-    else {
-      this.showSidenav = false;
-      document.body.classList.remove('disable-scroll');
-    }
+        if (!value.url.includes('search'))
+          this.searchQuery = '';
+        else {
+          var queValue = new URL(value.url, "http://localhost:53418/#");
+          let temp = queValue.searchParams.get('que');
+          if (temp)
+            this.searchQuery = temp;
+        }
+        if (localStorage.getItem('seller') && value.url.includes('seller')) {
+          this.switchCaseCondition = 'seller';
+          this.sellerName = sellerData?.name;
+        } else if (!localStorage.getItem('4uUser')) {
+          this.switchCaseCondition = 'default';
+          setTimeout(() => {
+            this.productService.userCartData.emit(userCartData);
+          }, 0);
+        } else {
+          this.isUserLogin = true;
+          this.switchCaseCondition = 'user';
+          this.userName = userData?.first_name;
+          this.productService.getUserCartlist(userData?.userID);
+        }
+      });
   }
 
   ngAfterViewInit() {
-    // Measure the height after the view and child views are initialized
-    if (this.componentContainer) {
-      this.product.headerComHeight = this.componentContainer.nativeElement.offsetHeight;
-    }
-    if (this.componentContainer?.nativeElement.offsetWidth < 536) {
-      this.product.isMobile = true;
-    }
+    this.productService.headerHeight = this.componentContainer?.nativeElement.offsetHeight;
+    if (this.componentContainer?.nativeElement.offsetWidth < 536)
+      this.productService.isMobile = true;
+  }
+
+  toogle() {
+    this.showSidenav ? document.body.classList.remove('disable-scroll') : document.body.classList.add('disable-scroll');
+    this.showSidenav = !this.showSidenav;
   }
 
   scrollTop() {
@@ -133,17 +107,20 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.router.navigate(['search'], { queryParams: { que: data, correc: true } });
   }
 
+  sellerProductSearch(query: string) {
+    this.productService.sellerProductSearch.emit(query);
+  }
+
   SellerLogoutfun() {
-    this.currUrl = '';
     localStorage.removeItem('seller');
     this.router.navigate(['']);
   }
 
   UserLogoutfun() {
-    this.currUrl = '';
     this.isUserLogin = false;
     localStorage.removeItem('4uUser');
-    this.product.cartData.emit([]);
-    this.router.navigate(['']);
+    this.userName = undefined;
+    this.switchCaseCondition = 'default';
+    this.productService.userCartData.emit([]);
   }
 }

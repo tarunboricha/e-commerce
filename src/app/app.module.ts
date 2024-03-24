@@ -1,50 +1,57 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { tokenInterceptor } from './services/token.interceptor';
+import { NgbModule, NgbCarouselModule, NgbRatingModule} from '@ng-bootstrap/ng-bootstrap';
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserCartComponent } from './user-cart/user-cart.component';
 import { SellerComponent } from './seller/seller.component';
-import { SellerHomepageComponent } from './seller-homepage/seller-homepage.component';
-import { SellerAddProductComponent } from './seller-add-product/seller-add-product.component';
-import { SellerUpdateProductComponent } from './seller-update-product/seller-update-product.component';
-import { SearchComponent } from './search/search.component';
-import { DetailsOfProductComponent } from './details-of-product/details-of-product.component';
+import { SigninComponent } from './signin/signin.component';
 import { UserComponent } from './user/user.component';
+import { SearchComponent } from './search/search.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { FooterComponent } from './footer/footer.component';
-import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { WishlistComponent } from './wishlist/wishlist.component';
+import { SellerDashboardComponent } from './seller-dashboard/seller-dashboard.component';
+import { SellerAddProductComponent } from './seller-add-product/seller-add-product.component';
+import { ProductFormComponent } from './product-form/product-form.component';
+import { SellerUpdateProductComponent } from './seller-update-product/seller-update-product.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    SellerComponent,
-    SellerHomepageComponent,
-    SellerAddProductComponent,
-    SellerUpdateProductComponent,
     HomeComponent,
-    SearchComponent,
-    DetailsOfProductComponent,
+    HeaderComponent,
+    UserCartComponent,
+    SellerComponent,
+    SigninComponent,
     UserComponent,
+    SearchComponent,
+    ProductDetailComponent,
     FooterComponent,
-    AddToCartComponent,
-    CheckoutComponent,
-    MyOrdersComponent,
-    WishlistComponent
+    SellerDashboardComponent,
+    SellerAddProductComponent,
+    ProductFormComponent,
+    SellerUpdateProductComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
+    NgbCarouselModule,
     FormsModule,
+    ReactiveFormsModule,
+    NgbRatingModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: tokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

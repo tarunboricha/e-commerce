@@ -1,10 +1,3 @@
-export interface signUp {
-    userID:number,
-    name: string,
-    password: string,
-    email: string
-}
-
 export interface Login {
     email: string,
     password: string
@@ -17,29 +10,51 @@ export interface product {
     productColor: string,
     productDisc: string,
     productURL: string,
-    productQuantity: number | undefined,
     id: number,
     productID: undefined | number,
-    productSize: number|undefined,
-    trending:boolean|undefined,
-    wishlist:boolean|undefined,
-    savelater:boolean|undefined
+    trending: boolean,
+    rating:number
+}
+
+export interface userCartItem {
+    productName: string,
+    productPrice: number,
+    productType: string,
+    productColor: string,
+    productDisc: string,
+    productURL: string,
+    productQuantity: number | undefined,
+    id: number,
+    productID: number,
+    productSize: number,
+    trending: boolean,
+    wishlist: boolean,
+    savelater: boolean,
+    isloaderRemoveCart: boolean,
+    isloaderSaveLater: boolean,
+    userID: number | undefined
 }
 
 export interface User {
+    firstname: string,
+    lastname: string,
+    email: string,
+    password: string
+}
+
+export interface Seller {
     name: string,
     email: string,
     password: string,
-    id: number
+    sellerID: number
 }
 
 export interface addToCart {
-    id:number,
     productQuantity: number | undefined,
     userID: number,
     productID: number,
-    productSize: number|undefined,
-    savelater:boolean|undefined
+    productSize: number | undefined,
+    savelater: boolean | undefined
 }
 
 export interface priceSummary {
@@ -51,10 +66,10 @@ export interface priceSummary {
 }
 
 export interface order {
-    email:string,
-    address:string,
-    contact:string,
-    totalPrice:number,
-    userId:string,
-    id:number|undefined
-  }
+    email: string,
+    address: string,
+    contact: string,
+    totalPrice: number,
+    userId: string,
+    id: number | undefined
+}

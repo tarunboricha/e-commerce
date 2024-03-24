@@ -1,44 +1,50 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductSerService } from '../services/product-ser.service';
 import { product } from '../data-type';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-seller-update-product',
   templateUrl: './seller-update-product.component.html',
-  styleUrls: ['./seller-update-product.component.css']
+  styleUrl: './seller-update-product.component.css'
 })
 export class SellerUpdateProductComponent implements OnInit {
 
-  isLoader1: boolean = false;
   isLoader: boolean = false;
-  productData: undefined | product;
-  constructor(private router: ActivatedRoute, private product: ProductSerService, private route: Router) { }
-  ngOnInit(): void {
-    this.isLoader1 = true;
-    let productId = this.router.snapshot.paramMap.get('id');
-    productId && this.product.getProductservice(productId).subscribe((result) => {
-      this.isLoader1 = false;
-      this.productData = result[0];
-    });
-  }
-  UpdateproductMessage: string | undefined;
+  productData!: product;
 
-  updateProduct(data: product) {
+  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router, private authService: AuthService) { }
+
+  ngOnInit(): void {
     this.isLoader = true;
-    console.log(data);
-    if (this.productData) {
-      data.id = this.productData.id;
-    }
-    this.product.updateProductservice(data).subscribe((result) => {
-      console.log("result");
-      if (result) {
-        document.querySelectorAll('form')[0].reset(); 
+    const productID = this.route.snapshot.paramMap.get('id');
+    this.productService.getProductService(parseInt(productID ? productID : '')).subscribe({
+      next: (product: product[]) => {
+        this.productData = product[0];
         this.isLoader = false;
-        this.UpdateproductMessage = 'Product is Successfully Updated!';
-        setTimeout(() => this.UpdateproductMessage = undefined, 1000);
-        setTimeout(() => this.route.navigate(['/seller-homepage']), 1000);
+      },
+      error: (error) => {
+        this.productService.isServerDown.emit(true);
       }
     });
+  }
+
+  updateProduct(product: product) {
+    this.productService.updateProductService(product).subscribe({
+      next: (result) => {
+        this.authService.authSucessMessage.emit("Product is sucessfully updated!!");
+        setTimeout(() => {
+          this.router.navigate(['seller-dashboard']);
+        }, 1500);
+      },
+      error: (error) => {
+        this.productService.isServerDown.emit(true);
+      }
+    });
+  }
+
+  calMinhight() {
+    return `calc(100vh - ${this.productService.headerHeight}px - 2rem)`;
   }
 }
