@@ -86,10 +86,10 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart() {
     const userData = JSON.parse(localStorage.getItem('4uUser') || '[]')[0];
-    if (userData?.userID) {
+    if (userData.userID) {
       this.btnLoader = true;
       const addToCartItem: addToCart = {
-        userID: userData?.userID,
+        userID: userData.userID,
         productID: this.detailsOfProduct.id,
         productSize: this.productSize,
         productQuantity: this.productQuantity,
@@ -97,7 +97,7 @@ export class ProductDetailComponent implements OnInit {
       };
       this.productService.userAddToCartService(addToCartItem).subscribe({
         next: (result) => {
-          this.productService.getUserCartlist(this.userID ? this.userID : 0).add(() => {
+          this.productService.getUserCartlist(userData.userID).add(() => {
             this.btnLoader = false;
             this.isRemoveCard = true;
           });
