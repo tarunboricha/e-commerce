@@ -15,7 +15,7 @@ export class ProductService {
   userCartData = new EventEmitter<userCartItem[]>();
   private baseUrl: string = "https://4261-103-250-162-216.ngrok-free.app";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getProductService(pId: number) {
     return this.http.get<product[]>(`${this.baseUrl}/products/${pId}`);
@@ -33,7 +33,7 @@ export class ProductService {
     return this.http.put(`${this.baseUrl}/products/${product.id}`, product);
   }
 
-  searchProductService(data: string, correc:boolean) {
+  searchProductService(data: string, correc: boolean) {
     return this.http.get<{ correctedQuery: string, result: (product[]) }>(`${this.baseUrl}/search?query=${encodeURIComponent(data)}&correction=${encodeURIComponent(correc)}`);
   }
 

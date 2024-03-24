@@ -85,10 +85,11 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart() {
-    if (this.userID !== undefined) {
+    const userData = JSON.parse(localStorage.getItem('4uUser') || '[]')[0];
+    if (userData?.userID) {
       this.btnLoader = true;
       const addToCartItem: addToCart = {
-        userID: this.userID,
+        userID: userData?.userID,
         productID: this.detailsOfProduct.id,
         productSize: this.productSize,
         productQuantity: this.productQuantity,
