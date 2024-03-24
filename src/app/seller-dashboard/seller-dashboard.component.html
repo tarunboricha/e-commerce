@@ -14,9 +14,9 @@
             <tr>
                 <th scope="col">Image</th>
                 <th scope="col">Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Category</th>
-                <th scope="col">Color</th>
+                <th scope="col" class="price">Price</th>
+                <th scope="col" class="category">Category</th>
+                <th scope="col" class="color">Color</th>
                 <th scope="col">Action</th>
                 <th scope="col">Is Trending</th>
             </tr>
@@ -27,9 +27,9 @@
                     <img [src]="product.productURL" [alt]="'The flag of ' + product.productName" class="me-2" />
                 </td>
                 <td>{{product.productName}}</td>
-                <td>{{product.productPrice | currency:'INR'}}</td>
-                <td>{{product.productType}}</td>
-                <td>{{product.productColor}}</td>
+                <td class="price">{{product.productPrice | currency:'INR'}}</td>
+                <td class="category">{{product.productType}}</td>
+                <td class="color">{{product.productColor}}</td>
                 <td class="action">
                     <div>
                         <a (click)="deleteProduct(product.id)">Delete</a>

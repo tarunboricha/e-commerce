@@ -14,7 +14,7 @@ p {
     background-color: #fff;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
     padding: 1rem;
-    width: calc(75% - 1rem);
+    width: calc(100% - 300px - 1rem);
 }
 
 .empty {
@@ -116,7 +116,7 @@ p {
 .cart-summary {
     position: sticky;
     padding: 1rem;
-    width: 25%;
+    width: 300px;
     background-color: #fff;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
 }

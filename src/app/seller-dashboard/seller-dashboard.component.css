@@ -32,7 +32,24 @@ img {
     object-position: 50% 20%;
 }
 
-
 p {
     cursor: pointer;
+}
+
+@media (max-width: 576px) {
+
+    .seller-dashboard-container {
+        margin: 0.5rem;
+    }
+
+    img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .price,
+    .category,
+    .color {
+        display: none;
+    }
 }

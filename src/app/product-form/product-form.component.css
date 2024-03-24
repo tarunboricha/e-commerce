@@ -16,6 +16,10 @@
     width: 60%;
 }
 
+.success-message, .failed-message {
+    width: 600px;
+}
+
 button {
     border-radius: 0;
 }
@@ -28,6 +32,10 @@ button {
 
     .add-product-form {
         flex-direction: column;
+    }
+
+    .success-message, .failed-message {
+        width: 95%;
     }
 
     .left,

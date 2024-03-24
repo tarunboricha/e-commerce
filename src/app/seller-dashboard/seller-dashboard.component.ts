@@ -22,7 +22,7 @@ export class SellerDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  if (!localStorage.getItem('seller'))
+    if (!localStorage.getItem('seller'))
       this.router.navigate(['']);
     this.sellerSearchSubcription = this.productService.sellerProductSearch.subscribe((query) => {
       this.search(query);
@@ -49,9 +49,9 @@ export class SellerDashboardComponent implements OnInit {
     const terms = text.split(' ');
     this.filterProducts = this.allProducts.filter((product) => {
       return terms.every(term =>
-        product.productName.toLowerCase().includes(term) ||
-        product.productType.toLowerCase() === term ||
-        product.productColor.toLowerCase().includes(term)
+        product.productName.toLowerCase().includes(term.toLowerCase()) ||
+        product.productType.toLowerCase() === term.toLowerCase() ||
+        product.productColor.toLowerCase().includes(term.toLowerCase())
       );
     });
   }

@@ -3,6 +3,10 @@
     margin: 1rem;
 }
 
+.row > * {
+    padding-right: calc(var(--bs-gutter-x)* .25);
+}
+
 .picsum-img-loader {
     height: 300px;
     width: 100%;
@@ -26,6 +30,7 @@
 .trending-products {
     margin-top: 1rem;
     padding: 1rem;
+    padding-right: 1.5rem;
     background-color: #fff;
 }
 
@@ -79,6 +84,10 @@
 
 @media (max-width: 535px) {
 
+    .row > * {
+        padding-right: calc(var(--bs-gutter-x)* .12.5);
+    }
+
     .home-container {
         margin: 0.5rem;
     }
@@ -90,10 +99,15 @@
     .trending-products {
         margin-top: 0.5rem;
         padding: 0.5rem;
+        padding-right: 1.25rem;
     }
 
     .picsum-img-loader {
         height: 170px;
+    }
+
+    .loader-image {
+        height: 150px;
     }
 
     .picsum-img-wrapper img {

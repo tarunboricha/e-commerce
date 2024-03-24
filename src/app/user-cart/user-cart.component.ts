@@ -49,7 +49,7 @@ export class UserCartComponent implements OnInit {
   }
 
   calMinhight() {
-    return this.productService.isMobile ? `calc(100vh - ${this.productService.headerHeight}px - ${this.productService.headerHeight}px)` : `calc(100vh - ${this.productService.headerHeight}px - 2rem)`;
+    return this.productService.isMobile ? `calc(100vh - ${this.productService.headerHeight}px - ${this.productService.headerHeight}px - 3rem)` : `calc(100vh - ${this.productService.headerHeight}px - 2rem)`;
   }
 
   priceSummaryTopValue() {

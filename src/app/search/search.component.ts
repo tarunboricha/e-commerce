@@ -35,8 +35,10 @@ export class SearchComponent implements OnInit {
       this.clearFilters();
       this.categories.clear();
       this.colors.clear();
-      if (query)
+      if (query){
+        this.loaderfilteredProducts = [false, false];
         this.searchProduct(query, correc);
+      }
       else
         this.searchProduct(category, false);
     });
@@ -86,7 +88,11 @@ export class SearchComponent implements OnInit {
   }
 
   calMinhight() {
-    return `calc(100vh - ${this.productService.headerHeight}px - 4rem)`;
+    return `calc(100vh - ${this.productService.headerHeight}px)`;
+  }
+
+  calMinHightProduct() {
+    return `calc(100vh - ${this.productService.headerHeight}px - 2rem)`;
   }
 
   calFilterContainerTop() {

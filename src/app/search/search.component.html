@@ -1,172 +1,164 @@
-<div class="filterbtn" id="mob" [style.top.px]="productService.headerHeight"><button class="filter-button btn"
+<div class="filterbtn" id="mob" [style.top.px]="productService.headerHeight"><button style="border-radius: 0;" class="filter-button btn"
         (click)="toggleFilter()">Filter</button></div>
-<div class="search" [style.min-height]="calMinhight()">
-    <div class="containerr">
-        <div class="row">
-            <div class="col-xl-3 col-md-4 col-12">
-                <div class="filter-overlay" *ngIf="showFilter">
-                    <button class="close-btn" (click)="toggleFilter()">Close</button>
-                    <div class="filter-containerr card">
-                        <!-- <button class="close-btn" (click)="toggleFilter()">Close</button> -->
 
-                        <h3 class="card-header">Filters</h3>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>Category:</label>
-                                <select class="form-control" [(ngModel)]="selectedCategory">
-                                    <option value="">All</option>
-                                    <option *ngFor="let category of categories" [value]="category">{{ category }}
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Price Range:</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control"
-                                        style="border: var(--bs-border-width) solid var(--bs-border-color);"
-                                        placeholder="Min" [(ngModel)]="minPrice">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">to</span>
-                                    </div>
-                                    <input type="number" class="form-control"
-                                        style="border: var(--bs-border-width) solid var(--bs-border-color);"
-                                        placeholder="Max" [(ngModel)]="maxPrice">
-                                </div>
-                            </div>
-                            <!-- <div class="form-group">
-                                <label>Ratings:</label>
-                                <select class="form-control" [(ngModel)]="selectedRatings">
-                                    <option value="">All</option>
-                                    <option value="1">1 star</option>
-                                    <option value="2">2 stars</option>
-                                    <option value="3">3 stars</option>
-                                    <option value="4">4 stars</option>
-                                    <option value="5">5 stars</option>
-                                </select>
-                            </div> -->
-                            <div class="form-group">
-                                <label>Color:</label>
-                                <select class="form-control" [(ngModel)]="selectedColor">
-                                    <option value="">All</option>
-                                    <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
-                                </select>
-                            </div>
-                            <div style="display: flex; justify-content: space-evenly;"><button style="width: 45%;"
-                                    class="btn btn-primary btn-block" (click)="applyFilters(); toggleFilter();">Apply
-                                    Filters</button>
-                                <button style="width: 45%;" class="btn btn-primary btn-block"
-                                    (click)="clearFilters(); toggleFilter();">Clear
-                                    Filters</button>
-                            </div>
+<div class="search-container" [style.min-height]="calMinhight()">
+
+    <!-- Filter in Mobile View -->
+    <div class="filter-overlay" *ngIf="showFilter">
+        <button class="close-btn" (click)="toggleFilter()">Close</button>
+        <div class="filter-containerr card">
+            <h3 class="card-header">Filters</h3>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Category:</label>
+                    <select class="form-control" [(ngModel)]="selectedCategory">
+                        <option value="">All</option>
+                        <option *ngFor="let category of categories" [value]="category">{{ category }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Price Range:</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control"
+                            style="border: var(--bs-border-width) solid var(--bs-border-color);"
+                            placeholder="Min" [(ngModel)]="minPrice">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">to</span>
                         </div>
+                        <input type="number" class="form-control"
+                            style="border: var(--bs-border-width) solid var(--bs-border-color);"
+                            placeholder="Max" [(ngModel)]="maxPrice">
                     </div>
                 </div>
-                <div class="filter-container card" [style.top]="calFilterContainerTop()">
-                    <h3 class="card-header">Filters</h3>
+                <!-- <div class="form-group">
+                    <label>Ratings:</label>
+                    <select class="form-control" [(ngModel)]="selectedRatings">
+                        <option value="">All</option>
+                        <option value="1">1 star</option>
+                        <option value="2">2 stars</option>
+                        <option value="3">3 stars</option>
+                        <option value="4">4 stars</option>
+                        <option value="5">5 stars</option>
+                    </select>
+                </div> -->
+                <div class="form-group">
+                    <label>Color:</label>
+                    <select class="form-control" [(ngModel)]="selectedColor">
+                        <option value="">All</option>
+                        <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+                    </select>
+                </div>
+                <div style="display: flex; justify-content: space-evenly;"><button style="width: 45%;"
+                        class="btn btn-primary btn-block" (click)="applyFilters(); toggleFilter();">Apply
+                        Filters</button>
+                    <button style="width: 45%;" class="btn btn-primary btn-block"
+                        (click)="clearFilters(); toggleFilter();">Clear
+                        Filters</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter in Desktop View -->
+    <div class="filter-container card" [style.top]="calFilterContainerTop()">
+        <h3 class="card-header">Filters</h3>
+        <div class="card-body">
+            <div class="form-group">
+                <label>Category:</label>
+                <select class="form-control" [(ngModel)]="selectedCategory">
+                    <option value="">All</option>
+                    <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Price Range:</label>
+                <div class="input-group">
+                    <input type="number" class="form-control"
+                        style="border: var(--bs-border-width) solid var(--bs-border-color);" placeholder="Min"
+                        [(ngModel)]="minPrice">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">to</span>
+                    </div>
+                    <input type="number" class="form-control"
+                        style="border: var(--bs-border-width) solid var(--bs-border-color);" placeholder="Max"
+                        [(ngModel)]="maxPrice">
+                </div>
+            </div>
+            <!-- <div class="form-group">
+                <label>Ratings:</label>
+                <select class="form-control" [(ngModel)]="selectedRatings">
+                    <option value="">All</option>
+                    <option value="1">1 star</option>
+                    <option value="2">2 stars</option>
+                    <option value="3">3 stars</option>
+                    <option value="4">4 stars</option>
+                    <option value="5">5 stars</option>
+                </select>
+            </div> -->
+            <div class="form-group">
+                <label>Color:</label>
+                <select class="form-control" [(ngModel)]="selectedColor">
+                    <option value="">All</option>
+                    <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
+                </select>
+            </div>
+            <div style="display: flex; justify-content: space-between;"><button
+                    style="border-radius: 0; font-size: small; width: 48%;" class="btn btn-primary btn-block"
+                    (click)="applyFilters();">Apply
+                    Filters</button>
+                <button style="border-radius: 0; font-size: small; width: 48%;" class="btn btn-primary btn-block"
+                    (click)="clearFilters();">Clear
+                    Filters</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Products List Loader -->
+    <div class="search-results" *ngIf="isLoader" [style.min-height]="calMinHightProduct()">
+        <div class="row">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let product of loaderfilteredProducts">
+                <div class="card product-card picsum-img-loader">
+                    <div class="loader-image"></div>
                     <div class="card-body">
-                        <div class="form-group">
-                            <label>Category:</label>
-                            <select class="form-control" [(ngModel)]="selectedCategory">
-                                <option value="">All</option>
-                                <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Price Range:</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control"
-                                    style="border: var(--bs-border-width) solid var(--bs-border-color);"
-                                    placeholder="Min" [(ngModel)]="minPrice">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">to</span>
-                                </div>
-                                <input type="number" class="form-control"
-                                    style="border: var(--bs-border-width) solid var(--bs-border-color);"
-                                    placeholder="Max" [(ngModel)]="maxPrice">
-                            </div>
-                        </div>
-                        <!-- <div class="form-group">
-                        <label>Ratings:</label>
-                        <select class="form-control" [(ngModel)]="selectedRatings">
-                            <option value="">All</option>
-                            <option value="1">1 star</option>
-                            <option value="2">2 stars</option>
-                            <option value="3">3 stars</option>
-                            <option value="4">4 stars</option>
-                            <option value="5">5 stars</option>
-                        </select>
-                    </div> -->
-                        <div class="form-group">
-                            <label>Color:</label>
-                            <select class="form-control" [(ngModel)]="selectedColor">
-                                <option value="">All</option>
-                                <option *ngFor="let color of colors" [value]="color">{{ color }}</option>
-                            </select>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;"><button
-                                style="border-radius: 0; font-size: small; width: 48%;"
-                                class="btn btn-primary btn-block" (click)="applyFilters();">Apply
-                                Filters</button>
-                            <button style="border-radius: 0; font-size: small; width: 48%;"
-                                class="btn btn-primary btn-block" (click)="clearFilters();">Clear
-                                Filters</button>
-                        </div>
+                        <h5 class="card-title"
+                            style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</h5>
+                        <p class="card-text" style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.
+                        </p>
+                        <p class="card-text" style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-9 col-md-8 col-12">
-                <div class="search-results" *ngIf="isLoader" [style.min-height]="calMinhight()">
-                    <div class="row">
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
-                            *ngFor="let product of loaderfilteredProducts">
-                            <div class="card product-card picsum-img-loader">
-                                <div class="loader-image"></div>
-                                <div class="card-body">
-                                    <h5 class="card-title"
-                                        style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</h5>
-                                    <p class="card-text"
-                                        style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</p>
-                                    <p class="card-text"
-                                        style="background-color: rgb(232, 232, 232); color: rgb(232, 232, 232);;">.</p>
-                                    <!-- <button routerLink="/product/{{product.id}}" class="btn btn-primary btn-block">View
-                                    Details</button> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+    </div>
+
+    <!-- Search Products List -->
+    <div class="search-results" *ngIf="!isLoader" [style.min-height]="calMinHightProduct()">
+        <div class="search-empty" *ngIf="isEmpty">
+            <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/error-no-search-results_2353c5.png"
+                alt="">
+            <h3>Sorry, no result found!</h3>
+            <p>Sorry, no results found!
+                Please check the spelling or try searching for something else</p>
+        </div>
+        <div class="row">
+            <div class="correc-con" *ngIf="correctedQuery !== originalQuery && !isEmpty">
+                <div class="correction">Showing result for "{{correctedQuery}}"</div>
+                <div class="instead">
+                    Show results for <a style="color: #878787;" [routerLink]="['/search']"
+                        [queryParams]="{ que: originalQuery, correc:false }">{{originalQuery}}</a> instead
                 </div>
-                <div class="search-results" *ngIf="!isLoader" [style.min-height]="calMinhight()">
-                    <div class="search-empty" *ngIf="isEmpty">
-                        <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/error-no-search-results_2353c5.png"
-                            alt="">
-                        <h3>Sorry, no result found!</h3>
-                        <p>Sorry, no results found!
-                            Please check the spelling or try searching for something else</p>
-                    </div>
-                    <div class="row">
-                        <div class="correc-con" *ngIf="correctedQuery !== originalQuery && !isEmpty">
-                            <div class="correction">Showing result for "{{correctedQuery}}"</div>
-                            <div class="instead">
-                                Show results for <a style="color: #878787;" [routerLink]="['/search']"
-                                    [queryParams]="{ que: originalQuery, correc:false }">{{originalQuery}}</a> instead
-                            </div>
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4"
-                            *ngFor="let product of filteredProducts">
-                            <div class="card product-card">
-                                <img style="border-radius: 0;" routerLink="/product/{{product.id}}"
-                                    class="card-img-top loaded" loading="lazy" [src]="product.productURL"
-                                    alt="Product Image">
-                                <div class="card-body">
-                                    <h5 routerLink="/product/{{product.id}}" class="card-title">{{ product.productName
-                                        }}</h5>
-                                    <p class="card-text">{{ product.productDisc }}</p>
-                                    <p class="card-text">{{ product.productPrice | currency:'INR' }}</p>
-                                    <!-- <button routerLink="/product/{{product.id}}" class="btn btn-primary btn-block">View
-                                    Details</button> -->
-                                </div>
-                            </div>
-                        </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let product of filteredProducts">
+                <div class="card product-card">
+                    <img style="border-radius: 0;" routerLink="/product/{{product.id}}" class="card-img-top loaded"
+                        loading="lazy" [src]="product.productURL" alt="Product Image">
+                    <div class="card-body">
+                        <h5 routerLink="/product/{{product.id}}" class="card-title">{{ product.productName
+                            }}</h5>
+                        <p class="card-text">{{ product.productDisc }}</p>
+                        <p class="card-text">{{ product.productPrice | currency:'INR' }}</p>
                     </div>
                 </div>
             </div>
