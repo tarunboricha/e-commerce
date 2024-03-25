@@ -117,7 +117,7 @@
     <!-- Search Products List Loader -->
     <div class="search-results" *ngIf="isLoader" [style.min-height]="calMinHightProduct()">
         <div class="row">
-            <div class="correc-con" *ngIf="originalQuery !== ''">
+            <div class="correc-con" *ngIf="isQuery">
                 <div class="correction">Showing result for ""</div>
             </div>
             <!-- <div class="sort-by">

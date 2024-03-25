@@ -34,6 +34,15 @@ export class UserCartComponent implements OnInit {
       if (userCartData && userCartData.length) {
         this.userCartItems = userCartData.filter(item => !item.savelater);
         this.saveLaterItems = userCartData.filter(item => item.savelater);
+        let price = 0;
+        this.userCartItems.forEach(item => {
+          if (item.productQuantity)
+            price += item.productPrice * item.productQuantity;
+        });
+        this.priceSummary.price = price;
+        this.priceSummary.tax = this.priceSummary.discount = Math.floor(price / 10);
+        this.priceSummary.delivery = price ? 100 : 0;
+        this.priceSummary.total = price + this.priceSummary.delivery;
         this.userCartItems.length ? this.isCartEmpty = false : this.isCartEmpty = true;
       } else {
         this.isCartEmpty = true;
