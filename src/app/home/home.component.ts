@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
         this.isLoader = false;
       },
       error: (error) => {
-        this.http.get<product[]>('http://localhost:4200/assets/data/product-data.json').subscribe((products: product[]) => {
+        this.http.get<product[]>('https://tarunboricha.github.io/e-commerce/assets/data/product-data.json').subscribe((products: product[]) => {
           this.trendingProducts = products.slice(0, 6);
           this.isLoader = false;
           this.productService.isServerDown.emit(true);

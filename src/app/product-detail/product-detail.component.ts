@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { addToCart, product, userCartItem } from '../data-type';
 import { Subscription } from 'rxjs';
 import { ProductService } from '../services/product.service';
@@ -26,7 +26,7 @@ export class ProductDetailComponent implements OnInit {
   userCartDetail: userCartItem[] = [];
   userID: number | undefined;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService, private http: HttpClient) { }
 
   ngOnInit(): void {
     const userCartPromise = new Promise<void>((resolve) => {
@@ -56,7 +56,7 @@ export class ProductDetailComponent implements OnInit {
         },
         error: (error) => {
           this.productService.isServerDown.emit(true);
-          this.http.get<product[]>('http://localhost:4200/assets/data/product-data.json').subscribe((shirts: product[]) => {
+          this.http.get<product[]>('https://tarunboricha.github.io/e-commerce/assets/data/product-data.json').subscribe((shirts: product[]) => {
             this.isLoader = false;
             this.detailsOfProduct = shirts.filter((item) => parseInt(id) === item.id)[0];
             userCartPromise.then((result) => {
@@ -85,8 +85,12 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart() {
+    if (this.selectedSize === 'Select Size') {
+      alert("Please select the size.");
+      return;
+    }
     const userData = JSON.parse(localStorage.getItem('4uUser') || '[]')[0];
-    if (userData.userID) {
+    if (userData?.userID) {
       this.btnLoader = true;
       const addToCartItem: addToCart = {
         userID: userData.userID,
@@ -100,6 +104,9 @@ export class ProductDetailComponent implements OnInit {
           this.productService.getUserCartlist(userData.userID).add(() => {
             this.btnLoader = false;
             this.isRemoveCard = true;
+            setTimeout(() => {
+              this.router.navigate(['viewcart']);
+            }, 500);
           });
         },
         error: (error) => {
@@ -122,6 +129,9 @@ export class ProductDetailComponent implements OnInit {
       };
       this.productService.localAddToCart(addToCartItem);
       this.isRemoveCard = true;
+      setTimeout(() => {
+        this.router.navigate(['viewcart']);
+      }, 500);
     }
   }
 

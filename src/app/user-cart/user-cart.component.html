@@ -41,7 +41,7 @@
         <!-- User Cart Items Without Save Later -->
         <div *ngFor="let product of userCartItems; index as i" class="cart-item">
             <div class="product-details">
-                <img routerLink="/product/{{product.id}}" [src]="product.productURL" alt="Product Image">
+                <img class="loaded" routerLink="/product/{{product.id}}" [src]="product.productURL" alt="Product Image">
                 <div class="quantity-controls">
                     <div (click)="decreaseQuantity(product)" class="quantity-btn">-</div>
                     <div>{{product.productQuantity}}</div>
@@ -73,7 +73,7 @@
             <hr class="line">
             <div *ngFor="let product of saveLaterItems" class="cart-item">
                 <div class="product-details">
-                    <img routerLink="/product/{{product.id}}" [src]="product.productURL" alt="Product Image">
+                    <img class="loaded" routerLink="/product/{{product.id}}" [src]="product.productURL" alt="Product Image">
                     <div class="quantity-controls">
                         <div (click)="decreaseQuantity(product)" class="quantity-btn">-</div>
                         <div>{{product.productQuantity}}</div>

@@ -95,17 +95,21 @@
     background-color: #64af3d;
 }
 
+.row > * {
+    padding-right: calc(var(--bs-gutter-x)* .25);
+}
 
 .trending-products {
     margin-top: 0;
     margin: 1rem;
     padding: 1rem;
+    padding-right: 1.5rem;
     background-color: #fff;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
 }
 
 .trending-products h2 {
-    margin-bottom: 30px;
+    margin-bottom: 1rem;
     font-weight: bold;
     color: #333;
 }
@@ -168,6 +172,10 @@
 
 @media (max-width: 535px) {
 
+    .row > * {
+        padding-right: calc(var(--bs-gutter-x)* .12.5);
+    }
+
     .containerr {
         margin: 0.5rem;
     }
@@ -176,6 +184,7 @@
         margin-top: 0;
         margin: 0.5rem;
         padding: 0.5rem;
+        padding-right: 1.25rem;
     }
 
     .product-card img {

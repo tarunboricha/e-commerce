@@ -65,7 +65,7 @@ export class HeaderComponent implements OnInit {
         }
         if (localStorage.getItem('seller') && value.url.includes('seller')) {
           this.switchCaseCondition = 'seller';
-          this.sellerName = sellerData.name;
+          this.sellerName = sellerData?.name;
         } else if (!localStorage.getItem('4uUser')) {
           this.switchCaseCondition = 'default';
           setTimeout(() => {
@@ -74,8 +74,8 @@ export class HeaderComponent implements OnInit {
         } else {
           this.isUserLogin = true;
           this.switchCaseCondition = 'user';
-          this.userName = userData.first_name;
-          this.productService.getUserCartlist(userData.userID);
+          this.userName = userData?.first_name;
+          this.productService.getUserCartlist(userData?.userID);
         }
       });
   }
@@ -122,5 +122,6 @@ export class HeaderComponent implements OnInit {
     this.userName = undefined;
     this.switchCaseCondition = 'default';
     this.productService.userCartData.emit([]);
+    this.router.navigate(['']);
   }
 }

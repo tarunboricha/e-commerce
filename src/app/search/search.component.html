@@ -117,6 +117,19 @@
     <!-- Search Products List Loader -->
     <div class="search-results" *ngIf="isLoader" [style.min-height]="calMinHightProduct()">
         <div class="row">
+            <div class="correc-con" *ngIf="originalQuery !== ''">
+                <div class="correction">Showing result for ""</div>
+            </div>
+            <!-- <div class="sort-by">
+                Sort By
+                <ul>
+                    <li>Relevance</li>
+                    <li>Rating</li>
+                    <li>Price -- Low to High</li>
+                    <li>Price -- High to Low</li>
+                    <li>Newest First</li>
+                </ul>
+            </div> -->
             <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let product of loaderfilteredProducts">
                 <div class="card product-card picsum-img-loader">
                     <div class="loader-image"></div>
@@ -143,13 +156,23 @@
                 Please check the spelling or try searching for something else</p>
         </div>
         <div class="row">
-            <div class="correc-con" *ngIf="correctedQuery !== originalQuery && !isEmpty">
-                <div class="correction">Showing result for "{{correctedQuery}}"</div>
-                <div class="instead">
+            <div class="correc-con" *ngIf="isQuery">
+                <div class="correction">Showing {{filteredProducts.length}} result for "{{correctedQuery}}"</div>
+                <div class="instead" *ngIf="correctedQuery !== originalQuery && !isEmpty">
                     Show results for <a style="color: #878787;" [routerLink]="['/search']"
                         [queryParams]="{ que: originalQuery, correc:false }">{{originalQuery}}</a> instead
                 </div>
             </div>
+            <!-- <div class="sort-by">
+                Sort By
+                <ul>
+                    <li>Relevance</li>
+                    <li>Rating</li>
+                    <li>Price -- Low to High</li>
+                    <li>Price -- High to Low</li>
+                    <li>Newest First</li>
+                </ul>
+            </div> -->
             <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let product of filteredProducts">
                 <div class="card product-card">
                     <img style="border-radius: 0;" routerLink="/product/{{product.id}}" class="card-img-top loaded"

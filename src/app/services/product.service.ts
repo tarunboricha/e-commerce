@@ -13,7 +13,7 @@ export class ProductService {
   isServerDown: EventEmitter<boolean> = new EventEmitter<boolean>();
   sellerProductSearch: EventEmitter<string> = new EventEmitter<string>();
   userCartData = new EventEmitter<userCartItem[]>();
-  private baseUrl: string = "https://4261-103-250-162-216.ngrok-free.app";
+  private baseUrl: string = "https://c166-103-250-162-216.ngrok-free.app";
 
   constructor(private http: HttpClient) { }
 

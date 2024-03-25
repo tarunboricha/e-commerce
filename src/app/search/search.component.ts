@@ -24,6 +24,7 @@ export class SearchComponent implements OnInit {
   originalQuery: string = '';
   correctedQuery: string = '';
   showFilter: boolean = false;
+  isQuery:boolean = false;
 
   constructor(private route: ActivatedRoute, protected productService: ProductService) { }
 
@@ -36,6 +37,7 @@ export class SearchComponent implements OnInit {
       this.categories.clear();
       this.colors.clear();
       if (query){
+        this.isQuery = true; 
         this.loaderfilteredProducts = [false, false];
         this.searchProduct(query, correc);
       }
@@ -52,6 +54,7 @@ export class SearchComponent implements OnInit {
         this.correctedQuery = result.correctedQuery;
         this.isLoader = false;
         if (result.result.length) {
+          this.isEmpty = false;
           this.searchProductData = result.result;
           this.applyFilters();
         }
