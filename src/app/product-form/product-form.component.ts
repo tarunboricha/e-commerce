@@ -55,20 +55,20 @@ export class ProductFormComponent implements OnInit {
       this.productForm.markAllAsTouched();
       return;
     }
-    let isSame = true;
-    for (let key in this.productForm.value) {
-      if ((this.productForm.value as any)[key] !== (this.updateProductData as any)[key]) {
-        isSame = false;
-        break;
-      }
-    }
-    if (isSame) {
-      this.authFailedMessage = "Nothing is changed";
-      setTimeout(() => {
-        this.authFailedMessage = undefined;
-      }, 1500);
-      return;
-    }
+    // let isSame = true;
+    // for (let key in this.productForm.value) {
+    //   if ((this.productForm.value as any)[key] !== (this.updateProductData as any)[key]) {
+    //     isSame = false;
+    //     break;
+    //   }
+    // }
+    // if (isSame) {
+    //   this.authFailedMessage = "Nothing is changed";
+    //   setTimeout(() => {
+    //     this.authFailedMessage = undefined;
+    //   }, 1500);
+    //   return;
+    // }
     this.isLoader = true;
     this.productAddUpdate.emit(this.productForm.value);
   }

@@ -156,7 +156,7 @@
                 Please check the spelling or try searching for something else</p>
         </div>
         <div class="row">
-            <div class="correc-con" *ngIf="isQuery">
+            <div class="correc-con" *ngIf="isQuery && !isEmpty">
                 <div class="correction">Showing {{filteredProducts.length}} result for "{{correctedQuery}}"</div>
                 <div class="instead" *ngIf="correctedQuery !== originalQuery && !isEmpty">
                     Show results for <a style="color: #878787;" [routerLink]="['/search']"

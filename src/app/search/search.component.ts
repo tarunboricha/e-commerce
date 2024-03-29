@@ -51,7 +51,10 @@ export class SearchComponent implements OnInit {
     this.productService.searchProductService(query, correc).subscribe({
       next: (result: { correctedQuery: string, result: (product[]) }) => {
         this.originalQuery = query;
-        this.correctedQuery = result.correctedQuery;
+        if(this.originalQuery.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '') === result.correctedQuery.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, ''))
+          this.correctedQuery = this.originalQuery;
+        else
+          this.correctedQuery = result.correctedQuery;
         this.isLoader = false;
         if (result.result.length) {
           this.isEmpty = false;

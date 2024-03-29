@@ -13,7 +13,7 @@ export class ProductService {
   isServerDown: EventEmitter<boolean> = new EventEmitter<boolean>();
   sellerProductSearch: EventEmitter<string> = new EventEmitter<string>();
   userCartData = new EventEmitter<userCartItem[]>();
-  private baseUrl: string = "https://bf2d-103-250-162-216.ngrok-free.app";
+  private baseUrl: string = "https://b337-103-250-162-216.ngrok-free.app";
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +27,10 @@ export class ProductService {
 
   similarProductservice(productType: string, id: number) {
     return this.http.get<product[]>(`${this.baseUrl}/similar_products/${productType}/${id}`);
+  }
+
+  addProductService(data: product) {
+    return this.http.post(`${this.baseUrl}/products`, data);
   }
 
   updateProductService(product: product) {

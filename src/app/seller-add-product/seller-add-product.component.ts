@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../services/product.service';
+import { product } from '../data-type';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-seller-add-product',
@@ -11,14 +14,24 @@ export class SellerAddProductComponent implements OnInit {
 
   isLoader: boolean = false;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private authService: AuthService, private router:Router) { }
 
   ngOnInit(): void {
     
   }
 
-  addProduct(product: any) {
-    console.log(product);
+  addProduct(product: product) {
+    this.productService.addProductService(product).subscribe({
+      next: (result) => {
+        this.authService.authSucessMessage.emit("Product is sucessfully added");
+        setTimeout(() => {
+          this.router.navigate(['seller-dashboard']);
+        }, 1500);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
 
   calMinhight() {

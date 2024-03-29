@@ -103,7 +103,7 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['']);
       return;
     }
-    data = data.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '');
+    // data = data.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '');
     this.router.navigate(['search'], { queryParams: { que: data, correc: true } });
   }
 

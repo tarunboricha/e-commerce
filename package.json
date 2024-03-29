@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng build --base-href=/e-commerce/ && mv dist/e-commerce/* dist && rm -r dist/e-commerce && ngh --dir=dist"
+    "deploy": "ng build --base-href=/e-commerce/ && xcopy /s /e /i dist\\e-commerce\\browser dist\\e-commerce && ngh --dir=dist/e-commerce"
   },
   "private": true,
   "dependencies": {
