@@ -1,3 +1,14 @@
+#dropdownBasic1 {
+    border: none;
+    color: black;
+    font-size: 1.2rem;
+    padding: 0.2rem 0.5rem;
+}
+
+#dropdownBasic1:hover, .btn.show{
+    background-color: #f8f9fa;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -17,7 +28,7 @@
 
 .nav-link {
     font-size: 1.2rem;
-    margin-left: 1rem;
+    margin-left: 1.5rem;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -43,6 +54,7 @@
 
 .nav-items {
     display: flex;
+    align-items: center;
     list-style-type: none;
     margin: 0;
     padding: 0;

@@ -15,9 +15,9 @@
                 placeholder="Search for Products" aria-label="Search">
             <button class="btn btn-outline-success" style="border-radius: 0;" type="submit">Search</button>
         </form>
-        <form *ngIf="switchCaseCondition === 'seller'"
-            (ngSubmit)="sellerProductSearch(sellerSearch.value)" class="d-flex mx-auto">
-            <input style="border-radius: 0;"  [formControl]="sellerSearch" class="form-control me-2" type="search"
+        <form *ngIf="switchCaseCondition === 'seller'" (ngSubmit)="sellerProductSearch(sellerSearch.value)"
+            class="d-flex mx-auto">
+            <input style="border-radius: 0;" [formControl]="sellerSearch" class="form-control me-2" type="search"
                 placeholder="Seller Search for Products" aria-label="Search" id="seller-search">
             <button class="btn btn-outline-success" style="border-radius: 0;" type="submit">Search</button>
         </form>
@@ -28,17 +28,27 @@
 
         <!-- Default -->
         <ul class="nav-items" *ngSwitchCase="'default'">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" routerLink="">Home</a>
-            </li>
+            </li> -->
             <li class="nav-item">
-                <a class="nav-link" routerLink="seller">Seller</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="user">User</a>
+                <!-- <a class="nav-link" routerLink="user">User</a> -->
+                <div ngbDropdown class="d-inline-block">
+                    <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+                        User
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem>My Profile</button>
+                        <button ngbDropdownItem>Orders</button>
+                        <button ngbDropdownItem routerLink="user">Signin</button>
+                    </div>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="viewcart">Cart ({{cartItems}})</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="seller">Seller</a>
             </li>
         </ul>
 
@@ -64,20 +74,29 @@
         <!-- User -->
         <ul class="nav-items" *ngSwitchCase="'user'">
             <li class="nav-item">
-                <a class="nav-link" routerLink="" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: true }">Home</a>
+                <!-- <a class="nav-link" routerLink="user">User</a> -->
+                <div ngbDropdown class="d-inline-block">
+                    <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+                        {{userName | titlecase}}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem>My Profile</button>
+                        <button ngbDropdownItem>Orders</button>
+                        <button ngbDropdownItem (click)="UserLogoutfun()">Log-out</button>
+                    </div>
+                </div>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" routerLink="">{{userName | titlecase}}</a>
+            </li> -->
+            <!-- <li class="nav-item">
+                <a class="nav-link" style="cursor: pointer;" (click)="UserLogoutfun()">Log-out</a>
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link" routerLink="viewcart" routerLinkActive="active">Cart ({{ cartItems }})</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="seller" routerLinkActive="active">Seller</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="">{{userName | titlecase}}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="cursor: pointer;" (click)="UserLogoutfun()">Log-out</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="viewcart" routerLinkActive="active">Cart ({{ cartItems }})</a>
             </li>
         </ul>
     </div>
