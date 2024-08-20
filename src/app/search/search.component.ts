@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { product } from '../data-type';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-search',
@@ -24,9 +25,9 @@ export class SearchComponent implements OnInit {
   originalQuery: string = '';
   correctedQuery: string = '';
   showFilter: boolean = false;
-  isQuery:boolean = false;
+  isQuery: boolean = false;
 
-  constructor(private route: ActivatedRoute, protected productService: ProductService) { }
+  constructor(private route: ActivatedRoute, protected productService: ProductService, private http: HttpClient, private router:Router) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -36,8 +37,8 @@ export class SearchComponent implements OnInit {
       this.clearFilters();
       this.categories.clear();
       this.colors.clear();
-      if (query){
-        this.isQuery = true; 
+      if (query) {
+        this.isQuery = true;
         this.loaderfilteredProducts = [false, false];
         this.searchProduct(query, correc);
       }
@@ -51,7 +52,7 @@ export class SearchComponent implements OnInit {
     this.productService.searchProductService(query, correc).subscribe({
       next: (result: { correctedQuery: string, result: (product[]) }) => {
         this.originalQuery = query;
-        if(this.originalQuery.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '') === result.correctedQuery.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, ''))
+        if (this.originalQuery.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '') === result.correctedQuery.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, ''))
           this.correctedQuery = this.originalQuery;
         else
           this.correctedQuery = result.correctedQuery;
@@ -69,6 +70,18 @@ export class SearchComponent implements OnInit {
       },
       error: (error) => {
         this.productService.isServerDown.emit(true);
+        if (!this.isQuery) {
+          this.http.get<product[]>('https://tarunboricha.github.io/e-commerce/assets/data/product-data.json')
+            .subscribe((products: product[]) => {
+              this.isLoader = false;
+              this.searchProductData = products.filter(product => {
+                return product.productType === query;
+              });
+              this.applyFilters();
+            });
+        }
+        else
+          this.router.navigate(['']);
       }
     });
   }

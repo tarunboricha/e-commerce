@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
           this.trendingProducts = products.slice(0, 6);
           this.isLoader = false;
           this.productService.isServerDown.emit(true);
-        })
+        });
       }
     });
   }

@@ -111,7 +111,7 @@ export class HeaderComponent implements OnInit {
     this.productService.sellerProductSearch.emit(query);
   }
 
-  SellerLogoutfun() {
+  sellerLogout() {
     localStorage.removeItem('seller');
     this.router.navigate(['']);
   }

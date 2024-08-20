@@ -55,20 +55,21 @@
         <!-- Seller -->
         <ul class="nav-items" *ngSwitchCase="'seller'">
             <li class="nav-item">
+                <!-- <a class="nav-link" routerLink="user">User</a> -->
+                <div ngbDropdown class="d-inline-block" placement="bottom">
+                    <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+                        {{sellerName | titlecase}}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem routerLink="seller-dashboard">All Products</button>
+                        <button ngbDropdownItem routerLink="seller-add-product">Add-Product</button>
+                        <button ngbDropdownItem (click)="sellerLogout()">Log-out</button>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" routerLink="">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="seller-dashboard">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="seller-add-product">Add-Product</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="cursor: pointer;" (click)="SellerLogoutfun()">Log-out</a>
-            </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link">{{ sellerName | titlecase}}</a>
-            </li> -->
         </ul>
 
         <!-- User -->
