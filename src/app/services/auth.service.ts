@@ -9,7 +9,7 @@ export class AuthService {
 
   authFailedMessage = new EventEmitter<string>(undefined);
   authSucessMessage = new EventEmitter<string>(undefined);
-  baseURL: string = 'https://2f87-2401-4900-65cb-3ba5-209-64a3-654d-663f.ngrok-free.app';
+  baseURL: string = 'https://ba59-2401-4900-4e6f-4a77-c11e-8f2d-9719-639d.ngrok-free.app';
 
   constructor(private http: HttpClient) { }
 
